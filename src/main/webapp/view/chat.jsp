@@ -16,16 +16,22 @@
 
         <!-- Icon Font Stylesheet -->
 
-        <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/library/fontawesome-free-6.4.2-web/css/all.css">
-        <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/library/bootstrap-icons-1.11.1/bootstrap-icons.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}
+/assets/library/fontawesome-free-6.4.2-web/css/all.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}
+/assets/library/bootstrap-icons-1.11.1/bootstrap-icons.css">
         <!-- Libraries Stylesheet -->
 
-        <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/lib/animate/animate.min.css">
-        <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/lib/owlcarousel/assets/owl.carousel.min.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}
+/assets/lib/animate/animate.min.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}
+/assets/lib/owlcarousel/assets/owl.carousel.min.css">
 
-        <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/bootstrap.min.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}
+/assets/css/bootstrap.min.css">
         <!-- style.css -->
-        <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/style.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}
+/assets/css/style.css">
     </head>
 
     <body>
@@ -56,105 +62,117 @@
                     <a href="home.jsp" class="navbar-brand">
                         <h1 class="text-white fw-bold d-block">Trans<span class="text-secondary">Port</span> </h1>
                     </a>
-                    <button type="button" class="navbar-toggler me-0" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+                    <button type="button" class="navbar-toggler me-0" data-bs-toggle="collapse"
+                        data-bs-target="#navbarCollapse">
                         <span class="navbar-toggler-icon"></span>
                     </button>
                     <div class="collapse navbar-collapse bg-transparent" id="navbarCollapse">
                         <div class="navbar-nav ms-auto mx-xl-auto p-0">
                             <a href="order_receive.jsp" class="nav-item nav-link">Đơn nhận</a>
                             <a href="order_send.jsp" class="nav-item nav-link">Đơn gửi</a>
-                            <a href="./chat.html" class="nav-item nav-link active">Chat</a>
+                            <a href="./chat.jsp" class="nav-item nav-link">Chat</a>
                         </div>
                     </div>
-                    <div class="d-none d-xl-flex flex-shirink-0">
-                        <form class="input-group">
+                    <div class="d-none d-xl-flex flex-shirink-0 align-items-center">
+                        <form class="input-group" style="width: auto;">
                             <div class="form-outline">
-                              <input type="text" id="form1" class="form-control" placeholder="Tìm kiếm bài viết..."/>
+                                <input type="text" id="form1" class="form-control" placeholder="Tìm kiếm bài viết..." />
                             </div>
                             <button type="button" class="btn btn-primary">
-                              <i class="fas fa-search"></i>
+                                <i class="fas fa-search"></i>
                             </button>
                         </form>
-                        <div class="dropdown text-end">
-                            <a href="#" id="dropdownMenuButton1" class="d-block link-body-emphasis text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                              <img src="${pageContext.request.contextPath}/assets/img/101.jpg" alt="mdo" width="40" height="40" class="rounded-circle">
-                              <span class="text-white-50">Nguyễn Đông</span>
-                            </a>
-                            <ul class="dropdown-menu account-setting" aria-labelledby="dropdownMenuButton1">
+                        <div class="btn-group">
+                            <div id="dropdownMenuButton1" class="btn text-white d-flex align-items-center"
+                                style="font-size: 16px;" data-bs-toggle="dropdown" data-bs-display="static">
+                                <img src="../assets/img/101.jpg" alt="mdo" width="40" height="40" class="rounded-circle">
+                                <span class="text-white mx-2">Nguyễn Đông Tuấn</span>
+                            </div>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                                 <li><a class="dropdown-item" href="profile.jsp">Trang cá nhân</a></li>
-                                <li><hr class="dropdown-divider"></li>
-                                <li><a class="dropdown-item" href="index.jsp">Đăng xuất</a></li>
+                                <li><a class="dropdown-item" href="change_profile.jsp">Chỉnh sửa thông tin</a></li>
+                                <li><a class="dropdown-item" href="change_password.jsp">Đổi mật khẩu</a></li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li><a class="dropdown-item" href="../index.jsp">Đăng xuất</a></li>
                             </ul>
                         </div>
                         <!--  -->
                         <!--  -->
                         <div class="header__notification" onclick="clickOnBell()">
-                            <i class="header__notification-icon bi bi-bell"></i>
-                            <div class="header__popup">
-                                <h3 class="header__popup-heading">
-                                    Thông báo
-                                </h3>
-                                <ul class="header__popup-list">
-                                    <a class="header__popup-item" href="">
-                                        <img class="header__popup-item-avatar rounded-circle" src="${pageContext.request.contextPath}/assets/img/29.jpg"></img>
-                                        <label class="header__popup-item-content">
-                                            Người dùng Chihuahua vừa đăng bài viết mới.Vào share cho mình với. Share đi mình cho 50k. Nhanh nha bạn ơi
-                                        </label>
-                                    </a>
-                                    <a class="header__popup-item" href="">
-                                        <img class="header__popup-item-avatar rounded-circle" src="${pageContext.request.contextPath}/assets/img/29.jpg"></img>
-                                        <label class="header__popup-item-content">
-                                            Người dùng Chihuahua vừa đăng bài viết mới.Vào share cho mình với. Share đi mình cho 50k. Nhanh nha bạn ơi
-                                        </label>
-                                    </a>
-                                    <a class="header__popup-item" href="">
-                                        <img class="header__popup-item-avatar rounded-circle" src="${pageContext.request.contextPath}/assets/img/29.jpg"></img>
-                                        <label class="header__popup-item-content">
-                                            Share đi mình cho 50k. Nhanh nha bạn ơi.Người dùng Chihuahua vừa đăng bài viết mới.Vào share cho mình với. Share đi mình cho 50k. Nhanh nha bạn ơi.
-                                        </label>
-                                    </a>
-                                    <a class="header__popup-item" href="">
-                                        <img class="header__popup-item-avatar rounded-circle" src="${pageContext.request.contextPath}/assets/img/29.jpg"></img>
-                                        <label class="header__popup-item-content">
-                                            Share đi mình cho 50k. Nhanh nha bạn ơi.Người dùng Chihuahua vừa đăng bài viết mới.Vào share cho mình với. Share đi mình cho 50k. Nhanh nha bạn ơi.
-                                        </label>
-                                    </a>
-                                    <a class="header__popup-item" href="">
-                                        <img class="header__popup-item-avatar rounded-circle" src="${pageContext.request.contextPath}/assets/img/29.jpg" alt=""></img>
-                                        <label class="header__popup-item-content">
-                                            Share đi mình cho 50k. Nhanh nha bạn ơi.Người dùng Chihuahua vừa đăng bài viết mới.Vào share cho mình với. Share đi mình cho 50k. Nhanh nha bạn ơi.
-                                        </label>
-                                    </a>
-                                    <a class="header__popup-item" href="">
-                                        <img class="header__popup-item-avatar rounded-circle" src="${pageContext.request.contextPath}/assets/img/29.jpg"></img>
-                                        <label class="header__popup-item-content">
-                                            Share đi mình cho 50k. Nhanh nha bạn ơi.Người dùng Chihuahua vừa đăng bài viết mới.Vào share cho mình với. Share đi mình cho 50k. Nhanh nha bạn ơi.
-                                        </label>
-                                    </a>
-                                    <a class="header__popup-item" href="">
-                                        <img class="header__popup-item-avatar rounded-circle" src="${pageContext.request.contextPath}/assets/img/29.jpg"></img>
-                                        <label class="header__popup-item-content">
-                                            Share đi mình cho 50k. Nhanh nha bạn ơi.Người dùng Chihuahua vừa đăng bài viết mới.Vào share cho mình với. Share đi mình cho 50k. Nhanh nha bạn ơi.
-                                        </label>
-                                    </a>
-                                    <a class="header__popup-item" href="">
-                                        <img class="header__popup-item-avatar rounded-circle" src="${pageContext.request.contextPath}/assets/img/29.jpg"></img>
-                                        <label class="header__popup-item-content">
-                                            Share đi mình cho 50k. Nhanh nha bạn ơi.Người dùng Chihuahua vừa đăng bài viết mới.Vào share cho mình với. Share đi mình cho 50k. Nhanh nha bạn ơi.
-                                        </label>
-                                    </a>
-                                    <a class="header__popup-item" href="">
-                                        <img class="header__popup-item-avatar rounded-circle" src="${pageContext.request.contextPath}/assets/img/29.jpg"></img>
-                                        <label class="header__popup-item-content">
-                                            Share đi mình cho 50k. Nhanh nha bạn ơi.Người dùng Chihuahua vừa đăng bài viết mới.Vào share cho mình với. Share đi mình cho 50k. Nhanh nha bạn ơi.
-                                        </label>
-                                    </a>
-                                </ul>
-                                <h3 class="header__popup-bottom">
-                                    Xem tất cả
-                                </h3>
-                            </div>   
-                        </div>
+                                <i class="header__notification-icon bi bi-bell"></i>
+                                <!-- <span class="header__notification-number">99+</span> -->
+                                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                                    99+
+                                    <span class="visually-hidden">unread messages</span>
+                                  </span>
+                                <div class="header__popup">
+                                    <h3 class="header__popup-heading">
+                                        Thông báo
+                                    </h3>
+                                    <ul class="header__popup-list">
+                                        <a class="header__popup-item" href="">
+                                            <img class="header__popup-item-avatar rounded-circle" src="../assets/img/29.jpg"></img>
+                                            <label class="header__popup-item-content">
+                                                Người dùng Chihuahua vừa đăng bài viết mới.Vào share cho mình với. Share đi mình cho 50k. Nhanh nha bạn ơi
+                                            </label>
+                                        </a>
+                                        <a class="header__popup-item" href="">
+                                            <img class="header__popup-item-avatar rounded-circle" src="../assets/img/29.jpg"></img>
+                                            <label class="header__popup-item-content">
+                                                Người dùng Chihuahua vừa đăng bài viết mới.Vào share cho mình với. Share đi mình cho 50k. Nhanh nha bạn ơi
+                                            </label>
+                                        </a>
+                                        <a class="header__popup-item" href="">
+                                            <img class="header__popup-item-avatar rounded-circle" src="../assets/img/29.jpg"></img>
+                                            <label class="header__popup-item-content">
+                                                Share đi mình cho 50k. Nhanh nha bạn ơi.Người dùng Chihuahua vừa đăng bài viết mới.Vào share cho mình với. Share đi mình cho 50k. Nhanh nha bạn ơi.
+                                            </label>
+                                        </a>
+                                        <a class="header__popup-item" href="">
+                                            <img class="header__popup-item-avatar rounded-circle" src="../assets/img/29.jpg"></img>
+                                            <label class="header__popup-item-content">
+                                                Share đi mình cho 50k. Nhanh nha bạn ơi.Người dùng Chihuahua vừa đăng bài viết mới.Vào share cho mình với. Share đi mình cho 50k. Nhanh nha bạn ơi.
+                                            </label>
+                                        </a>
+                                        <a class="header__popup-item" href="">
+                                            <img class="header__popup-item-avatar rounded-circle" src="../assets/img/29.jpg"></img>
+                                            <label class="header__popup-item-content">
+                                                Share đi mình cho 50k. Nhanh nha bạn ơi.Người dùng Chihuahua vừa đăng bài viết mới.Vào share cho mình với. Share đi mình cho 50k. Nhanh nha bạn ơi.
+                                            </label>
+                                        </a>
+                                        <a class="header__popup-item" href="">
+                                            <img class="header__popup-item-avatar rounded-circle" src="../assets/img/29.jpg"></img>
+                                            <label class="header__popup-item-content">
+                                                Share đi mình cho 50k. Nhanh nha bạn ơi.Người dùng Chihuahua vừa đăng bài viết mới.Vào share cho mình với. Share đi mình cho 50k. Nhanh nha bạn ơi.
+                                            </label>
+                                        </a>
+                                        <a class="header__popup-item" href="">
+                                            <img class="header__popup-item-avatar rounded-circle" src="../assets/img/29.jpg"></img>
+                                            <label class="header__popup-item-content">
+                                                Share đi mình cho 50k. Nhanh nha bạn ơi.Người dùng Chihuahua vừa đăng bài viết mới.Vào share cho mình với. Share đi mình cho 50k. Nhanh nha bạn ơi.
+                                            </label>
+                                        </a>
+                                        <a class="header__popup-item" href="">
+                                            <img class="header__popup-item-avatar rounded-circle" src="../assets/img/29.jpg"></img>
+                                            <label class="header__popup-item-content">
+                                                Share đi mình cho 50k. Nhanh nha bạn ơi.Người dùng Chihuahua vừa đăng bài viết mới.Vào share cho mình với. Share đi mình cho 50k. Nhanh nha bạn ơi.
+                                            </label>
+                                        </a>
+                                        <a class="header__popup-item" href="">
+                                            <img class="header__popup-item-avatar rounded-circle" src="../assets/img/29.jpg"></img>
+                                            <label class="header__popup-item-content">
+                                                Share đi mình cho 50k. Nhanh nha bạn ơi.Người dùng Chihuahua vừa đăng bài viết mới.Vào share cho mình với. Share đi mình cho 50k. Nhanh nha bạn ơi.
+                                            </label>
+                                        </a>
+                                    </ul>
+                                    <h3 class="header__popup-bottom">
+                                        Xem tất cả
+                                    </h3>
+                                </div>   
+                            </div>
+    
                     </div>
                 </nav>
             </div>
@@ -165,149 +183,337 @@
                 <h1 class="h3 mb-3">Chat</h1>
         
                 <div class="card">
-                    <div class="row g-0">
-                        <div class="chat-sidebar col-12 col-lg-5 col-xl-3 border-right">
-                            <div class="px-4 d-none d-md-block">
-                                <div class="d-flex align-items-center">
-                                    <div class="flex-grow-1">
-                                        <input type="text" class="form-control my-3" placeholder="Tìm kiếm...">
-                                    </div>
-                                </div>
+                    <div class="d-flex">
+                        <!-- Sidebar(bên trái) -->
+                        <div class="nav flex-column nav-pills me-3 py-2" style="min-width: 25%; max-height: 694px;overflow-y: scroll; flex-wrap: nowrap;" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                             <div class="px-4">
+                                <input type="text" class="form-control my-3" placeholder="Tìm kiếm...">
                             </div>
-        
-                            <a href="#" class="list-group-item list-group-item-action border-0">
-                                <div class="badge bg-success float-right">5</div>
-                                <div class="d-flex align-items-start">
-                                    <img src="https://bootdey.com/img/Content/avatar/avatar5.png" class="rounded-circle mr-1" alt="Vanessa Tucker" width="40" height="40">
-                                    <div class="flex-grow-1 ml-3">
-                                        Vanessa Tucker
-                                        <div class="small"><span class="fas fa-circle chat-online"></span> Online</div>
-                                    </div>
-                                </div>
-                            </a>
-                            <a href="#" class="list-group-item list-group-item-action border-0">
-                                <div class="badge bg-success float-right">2</div>
-                                <div class="d-flex align-items-start">
-                                    <img src="https://bootdey.com/img/Content/avatar/avatar2.png" class="rounded-circle mr-1" alt="William Harris" width="40" height="40">
-                                    <div class="flex-grow-1 ml-3">
-                                        William Harris
-                                        <div class="small"><span class="fas fa-circle chat-online"></span> Online</div>
-                                    </div>
-                                </div>
-                            </a>
-                            <a href="#" class="list-group-item list-group-item-action border-0 active">
-                                <div class="d-flex align-items-start">
-                                    <img src="https://bootdey.com/img/Content/avatar/avatar3.png" class="rounded-circle mr-1" alt="Sharon Lessman" width="40" height="40">
-                                    <div class="flex-grow-1 ml-3">
-                                        Sharon Lessman
-                                        <div class="small"><span class="fas fa-circle chat-online"></span> Online</div>
-                                    </div>
-                                </div>
-                            </a>
-                            <a href="#" class="list-group-item list-group-item-action border-0">
-                                <div class="d-flex align-items-start">
-                                    <img src="https://bootdey.com/img/Content/avatar/avatar4.png" class="rounded-circle mr-1" alt="Christina Mason" width="40" height="40">
-                                    <div class="flex-grow-1 ml-3">
-                                        Christina Mason
-                                        <div class="small"><span class="fas fa-circle chat-offline"></span> Offline</div>
-                                    </div>
-                                </div>
-                            </a>
-                            <a href="#" class="list-group-item list-group-item-action border-0">
-                                <div class="d-flex align-items-start">
-                                    <img src="https://bootdey.com/img/Content/avatar/avatar5.png" class="rounded-circle mr-1" alt="Fiona Green" width="40" height="40">
-                                    <div class="flex-grow-1 ml-3">
-                                        Fiona Green
-                                        <div class="small"><span class="fas fa-circle chat-offline"></span> Offline</div>
-                                    </div>
-                                </div>
-                            </a>
-                            <a href="#" class="list-group-item list-group-item-action border-0">
-                                <div class="d-flex align-items-start">
-                                    <img src="https://bootdey.com/img/Content/avatar/avatar2.png" class="rounded-circle mr-1" alt="Doris Wilder" width="40" height="40">
-                                    <div class="flex-grow-1 ml-3">
-                                        Doris Wilder
-                                        <div class="small"><span class="fas fa-circle chat-offline"></span> Offline</div>
-                                    </div>
-                                </div>
-                            </a>
-                            <a href="#" class="list-group-item list-group-item-action border-0">
-                                <div class="d-flex align-items-start">
-                                    <img src="https://bootdey.com/img/Content/avatar/avatar4.png" class="rounded-circle mr-1" alt="Haley Kennedy" width="40" height="40">
-                                    <div class="flex-grow-1 ml-3">
-                                        Haley Kennedy
-                                        <div class="small"><span class="fas fa-circle chat-offline"></span> Offline</div>
-                                    </div>
-                                </div>
-                            </a>
-                            <a href="#" class="list-group-item list-group-item-action border-0">
-                                <div class="d-flex align-items-start">
-                                    <img src="https://bootdey.com/img/Content/avatar/avatar3.png" class="rounded-circle mr-1" alt="Jennifer Chang" width="40" height="40">
-                                    <div class="flex-grow-1 ml-3">
-                                        Jennifer Chang
-                                        <div class="small"><span class="fas fa-circle chat-offline"></span> Offline</div>
-                                    </div>
-                                </div>
-                            </a>
-                            <a href="#" class="list-group-item list-group-item-action border-0">
-                                <div class="d-flex align-items-start">
-                                    <img src="https://bootdey.com/img/Content/avatar/avatar3.png" class="rounded-circle mr-1" alt="Jennifer Chang" width="40" height="40">
-                                    <div class="flex-grow-1 ml-3">
-                                        Jennifer Chang
-                                        <div class="small"><span class="fas fa-circle chat-offline"></span> Offline</div>
-                                    </div>
-                                </div>
-                            </a>
-                            <a href="#" class="list-group-item list-group-item-action border-0">
-                                <div class="d-flex align-items-start">
-                                    <img src="https://bootdey.com/img/Content/avatar/avatar3.png" class="rounded-circle mr-1" alt="Jennifer Chang" width="40" height="40">
-                                    <div class="flex-grow-1 ml-3">
-                                        Jennifer Chang
-                                        <div class="small"><span class="fas fa-circle chat-offline"></span> Offline</div>
-                                    </div>
-                                </div>
-                            </a>
-                            <a href="#" class="list-group-item list-group-item-action border-0">
-                                <div class="d-flex align-items-start">
-                                    <img src="https://bootdey.com/img/Content/avatar/avatar3.png" class="rounded-circle mr-1" alt="Jennifer Chang" width="40" height="40">
-                                    <div class="flex-grow-1 ml-3">
-                                        Jennifer Chang
-                                        <div class="small"><span class="fas fa-circle chat-offline"></span> Offline</div>
-                                    </div>
-                                </div>
-                            </a>
-                            <a href="#" class="list-group-item list-group-item-action border-0">
-                                <div class="d-flex align-items-start">
-                                    <img src="https://bootdey.com/img/Content/avatar/avatar3.png" class="rounded-circle mr-1" alt="Jennifer Chang" width="40" height="40">
-                                    <div class="flex-grow-1 ml-3">
-                                        Jennifer Chang
-                                        <div class="small"><span class="fas fa-circle chat-offline"></span> Offline</div>
-                                    </div>
-                                </div>
-                            </a>
-                            <hr class="d-block d-lg-none mt-1 mb-0">
+                          <button class="nav-link active" id="v-pills-home-tab" data-bs-toggle="pill" data-bs-target="#v-pills-home" type="button" role="tab" aria-controls="v-pills-home" aria-selected="true">
+                            <div class="d-flex align-items-center position-relative">
+                                <img src="${pageContext.request.contextPath}
+/assets/img/101.jpg" class="rounded-circle mx-2" width="40px" height="40px" alt="">
+                                <span>Nguyễn Đông</span>
+                                <span class="position-absolute top-2 start-100 translate-middle badge rounded-pill bg-danger">
+                                    10
+                                  </span>
+                            </div>
+                          </button>
+                          <button class="nav-link" id="v-pills-profile-tab" data-bs-toggle="pill" data-bs-target="#v-pills-profile" type="button" role="tab" aria-controls="v-pills-profile" aria-selected="false">
+                            <div class="d-flex align-items-center position-relative">
+                                <img src="${pageContext.request.contextPath}
+/assets/img/29.jpg" class="rounded-circle mx-2" width="40px" height="40px" alt="">
+                                <span>Phùng Ánh</span>
+                                <span class="position-absolute top-2 start-100 translate-middle badge rounded-pill bg-danger">
+                                    2
+                                  </span>
+                            </div>
+                          </button>
+                          <button class="nav-link" id="v-pills-messages-tab" data-bs-toggle="pill" data-bs-target="#v-pills-messages" type="button" role="tab" aria-controls="v-pills-messages" aria-selected="false">
+                            <div class="d-flex align-items-center position-relative">
+                                <img src="${pageContext.request.contextPath}
+/assets/img/about-1.jpg" class="rounded-circle mx-2" width="40px" height="40px" alt="">
+                                <span>Ngọc Sơn</span>
+                            </div>
+                          </button>
+                          <button class="nav-link" id="v-pills-settings-tab" data-bs-toggle="pill" data-bs-target="#v-pills-settings" type="button" role="tab" aria-controls="v-pills-settings" aria-selected="false">
+                            <div class="d-flex align-items-center position-relative">
+                                <img src="${pageContext.request.contextPath}
+/assets/img/about-2.jpg" class="rounded-circle mx-2" width="40px" height="40px" alt="">
+                                <span>Alexander Arnold</span>
+                                <span class="position-absolute top-2 start-100 translate-middle badge rounded-pill bg-danger">
+                                    12
+                                  </span>
+                            </div>
+                          </button>
+                          <button class="nav-link" id="v-pills-messages-tab" data-bs-toggle="pill" data-bs-target="#v-pills-messages" type="button" role="tab" aria-controls="v-pills-messages" aria-selected="false">
+                            <div class="d-flex align-items-center position-relative">
+                                <img src="${pageContext.request.contextPath}
+/assets/img/about-1.jpg" class="rounded-circle mx-2" width="40px" height="40px" alt="">
+                                <span>Ngọc Sơn</span>
+                            </div>
+                          </button>
+                          <button class="nav-link" id="v-pills-messages-tab" data-bs-toggle="pill" data-bs-target="#v-pills-messages" type="button" role="tab" aria-controls="v-pills-messages" aria-selected="false">
+                            <div class="d-flex align-items-center position-relative">
+                                <img src="${pageContext.request.contextPath}
+/assets/img/about-1.jpg" class="rounded-circle mx-2" width="40px" height="40px" alt="">
+                                <span>Ngọc Sơn</span>
+                            </div>
+                          </button>
+                          <button class="nav-link" id="v-pills-messages-tab" data-bs-toggle="pill" data-bs-target="#v-pills-messages" type="button" role="tab" aria-controls="v-pills-messages" aria-selected="false">
+                            <div class="d-flex align-items-center position-relative">
+                                <img src="${pageContext.request.contextPath}
+/assets/img/about-1.jpg" class="rounded-circle mx-2" width="40px" height="40px" alt="">
+                                <span>Ngọc Sơn</span>
+                            </div>
+                          </button>
+                          <button class="nav-link" id="v-pills-messages-tab" data-bs-toggle="pill" data-bs-target="#v-pills-messages" type="button" role="tab" aria-controls="v-pills-messages" aria-selected="false">
+                            <div class="d-flex align-items-center position-relative">
+                                <img src="${pageContext.request.contextPath}
+/assets/img/about-1.jpg" class="rounded-circle mx-2" width="40px" height="40px" alt="">
+                                <span>Ngọc Sơn</span>
+                            </div>
+                          </button>
+                          <button class="nav-link" id="v-pills-messages-tab" data-bs-toggle="pill" data-bs-target="#v-pills-messages" type="button" role="tab" aria-controls="v-pills-messages" aria-selected="false">
+                            <div class="d-flex align-items-center position-relative">
+                                <img src="${pageContext.request.contextPath}
+/assets/img/about-1.jpg" class="rounded-circle mx-2" width="40px" height="40px" alt="">
+                                <span>Ngọc Sơn</span>
+                            </div>
+                          </button>
+                          <button class="nav-link" id="v-pills-messages-tab" data-bs-toggle="pill" data-bs-target="#v-pills-messages" type="button" role="tab" aria-controls="v-pills-messages" aria-selected="false">
+                            <div class="d-flex align-items-center position-relative">
+                                <img src="${pageContext.request.contextPath}
+/assets/img/about-1.jpg" class="rounded-circle mx-2" width="40px" height="40px" alt="">
+                                <span>Ngọc Sơn</span>
+                            </div>
+                          </button>
+                          <button class="nav-link" id="v-pills-messages-tab" data-bs-toggle="pill" data-bs-target="#v-pills-messages" type="button" role="tab" aria-controls="v-pills-messages" aria-selected="false">
+                            <div class="d-flex align-items-center position-relative">
+                                <img src="${pageContext.request.contextPath}
+/assets/img/about-1.jpg" class="rounded-circle mx-2" width="40px" height="40px" alt="">
+                                <span>Ngọc Sơn</span>
+                            </div>
+                          </button>
+                          <button class="nav-link" id="v-pills-messages-tab" data-bs-toggle="pill" data-bs-target="#v-pills-messages" type="button" role="tab" aria-controls="v-pills-messages" aria-selected="false">
+                            <div class="d-flex align-items-center position-relative">
+                                <img src="${pageContext.request.contextPath}
+/assets/img/about-1.jpg" class="rounded-circle mx-2" width="40px" height="40px" alt="">
+                                <span>Ngọc Sơn</span>
+                            </div>
+                          </button>
+                          <button class="nav-link" id="v-pills-messages-tab" data-bs-toggle="pill" data-bs-target="#v-pills-messages" type="button" role="tab" aria-controls="v-pills-messages" aria-selected="false">
+                            <div class="d-flex align-items-center position-relative">
+                                <img src="${pageContext.request.contextPath}
+/assets/img/about-1.jpg" class="rounded-circle mx-2" width="40px" height="40px" alt="">
+                                <span>Ngọc Sơn</span>
+                            </div>
+                          </button>
+                          <button class="nav-link" id="v-pills-messages-tab" data-bs-toggle="pill" data-bs-target="#v-pills-messages" type="button" role="tab" aria-controls="v-pills-messages" aria-selected="false">
+                            <div class="d-flex align-items-center position-relative">
+                                <img src="${pageContext.request.contextPath}
+/assets/img/about-1.jpg" class="rounded-circle mx-2" width="40px" height="40px" alt="">
+                                <span>Ngọc Sơn</span>
+                            </div>
+                          </button>
                         </div>
-                        
-                        <div class="col-12 col-lg-7 col-xl-9" >
-                            <div class="py-2 px-4 border-bottom d-none d-lg-block">
-                                <div class="d-flex align-items-center py-1">
-                                    <div class="position-relative">
-                                        <img src="https://bootdey.com/img/Content/avatar/avatar3.png" class="rounded-circle mr-1" alt="Sharon Lessman" width="40" height="40">
+                        <!-- Tin nhắn (bên phải) -->
+
+                        <!-- Người 1 -->
+                        <div class="tab-content flex-grow-1" id="v-pills-tabContent">
+                          <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
+                            <div class="d-flex justify-content-between p-3" style="border-bottom: 1px solid #ccc;">
+                                <div class="d-flex align-items-center">
+                                    <img src="${pageContext.request.contextPath}
+/assets/img/101.jpg" class="rounded-circle mx-2" width="40" height="40"  alt="">
+                                    <span><strong><a href="profile.jsp">Nguyen Dong</a></strong></span>
+                                </div>
+                                <div class="">
+                                    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal-order">Điền đơn</button>
+                                </div>
+                            </div>
+                        <div class="position-relative" style="background-color: #E5F2FF;">
+                                <div class="chat-messages p-4">
+        
+                                    <div class="chat-message-right pb-4">
+                                        <div>
+                                            <img src="https://bootdey.com/img/Content/avatar/avatar1.png" class="rounded-circle mr-1" alt="Chris Wood" width="40" height="40">
+                                            <div class="text-muted small text-nowrap mt-2">2:33 am</div>
+                                        </div>
+                                        <div class="flex-shrink-1 bg-light rounded py-2 px-3 mr-3">
+                                            <div class="font-weight-bold mb-1">Bạn</div>
+                                            Lorem ipsum dolor sit amet, vis erat denique in, dicunt prodesset te vix.
+                                        </div>
                                     </div>
-                                    <div class="flex-grow-1 pl-3">
-                                        <strong>Sharon Lessman</strong>
-                                        <div class="text-muted small"><em>Đang gõ...</em></div>
+        
+                                    <div class="chat-message-left pb-4">
+                                        <div>
+                                            <img src="https://bootdey.com/img/Content/avatar/avatar3.png" class="rounded-circle mr-1" alt="Sharon Lessman" width="40" height="40">
+                                            <div class="text-muted small text-nowrap mt-2">2:34 am</div>
+                                        </div>
+                                        <div class="flex-shrink-1 bg-light rounded py-2 px-3 ml-3">
+                                            <div class="font-weight-bold mb-1">Sharon Lessman</div>
+                                            Sit meis deleniti eu, pri vidit meliore docendi ut, an eum erat animal commodo.
+                                        </div>
                                     </div>
-                                    <div>
-                                        <!-- <button class="btn btn-primary btn-lg mr-1 px-3"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-phone feather-lg"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg></button>
-                                        <button class="btn btn-info btn-lg mr-1 px-3 d-none d-md-inline-block"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-video feather-lg"><polygon points="23 7 16 12 23 17 23 7"></polygon><rect x="1" y="5" width="15" height="14" rx="2" ry="2"></rect></svg></button>
-                                        <button class="btn btn-light border btn-lg px-3"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-horizontal feather-lg"><circle cx="12" cy="12" r="1"></circle><circle cx="19" cy="12" r="1"></circle><circle cx="5" cy="12" r="1"></circle></svg></button> -->
-                                        <!-- <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#required-order">Yêu cầu đơn</button> -->
-                                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Điền đơn</button>
+        
+                                    <div class="chat-message-right mb-4">
+                                        <div>
+                                            <img src="https://bootdey.com/img/Content/avatar/avatar1.png" class="rounded-circle mr-1" alt="Chris Wood" width="40" height="40">
+                                            <div class="text-muted small text-nowrap mt-2">2:35 am</div>
+                                        </div>
+                                        <div class="flex-shrink-1 bg-light rounded py-2 px-3 mr-3">
+                                            <div class="font-weight-bold mb-1">Bạn</div>
+                                            Cum ea graeci tractatos.
+                                        </div>
                                     </div>
+        
+                                    <div class="chat-message-left pb-4">
+                                        <div>
+                                            <img src="https://bootdey.com/img/Content/avatar/avatar3.png" class="rounded-circle mr-1" alt="Sharon Lessman" width="40" height="40">
+                                            <div class="text-muted small text-nowrap mt-2">2:36 am</div>
+                                        </div>
+                                        <div class="flex-shrink-1 bg-light rounded py-2 px-3 ml-3">
+                                            <div class="font-weight-bold mb-1">Sharon Lessman</div>
+                                            Sed pulvinar, massa vitae interdum pulvinar, risus lectus porttitor magna, vitae commodo lectus mauris et velit.
+                                            Proin ultricies placerat imperdiet. Morbi varius quam ac venenatis tempus.
+                                        </div>
+                                    </div>
+        
+                                    <div class="chat-message-left pb-4">
+                                        <div>
+                                            <img src="https://bootdey.com/img/Content/avatar/avatar3.png" class="rounded-circle mr-1" alt="Sharon Lessman" width="40" height="40">
+                                            <div class="text-muted small text-nowrap mt-2">2:37 am</div>
+                                        </div>
+                                        <div class="flex-shrink-1 bg-light rounded py-2 px-3 ml-3">
+                                            <div class="font-weight-bold mb-1">Sharon Lessman</div>
+                                            Cras pulvinar, sapien id vehicula aliquet, diam velit elementum orci.
+                                        </div>
+                                    </div>
+        
+                                    <div class="chat-message-right mb-4">
+                                        <div>
+                                            <img src="https://bootdey.com/img/Content/avatar/avatar1.png" class="rounded-circle mr-1" alt="Chris Wood" width="40" height="40">
+                                            <div class="text-muted small text-nowrap mt-2">2:38 am</div>
+                                        </div>
+                                        <div class="flex-shrink-1 bg-light rounded py-2 px-3 mr-3">
+                                            <div class="font-weight-bold mb-1">Bạn</div>
+                                            Lorem ipsum dolor sit amet, vis erat denique in, dicunt prodesset te vix.
+                                        </div>
+                                    </div>
+        
+                                    <div class="chat-message-left pb-4">
+                                        <div>
+                                            <img src="https://bootdey.com/img/Content/avatar/avatar3.png" class="rounded-circle mr-1" alt="Sharon Lessman" width="40" height="40">
+                                            <div class="text-muted small text-nowrap mt-2">2:39 am</div>
+                                        </div>
+                                        <div class="flex-shrink-1 bg-light rounded py-2 px-3 ml-3">
+                                            <div class="font-weight-bold mb-1">Sharon Lessman</div>
+                                            Sit meis deleniti eu, pri vidit meliore docendi ut, an eum erat animal commodo.
+                                        </div>
+                                    </div>
+        
+                                    <div class="chat-message-right mb-4">
+                                        <div>
+                                            <img src="https://bootdey.com/img/Content/avatar/avatar1.png" class="rounded-circle mr-1" alt="Chris Wood" width="40" height="40">
+                                            <div class="text-muted small text-nowrap mt-2">2:40 am</div>
+                                        </div>
+                                        <div class="flex-shrink-1 bg-light rounded py-2 px-3 mr-3">
+                                            <div class="font-weight-bold mb-1">Bạn</div>
+                                            Cum ea graeci tractatos.
+                                        </div>
+                                    </div>
+        
+                                    <div class="chat-message-right mb-4">
+                                        <div>
+                                            <img src="https://bootdey.com/img/Content/avatar/avatar1.png" class="rounded-circle mr-1" alt="Chris Wood" width="40" height="40">
+                                            <div class="text-muted small text-nowrap mt-2">2:41 am</div>
+                                        </div>
+                                        <div class="flex-shrink-1 bg-light rounded py-2 px-3 mr-3">
+                                            <div class="font-weight-bold mb-1">Bạn</div>
+                                            Morbi finibus, lorem id placerat ullamcorper, nunc enim ultrices massa, id dignissim metus urna eget purus.
+                                        </div>
+                                    </div>
+        
+                                    <div class="chat-message-left pb-4">
+                                        <div>
+                                            <img src="https://bootdey.com/img/Content/avatar/avatar3.png" class="rounded-circle mr-1" alt="Sharon Lessman" width="40" height="40">
+                                            <div class="text-muted small text-nowrap mt-2">2:42 am</div>
+                                        </div>
+                                        <div class="flex-shrink-1 bg-light rounded py-2 px-3 ml-3">
+                                            <div class="font-weight-bold mb-1">Sharon Lessman</div>
+                                            Sed pulvinar, massa vitae interdum pulvinar, risus lectus porttitor magna, vitae commodo lectus mauris et velit.
+                                            Proin ultricies placerat imperdiet. Morbi varius quam ac venenatis tempus.
+                                        </div>
+                                    </div>
+        
+                                    <div class="chat-message-right mb-4">
+                                        <div>
+                                            <img src="https://bootdey.com/img/Content/avatar/avatar1.png" class="rounded-circle mr-1" alt="Chris Wood" width="40" height="40">
+                                            <div class="text-muted small text-nowrap mt-2">2:43 am</div>
+                                        </div>
+                                        <div class="flex-shrink-1 bg-light rounded py-2 px-3 mr-3">
+                                            <div class="font-weight-bold mb-1">Bạn</div>
+                                            Lorem ipsum dolor sit amet, vis erat denique in, dicunt prodesset te vix.
+                                        </div>
+                                    </div>
+                                    <div class="chat-message-right mb-4">
+                                        <div>
+                                            <img src="https://bootdey.com/img/Content/avatar/avatar1.png" class="rounded-circle mr-1" alt="Chris Wood" width="40" height="40">
+                                            <div class="text-muted small text-nowrap mt-2">2:43 am</div>
+                                        </div>
+                                        <div class="flex-shrink-1 bg-light rounded py-2 px-3 mr-3">
+                                            <div class="font-weight-bold mb-1">Bạn</div>
+                                            <span class="bg-primary text-white">Đơn yêu cầu vận chuyển<br></span>
+                                            <div>
+                                                <strong>Người nhận: </strong>Tuấn<br>
+                                                <strong>Số điện thoại: </strong>0966535573<br>
+                                                <strong>Địa chỉ đi: </strong>Hải Phòng<br>
+                                                <strong>Địa chỉ đến: </strong>Bắc Giang<br>
+                                                <strong>Khổi lượng: </strong>250g<br>
+                                                <strong>Thời gian đưa hàng cho người vận chuyển: </strong>30/11/2023 16:00<br>
+                                                <strong>Ghi chú: </strong>Cho chú iphone 14<br>
+                                            </div>
+                                            <a href="" class="btn btn-primary" style="float: right;">Huỷ</a>
+                                        </div>
+                                    </div>
+        
+                                    <div class="chat-message-left pb-4">
+                                        <div>
+                                            <img src="https://bootdey.com/img/Content/avatar/avatar3.png" class="rounded-circle mr-1" alt="Sharon Lessman" width="40" height="40">
+                                            <div class="text-muted small text-nowrap mt-2">2:44 am</div>
+                                        </div>
+                                        <div class="flex-shrink-1 bg-light rounded py-2 px-3 ml-3">
+                                            <div class="font-weight-bold mb-1">Sharon Lessman</div>
+                                            Sit meis deleniti eu, pri vidit meliore docendi ut, an eum erat animal commodo.
+                                        </div>
+                                    </div>
+                                    <div class="chat-message-left pb-4">
+                                        <div>
+                                            <img src="https://bootdey.com/img/Content/avatar/avatar3.png" class="rounded-circle mr-1" alt="Sharon Lessman" width="40" height="40">
+                                            <div class="text-muted small text-nowrap mt-2">2:44 am</div>
+                                        </div>
+                                        <div class="flex-shrink-1 bg-light rounded py-2 px-3 mr-3">
+                                            <div class="font-weight-bold mb-1">Sharon Lessman</div>
+                                            <span class="bg-success text-white">Đơn yêu cầu nhận vận chuyển<br></span>
+                                            <div>
+                                                <strong>Người nhận: </strong>Tuấn<br>
+                                                <strong>Số điện thoại: </strong>0966535573<br>
+                                                <strong>Địa chỉ đi: </strong>Hải Phòng<br>
+                                                <strong>Địa chỉ đến: </strong>Bắc Giang<br>
+                                                <strong>Khổi lượng: </strong>250g<br>
+                                                <strong>Thời gian đưa hàng cho người vận chuyển: </strong>30/11/2023 16:00<br>
+                                                <strong>Ghi chú: </strong>Cho chú iphone 14<br>
+                                            </div>
+                                            <div style="float: right;">
+                                                <a href="" class="btn btn-primary" >Huỷ</a>
+                                                <a href="" class="btn btn-success" >Nhận đơn</a>
+                                            </div>
+                                        </div>
+                                    </div>
+        
                                 </div>
                             </div>
         
+                            <div class="flex-grow-0 py-3 px-4 border-top">
+                                <div class="input-group">
+                                    <input type="text" class="form-control" placeholder="Nhập tin nhắn">
+                                    <button class="btn btn-primary">Gửi</button>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Ngưới 2 -->
+                          <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
+                            <div class="d-flex justify-content-between p-3" style="border-bottom: 1px solid #ccc;">
+                                <div class="d-flex align-items-center">
+                                    <img src="${pageContext.request.contextPath}
+/assets/img/29.jpg" class="rounded-circle mx-2" width="40" height="40"  alt="">
+                                    <span><strong><a href="profile.jsp">Phùng Ánh</a></strong></span>
+                                </div>
+                                <div class="">
+                                    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal-order">Điền đơn</button>
+                                </div>
+                            </div>
                             <div class="position-relative" style="background-color: #E5F2FF;">
                                 <div class="chat-messages p-4">
         
@@ -497,18 +703,20 @@
                                     <button class="btn btn-primary">Gửi</button>
                                 </div>
                             </div>
-        
+                          </div>
+                          <div class="tab-pane fade" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab">...</div>
+                          <div class="tab-pane fade" id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-settings-tab">...</div>
                         </div>
                     </div>
                 </div>
             </div>
             <!-- Modal điền đơn -->
             <div class="container">
-                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal fade" id="modal-order" tabindex="-1" aria-labelledby="modal-orderLabel" aria-hidden="true">
                     <div class="modal-dialog" style="min-width: 1000px; ">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">Điền đơn mới</h5>
+                                <h5 class="modal-title" id="modal-orderLabel">Điền đơn mới</h5>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
@@ -516,11 +724,6 @@
                                     <div class="mb-3">
                                         <label for="recipient-name" class="col-form-label">Nhập tên người nhận</label>
                                         <input type="text" class="form-control" id="recipient-name" placeholder="Nhập tên người nhận...">
-                                    </div>
-
-                                    <div class="mb-3">
-                                        <label for="formFileMultiple" class="form-label">Đính kèm</label>
-                                        <input class="form-control" type="file" id="formFileMultiple" multiple>
                                     </div>
                                     <div class="mb-3">
                                         <label for="recipient-name" class="col-form-label">Số điện thoại</label>
@@ -635,7 +838,7 @@
             <div class="container pt-5 pb-4">
                 <div class="row g-5">
                     <div class="col-lg-3 col-md-6">
-                        <a href="index.jsp">
+                        <a href="../index.jsp">
                             <h1 class="text-white fw-bold d-block">Trans<span class="text-secondary">Port</span> </h1>
                         </a>
                         <p class="mt-4 text-light">Chúng tôi tạo ra diễn đàn này giúp mọi người kết nối và dễ dàng vận chuyển.</p>
@@ -694,14 +897,20 @@
 
         
         <!-- JavaScript Libraries -->
-        <script src="${pageContext.request.contextPath}/assets/library/bootstrap-5.2.3-dist/js/bootstrap.bundle.min.js"></script>
-        <script src="${pageContext.request.contextPath}/assets/lib/wow/wow.min.js"></script>
-        <script src="${pageContext.request.contextPath}/assets/lib/easing/easing.min.js"></script>
-        <script src="${pageContext.request.contextPath}/assets/lib/waypoints/waypoints.min.js"></script>
-        <script src="${pageContext.request.contextPath}/assets/lib/owlcarousel/owl.carousel.min.js"></script>
+        <script src="${pageContext.request.contextPath}
+/assets/library/bootstrap-5.2.3-dist/js/bootstrap.bundle.min.js"></script>
+        <script src="${pageContext.request.contextPath}
+/assets/lib/wow/wow.min.js"></script>
+        <script src="${pageContext.request.contextPath}
+/assets/lib/easing/easing.min.js"></script>
+        <script src="${pageContext.request.contextPath}
+/assets/lib/waypoints/waypoints.min.js"></script>
+        <script src="${pageContext.request.contextPath}
+/assets/lib/owlcarousel/owl.carousel.min.js"></script>
 
         <!-- Template Javascript -->
-        <script src="${pageContext.request.contextPath}/assets/js/main.js"></script>
+        <script src="${pageContext.request.contextPath}
+/assets/js/main.js"></script>
     </body>
 
 </html>

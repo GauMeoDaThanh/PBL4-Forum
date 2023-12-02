@@ -16,16 +16,22 @@
 
         <!-- Icon Font Stylesheet -->
 
-        <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/library/fontawesome-free-6.4.2-web/css/all.css">
-        <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/library/bootstrap-icons-1.11.1/bootstrap-icons.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}
+/assets/library/fontawesome-free-6.4.2-web/css/all.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}
+/assets/library/bootstrap-icons-1.11.1/bootstrap-icons.css">
         <!-- Libraries Stylesheet -->
 
-        <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/lib/animate/animate.min.css">
-        <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/lib/owlcarousel/assets/owl.carousel.min.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}
+/assets/lib/animate/animate.min.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}
+/assets/lib/owlcarousel/assets/owl.carousel.min.css">
 
-        <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/bootstrap.min.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}
+/assets/css/bootstrap.min.css">
         <!-- style.css -->
-        <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/style.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}
+/assets/css/style.css">
     </head>
 
     <body>
@@ -53,10 +59,11 @@
         <div class="fixed-top my-5 container-fluid bg-primary">
             <div class="container">
                 <nav class="navbar navbar-dark navbar-expand-lg py-0">
-                    <a href="./home.html" class="navbar-brand">
+                    <a href="./home.jsp" class="navbar-brand">
                         <h1 class="text-white fw-bold d-block">Trans<span class="text-secondary">Port</span> </h1>
                     </a>
-                    <button type="button" class="navbar-toggler me-0" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+                    <button type="button" class="navbar-toggler me-0" data-bs-toggle="collapse"
+                        data-bs-target="#navbarCollapse">
                         <span class="navbar-toggler-icon"></span>
                     </button>
                     <div class="collapse navbar-collapse bg-transparent" id="navbarCollapse">
@@ -66,95 +73,106 @@
                             <a href="chat.jsp" class="nav-item nav-link">Chat</a>
                         </div>
                     </div>
-                    <div class="d-none d-xl-flex flex-shirink-0">
-                        <form class="input-group">
+                    <div class="d-none d-xl-flex flex-shirink-0 align-items-center">
+                        <form class="input-group" style="width: auto;">
                             <div class="form-outline">
-                              <input type="text" id="form1" class="form-control" placeholder="Tìm kiếm bài viết..."/>
+                                <input type="text" id="form1" class="form-control" placeholder="Tìm kiếm bài viết..." />
                             </div>
                             <button type="button" class="btn btn-primary">
-                              <i class="fas fa-search"></i>
+                                <i class="fas fa-search"></i>
                             </button>
                         </form>
-                        <div class="dropdown text-end">
-                            <a href="#" id="dropdownMenuButton1" class="d-block link-body-emphasis text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                              <img src="${pageContext.request.contextPath}/assets/img/101.jpg" alt="mdo" width="40" height="40" class="rounded-circle">
-                              <span class="text-white-50">Nguyễn Đông</span>
-                            </a>
-                            <ul class="dropdown-menu account-setting" aria-labelledby="dropdownMenuButton1">
+                        <div class="btn-group">
+                            <div id="dropdownMenuButton1" class="btn text-white d-flex align-items-center"
+                                style="font-size: 16px;" data-bs-toggle="dropdown" data-bs-display="static">
+                                <img src="../assets/img/101.jpg" alt="mdo" width="40" height="40" class="rounded-circle">
+                                <span class="text-white mx-2">Nguyễn Đông Tuấn</span>
+                            </div>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                                 <li><a class="dropdown-item" href="profile.jsp">Trang cá nhân</a></li>
-                                <li><hr class="dropdown-divider"></li>
-                                <li><a class="dropdown-item" href="index.jsp">Đăng xuất</a></li>
+                                <li><a class="dropdown-item" href="change_profile.jsp">Chỉnh sửa thông tin</a></li>
+                                <li><a class="dropdown-item" href="change_password.jsp">Đổi mật khẩu</a></li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li><a class="dropdown-item" href="../index.jsp">Đăng xuất</a></li>
                             </ul>
                         </div>
                         <!--  -->
                         <!--  -->
                         <div class="header__notification" onclick="clickOnBell()">
-                            <i class="header__notification-icon bi bi-bell"></i>
-                            <div class="header__popup">
-                                <h3 class="header__popup-heading">
-                                    Thông báo
-                                </h3>
-                                <ul class="header__popup-list">
-                                    <a class="header__popup-item" href="">
-                                        <img class="header__popup-item-avatar rounded-circle" src="../assets/img/29.jpg"></img>
-                                        <label class="header__popup-item-content">
-                                            Người dùng Chihuahua vừa đăng bài viết mới.Vào share cho mình với. Share đi mình cho 50k. Nhanh nha bạn ơi
-                                        </label>
-                                    </a>
-                                    <a class="header__popup-item" href="">
-                                        <img class="header__popup-item-avatar rounded-circle" src="../assets/img/29.jpg"></img>
-                                        <label class="header__popup-item-content">
-                                            Người dùng Chihuahua vừa đăng bài viết mới.Vào share cho mình với. Share đi mình cho 50k. Nhanh nha bạn ơi
-                                        </label>
-                                    </a>
-                                    <a class="header__popup-item" href="">
-                                        <img class="header__popup-item-avatar rounded-circle" src="../assets/img/29.jpg"></img>
-                                        <label class="header__popup-item-content">
-                                            Share đi mình cho 50k. Nhanh nha bạn ơi.Người dùng Chihuahua vừa đăng bài viết mới.Vào share cho mình với. Share đi mình cho 50k. Nhanh nha bạn ơi.
-                                        </label>
-                                    </a>
-                                    <a class="header__popup-item" href="">
-                                        <img class="header__popup-item-avatar rounded-circle" src="../assets/img/29.jpg"></img>
-                                        <label class="header__popup-item-content">
-                                            Share đi mình cho 50k. Nhanh nha bạn ơi.Người dùng Chihuahua vừa đăng bài viết mới.Vào share cho mình với. Share đi mình cho 50k. Nhanh nha bạn ơi.
-                                        </label>
-                                    </a>
-                                    <a class="header__popup-item" href="">
-                                        <img class="header__popup-item-avatar rounded-circle" src="../assets/img/29.jpg"></img>
-                                        <label class="header__popup-item-content">
-                                            Share đi mình cho 50k. Nhanh nha bạn ơi.Người dùng Chihuahua vừa đăng bài viết mới.Vào share cho mình với. Share đi mình cho 50k. Nhanh nha bạn ơi.
-                                        </label>
-                                    </a>
-                                    <a class="header__popup-item" href="">
-                                        <img class="header__popup-item-avatar rounded-circle" src="../assets/img/29.jpg"></img>
-                                        <label class="header__popup-item-content">
-                                            Share đi mình cho 50k. Nhanh nha bạn ơi.Người dùng Chihuahua vừa đăng bài viết mới.Vào share cho mình với. Share đi mình cho 50k. Nhanh nha bạn ơi.
-                                        </label>
-                                    </a>
-                                    <a class="header__popup-item" href="">
-                                        <img class="header__popup-item-avatar rounded-circle" src="../assets/img/29.jpg"></img>
-                                        <label class="header__popup-item-content">
-                                            Share đi mình cho 50k. Nhanh nha bạn ơi.Người dùng Chihuahua vừa đăng bài viết mới.Vào share cho mình với. Share đi mình cho 50k. Nhanh nha bạn ơi.
-                                        </label>
-                                    </a>
-                                    <a class="header__popup-item" href="">
-                                        <img class="header__popup-item-avatar rounded-circle" src="../assets/img/29.jpg"></img>
-                                        <label class="header__popup-item-content">
-                                            Share đi mình cho 50k. Nhanh nha bạn ơi.Người dùng Chihuahua vừa đăng bài viết mới.Vào share cho mình với. Share đi mình cho 50k. Nhanh nha bạn ơi.
-                                        </label>
-                                    </a>
-                                    <a class="header__popup-item" href="">
-                                        <img class="header__popup-item-avatar rounded-circle" src="../assets/img/29.jpg"></img>
-                                        <label class="header__popup-item-content">
-                                            Share đi mình cho 50k. Nhanh nha bạn ơi.Người dùng Chihuahua vừa đăng bài viết mới.Vào share cho mình với. Share đi mình cho 50k. Nhanh nha bạn ơi.
-                                        </label>
-                                    </a>
-                                </ul>
-                                <h3 class="header__popup-bottom">
-                                    Xem tất cả
-                                </h3>
-                            </div>   
-                        </div>
+                                <i class="header__notification-icon bi bi-bell"></i>
+                                <!-- <span class="header__notification-number">99+</span> -->
+                                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                                    99+
+                                    <span class="visually-hidden">unread messages</span>
+                                  </span>
+                                <div class="header__popup">
+                                    <h3 class="header__popup-heading">
+                                        Thông báo
+                                    </h3>
+                                    <ul class="header__popup-list">
+                                        <a class="header__popup-item" href="">
+                                            <img class="header__popup-item-avatar rounded-circle" src="../assets/img/29.jpg"></img>
+                                            <label class="header__popup-item-content">
+                                                Người dùng Chihuahua vừa đăng bài viết mới.Vào share cho mình với. Share đi mình cho 50k. Nhanh nha bạn ơi
+                                            </label>
+                                        </a>
+                                        <a class="header__popup-item" href="">
+                                            <img class="header__popup-item-avatar rounded-circle" src="../assets/img/29.jpg"></img>
+                                            <label class="header__popup-item-content">
+                                                Người dùng Chihuahua vừa đăng bài viết mới.Vào share cho mình với. Share đi mình cho 50k. Nhanh nha bạn ơi
+                                            </label>
+                                        </a>
+                                        <a class="header__popup-item" href="">
+                                            <img class="header__popup-item-avatar rounded-circle" src="../assets/img/29.jpg"></img>
+                                            <label class="header__popup-item-content">
+                                                Share đi mình cho 50k. Nhanh nha bạn ơi.Người dùng Chihuahua vừa đăng bài viết mới.Vào share cho mình với. Share đi mình cho 50k. Nhanh nha bạn ơi.
+                                            </label>
+                                        </a>
+                                        <a class="header__popup-item" href="">
+                                            <img class="header__popup-item-avatar rounded-circle" src="../assets/img/29.jpg"></img>
+                                            <label class="header__popup-item-content">
+                                                Share đi mình cho 50k. Nhanh nha bạn ơi.Người dùng Chihuahua vừa đăng bài viết mới.Vào share cho mình với. Share đi mình cho 50k. Nhanh nha bạn ơi.
+                                            </label>
+                                        </a>
+                                        <a class="header__popup-item" href="">
+                                            <img class="header__popup-item-avatar rounded-circle" src="../assets/img/29.jpg"></img>
+                                            <label class="header__popup-item-content">
+                                                Share đi mình cho 50k. Nhanh nha bạn ơi.Người dùng Chihuahua vừa đăng bài viết mới.Vào share cho mình với. Share đi mình cho 50k. Nhanh nha bạn ơi.
+                                            </label>
+                                        </a>
+                                        <a class="header__popup-item" href="">
+                                            <img class="header__popup-item-avatar rounded-circle" src="../assets/img/29.jpg"></img>
+                                            <label class="header__popup-item-content">
+                                                Share đi mình cho 50k. Nhanh nha bạn ơi.Người dùng Chihuahua vừa đăng bài viết mới.Vào share cho mình với. Share đi mình cho 50k. Nhanh nha bạn ơi.
+                                            </label>
+                                        </a>
+                                        <a class="header__popup-item" href="">
+                                            <img class="header__popup-item-avatar rounded-circle" src="../assets/img/29.jpg"></img>
+                                            <label class="header__popup-item-content">
+                                                Share đi mình cho 50k. Nhanh nha bạn ơi.Người dùng Chihuahua vừa đăng bài viết mới.Vào share cho mình với. Share đi mình cho 50k. Nhanh nha bạn ơi.
+                                            </label>
+                                        </a>
+                                        <a class="header__popup-item" href="">
+                                            <img class="header__popup-item-avatar rounded-circle" src="../assets/img/29.jpg"></img>
+                                            <label class="header__popup-item-content">
+                                                Share đi mình cho 50k. Nhanh nha bạn ơi.Người dùng Chihuahua vừa đăng bài viết mới.Vào share cho mình với. Share đi mình cho 50k. Nhanh nha bạn ơi.
+                                            </label>
+                                        </a>
+                                        <a class="header__popup-item" href="">
+                                            <img class="header__popup-item-avatar rounded-circle" src="../assets/img/29.jpg"></img>
+                                            <label class="header__popup-item-content">
+                                                Share đi mình cho 50k. Nhanh nha bạn ơi.Người dùng Chihuahua vừa đăng bài viết mới.Vào share cho mình với. Share đi mình cho 50k. Nhanh nha bạn ơi.
+                                            </label>
+                                        </a>
+                                    </ul>
+                                    <h3 class="header__popup-bottom">
+                                        Xem tất cả
+                                    </h3>
+                                </div>   
+                            </div>
+    
                     </div>
                 </nav>
             </div>
@@ -174,7 +192,7 @@
                         <div class="card mb-2" style="background-color: #E5F2FF;">
                             <div class="card-body">
                                 <div class="media forum-item d-flex">
-                                    <a href="" data-toggle="collapse" data-target=".forum-content"><img src="../assets/img/29.jpg" class="mr-3 rounded-circle" width="70" height="70" alt="User" /></a>
+                                    <a href="profile.jsp" data-toggle="collapse" data-target=".forum-content"><img src="../assets/img/29.jpg" class="mr-3 rounded-circle" width="70" height="70" alt="User" /></a>
                                     <div class="media-body mx-2" style="min-width: 60%; max-width: 60%;">
                                         <h4><a href="post_detail.jsp" data-toggle="collapse" data-target=".forum-content" class="text-body"><strong>Nhận vận chuyển nội thành Đà Nẵng.Nhận vận chuyển nội thành Đà Nẵng</strong></a></h4>
                                         <p class="text-muted"><a href="javascript:void(0)">NguyenDong</a> at <span class="text-dark font-weight-bold">05/05/2023 16:00</span></p>
@@ -371,7 +389,7 @@
             <div class="container pt-5 pb-4">
                 <div class="row g-5">
                     <div class="col-lg-3 col-md-6">
-                        <a href="index.jsp">
+                        <a href="../index.jsp">
                             <h1 class="text-white fw-bold d-block">Trans<span class="text-secondary">Port</span> </h1>
                         </a>
                         <p class="mt-4 text-light">Chúng tôi tạo ra diễn đàn này giúp mọi người kết nối và dễ dàng vận chuyển.</p>
@@ -430,14 +448,20 @@
 
         
         <!-- JavaScript Libraries -->
-        <script src="${pageContext.request.contextPath}/assets/library/bootstrap-5.2.3-dist/js/bootstrap.bundle.min.js"></script>
-        <script src="${pageContext.request.contextPath}/assets/lib/wow/wow.min.js"></script>
-        <script src="${pageContext.request.contextPath}/assets/lib/easing/easing.min.js"></script>
-        <script src="${pageContext.request.contextPath}/assets/lib/waypoints/waypoints.min.js"></script>
-        <script src="${pageContext.request.contextPath}/assets/lib/owlcarousel/owl.carousel.min.js"></script>
+        <script src="${pageContext.request.contextPath}
+/assets/library/bootstrap-5.2.3-dist/js/bootstrap.bundle.min.js"></script>
+        <script src="${pageContext.request.contextPath}
+/assets/lib/wow/wow.min.js"></script>
+        <script src="${pageContext.request.contextPath}
+/assets/lib/easing/easing.min.js"></script>
+        <script src="${pageContext.request.contextPath}
+/assets/lib/waypoints/waypoints.min.js"></script>
+        <script src="${pageContext.request.contextPath}
+/assets/lib/owlcarousel/owl.carousel.min.js"></script>
 
         <!-- Template Javascript -->
-        <script src="${pageContext.request.contextPath}/assets/js/main.js"></script>
+        <script src="${pageContext.request.contextPath}
+/assets/js/main.js"></script>
     </body>
 
 </html>
