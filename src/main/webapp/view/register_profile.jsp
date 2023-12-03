@@ -54,7 +54,7 @@
 <!-- Navbar End -->
 <main class="content" style="margin-top: 150px; margin-bottom: 150px;">
     <div class="container">
-        <form action="" method="" class="p-4 rounded shadow" style="border: 10px solid #DFEBFF;">
+        <form action="../Profile/Update" method="post" class="p-4 rounded shadow" style="border: 10px solid #DFEBFF;" enctype="multipart/form-data">
             <div class="mb-5">
                 <h1 class="text-center">Thông tin tài khoản</h1>
             </div>
@@ -65,22 +65,22 @@
                          class="rounded-circle" style="width: 200px; height: 200px; object-fit: cover;" alt="example placeholder" />
                     <div class="btn btn-primary btn-rounded mt-3">
                         <label class="form-label text-white m-1" for="customFile2">Chọn ảnh upload</label>
-                        <input type="file" class="form-control d-none" id="customFile2" accept=".jpg,.png" onchange="displaySelectedImage(event, 'selectedAvatar')" />
+                        <input type="file" class="form-control d-none" id="customFile2" accept=".jpg,.png" onchange="displaySelectedImage(event, 'selectedAvatar')" name="avatar"/>
                     </div>
                 </div>
             </div>
             <div class="mb-3">
                 <label for="name-account" class="form-label"><strong>Tên tài khoản</strong></label>
-                <input type="text" class="form-control" id="name-account" placeholder="Nhập tên tài khoản ở đây">
+                <input type="text" class="form-control" id="name-account" placeholder="Nhập tên tài khoản ở đây" name="name" required>
             </div>
             <div class="mb-3">
                 <label for="exampleInputEmail1" class="form-label"><strong>Email</strong></label>
-                <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Nhập email ở đây">
+                <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Nhập email ở đây" name="email" required>
             </div>
 
             <div class="mb-3">
-                <label for="avatar" class="form-label"><strong>Mô tả</strong></label>
-                <textarea name="" id="" class="form-control" rows="4" placeholder="Nhập mô tả ở đây"></textarea>
+                <label for="description" class="form-label"><strong>Mô tả</strong></label>
+                <textarea name="description" id="description" class="form-control" rows="4" placeholder="Nhập mô tả ở đây" ></textarea>
             </div>
             <div class="text-center">
                 <button type="submit" class="btn btn-success px-4 py-2">Lưu thông tin</button>

@@ -29,10 +29,14 @@ public class AuthenticateServlet extends HttpServlet {
                     String password = req.getParameter("password");
                     if (authenticateBO.verify(username, password)) {
                         UserBEAN user = authenticateBO.getUserDetail(username);
-//                resp.getWriter().println(role);
                         HttpSession session = req.getSession();
                         session.setAttribute("user", user);
-                        resp.sendRedirect("../Topic/");
+                        if (user.getName() == null) {
+                            resp.sendRedirect("../Profile/Register");
+                        }else{
+                            resp.sendRedirect("../Topic/");
+                        }
+
                     }else{
                         resp.getWriter().println("cut roi");
                     }
@@ -44,9 +48,11 @@ public class AuthenticateServlet extends HttpServlet {
                 try{
                     String username = req.getParameter("username");
                     String password = req.getParameter("password");
-//                    authenticateBO.signUp(username, password);
-//                    resp.sendRedirect("../../Forum?alert=success");
-                    resp.sendRedirect(BCrypt.hashpw("1", BCrypt.gensalt()));
+                    authenticateBO.signUp(username, password);
+                    UserBEAN userBEAN = authenticateBO.getUserDetail(username);
+                    HttpSession session = req.getSession();
+                    session.setAttribute("user", userBEAN);
+                    resp.sendRedirect("../Profile/Register");
                 }catch(Exception e){
                     throw new RuntimeException(e);
                 }
