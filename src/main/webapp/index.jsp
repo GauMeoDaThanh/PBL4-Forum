@@ -4,7 +4,7 @@
 
     <head>
         <meta charset="utf-8">
-        <title>index</title>
+        <title>Forum</title>
         <meta content="width=device-width, initial-scale=1.0" name="viewport">
         <meta content="" name="keywords">
         <meta content="" name="description">
@@ -286,6 +286,20 @@
         <!-- <script src="js/main.js"></script> -->
         <script src="${pageContext.request.contextPath}
 /assets/js/main.js"></script>
+        <script >
+            $(document).on("submit", "#form-register", function (event){
+                const $form = $(this);
+                $.post($form.attr("action"), $form.serialize(), function (response){
+                    if (response === "trung tai khoan") {
+                        alert("Tên tài khoản đã tồn tại, vui lòng chọn tên khác");
+                        location.reload();
+                    }else {
+                        window.location.assign("Profile/Register")
+                    }
+                });
+                event.preventDefault();
+            });
+        </script>
     </body>
 
 </html>

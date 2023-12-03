@@ -216,11 +216,3 @@ function displaySelectedImage(event, elementId) {
     }
 }
 
-const urlParams = new URLSearchParams(window.location.search);
-const alertParam = urlParams.get('alert');
-
-
-if (alertParam === 'success') {
-
-    alert('Tạo tài khoản thành công, vui lòng đăng nhập lại');
-}

@@ -11,7 +11,7 @@ public class AuthenticateDAO {
         return DriverManager.getConnection("jdbc:mysql://localhost:3306/deli_forum", "root", "teamctg123");
     }
 
-    public boolean isExistedUser(String username, String password) throws Exception{
+    public boolean verifyUser(String username, String password) throws Exception{
         Connection conn = connectDb();
         PreparedStatement preparedStatement = conn.prepareStatement("select count(*) as count, password from user where username = ?");
         preparedStatement.setString(1, username);
@@ -19,6 +19,16 @@ public class AuthenticateDAO {
         rs.next();
         if (rs.getInt("count") > 0){
             return BCrypt.checkpw(password, rs.getString("password"));
+        }
+        return false;
+    }
+    public boolean isExistedUsername(String username) throws Exception{
+        PreparedStatement statement = connectDb().prepareStatement("select count(*) as count from user where username = ?");
+        statement.setString(1, username);
+        ResultSet rs = statement.executeQuery();
+        rs.next();
+        if (rs.getInt("count") > 0) {
+            return true;
         }
         return false;
     }

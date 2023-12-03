@@ -2,10 +2,7 @@ package controller;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
-import jakarta.servlet.http.HttpServlet;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
+import jakarta.servlet.http.*;
 import model.BEAN.UserBEAN;
 import model.BO.AuthenticateBO;
 import org.mindrot.jbcrypt.BCrypt;
@@ -48,11 +45,17 @@ public class AuthenticateServlet extends HttpServlet {
                 try{
                     String username = req.getParameter("username");
                     String password = req.getParameter("password");
-                    authenticateBO.signUp(username, password);
-                    UserBEAN userBEAN = authenticateBO.getUserDetail(username);
-                    HttpSession session = req.getSession();
-                    session.setAttribute("user", userBEAN);
-                    resp.sendRedirect("../Profile/Register");
+                    if (!authenticateBO.isExistedUsername(username)){
+                        authenticateBO.signUp(username, password);
+                        UserBEAN userBEAN = authenticateBO.getUserDetail(username);
+                        HttpSession session = req.getSession();
+                        session.setAttribute("user", userBEAN);
+                    }else {
+                        boolean ajax = "XMLHttpRequest".equals(req.getHeader("X-Requested-With"));
+                        if (ajax) {
+                            resp.getWriter().write("trung tai khoan");
+                        }
+                    }
                 }catch(Exception e){
                     throw new RuntimeException(e);
                 }
