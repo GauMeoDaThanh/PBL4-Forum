@@ -19,6 +19,7 @@ public class AuthenticateServlet extends HttpServlet {
                 HttpSession session = req.getSession(false);
                 session.removeAttribute("user");
                 resp.sendRedirect("../../Forum");
+
                 break;
         }
     }
@@ -39,7 +40,7 @@ public class AuthenticateServlet extends HttpServlet {
                         if (user.getName() == null) {
                             resp.sendRedirect("../Profile/Register");
                         }else{
-                            resp.sendRedirect("../Topic/");
+                            resp.sendRedirect("../Home/");
                         }
 
                     }else{

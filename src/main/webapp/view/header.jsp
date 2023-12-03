@@ -1,11 +1,14 @@
-<%@ page import="model.BEAN.UserBEAN" %><%--
+<%@ page import="model.BEAN.UserBEAN" %>
+<%@page isELIgnored="false" %>
+<%--
   Created by IntelliJ IDEA.
   User: ACER
   Date: 03/12/2023
   Time: 8:10 CH
   To change this template use File | Settings | File Templates.
 --%>
-<% UserBEAN user = (UserBEAN) session.getAttribute("user"); %>
+<%
+    UserBEAN user = (UserBEAN) session.getAttribute("user"); %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!-- Navbar Start -->
 <div class="fixed-top my-5 container-fluid bg-primary">
@@ -37,7 +40,7 @@
                 <div class="btn-group">
                     <div id="dropdownMenuButton1" class="btn text-white d-flex align-items-center"
                          style="font-size: 16px;" data-bs-toggle="dropdown" data-bs-display="static">
-                        <img src="../assets/img/<%=user.getAvatar()==null ? "29.jpg" : user.getAvatar()%>" alt="mdo" width="40" height="40" class="rounded-circle">
+                        <img src="${pageContext.request.contextPath}/image/<%=user.getAvatar()==null  || user.getAvatar().equals("") ? "29.jpg" : user.getAvatar()%>" alt="mdo" width="40" height="40" class="rounded-circle">
                         <span class="text-white mx-2"><%=user.getUsername()%></span>
                     </div>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">

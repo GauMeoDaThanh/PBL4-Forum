@@ -57,7 +57,7 @@ public class ProfileServlet extends HttpServlet {
                     String img = file.getSubmittedFileName().equals("") ?  "" : System.currentTimeMillis() + file.getSubmittedFileName();
                     System.out.println(img);
                     if (!img.equals("")){
-                        uploadPath = "E:/Code file/Workspace Intelj/Java/PBL4-DeliveryForum/src/main/webapp/assets/img/" + img;
+                        uploadPath = "E:/giao_trinh/pbl4/img/" + img;
                         FileOutputStream fos = new FileOutputStream(uploadPath);
                         InputStream is = file.getInputStream();
 
@@ -70,7 +70,8 @@ public class ProfileServlet extends HttpServlet {
                     UserBEAN userBean = new UserBEAN(username, name, email, role, img, description);
                     ProfileBo profileBO = new ProfileBo();
                     profileBO.updateProfile(userBean);
-                    resp.getWriter().println("xog");
+                    session.setAttribute("user", userBean);
+                    resp.sendRedirect("../Home/");
             };
         } catch (Exception e) {
             resp.sendRedirect("../../Forum");
