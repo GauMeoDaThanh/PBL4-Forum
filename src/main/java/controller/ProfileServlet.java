@@ -44,7 +44,7 @@ public class ProfileServlet extends HttpServlet {
             UserBEAN user = (UserBEAN) session.getAttribute("user");
             String action = req.getPathInfo().substring(1);
             switch (action) {
-                case "Update":
+                case "RegisterUpdate":
                     String name = req.getParameter("name");
                     String email = req.getParameter("email");
                     String description = req.getParameter("description");
@@ -67,23 +67,13 @@ public class ProfileServlet extends HttpServlet {
                         fos.close();
                     }
 
-                    UserBEAN userBean = new UserBEAN(username, name, email, role, uploadPath, description);
+                    UserBEAN userBean = new UserBEAN(username, name, email, role, img, description);
                     ProfileBo profileBO = new ProfileBo();
                     profileBO.updateProfile(userBean);
                     resp.getWriter().println("xog");
             };
         } catch (Exception e) {
-//            resp.sendRedirect("../../Forum");
-            System.out.println(e.getMessage());
+            resp.sendRedirect("../../Forum");
         }
     }
-//    private String getFileName(Part part){
-//        String headers = part.getHeaders("content-disposition").toString();
-//        for (String content : headers.split(";")){
-//            if (content.trim().startsWith("filename")) {
-//                return content.substring(content.indexOf('=') + 1, content.length()-1).trim().replace("\"", "");
-//            }
-//        }
-//        return null;
-//    }
 }

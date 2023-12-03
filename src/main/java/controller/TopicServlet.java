@@ -15,7 +15,11 @@ public class TopicServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession(false);
-        UserBEAN user = (UserBEAN) session.getAttribute("user");
-        resp.getWriter().println(user.getUsername());
+        try {
+            UserBEAN user = (UserBEAN) session.getAttribute("user");
+            resp.sendRedirect("../view/home.jsp");
+        } catch (Exception e) {
+            resp.sendRedirect("../../Forum");
+        }
     }
 }

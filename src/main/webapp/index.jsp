@@ -71,7 +71,7 @@
         <div class="fixed-top my-5 container-fluid bg-primary">
             <div class="container">
                 <nav class="navbar navbar-dark navbar-expand-lg py-0">
-                    <a href="index.jsp" class="navbar-brand">
+                    <a href="" class="navbar-brand">
                         <h1 class="text-white fw-bold d-block">Trans<span class="text-secondary">Port</span> </h1>
                     </a>
                     <button type="button" class="navbar-toggler me-0" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
@@ -299,6 +299,14 @@
                 });
                 event.preventDefault();
             });
+            const urlParams = new URLSearchParams(window.location.search);
+            const alertParam = urlParams.get('alert');
+
+            if (alertParam === '1') {
+
+                alert('Sai tài khoản hoặc mật khẩu');
+                window.location.assign("/Forum");
+            }
         </script>
     </body>
 

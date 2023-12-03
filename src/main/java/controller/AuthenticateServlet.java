@@ -13,6 +13,14 @@ import java.io.IOException;
 public class AuthenticateServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String action = req.getPathInfo().substring(1);
+        switch (action) {
+            case "logout":
+                HttpSession session = req.getSession(false);
+                session.removeAttribute("user");
+                resp.sendRedirect("../../Forum");
+                break;
+        }
     }
 
     @Override
@@ -35,7 +43,7 @@ public class AuthenticateServlet extends HttpServlet {
                         }
 
                     }else{
-                        resp.getWriter().println("cut roi");
+                        resp.sendRedirect("../../Forum?alert=1");
                     }
                 } catch (Exception e) {
                     throw new RuntimeException(e);
