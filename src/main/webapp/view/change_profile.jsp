@@ -1,5 +1,9 @@
+<%@ page import="model.BEAN.UserBEAN" %>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html lang="en">
+<%
+    UserBEAN user = (UserBEAN) session.getAttribute("user"); %>
 
 <head>
     <meta charset="utf-8">
@@ -48,158 +52,37 @@
 </div>
 <!-- Topbar End -->
 
-<!-- Navbar Start -->
-<div class="fixed-top my-5 container-fluid bg-primary">
-    <div class="container">
-        <nav class="navbar navbar-dark navbar-expand-lg py-0">
-            <a href="./home.jsp" class="navbar-brand">
-                <h1 class="text-white fw-bold d-block">Trans<span class="text-secondary">Port</span> </h1>
-            </a>
-            <button type="button" class="navbar-toggler me-0" data-bs-toggle="collapse"
-                    data-bs-target="#navbarCollapse">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse bg-transparent" id="navbarCollapse">
-                <div class="navbar-nav ms-auto mx-xl-auto p-0">
-                    <a href="./order_receive.jsp" class="nav-item nav-link">Đơn nhận</a>
-                    <a href="./order_send.jsp" class="nav-item nav-link">Đơn gửi</a>
-                    <a href="./chat.jsp" class="nav-item nav-link">Chat</a>
-                </div>
-            </div>
-            <div class="d-none d-xl-flex flex-shirink-0 align-items-center">
-                <form class="input-group" style="width: auto;">
-                    <div class="form-outline">
-                        <input type="text" id="form1" class="form-control" placeholder="Tìm kiếm bài viết..." />
-                    </div>
-                    <button type="button" class="btn btn-primary">
-                        <i class="fas fa-search"></i>
-                    </button>
-                </form>
-                <div class="btn-group">
-                    <div id="dropdownMenuButton1" class="btn text-white d-flex align-items-center"
-                         style="font-size: 16px;" data-bs-toggle="dropdown" data-bs-display="static">
-                        <img src="${pageContext.request.contextPath}/assets/img/101.jpg" alt="mdo" width="40" height="40" class="rounded-circle">
-                        <span class="text-white mx-2">Nguyễn Đông Tuấn</span>
-                    </div>
-                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                        <li><a class="dropdown-item" href="./profile.jsp">Trang cá nhân</a></li>
-                        <li><a class="dropdown-item" href="./change_profile.jsp">Chỉnh sửa thông tin</a></li>
-                        <li><a class="dropdown-item" href="./change_password.jsp">Đổi mật khẩu</a></li>
-                        <li>
-                            <hr class="dropdown-divider">
-                        </li>
-                        <li><a class="dropdown-item" href="./index.jsp">Đăng xuất</a></li>
-                    </ul>
-                </div>
-                <!--  -->
-                <!--  -->
-                <div class="header__notification" onclick="clickOnBell()">
-                    <i class="header__notification-icon bi bi-bell"></i>
-                    <!-- <span class="header__notification-number">99+</span> -->
-                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                                    99+
-                                    <span class="visually-hidden">unread messages</span>
-                                  </span>
-                    <div class="header__popup">
-                        <h3 class="header__popup-heading">
-                            Thông báo
-                        </h3>
-                        <ul class="header__popup-list">
-                            <a class="header__popup-item" href="">
-                                <img class="header__popup-item-avatar rounded-circle" src="../assets/img/29.jpg"></img>
-                                <label class="header__popup-item-content">
-                                    Người dùng Chihuahua vừa đăng bài viết mới.Vào share cho mình với. Share đi mình cho 50k. Nhanh nha bạn ơi
-                                </label>
-                            </a>
-                            <a class="header__popup-item" href="">
-                                <img class="header__popup-item-avatar rounded-circle" src="../assets/img/29.jpg"></img>
-                                <label class="header__popup-item-content">
-                                    Người dùng Chihuahua vừa đăng bài viết mới.Vào share cho mình với. Share đi mình cho 50k. Nhanh nha bạn ơi
-                                </label>
-                            </a>
-                            <a class="header__popup-item" href="">
-                                <img class="header__popup-item-avatar rounded-circle" src="../assets/img/29.jpg"></img>
-                                <label class="header__popup-item-content">
-                                    Share đi mình cho 50k. Nhanh nha bạn ơi.Người dùng Chihuahua vừa đăng bài viết mới.Vào share cho mình với. Share đi mình cho 50k. Nhanh nha bạn ơi.
-                                </label>
-                            </a>
-                            <a class="header__popup-item" href="">
-                                <img class="header__popup-item-avatar rounded-circle" src="../assets/img/29.jpg"></img>
-                                <label class="header__popup-item-content">
-                                    Share đi mình cho 50k. Nhanh nha bạn ơi.Người dùng Chihuahua vừa đăng bài viết mới.Vào share cho mình với. Share đi mình cho 50k. Nhanh nha bạn ơi.
-                                </label>
-                            </a>
-                            <a class="header__popup-item" href="">
-                                <img class="header__popup-item-avatar rounded-circle" src="../assets/img/29.jpg"></img>
-                                <label class="header__popup-item-content">
-                                    Share đi mình cho 50k. Nhanh nha bạn ơi.Người dùng Chihuahua vừa đăng bài viết mới.Vào share cho mình với. Share đi mình cho 50k. Nhanh nha bạn ơi.
-                                </label>
-                            </a>
-                            <a class="header__popup-item" href="">
-                                <img class="header__popup-item-avatar rounded-circle" src="../assets/img/29.jpg"></img>
-                                <label class="header__popup-item-content">
-                                    Share đi mình cho 50k. Nhanh nha bạn ơi.Người dùng Chihuahua vừa đăng bài viết mới.Vào share cho mình với. Share đi mình cho 50k. Nhanh nha bạn ơi.
-                                </label>
-                            </a>
-                            <a class="header__popup-item" href="">
-                                <img class="header__popup-item-avatar rounded-circle" src="../assets/img/29.jpg"></img>
-                                <label class="header__popup-item-content">
-                                    Share đi mình cho 50k. Nhanh nha bạn ơi.Người dùng Chihuahua vừa đăng bài viết mới.Vào share cho mình với. Share đi mình cho 50k. Nhanh nha bạn ơi.
-                                </label>
-                            </a>
-                            <a class="header__popup-item" href="">
-                                <img class="header__popup-item-avatar rounded-circle" src="../assets/img/29.jpg"></img>
-                                <label class="header__popup-item-content">
-                                    Share đi mình cho 50k. Nhanh nha bạn ơi.Người dùng Chihuahua vừa đăng bài viết mới.Vào share cho mình với. Share đi mình cho 50k. Nhanh nha bạn ơi.
-                                </label>
-                            </a>
-                            <a class="header__popup-item" href="">
-                                <img class="header__popup-item-avatar rounded-circle" src="../assets/img/29.jpg"></img>
-                                <label class="header__popup-item-content">
-                                    Share đi mình cho 50k. Nhanh nha bạn ơi.Người dùng Chihuahua vừa đăng bài viết mới.Vào share cho mình với. Share đi mình cho 50k. Nhanh nha bạn ơi.
-                                </label>
-                            </a>
-                        </ul>
-                        <h3 class="header__popup-bottom">
-                            Xem tất cả
-                        </h3>
-                    </div>
-                </div>
+<jsp:include page="header.jsp"/>
 
-            </div>
-        </nav>
-    </div>
-</div>
-<!-- Navbar End -->
 <main class="content" style="margin-top: 150px; margin-bottom: 150px;">
     <div class="container">
-        <form action="" method="" class="p-4 rounded shadow" style="border: 10px solid #DFEBFF;">
+        <form action="../Profile/Update" method="post" class="p-4 rounded shadow" style="border: 10px solid #DFEBFF;" enctype="multipart/form-data">
             <div class="mb-5">
                 <h1 class="text-center">Chỉnh sửa thông tin tài khoản</h1>
             </div>
             <div class="mb-3">
                 <p for="avatar" class="form-label text-center mb-3" style="font-size: large;"><strong>Ảnh đại diện</strong></p>
                 <div class="d-flex flex-column align-items-center">
-                    <img id="selectedAvatar" src="${pageContext.request.contextPath}/assets/img/avater-fun.jpg"
+                    <img id="selectedAvatar" src="${pageContext.request.contextPath}/image/<%=user.getAvatar()==null  || user.getAvatar().equals("") ? "29.jpg" : user.getAvatar()%>"
                          class="rounded-circle" style="width: 200px; height: 200px; object-fit: cover;" alt="example placeholder" />
                     <div class="btn btn-primary btn-rounded mt-3">
                         <label class="form-label text-white m-1" for="customFile2">Chọn ảnh upload</label>
-                        <input type="file" class="form-control d-none" id="customFile2" accept=".jpg,.png" onchange="displaySelectedImage(event, 'selectedAvatar')" />
+                        <input type="file" class="form-control d-none" id="customFile2" accept=".jpg,.png" onchange="displaySelectedImage(event, 'selectedAvatar')" name="avatar"/>
                     </div>
                 </div>
             </div>
             <div class="mb-3">
                 <label for="name-account" class="form-label"><strong>Tên tài khoản</strong></label>
-                <input type="text" class="form-control" id="name-account" value="NguyenDong">
+                <input type="text" class="form-control" id="name-account" value="<%=user.getName()%>" name="name">
             </div>
             <div class="mb-3">
-                <label for="exampleInputEmail1" class="form-label"><strong>Email</strong></label>
-                <input type="email" class="form-control" id="exampleInputEmail1" value="dong@gmail.com">
+                <label for="exampleInputEmail1" class="form-label"> <strong>Email</strong></label>
+                <input type="email" class="form-control" id="exampleInputEmail1" value="<%=user.getEmail()%>" name="email">
             </div>
 
             <div class="mb-3">
                 <label for="avatar" class="form-label"><strong>Mô tả</strong></label>
-                <textarea name="" id="" class="form-control" rows="4" placeholder="Nhập mô tả ở đây"></textarea>
+                <textarea name="description" id="" class="form-control" rows="4" placeholder="Nhập mô tả ở đây"><%=user.getDescription()%></textarea>
             </div>
             <div class="text-center">
                 <button type="submit" class="btn btn-success px-4 py-2">Lưu thông tin</button>

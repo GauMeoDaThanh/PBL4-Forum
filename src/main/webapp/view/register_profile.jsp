@@ -54,7 +54,7 @@
 <!-- Navbar End -->
 <main class="content" style="margin-top: 150px; margin-bottom: 150px;">
     <div class="container">
-        <form action="../Profile/RegisterUpdate" method="post" class="p-4 rounded shadow" style="border: 10px solid #DFEBFF;" enctype="multipart/form-data">
+        <form action="../Profile/Update" method="post" class="p-4 rounded shadow" style="border: 10px solid #DFEBFF;" enctype="multipart/form-data">
             <div class="mb-5">
                 <h1 class="text-center">Thông tin tài khoản</h1>
             </div>
