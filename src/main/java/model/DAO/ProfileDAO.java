@@ -1,6 +1,8 @@
 package model.DAO;
 
+import model.BEAN.ProfileBEAN;
 import model.BEAN.UserBEAN;
+import model.BO.ProfileBO;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -38,5 +40,25 @@ public class ProfileDAO {
         preparedStatement.setString(1, password);
         preparedStatement.setString(2, username);
         preparedStatement.executeUpdate();
+    }
+
+    public boolean isValidUser(String username) throws Exception{
+        Connection conn = connectDb();
+        PreparedStatement preparedStatement = conn.prepareStatement("select * from user where username = ?");
+        preparedStatement.setString(1, username);
+        ResultSet rs = preparedStatement.executeQuery();
+        return rs.next();
+    }
+    public ProfileBEAN getUser(String username) throws Exception {
+        Connection conn = connectDb();
+        PreparedStatement preparedStatement = conn.prepareStatement("select count(delivery.id) as num_deli, avg(rate.point) as point, user.username," +
+                " user.name, user.email, user.description, user.avatar from user left join delivery on user.username = delivery.user_take left join rate on user.username = rate.to_user " +
+                "where user.username = ?");
+        preparedStatement.setString(1, username);
+        ResultSet rs = preparedStatement.executeQuery();
+        rs.next();
+        return new ProfileBEAN(rs.getString("username"), rs.getString("name"),
+                rs.getString("email"), rs.getString("description"),
+                rs.getInt("num_deli"), rs.getDouble("point"), rs.getString("avatar"));
     }
 }

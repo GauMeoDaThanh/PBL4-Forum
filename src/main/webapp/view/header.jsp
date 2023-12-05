@@ -44,7 +44,7 @@
                         <span class="text-white mx-2"><%=user.getUsername()%></span>
                     </div>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                        <li><a class="dropdown-item" href="profile.jsp">Trang cá nhân</a></li>
+                        <li><a class="dropdown-item" href="../Profile/Info?username=<%=user.getUsername()%>">Trang cá nhân</a></li>
                         <li><a class="dropdown-item" href="../Profile/Update">Chỉnh sửa thông tin</a></li>
                         <li><a class="dropdown-item" href="../Profile/UpdatePassword">Đổi mật khẩu</a></li>
                         <li>

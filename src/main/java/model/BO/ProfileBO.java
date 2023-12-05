@@ -1,5 +1,6 @@
 package model.BO;
 
+import model.BEAN.ProfileBEAN;
 import model.BEAN.UserBEAN;
 import model.DAO.ProfileDAO;
 import org.mindrot.jbcrypt.BCrypt;
@@ -18,5 +19,12 @@ public class ProfileBO {
             return true;
         }
         return false;
+    }
+
+    public ProfileBEAN getUserInfo(String username) throws Exception{
+        if (profileDAO.isValidUser(username)){
+            return profileDAO.getUser(username);
+        }
+        return null;
     }
 }

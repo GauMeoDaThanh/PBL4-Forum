@@ -4,9 +4,12 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.*;
+import model.BEAN.ProfileBEAN;
 import model.BEAN.UserBEAN;
+import model.BO.AuthenticateBO;
 import model.BO.ProfileBO;
 
+import java.io.EOFException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -16,9 +19,9 @@ import java.io.InputStream;
 public class ProfileServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        //Return to homepage if no user found
         HttpSession session = req.getSession(false);
-        try{
+        ProfileBO profileBO = new ProfileBO();
+        try {
             String action = req.getPathInfo().substring(1);
             UserBEAN user = (UserBEAN) session.getAttribute("user");
             switch (action) {
@@ -31,9 +34,24 @@ public class ProfileServlet extends HttpServlet {
                 case "UpdatePassword":
                     req.getRequestDispatcher("../view/change_password.jsp").forward(req, resp);
                     break;
+                case "Info":
+                    System.out.println(req.getParameter("username"));
+                    String username = req.getParameter("username");
+                    AuthenticateBO authenticateBO = new AuthenticateBO();
+                    if (session.getAttribute("user") == null) throw new Exception();
+                    ProfileBEAN userInfo= profileBO.getUserInfo(username);
+                    if (userInfo != null) {
+                        req.setAttribute("userInfo", userInfo);
+                        req.getRequestDispatcher("../view/profile.jsp").forward(req, resp);
+                    } else {
+                        resp.getWriter().write("User not found");
+                    }
+                    break;
             }
         } catch (Exception e) {
-           resp.sendRedirect("../../Forum");
+            //Return to homepage if no user found
+            resp.sendRedirect("../../Forum");
+            System.out.println(e.getMessage());
         }
     }
 
@@ -42,7 +60,7 @@ public class ProfileServlet extends HttpServlet {
         //Return to homepage if no user found
         HttpSession session = req.getSession(false);
         ProfileBO profileBO = new ProfileBO();
-        try{
+        try {
             UserBEAN user = (UserBEAN) session.getAttribute("user");
             String username;
             String action = req.getPathInfo().substring(1);
@@ -58,10 +76,10 @@ public class ProfileServlet extends HttpServlet {
                     //save avatar to assets/img folder
                     Part file = req.getPart("avatar");
                     System.out.println(img);
-                    if (user.getAvatar() == null || !file.getSubmittedFileName().equals("")){
-                        img = file.getSubmittedFileName().equals("") ?  "" : System.currentTimeMillis() + file.getSubmittedFileName();
+                    if (user.getAvatar() == null || !file.getSubmittedFileName().equals("")) {
+                        img = file.getSubmittedFileName().equals("") ? "" : System.currentTimeMillis() + file.getSubmittedFileName();
                         System.out.println(img);
-                        if (!img.equals("")){
+                        if (!img.equals("")) {
                             uploadPath = "E:/giao_trinh/pbl4/img/" + img;
                             FileOutputStream fos = new FileOutputStream(uploadPath);
                             InputStream is = file.getInputStream();
@@ -84,14 +102,16 @@ public class ProfileServlet extends HttpServlet {
                     if (ajax) {
                         if (!profileBO.updatePassword(username, req.getParameter("password"), req.getParameter("new_password"))) {
                             resp.getWriter().write("wrong password");
-                        }else{
+                        } else {
                             resp.getWriter().write("Ok");
                         }
                     }
                     break;
-            };
+            }
+            ;
         } catch (Exception e) {
-           resp.sendRedirect("../../Forum");
+            resp.sendRedirect("../../Forum");
+            System.out.println(e.getMessage());
         }
     }
 }
