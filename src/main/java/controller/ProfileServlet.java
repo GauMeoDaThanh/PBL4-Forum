@@ -80,10 +80,12 @@ public class ProfileServlet extends HttpServlet {
                 case "UpdatePassword":
                     UserBEAN userBEAN = (UserBEAN) session.getAttribute("user");
                     username = userBEAN.getUsername();
-                    if (!profileBO.updatePassword(username, req.getParameter("password"), req.getParameter("new_password"))) {
-                        boolean ajax = "XMLHttpRequest".equals(req.getHeader("X-Requested-With"));
-                        if (ajax){
+                    boolean ajax = "XMLHttpRequest".equals(req.getHeader("X-Requested-With"));
+                    if (ajax) {
+                        if (!profileBO.updatePassword(username, req.getParameter("password"), req.getParameter("new_password"))) {
                             resp.getWriter().write("wrong password");
+                        }else{
+                            resp.getWriter().write("Ok");
                         }
                     }
                     break;

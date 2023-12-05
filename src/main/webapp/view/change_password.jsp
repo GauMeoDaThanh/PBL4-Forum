@@ -32,6 +32,22 @@
         <!-- style.css -->
         <link rel="stylesheet" href="${pageContext.request.contextPath}
 /assets/css/style.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+        <script>
+            $(document).on("submit", "#form-password", function (event) {
+                const $form = $(this);
+                $.post($form.attr("action"), $form.serialize(), function (response) {
+                    if (response === "wrong password"){
+                        alert("Mật khẩu hiện tại không chính xác, vui lòng nhập lại mật khẩu");
+                        $('input:password').val('');
+                    }else {
+                        alert("Đổi mật khẩu thành công");
+                        window.location.assign("../Home/");
+                    }
+                });
+                event.preventDefault();
+            });
+        </script>
     </head>
 
     <body>
@@ -144,7 +160,6 @@
 
 
         <!-- JavaScript Libraries -->
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
         <script src="${pageContext.request.contextPath}
 /assets/library/bootstrap-5.2.3-dist/js/bootstrap.bundle.min.js"></script>
         <script src="${pageContext.request.contextPath}
@@ -160,19 +175,4 @@
         <script src="${pageContext.request.contextPath}
 /assets/js/main.js"></script>
     </body>
-    <script>
-        $(document).on("submit", "#form-password", function (event){
-            const $form = $(this);
-            $.post($form.attr("action"), $form.serialize(), function (response){
-                if (response === "wrong password") {
-                    alert("Mật khẩu hiện tại không chính xác, vui lòng nhập lại mật khẩu");
-                    window.location.assign("UpdatePassword")
-                }else {
-                    alert("Đổi mật khẩu thành công")
-                    window.location.assign("../Home/")
-                }
-                event.preventDefault();
-            });
-        });
-    </script>
 </html>
