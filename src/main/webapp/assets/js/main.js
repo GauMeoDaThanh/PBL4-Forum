@@ -126,7 +126,6 @@ function clickOnBell() {
         dropdown.style.display ='none'
 
     }
-
 }
 
 // Rating star
@@ -208,6 +207,33 @@ function displaySelectedImage(event, elementId) {
         };
 
         reader.readAsDataURL(fileInput.files[0]);
+        selectedImage.style.display='block';
+
     }
+
+    var buttonDeleteImage = document.getElementById("button-deleteImage");
+    buttonDeleteImage.style.display='block'
+
 }
+
+// Click reply button
+function replyPost(){
+    var blockReply = document.getElementById("block-reply");
+    var commentText = document.getElementById("comment-text");
+    var elementText = document.getElementById("element-text");
+    var elementTo = document.getElementById("element-to");
+    var ownPost = document.getElementById("own-post");
+
+
+    blockReply.style.display='block';
+    elementText.innerHTML=commentText.innerHTML;
+    elementTo.innerHTML=ownPost.innerHTML
+
+}
+
+function resetReply() {
+    var blockReply = document.getElementById("block-reply");
+    blockReply.style.display='none'
+}
+
 

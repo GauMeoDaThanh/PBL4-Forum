@@ -1,5 +1,4 @@
 <%@ page import="model.BEAN.ProfileBEAN" %>
-<%@ page import="model.BEAN.UserBEAN" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
@@ -93,12 +92,12 @@
                                     <c:when test="${sessionScope.user.username == requestScope.userInfo.username }">
                                     </c:when>
                                     <c:when test="${sessionScope.user.role == 'admin'}">
-                                        <button class="btn btn-success mx-4" style="width: 100px;">Chat</button>
+                                        <a class="btn btn-success mx-4" style="width: 100px;" href="../Chat/Info?user=${requestScope.userInfo.username}">Chat</a>
                                         <button class="btn btn-danger mx-4" data-bs-toggle="modal" data-bs-target="#modal-ban"
                                                 style="width: 100px;">Xử phạt</button>
                                     </c:when>
                                     <c:otherwise>
-                                        <button class="btn btn-success mx-4" style="width: 100px;">Chat</button>
+                                        <a class="btn btn-success mx-4" style="width: 100px;" href="../Chat/Info?user=${requestScope.userInfo.username}">Chat</a>
                                         <button class="btn btn-primary mx-4" data-bs-toggle="modal"
                                                 data-bs-target="#modal-report" style="width: 100px;">Báo cáo</button>
                                     </c:otherwise>

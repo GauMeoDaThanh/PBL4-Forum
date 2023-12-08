@@ -23,9 +23,9 @@
             </button>
             <div class="collapse navbar-collapse bg-transparent" id="navbarCollapse">
                 <div class="navbar-nav ms-auto mx-xl-auto p-0">
-                    <a href="order_receive.jsp" class="nav-item nav-link">Đơn nhận</a>
-                    <a href="order_send.jsp" class="nav-item nav-link">Đơn gửi</a>
-                    <a href="chat.jsp" class="nav-item nav-link">Chat</a>
+                    <a href="#" class="nav-item nav-link">Đơn nhận</a>
+                    <a href="#" class="nav-item nav-link">Đơn gửi</a>
+                    <a href="#" class="nav-item nav-link">Chat</a>
                 </div>
             </div>
             <div class="d-none d-xl-flex flex-shirink-0 align-items-center">
