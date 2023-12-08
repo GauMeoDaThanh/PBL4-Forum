@@ -186,116 +186,40 @@
                     <div class="d-flex">
                         <!-- Sidebar(bên trái) -->
                         <div class="nav flex-column nav-pills me-3 py-2" style="min-width: 25%; max-height: 694px;overflow-y: scroll; flex-wrap: nowrap;" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-                             <div class="px-4">
+                            <div class="px-4">
                                 <input type="text" class="form-control my-3" placeholder="Tìm kiếm...">
                             </div>
-                          <button class="nav-link active" id="v-pills-home-tab" data-bs-toggle="pill" data-bs-target="#v-pills-home" type="button" role="tab" aria-controls="v-pills-home" aria-selected="true">
-                            <div class="d-flex align-items-center position-relative">
-                                <img src="${pageContext.request.contextPath}
-/assets/img/101.jpg" class="rounded-circle mx-2" width="40px" height="40px" alt="">
-                                <span>Nguyễn Đông</span>
-                                <span class="position-absolute top-2 start-100 translate-middle badge rounded-pill bg-danger">
+                            <!--  -->
+                            <button class="nav-link active" id="v-pills-home-tab" data-bs-toggle="pill" data-bs-target="#v-pills-home" type="button" role="tab" aria-controls="v-pills-home" aria-selected="true">
+                                <div class="d-flex align-items-center position-relative">
+                                    <img src="../assets/img/101.jpg" class="rounded-circle mx-2" width="40px" height="40px" alt="">
+                                    <span>Nguyễn Đông</span>
+                                    <span class="position-absolute top-2 start-100 translate-middle badge rounded-pill bg-danger">
                                     10
                                   </span>
-                            </div>
-                          </button>
-                          <button class="nav-link" id="v-pills-profile-tab" data-bs-toggle="pill" data-bs-target="#v-pills-profile" type="button" role="tab" aria-controls="v-pills-profile" aria-selected="false">
-                            <div class="d-flex align-items-center position-relative">
-                                <img src="${pageContext.request.contextPath}
-/assets/img/29.jpg" class="rounded-circle mx-2" width="40px" height="40px" alt="">
-                                <span>Phùng Ánh</span>
-                                <span class="position-absolute top-2 start-100 translate-middle badge rounded-pill bg-danger">
+                                </div>
+                            </button>
+                            <!--  -->
+                            <button class="nav-link" id="v-pills-profile-tab" data-bs-toggle="pill" data-bs-target="#v-pills-profile" type="button" role="tab" aria-controls="v-pills-profile" aria-selected="false">
+                                <div class="d-flex align-items-center position-relative">
+                                    <img src="../assets/img/29.jpg" class="rounded-circle mx-2" width="40px" height="40px" alt="">
+                                    <span>Phùng Ánh</span>
+                                    <span class="position-absolute top-2 start-100 translate-middle badge rounded-pill bg-danger">
                                     2
                                   </span>
-                            </div>
-                          </button>
-                          <button class="nav-link" id="v-pills-messages-tab" data-bs-toggle="pill" data-bs-target="#v-pills-messages" type="button" role="tab" aria-controls="v-pills-messages" aria-selected="false">
-                            <div class="d-flex align-items-center position-relative">
-                                <img src="${pageContext.request.contextPath}
-/assets/img/about-1.jpg" class="rounded-circle mx-2" width="40px" height="40px" alt="">
-                                <span>Ngọc Sơn</span>
-                            </div>
-                          </button>
-                          <button class="nav-link" id="v-pills-settings-tab" data-bs-toggle="pill" data-bs-target="#v-pills-settings" type="button" role="tab" aria-controls="v-pills-settings" aria-selected="false">
-                            <div class="d-flex align-items-center position-relative">
-                                <img src="${pageContext.request.contextPath}
-/assets/img/about-2.jpg" class="rounded-circle mx-2" width="40px" height="40px" alt="">
-                                <span>Alexander Arnold</span>
-                                <span class="position-absolute top-2 start-100 translate-middle badge rounded-pill bg-danger">
-                                    12
-                                  </span>
-                            </div>
-                          </button>
-                          <button class="nav-link" id="v-pills-messages-tab" data-bs-toggle="pill" data-bs-target="#v-pills-messages" type="button" role="tab" aria-controls="v-pills-messages" aria-selected="false">
-                            <div class="d-flex align-items-center position-relative">
-                                <img src="${pageContext.request.contextPath}
-/assets/img/about-1.jpg" class="rounded-circle mx-2" width="40px" height="40px" alt="">
-                                <span>Ngọc Sơn</span>
-                            </div>
-                          </button>
-                          <button class="nav-link" id="v-pills-messages-tab" data-bs-toggle="pill" data-bs-target="#v-pills-messages" type="button" role="tab" aria-controls="v-pills-messages" aria-selected="false">
-                            <div class="d-flex align-items-center position-relative">
-                                <img src="${pageContext.request.contextPath}
-/assets/img/about-1.jpg" class="rounded-circle mx-2" width="40px" height="40px" alt="">
-                                <span>Ngọc Sơn</span>
-                            </div>
-                          </button>
-                          <button class="nav-link" id="v-pills-messages-tab" data-bs-toggle="pill" data-bs-target="#v-pills-messages" type="button" role="tab" aria-controls="v-pills-messages" aria-selected="false">
-                            <div class="d-flex align-items-center position-relative">
-                                <img src="${pageContext.request.contextPath}
-/assets/img/about-1.jpg" class="rounded-circle mx-2" width="40px" height="40px" alt="">
-                                <span>Ngọc Sơn</span>
-                            </div>
-                          </button>
-                          <button class="nav-link" id="v-pills-messages-tab" data-bs-toggle="pill" data-bs-target="#v-pills-messages" type="button" role="tab" aria-controls="v-pills-messages" aria-selected="false">
-                            <div class="d-flex align-items-center position-relative">
-                                <img src="${pageContext.request.contextPath}
-/assets/img/about-1.jpg" class="rounded-circle mx-2" width="40px" height="40px" alt="">
-                                <span>Ngọc Sơn</span>
-                            </div>
-                          </button>
-                          <button class="nav-link" id="v-pills-messages-tab" data-bs-toggle="pill" data-bs-target="#v-pills-messages" type="button" role="tab" aria-controls="v-pills-messages" aria-selected="false">
-                            <div class="d-flex align-items-center position-relative">
-                                <img src="${pageContext.request.contextPath}
-/assets/img/about-1.jpg" class="rounded-circle mx-2" width="40px" height="40px" alt="">
-                                <span>Ngọc Sơn</span>
-                            </div>
-                          </button>
-                          <button class="nav-link" id="v-pills-messages-tab" data-bs-toggle="pill" data-bs-target="#v-pills-messages" type="button" role="tab" aria-controls="v-pills-messages" aria-selected="false">
-                            <div class="d-flex align-items-center position-relative">
-                                <img src="${pageContext.request.contextPath}
-/assets/img/about-1.jpg" class="rounded-circle mx-2" width="40px" height="40px" alt="">
-                                <span>Ngọc Sơn</span>
-                            </div>
-                          </button>
-                          <button class="nav-link" id="v-pills-messages-tab" data-bs-toggle="pill" data-bs-target="#v-pills-messages" type="button" role="tab" aria-controls="v-pills-messages" aria-selected="false">
-                            <div class="d-flex align-items-center position-relative">
-                                <img src="${pageContext.request.contextPath}
-/assets/img/about-1.jpg" class="rounded-circle mx-2" width="40px" height="40px" alt="">
-                                <span>Ngọc Sơn</span>
-                            </div>
-                          </button>
-                          <button class="nav-link" id="v-pills-messages-tab" data-bs-toggle="pill" data-bs-target="#v-pills-messages" type="button" role="tab" aria-controls="v-pills-messages" aria-selected="false">
-                            <div class="d-flex align-items-center position-relative">
-                                <img src="${pageContext.request.contextPath}
-/assets/img/about-1.jpg" class="rounded-circle mx-2" width="40px" height="40px" alt="">
-                                <span>Ngọc Sơn</span>
-                            </div>
-                          </button>
-                          <button class="nav-link" id="v-pills-messages-tab" data-bs-toggle="pill" data-bs-target="#v-pills-messages" type="button" role="tab" aria-controls="v-pills-messages" aria-selected="false">
-                            <div class="d-flex align-items-center position-relative">
-                                <img src="${pageContext.request.contextPath}
-/assets/img/about-1.jpg" class="rounded-circle mx-2" width="40px" height="40px" alt="">
-                                <span>Ngọc Sơn</span>
-                            </div>
-                          </button>
-                          <button class="nav-link" id="v-pills-messages-tab" data-bs-toggle="pill" data-bs-target="#v-pills-messages" type="button" role="tab" aria-controls="v-pills-messages" aria-selected="false">
-                            <div class="d-flex align-items-center position-relative">
-                                <img src="${pageContext.request.contextPath}
-/assets/img/about-1.jpg" class="rounded-circle mx-2" width="40px" height="40px" alt="">
-                                <span>Ngọc Sơn</span>
-                            </div>
-                          </button>
+                                </div>
+                            </button>
+                            <!--  -->
+                            <button class="nav-link" id="v-pills-messages-tab" data-bs-toggle="pill" data-bs-target="#v-pills-messages" type="button" role="tab" aria-controls="v-pills-messages" aria-selected="false">
+                                <div class="d-flex align-items-center position-relative">
+                                    <img src="../assets/img/about-1.jpg" class="rounded-circle mx-2" width="40px" height="40px" alt="">
+                                    <span>Ngọc Sơn</span>
+                                </div>
+                            </button>
+                            <!--  -->
+
+
+
                         </div>
                         <!-- Tin nhắn (bên phải) -->
 

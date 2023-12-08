@@ -211,3 +211,34 @@ function displaySelectedImage(event, elementId) {
     }
 }
 
+// Click reply button
+function replyPost(postOwner,postContent,idPost,ownerPostTo,contentPostTo,idPostTo,blockReply){
+    var postOwnerElement = document.getElementById(postOwner);
+    var postContentElement=document.getElementById(postContent);
+    // var idPostElement = document.getElementById(idPost);
+
+    var ownerPostToElement=document.getElementById(ownerPostTo);
+    var contentPostToElement=document.getElementById(contentPostTo);
+    var idPostToElement = document.getElementById(idPostTo);
+
+    var blockReplyElement=document.getElementById(blockReply);
+
+    ownerPostToElement.innerHTML=postOwnerElement.innerHTML
+    contentPostToElement.innerHTML=postContentElement.innerHTML
+    idPostToElement.value=idPost
+    blockReplyElement.style.display='block'
+
+}
+
+function resetReply(ownerPostTo,contentPostTo,idPostTo,blockReply) {
+    var ownerPostToElement=document.getElementById(ownerPostTo);
+    var contentPostToElement=document.getElementById(contentPostTo);
+    var idPostToElement = document.getElementById(idPostTo);
+    var blockReplyElement=document.getElementById(blockReply);
+
+    ownerPostToElement.innerHTML=""
+    contentPostToElement.innerHTML=""
+    idPostToElement.value=""
+    blockReplyElement.style.display='none'
+}
+

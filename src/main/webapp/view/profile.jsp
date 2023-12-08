@@ -215,7 +215,7 @@
                                     <div class="media-body mx-2" style="min-width: 60%; max-width: 60%;">
                                         <span class="text-white rounded p-1" style="background-color: #A231FC;">Bài nhận
                                             vận chuyển</span>
-                                        <h4 class="mt-2"><a href="post_detail.jsp" data-toggle="collapse"
+                                        <h4 class="mt-2"><a href="post.jsp" data-toggle="collapse"
                                                             data-target=".forum-content" class="text-body"><strong>Nhận vận chuyển
                                                     nội thành Đà Nẵng.Nhận vận chuyển nội thành Đà Nẵng</strong></a>
                                         </h4>
@@ -251,7 +251,7 @@
                                     <div class="media-body mx-2" style="min-width: 60%; max-width: 60%;">
                                         <span class="text-white rounded p-1" style="background-color: #7752FE;">Bài gửi
                                             vận chuyển</span>
-                                        <h4 class="mt-2"><a href="post_detail.jsp" data-toggle="collapse"
+                                        <h4 class="mt-2"><a href="post.jsp" data-toggle="collapse"
                                                             data-target=".forum-content" class="text-body"><strong>Nhận vận chuyển
                                                     nội thành Đà Nẵng.Nhận vận chuyển nội thành Đà Nẵng</strong></a>
                                         </h4>
@@ -287,7 +287,7 @@
                                     <div class="media-body mx-2" style="min-width: 60%; max-width: 60%;">
                                         <span class="text-white rounded p-1" style="background-color: #7752FE;">Bài gửi
                                             vận chuyển</span>
-                                        <h4 class="mt-2"><a href="post_detail.jsp" data-toggle="collapse"
+                                        <h4 class="mt-2"><a href="post.jsp" data-toggle="collapse"
                                                             data-target=".forum-content" class="text-body"><strong>Nhận vận chuyển
                                                     nội thành Đà Nẵng.Nhận vận chuyển nội thành Đà Nẵng</strong></a>
                                         </h4>
@@ -478,20 +478,14 @@
 
 
     <!-- JavaScript Libraries -->
-    <script src="${pageContext.request.contextPath}
-/assets/library/bootstrap-5.2.3-dist/js/bootstrap.bundle.min.js"></script>
-    <script src="${pageContext.request.contextPath}
-/assets/lib/wow/wow.min.js"></script>
-    <script src="${pageContext.request.contextPath}
-/assets/lib/easing/easing.min.js"></script>
-    <script src="${pageContext.request.contextPath}
-/assets/lib/waypoints/waypoints.min.js"></script>
-    <script src="${pageContext.request.contextPath}
-/assets/lib/owlcarousel/owl.carousel.min.js"></script>
+    <script src="${pageContext.request.contextPath}/assets/library/bootstrap-5.2.3-dist/js/bootstrap.bundle.min.js"></script>
+    <script src="${pageContext.request.contextPath}/assets/lib/wow/wow.min.js"></script>
+    <script src="${pageContext.request.contextPath}/assets/lib/easing/easing.min.js"></script>
+    <script src="${pageContext.request.contextPath}/assets/lib/waypoints/waypoints.min.js"></script>
+    <script src="${pageContext.request.contextPath}/assets/lib/owlcarousel/owl.carousel.min.js"></script>
 
     <!-- Template Javascript -->
-    <script src="${pageContext.request.contextPath}
-/assets/js/main.js"></script>
+    <script src="${pageContext.request.contextPath}/assets/js/main.js"></script>
 </body>
 
 </html>

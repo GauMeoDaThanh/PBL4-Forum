@@ -75,10 +75,8 @@ public class ProfileServlet extends HttpServlet {
                     String img = user.getAvatar();
                     //save avatar to assets/img folder
                     Part file = req.getPart("avatar");
-                    System.out.println(img);
                     if (user.getAvatar() == null || !file.getSubmittedFileName().equals("")) {
                         img = file.getSubmittedFileName().equals("") ? "" : System.currentTimeMillis() + file.getSubmittedFileName();
-                        System.out.println(img);
                         if (!img.equals("")) {
                             uploadPath = "E:/giao_trinh/pbl4/img/" + img;
                             FileOutputStream fos = new FileOutputStream(uploadPath);

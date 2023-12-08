@@ -14,7 +14,7 @@
 <div class="fixed-top my-5 container-fluid bg-primary">
     <div class="container">
         <nav class="navbar navbar-dark navbar-expand-lg py-0">
-            <a href="./home.jsp" class="navbar-brand">
+            <a href="../Home/" class="navbar-brand">
                 <h1 class="text-white fw-bold d-block">Trans<span class="text-secondary">Port</span> </h1>
             </a>
             <button type="button" class="navbar-toggler me-0" data-bs-toggle="collapse"
@@ -41,7 +41,7 @@
                     <div id="dropdownMenuButton1" class="btn text-white d-flex align-items-center"
                          style="font-size: 16px;" data-bs-toggle="dropdown" data-bs-display="static">
                         <img src="${pageContext.request.contextPath}/image/<%=user.getAvatar()==null  || user.getAvatar().equals("") ? "29.jpg" : user.getAvatar()%>" alt="mdo" width="40" height="40" class="rounded-circle">
-                        <span class="text-white mx-2"><%=user.getUsername()%></span>
+                        <span class="text-white mx-2"><%=user.getName()%></span>
                     </div>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                         <li><a class="dropdown-item" href="../Profile/Info?username=<%=user.getUsername()%>">Trang cá nhân</a></li>

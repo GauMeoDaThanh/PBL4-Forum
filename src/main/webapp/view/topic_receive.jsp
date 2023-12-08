@@ -8,13 +8,12 @@
 <html lang="en">
 <%
     UserBEAN user = (UserBEAN) session.getAttribute("user");
-    ArrayList<TopicBEAN> listReceive = (ArrayList<TopicBEAN>) request.getAttribute("listTopicReceive");
-    ArrayList<TopicBEAN> listSend = (ArrayList<TopicBEAN>) request.getAttribute("listTopicSend");
-
+    ArrayList<TopicBEAN> list= (ArrayList<TopicBEAN>) request.getAttribute("listTopic");
 %>
+
     <head>
         <meta charset="utf-8">
-        <title>Trang chủ</title>
+        <title>Topic receive</title>
         <meta content="width=device-width, initial-scale=1.0" name="viewport">
         <meta content="" name="keywords">
         <meta content="" name="description">
@@ -22,7 +21,7 @@
         <!-- Google Web Fonts -->
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Saira:wght@500;600;700&display=swap" rel="stylesheet"> 
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Saira:wght@500;600;700&display=swap" rel="stylesheet">
 
         <!-- Icon Font Stylesheet -->
 
@@ -57,18 +56,29 @@
                 </div>
             </div>
         </div>
-        <jsp:include page="header.jsp"/>
         <!-- Topbar End -->
+
+        <!-- Navbar Start -->
+        <jsp:include page="header.jsp"/>
+        <!-- Navbar End -->
         <main class="content" style="margin-top: 150px; margin-bottom: 150px;">
-            <!-- Bài nhận vận chuyển -->
             <div class="container">
-                <div class="row border-top">
-                    <a href="/Topic/receive">
-                        <h4 class="p-2 bg-primary text-secondary border-top" style="display: block;">BÀI NHẬN VẬN CHUYỂN</h4>
-                    </a>
+                <div class="row">
+                    <div class="col p-4">
+                        <button class="btn btn-primary has-icon btn-block" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-plus mr-2">
+                                <line x1="12" y1="5" x2="12" y2="19"></line>
+                                <line x1="5" y1="12" x2="19" y2="12"></line>
+                            </svg>
+                            ĐĂNG TOPIC MỚI
+                        </button>
+                    </div>
+                </div>
+                <div class="row">
+                    <h3 class="text-center p-3">BÀI NHẬN VẬN CHUYỂN</h3>
                 </div>
                 <%
-                    for (TopicBEAN topic:listReceive) {
+                    for (TopicBEAN topic:list) {
                         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
                         String createTime = dateFormat.format(topic.getCreate_time());
 //                        String editTime = dateFormat.format(topic.getEdit_time());
@@ -81,7 +91,7 @@
                                 <div class="media forum-item d-flex">
                                     <a href="profile.jsp" data-toggle="collapse" data-target=".forum-content"><img src="${pageContext.request.contextPath}/image/<%=topic.getAvatar()==null  || topic.getAvatar().equals("") ? "29.jpg" : topic.getAvatar()%>" class="mr-3 rounded-circle" width="70" height="70" alt="User" /></a>
                                     <div class="media-body mx-2" style="min-width: 60%; max-width: 60%;">
-                                        <h4><a href="post.jsp" data-toggle="collapse" data-target=".forum-content" class="text-body"><strong><%=topic.getTopic_name()%></strong></a></h4>
+                                        <h4><a href="/Topic/Info?topicID=<%=topic.getId()%>" data-toggle="collapse" data-target=".forum-content" class="text-body"><strong><%=topic.getTopic_name()%></strong></a></h4>
                                         <p class="text-muted"><a href="javascript:void(0)"><%=topic.getName().equals(user.getName())?"Bạn":topic.getName()%></a> at <span class="text-dark font-weight-bold"><%=createTime%></span></p>
                                     </div>
                                     <div class="media-body mx-4" style="width: 20%;">
@@ -107,53 +117,86 @@
                     }
                 %>
 
-            </div>
-            <!-- Bài gửi vận chuyển -->
-            <div class="container py-5">
-                <div class="row border-top">
-                    <a href="/Topic/send">
-                        <h4 class="p-2 bg-primary text-secondary border-top" style="display: block;">BÀI GỬI VẬN CHUYỂN</h4>
-                    </a>
-                </div>
-                <%
-                    for (TopicBEAN topic:listSend) {
-                        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-                        String createTime = dateFormat.format(topic.getCreate_time());
-//                        String editTime = dateFormat.format(topic.getEdit_time());
-                        String deliDateTime = dateFormat.format(topic.getDeli_datetime());
-                %>
                 <div class="row">
-                    <div class="inner-main-bodycollapse forum-content show">
-                        <div class="card mb-2" style="background-color: #E5F2FF;">
-                            <div class="card-body">
-                                <div class="media forum-item d-flex">
-                                    <a href="profile.jsp" data-toggle="collapse" data-target=".forum-content"><img src="${pageContext.request.contextPath}/image/<%=topic.getAvatar()==null  || topic.getAvatar().equals("") ? "29.jpg" : topic.getAvatar()%>" class="mr-3 rounded-circle" width="70" height="70" alt="User" /></a>
-                                    <div class="media-body mx-2" style="min-width: 60%; max-width: 60%;">
-                                        <h4><a href="post.jsp" data-toggle="collapse" data-target=".forum-content" class="text-body"><strong><%=topic.getTopic_name()%></strong></a></h4>
-                                        <p class="text-muted"><a href="javascript:void(0)"><%=topic.getName().equals(user.getName())?"Bạn":topic.getName()%></a> at <span class="text-dark font-weight-bold"><%=createTime%></span></p>
+                    <nav aria-label="Page navigation example">
+                        <ul class="pagination justify-content-center">
+                          <li class="page-item disabled">
+                            <a class="page-link" href="#" tabindex="-1">Quay lại</a>
+                          </li>
+                          <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                          <li class="page-item"><a class="page-link" href="#">2</a></li>
+                          <li class="page-item"><a class="page-link" href="#">3</a></li>
+                          <li class="page-item">
+                            <a class="page-link" href="#">Tiếp</a>
+                          </li>
+                        </ul>
+                    </nav>
+                </div>
+              </div>
+            <div class="container">
+                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" style="min-width: 800px;">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Đăng Topic mới</h5>
+                                <button type="reset" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <form action="/Topic/addNewTopic" method="post" enctype="multipart/form-data">
+                                    <div class="mb-3">
+                                        <label for="new_topic_name" class="col-form-label">Tên Topic</label>
+                                        <input name="new_topic_name" type="text" class="form-control" id="new_topic_name" placeholder="Nhập tiêu đề">
                                     </div>
-                                    <div class="media-body mx-4" style="width: 20%;">
-                                        <div class="content__topic-item-right-item">
-                                            <i class="bi bi-geo-alt-fill" style="color: red; font-size: larger;"></i>
-                                            <label for="" class="content__topic-item-text"><%=topic.getFrom_location()+" đến "+ topic.getTo_location()%></label>
-                                        </div>
-                                        <div class="content__topic-item-right-item py-3">
-                                            <i class="content__topic-item-icon color--green fa-solid fa-calendar-days" style="color: green"></i>
-                                            <label for="" class="content__topic-item-text"><%=deliDateTime%></label>
-                                        </div>
+                                    <div class="mb-3">
+                                        <label for="select-topic-type-id" class="col-form-label">Chọn thể loại bài đăng</label>
+                                        <select name="new_topic_type_id" id="select-topic-type-id" class="form-select" aria-label="Default select example">
+                                            <option value="1" selected>Bài nhận vận chuyển</option>
+                                            <option value="2">Bài gửi vận chuyển</option>
+                                        </select>
                                     </div>
-                                    <div class="text-muted small text-center align-self-center">
-                                        <!-- <span class="d-none d-sm-inline-block mx-1"><i class="far fa-eye"></i> 19</span> -->
-                                        <span><i class="far fa-comment mx-1"></i> 3</span>
+                                    <div class="mb-3">
+                                        <label for="select-from-location" class="col-form-label">Địa điểm đi</label>
+                                        <select name="new_topic_from_location" id="select-from-location" class="form-select" aria-label="Default select example">
+                                            <option value="An Giang" selected>An Giang</option>
+                                            <option value="Hà Nội">Hà Nội</option>
+                                            <option value="Phú Quốc">Phú Quốc</option>
+                                            <option value="Đà Nẵng">Đà Nẵng</option>
+                                            <option value="Hồ Chí Minh">Hồ Chí Minh</option>
+                                            <option value="Nha Trang">Nha Trang</option>
+                                        </select>
                                     </div>
-                                </div>
+                                    <div class="mb-3">
+                                        <label for="select-to-location" class="col-form-label">Địa điểm đến</label>
+                                        <select name="new_topic_to_location" id="select-to-location" class="form-select" aria-label="Default select example">
+                                            <option value="An Giang" selected>An Giang</option>
+                                            <option value="Hà Nội">Hà Nội</option>
+                                            <option value="Phú Quốc">Phú Quốc</option>
+                                            <option value="Đà Nẵng">Đà Nẵng</option>
+                                            <option value="Hồ Chí Minh">Hồ Chí Minh</option>
+                                            <option value="Nha Trang">Nha Trang</option>
+                                        </select>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="select-datetime" class="my-2" style="display:block;">Thời gian chuyển</label>
+                                        <input name="new_topic_deli_datetime" type="datetime-local"  id="select-datetime" class="">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="formFile" class="form-label">Đính kèm ảnh</label>
+                                        <input name="new_topic_file" class="form-control" type="file" accept=".jpg,.png" id="formFile" multiple>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="message-text" class="col-form-label">Nội dung chính</label>
+                                        <input name="new_topic_content" class="form-control" id="message-text" placeholder="Nhập nội dung chính" rows="5"></input>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="reset" class="btn btn-primary" data-bs-dismiss="modal" style="width: 80px;">Huỷ</button>
+                                        <button type="submit" class="btn btn-success" style="width: 100px;">OK</button>
+                                    </div>
+                                </form>
                             </div>
                         </div>
                     </div>
                 </div>
-                <%
-                    }
-                %>
             </div>
         </main>
         <!-- Footer Start -->
@@ -218,7 +261,7 @@
         <!-- Back to Top -->
         <a href="#" class="btn btn-secondary btn-square rounded-circle back-to-top"><i class="fa fa-arrow-up text-white"></i></a>
 
-        
+
         <!-- JavaScript Libraries -->
         <script src="${pageContext.request.contextPath}/assets/library/bootstrap-5.2.3-dist/js/bootstrap.bundle.min.js"></script>
         <script src="${pageContext.request.contextPath}/assets/lib/wow/wow.min.js"></script>
