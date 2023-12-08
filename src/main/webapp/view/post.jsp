@@ -1,6 +1,19 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page import="model.BEAN.TopicBEAN" %>
+<%@ page import="model.BEAN.UserBEAN" %>
+<%@ page import="java.text.SimpleDateFormat" %>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="model.BEAN.PostBEAN" %>
+<%@ page import="java.util.Objects" %>
 <!DOCTYPE html>
 <html lang="en">
-
+<%
+    UserBEAN user = (UserBEAN) session.getAttribute("user");
+    TopicBEAN topic = (TopicBEAN) request.getAttribute("topic");
+    ArrayList<PostBEAN> listPost = (ArrayList<PostBEAN>) request.getAttribute("listPost");
+//    ArrayList<PostBEAN> listPost2 = (ArrayList<PostBEAN>) request.getAttribute("listPost");
+    SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+%>
 <head>
     <meta charset="utf-8">
     <title>Post</title>
@@ -54,19 +67,19 @@
 <main class="content" style="margin-top: 150px; margin-bottom: 150px;">
     <div class="container">
         <div class="mb-3">
-            <h1 class="h3 mb-3 text-body">Nhận vận chuyển nội thành Đà Nẵng</h1>
+            <h1 class="h3 mb-3 text-body"><%=topic.getTopic_name()%></h1>
             <div class="d-flex align-items-center">
                 <div class="mx-2 d-flex align-items-center">
                     <i class="bi bi-person" style="font-size: larger;"></i>
-                    <a href="" class="mx-1">Leo Messi</a>
+                    <a href="/Profile/Info?username=<%=topic.getFrom_user()%>" class="mx-1"><%=(topic.getName().equals(user.getName()))?"Bạn":topic.getName()%></a>
                 </div>
                 <div class="mx-2 d-flex align-items-center">
                     <i class="bi bi-geo-alt-fill" style="color: red; font-size: large;"></i>
-                    <span class="mx-1">Hà Nội đến Hồ Chí Minh</span>
+                    <span class="mx-1"><%=topic.getFrom_location()+" đến "+topic.getTo_location()%></span>
                 </div>
                 <div class="mx-2 d-flex align-items-center">
                     <i class="fa-solid fa-calendar-days" style="color: green; font-size: large;"></i>
-                    <span class="mx-1">05/10/2023 16:00</span>
+                    <span class="mx-1"><%=dateFormat.format(topic.getCreate_time())%></span>
                 </div>
             </div>
         </div>
@@ -92,32 +105,63 @@
         </div>
     </div>
     <div class="container">
-        <div class="row rounded border mt-3" id="id-post-1" style="min-height: 200px;">
+        <%
+            for (PostBEAN post:listPost) {
+        %>
+        <div class="row rounded border mt-3" id="<%=post.getId()%>" style="min-height: 200px;">
             <div class="col-2 p-2 text-center" style="background-color: #E5F2FF; border-right: 1px solid #d3d5d7;">
-                <img src="../assets/img/101.jpg"  class="rounded-circle mr-1 avatar-hover" alt="Vanessa Tucker" width="100" height="100">
+                <img src="${pageContext.request.contextPath}/image/<%=post.getAvatar()==null  || post.getAvatar().equals("") ? "29.jpg" : post.getAvatar()%>"  class="rounded-circle mr-1 avatar-hover" alt="Vanessa Tucker" width="100" height="100">
                 <div>
-                    <a id="post-owner-1" class="text-primary my-2" href="" style="font-weight: 700; font-size: larger;">Leo Messi</a>
-                    <p class="text-success p-2">Tôi là nhà vô địch thế giới.Tôi là nhà vô địch thế giới.</p>
+                    <a id="post-owner-<%=post.getId()%>" class="text-primary my-2" href="/Profile/Info?username=<%=post.getFrom_user()%>" style="font-weight: 700; font-size: larger;"><%=(post.getName().equals(user.getName()))?"Bạn":post.getName()%></a>
+                    <p class="text-success p-2"><%=post.getDescription()%></p>
                 </div>
             </div>
             <div class="col-10 p-3" style="background-color: #E5F2FF; min-height: 100%;">
                 <div class="m-1 d-flex align-items-center">
                     <i class="fa-solid fa-calendar-days" style="color: green; font-size: large;"></i>
-                    <span class="mx-1">05/10/2023 16:00</span>
+                    <span class="mx-1"><%=dateFormat.format(post.getCreate_time())%></span>
                 </div>
-                <p id="post-content-1" style="min-height: 50%;">Diễn đàn VOZ vừa được cập nhật lên phiên bản hơi mới, với những thay đổi tập trung chính về hiệu năng và nâng cao trải nghiệm. Một vài ví dụ:
-                    Nhanh cực, nếu thấy chậm thì refresh lại thử xem sao.
-                    Mã xác thực 2 lớp không phải nhập lại nếu bạn vào VOZ thường xuyên, ít vào thì chịu.
-                    Thông báo có thể đánh dấu đã đọc từng cái một, có thể tinh chỉnh tự động đánh dấu, tổng hợp... abcxyz... ai rảnh thì mò thử.
-                    Nhanh cực, nếu thấy chậm thì refresh lại thử xem sao.
-                    Mã xác thực 2 lớp không phải nhập lại nếu bạn vào VOZ thường xuyên, ít vào thì chịu.
-                    Thông báo có thể đánh dấu đã đọc từng cái một, có thể tinh chỉnh tự động đánh dấu, tổng hợp... abcxyz... ai rảnh thì mò thử.
-                    Nhanh cực, nếu thấy chậm thì refresh lại thử xem sao.
-                    Mã xác thực 2 lớp không phải nhập lại nếu bạn vào VOZ thường xuyên, ít vào thì chịu.
-                    Thông báo có thể đánh dấu đã đọc từng cái một, có thể tinh chỉnh tự động đánh dấu, tổng hợp... abcxyz... ai rảnh thì mò thử.
+                <%
+                    if(post.getPost_id()!=null) {
+                        for(PostBEAN p: listPost) {
+                            if(Objects.equals(p.getId(), post.getPost_id())){
+
+                %>
+                <div style="background-color: #ccc;" class="p-3 rounded">
+                    <span>Trả lời <%=p.getName()%>:</span><br>
+                    <%=p.getContent()%>
                     <br><br>
-                    <img src="../assets/img/about-2.jpg" width="160" height="160" alt="image">
+                <%
+                                for (String imageName2 : p.getImageList()){
+                %>
+                    <img src="${pageContext.request.contextPath}/image/<%=imageName2%>" class="mx-2" width="160" height="160" alt="image">
+                <%
+
+                                }
+                %>
+
+                </div>
+                <%
+                            }
+
+                        }
+                    }
+                %>
+                <p id="post-content-<%=post.getId()%>">
+                    <%=post.getContent()%>
+                    <br><br>
+                    <%
+
+                        for(String imageName:post.getImageList()) {
+
+                    %>
+                    <img src="${pageContext.request.contextPath}/image/<%=imageName%>" class="mx-2" width="160" height="160" alt="image">
+                    <%
+                        }
+                    %>
                 </p>
+
+<%--                --%>
                 <div class="mt-3 py-2" style="border-top: 1px solid #ccc;">
                     <button class="icon-hover btn" style="display: none;">
                         <i class="bi bi-heart" ></i>
@@ -127,7 +171,11 @@
                         <i class="bi bi-emoji-angry"></i>
                         Phẫn nộ
                     </button>
-                    <button class="icon-hover btn" onclick="replyPost('post-owner-1','post-content-1','id-post-1','owner-post-to','content-post-to','id-post-to','block-reply')">
+                    <%
+                        if(!post.getFrom_user().equals(user.getUsername())) {
+
+                    %>
+                    <button class="icon-hover btn" onclick="replyPost('post-owner-<%=post.getId()%>','post-content-<%=post.getId()%>','<%=post.getId()%>','owner-post-to','content-post-to','id-post-to','block-reply')">
                         <i class="bi bi-reply"></i>
                         Trả lời
                     </button>
@@ -135,57 +183,30 @@
                         <i class="bi bi-flag" ></i>
                         Báo cáo
                     </button>
-                    <button class="icon-hover btn btn-link" style="color: #dc3545;" data-bs-toggle="modal" data-bs-target="#confirm-delete">
-                        <i class="bi bi-trash" ></i>
-                        Xoá bài viết
-                    </button>
+                    <%
+                        }
+                        else {
+                    %>
+                    <form action="/Post/Delete" method="get">
+                        <input name="topicID" type="text" value="<%=topic.getId()%>" style="display: none">
+                        <input name="postID" type="text" value="<%=post.getId()%>" style="display: none">
+                        <button type="submit" class="icon-hover btn btn-link" style="color: #dc3545;" data-bs-toggle="modal" data-bs-target="#confirm-delete">
+                            <i class="bi bi-trash" ></i>
+                            Xoá bài viết
+                        </button>
+                    </form>
+
+                    <%
+                        }
+                    %>
                 </div>
 
             </div>
         </div>
-        <div class="row rounded border mt-3" id="id-post-2" style="min-height: 200px;">
-            <div class="col-2 p-2 text-center" style="background-color: #E5F2FF; border-right: 1px solid #d3d5d7;">
-                <img src="../assets/img/101.jpg"  class="rounded-circle mr-1 avatar-hover" alt="Vanessa Tucker" width="100" height="100">
-                <div>
-                    <a id="post-owner-2" class="text-primary my-2" href="" style="font-weight: 700; font-size: larger;">Nguyễn Lam</a>
-                    <p class="text-success p-2">Tôi là lam</p>
-                </div>
-            </div>
-            <div class="col-10 p-3" style="background-color: #E5F2FF; min-height: 100%;">
-                <div class="m-1 d-flex align-items-center">
-                    <i class="fa-solid fa-calendar-days" style="color: green; font-size: large;"></i>
-                    <span class="mx-1">05/10/2023 16:00</span>
-                </div>
-                <p id="post-content-2" style="min-height: 50%;">Hello
+        <%
+            }
+        %>
 
-                    <br><br>
-                    <img src="../assets/img/about-1.jpg" width="160" height="160" alt="image">
-                </p>
-                <div class="mt-3 py-2" style="border-top: 1px solid #ccc;">
-                    <button class="icon-hover btn" style="display: none;">
-                        <i class="bi bi-heart" ></i>
-                        Thích
-                    </button>
-                    <button class="icon-hover btn" style="display: none;">
-                        <i class="bi bi-emoji-angry"></i>
-                        Phẫn nộ
-                    </button>
-                    <button class="icon-hover btn" onclick="replyPost('post-owner-2','post-content-2','id-post-2','owner-post-to','content-post-to','id-post-to','block-reply')">
-                        <i class="bi bi-reply"></i>
-                        Trả lời
-                    </button>
-                    <button class="icon-hover btn">
-                        <i class="bi bi-flag" ></i>
-                        Báo cáo
-                    </button>
-                    <button class="icon-hover btn btn-link" style="color: #dc3545;" data-bs-toggle="modal" data-bs-target="#confirm-delete">
-                        <i class="bi bi-trash" ></i>
-                        Xoá bài viết
-                    </button>
-                </div>
-
-            </div>
-        </div>
         <nav aria-label="Page navigation example" class="my-5">
             <ul class="pagination justify-content-center">
                 <li class="page-item disabled">
@@ -199,20 +220,21 @@
                 </li>
             </ul>
         </nav>
-        <div class="row rounded border mt-3">
+        <div class="row rounded border mt-3" id="element-focus-reply">
             <div class="col-2 p-2 text-center" style="background-color: #E5F2FF; border-right: 1px solid #d3d5d7;">
-                <img src="../assets/img/about-2.jpg"  class="rounded-circle mr-1 avatar-hover" alt="Vanessa Tucker" width="100" height="100">
+                <img src="${pageContext.request.contextPath}/image/<%=user.getAvatar()==null  || user.getAvatar().equals("") ? "29.jpg" : user.getAvatar()%>"  class="rounded-circle mr-1 avatar-hover" alt="Vanessa Tucker" width="100" height="100">
                 <div>
-                    <a class="text-primary my-2" href="" style="font-weight: 700; font-size: larger;">Nguyen Dong</a>
-                    <p class="text-success p-2">Toi la nguyen dong</p>
+                    <a class="text-primary my-2" href="/Profile/Info?username=<%=user.getUsername()%>" style="font-weight: 700; font-size: larger;">Bạn</a>
+                    <p class="text-success p-2"><%=user.getDescription()%></p>
                 </div>
             </div>
 
             <div class="col-10 p-3" style="background-color: #E5F2FF;">
-                <form action="/Post/add" method="post">
+                <form action="/Post/Add" method="post" enctype="multipart/form-data">
                     <div id="block-reply" style="background-color: #ccc; display: none;" class="p-3 rounded">
                         <span>Trả lời </span><span id="owner-post-to"></span>:<br>
                         <p id="content-post-to"></p>
+                        <input name="topicID" value="<%=topic.getId()%>" style="display:none;">
                         <input name="idPostTo" type="text" id="id-post-to" style="display: none;">
                     </div>
 
@@ -221,6 +243,7 @@
                         <input name="attachFile" type="file" id="attachFile" class="form-control my-2" accept=".jpg,.png" multiple>
                         <textarea name="post-content-text" class="form-control" id="message-text" placeholder="Nhập nội dung" rows="10"></textarea>
                     </div>
+
                     <div class="mt-3 py-2" style="text-align: right; border-top: 1px solid #ccc;">
                         <button type="reset" class="btn btn-primary mx-3" style="width: 120px;" onclick="resetReply('owner-post-to','content-post-to','id-post-to','block-reply')">
                             <i class="bi bi-bootstrap-reboot"></i>

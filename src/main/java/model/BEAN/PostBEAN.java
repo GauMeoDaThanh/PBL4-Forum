@@ -10,7 +10,7 @@ public class PostBEAN {
     private String content;
     private Timestamp create_time;
     private Timestamp edit_time;
-    private int post_id;
+    private Integer post_id;
     //
     private String avatar;
     private String name;
@@ -20,15 +20,16 @@ public class PostBEAN {
 
     }
 
-    public PostBEAN(String from_user, int topic_id, String content, Timestamp create_time,ArrayList<String> imageList) {
+    public PostBEAN(String from_user, int topic_id, String content, Timestamp create_time,ArrayList<String> imageList,Integer post_id) {
         this.from_user = from_user;
         this.topic_id = topic_id;
         this.content = content;
         this.create_time = create_time;
         this.imageList = imageList;
+        this.post_id = post_id;
     }
 
-    public PostBEAN(int id, String from_user, int topic_id, String content, Timestamp create_time, Timestamp edit_time, int post_id, String avatar, String name, String description, ArrayList<String> imageList) {
+    public PostBEAN(int id, String from_user, int topic_id, String content, Timestamp create_time, Timestamp edit_time, Integer post_id, String avatar, String name, String description, ArrayList<String> imageList) {
         this.id = id;
         this.from_user = from_user;
         this.topic_id = topic_id;
@@ -42,11 +43,11 @@ public class PostBEAN {
         this.imageList = imageList;
     }
 
-    public Integer getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(int id) {
         this.id = id;
     }
 

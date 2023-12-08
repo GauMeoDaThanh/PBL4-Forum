@@ -54,7 +54,18 @@ public class TopicServlet extends HttpServlet {
                 }
                 break;
             case "Info":
-                int topicID = Integer.parseInt(req.getParameter("topicID"));
+                try {
+                    int topicID = Integer.parseInt(req.getParameter("topicID"));
+                    TopicBO topicBO = new TopicBO();
+                    TopicBEAN topicBEAN = topicBO.getTopicById(topicID);
+                    PostBO postBO =new PostBO();
+                    ArrayList<PostBEAN> list = postBO.getAllPostInTopic(topicID);
+                    req.setAttribute("topic",topicBEAN);
+                    req.setAttribute("listPost",list);
+                    req.getRequestDispatcher("../view/post.jsp").forward(req,resp);
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
 
                 break;
         }
@@ -113,7 +124,7 @@ public class TopicServlet extends HttpServlet {
                     String contentPost = req.getParameter("new_topic_content");
                     Timestamp createTimePost = newTopic.getCreate_time();
 
-                    PostBEAN postBEAN = new PostBEAN(from_user, newTopic.getId(), contentPost,createTimePost,imageList);
+                    PostBEAN postBEAN = new PostBEAN(from_user, newTopic.getId(), contentPost,createTimePost,imageList,null);
                     PostBO postBO = new PostBO();
                     postBO.addPost(postBEAN);
                     if(topicTypeId==1) {

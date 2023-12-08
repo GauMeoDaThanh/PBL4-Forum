@@ -24,82 +24,6 @@
         return false;
     });
 
-
-    // Team carousel
-    // $(".team-carousel").owlCarousel({
-    //     autoplay: true,
-    //     smartSpeed: 1000,
-    //     center: false,
-    //     dots: false,
-    //     loop: true,
-    //     margin: 50,
-    //     nav : true,
-    //     navText : [
-    //         '<i class="bi bi-arrow-left"></i>',
-    //         '<i class="bi bi-arrow-right"></i>'
-    //     ],
-    //     responsiveClass: true,
-    //     responsive: {
-    //         0:{
-    //             items:1
-    //         },
-    //         768:{
-    //             items:2
-    //         },
-    //         992:{
-    //             items:3
-    //         }
-    //     }
-    // });
-
-
-    // Testimonial carousel
-
-    // $(".testimonial-carousel").owlCarousel({
-    //     autoplay: true,
-    //     smartSpeed: 1500,
-    //     center: true,
-    //     dots: true,
-    //     loop: true,
-    //     margin: 0,
-    //     nav : true,
-    //     navText: false,
-    //     responsiveClass: true,
-    //     responsive: {
-    //         0:{
-    //             items:1
-    //         },
-    //         576:{
-    //             items:1
-    //         },
-    //         768:{
-    //             items:2
-    //         },
-    //         992:{
-    //             items:3
-    //         }
-    //     }
-    // });
-
-
-    // Fact Counter
-
-    //  $(document).ready(function(){
-    //     $('.counter-value').each(function(){
-    //         $(this).prop('Counter',0).animate({
-    //             Counter: $(this).text()
-    //         },{
-    //             duration: 2000,
-    //             easing: 'easeInQuad',
-    //             step: function (now){
-    //                 $(this).text(Math.ceil(now));
-    //             }
-    //         });
-    //     });
-    // });
-
-
-
 })(jQuery);
 
 //
@@ -215,7 +139,6 @@ function displaySelectedImage(event, elementId) {
 function replyPost(postOwner,postContent,idPost,ownerPostTo,contentPostTo,idPostTo,blockReply){
     var postOwnerElement = document.getElementById(postOwner);
     var postContentElement=document.getElementById(postContent);
-    // var idPostElement = document.getElementById(idPost);
 
     var ownerPostToElement=document.getElementById(ownerPostTo);
     var contentPostToElement=document.getElementById(contentPostTo);
@@ -225,9 +148,13 @@ function replyPost(postOwner,postContent,idPost,ownerPostTo,contentPostTo,idPost
 
     ownerPostToElement.innerHTML=postOwnerElement.innerHTML
     contentPostToElement.innerHTML=postContentElement.innerHTML
-    idPostToElement.value=idPost
+    idPostToElement.value = idPost
     blockReplyElement.style.display='block'
 
+    // truot xuong khung chat
+    var focus = document.getElementById("element-focus-reply")
+
+    focus.scrollIntoView({ behavior: 'smooth', block: 'center' });
 }
 
 function resetReply(ownerPostTo,contentPostTo,idPostTo,blockReply) {
