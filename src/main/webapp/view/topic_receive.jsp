@@ -92,16 +92,16 @@
                                     <a href="#" data-toggle="collapse" data-target=".forum-content"><img src="${pageContext.request.contextPath}/image/<%=topic.getAvatar()==null  || topic.getAvatar().equals("") ? "29.jpg" : topic.getAvatar()%>" class="mr-3 rounded-circle" width="70" height="70" alt="User" /></a>
                                     <div class="media-body mx-2" style="min-width: 60%; max-width: 60%;">
                                         <h4><a href="/Topic/Info?topicID=<%=topic.getId()%>" data-toggle="collapse" data-target=".forum-content" class="text-body"><strong><%=topic.getTopic_name()%></strong></a></h4>
-                                        <p class="text-muted"><a href="/Profile/Info?username=<%=topic.getFrom_user()%>"><%=topic.getName().equals(user.getName())?"Bạn":topic.getName()%></a> at <span class="text-dark font-weight-bold"><%=createTime%></span></p>
+                                        <p class="text-muted"><a href="/Profile/Info?username=<%=topic.getFrom_user()%>"><%=topic.getFrom_user()%></a> at <span class="text-dark font-weight-bold"><%=createTime%></span></p>
                                     </div>
                                     <div class="media-body mx-4" style="width: 20%;">
                                         <div class="content__topic-item-right-item">
                                             <i class="bi bi-geo-alt-fill" style="color: red; font-size: larger;"></i>
-                                            <label for="" class="content__topic-item-text"><%=topic.getFrom_location()+" đến "+ topic.getTo_location()%></label>
+                                            <label for="" class="text-dark"><%=topic.getFrom_location()+" đến "+ topic.getTo_location()%></label>
                                         </div>
                                         <div class="content__topic-item-right-item py-3">
                                             <i class="content__topic-item-icon color--green fa-solid fa-calendar-days" style="color: green"></i>
-                                            <label for="" class="content__topic-item-text"><%=deliDateTime%></label>
+                                            <label for="" class="text-dark"><%=deliDateTime%></label>
                                         </div>
                                     </div>
                                     <div class="text-muted small text-center align-self-center">

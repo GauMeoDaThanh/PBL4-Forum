@@ -71,15 +71,15 @@
             <div class="d-flex align-items-center">
                 <div class="mx-2 d-flex align-items-center">
                     <i class="bi bi-person" style="font-size: larger;"></i>
-                    <a href="/Profile/Info?username=<%=topic.getFrom_user()%>" class="mx-1"><%=(topic.getName().equals(user.getName()))?"Bạn":topic.getName()%></a>
+                    <a href="/Profile/Info?username=<%=topic.getFrom_user()%>" class="mx-1"><%=topic.getFrom_user()%></a>
                 </div>
                 <div class="mx-2 d-flex align-items-center">
                     <i class="bi bi-geo-alt-fill" style="color: red; font-size: large;"></i>
-                    <span class="mx-1"><%=topic.getFrom_location()+" đến "+topic.getTo_location()%></span>
+                    <span class="mx-1 text-dark" ><%=topic.getFrom_location()+" đến "+topic.getTo_location()%></span>
                 </div>
                 <div class="mx-2 d-flex align-items-center">
                     <i class="fa-solid fa-calendar-days" style="color: green; font-size: large;"></i>
-                    <span class="mx-1"><%=dateFormat.format(topic.getCreate_time())%></span>
+                    <span class="mx-1 text-dark"><%=dateFormat.format(topic.getCreate_time())%></span>
                 </div>
             </div>
         </div>
@@ -109,17 +109,16 @@
             for (PostBEAN post:listPost) {
         %>
         <div class="row rounded border mt-3" id="<%=post.getId()%>" style="min-height: 200px;">
-            <div class="col-2 p-2 text-center" style="background-color: #E5F2FF; border-right: 1px solid #d3d5d7;">
+            <div class="col-2 p-2 text-center" style="background-color: #ccc; border-right: 1px solid #d3d5d7;">
                 <img src="${pageContext.request.contextPath}/image/<%=post.getAvatar()==null  || post.getAvatar().equals("") ? "29.jpg" : post.getAvatar()%>"  class="rounded-circle mr-1 avatar-hover" alt="Vanessa Tucker" width="100" height="100">
                 <div>
-                    <a id="post-owner-<%=post.getId()%>" class="text-primary my-2" href="/Profile/Info?username=<%=post.getFrom_user()%>" style="font-weight: 700; font-size: larger;"><%=(post.getName().equals(user.getName()))?"Bạn":post.getName()%></a>
+                    <a id="post-owner-<%=post.getId()%>" class="text-primary my-2" href="/Profile/Info?username=<%=post.getFrom_user()%>" style="font-weight: 700; font-size: larger;"><%=post.getFrom_user()%></a>
                     <p class="text-success p-2"><%=post.getDescription()%></p>
                 </div>
             </div>
             <div class="col-10 p-3" style="background-color: #E5F2FF; min-height: 100%;">
-                <div class="m-1 d-flex align-items-center">
-                    <i class="fa-solid fa-calendar-days" style="color: green; font-size: large;"></i>
-                    <span class="mx-1"><%=dateFormat.format(post.getCreate_time())%></span>
+                <div class="d-flex align-items-center py-2 my-1" style="border-bottom: 1px solid #ccc;">
+                    <span class="mx-1 text-dark"><%=dateFormat.format(post.getCreate_time())%></span>
                 </div>
                 <%
                     if(post.getPost_id()!=null) {
@@ -128,7 +127,7 @@
 
                 %>
                 <div style="background-color: #ccc;" class="p-3 rounded">
-                    <span>Trả lời <%=p.getName()%>:</span><br>
+                    <span class="text-dark"><strong>Trả lời <%=p.getName()%>:</strong></span><br>
                     <%=p.getContent()%>
                     <br><br>
                 <%
@@ -147,7 +146,7 @@
                         }
                     }
                 %>
-                <p id="post-content-<%=post.getId()%>">
+                <p id="post-content-<%=post.getId()%>" class="text-dark">
                     <%=post.getContent()%>
                     <br><br>
                     <%
@@ -171,14 +170,15 @@
                         <i class="bi bi-emoji-angry"></i>
                         Phẫn nộ
                     </button>
-                    <%
-                        if(!post.getFrom_user().equals(user.getUsername())) {
-
-                    %>
                     <button class="icon-hover btn" onclick="replyPost('post-owner-<%=post.getId()%>','post-content-<%=post.getId()%>','<%=post.getId()%>','owner-post-to','content-post-to','id-post-to','block-reply')">
                         <i class="bi bi-reply"></i>
                         Trả lời
                     </button>
+                    <%
+                        if(!post.getFrom_user().equals(user.getUsername())) {
+
+                    %>
+
                     <button class="icon-hover btn">
                         <i class="bi bi-flag" ></i>
                         Báo cáo
@@ -187,7 +187,7 @@
                         }
                         else {
                     %>
-                    <form action="/Post/Delete" method="get">
+                    <form action="/Post/Delete" method="get" style="display: inline-block;">
                         <input name="topicID" type="text" value="<%=topic.getId()%>" style="display: none">
                         <input name="postID" type="text" value="<%=post.getId()%>" style="display: none">
                         <button type="submit" class="icon-hover btn btn-link" style="color: #dc3545;" data-bs-toggle="modal" data-bs-target="#confirm-delete">
@@ -195,6 +195,7 @@
                             Xoá bài viết
                         </button>
                     </form>
+
 
                     <%
                         }
@@ -221,10 +222,10 @@
             </ul>
         </nav>
         <div class="row rounded border mt-3" id="element-focus-reply">
-            <div class="col-2 p-2 text-center" style="background-color: #E5F2FF; border-right: 1px solid #d3d5d7;">
+            <div class="col-2 p-2 text-center" style="background-color: #ccc; border-right: 1px solid #d3d5d7;">
                 <img src="${pageContext.request.contextPath}/image/<%=user.getAvatar()==null  || user.getAvatar().equals("") ? "29.jpg" : user.getAvatar()%>"  class="rounded-circle mr-1 avatar-hover" alt="Vanessa Tucker" width="100" height="100">
                 <div>
-                    <a class="text-primary my-2" href="/Profile/Info?username=<%=user.getUsername()%>" style="font-weight: 700; font-size: larger;">Bạn</a>
+                    <a class="text-primary my-2" href="/Profile/Info?username=<%=user.getUsername()%>" style="font-weight: 700; font-size: larger;"><%=user.getUsername()%></a>
                     <p class="text-success p-2"><%=user.getDescription()%></p>
                 </div>
             </div>
@@ -232,14 +233,14 @@
             <div class="col-10 p-3" style="background-color: #E5F2FF;">
                 <form action="/Post/Add" method="post" enctype="multipart/form-data">
                     <div id="block-reply" style="background-color: #ccc; display: none;" class="p-3 rounded">
-                        <span>Trả lời </span><span id="owner-post-to"></span>:<br>
+                        <strong><span class="text-dark text-bold" >Trả lời </span><span id="owner-post-to" class="text-dark text-bold"></span>:</strong><br>
                         <p id="content-post-to"></p>
                         <input name="topicID" value="<%=topic.getId()%>" style="display:none;">
                         <input name="idPostTo" type="text" id="id-post-to" style="display: none;">
                     </div>
 
                     <div class="mt-3">
-                        <label for="attachFile" class="">Đính kèm ảnh</label>
+                        <label for="attachFile" class="text-dark" >Đính kèm ảnh</label>
                         <input name="attachFile" type="file" id="attachFile" class="form-control my-2" accept=".jpg,.png" multiple>
                         <textarea name="post-content-text" class="form-control" id="message-text" placeholder="Nhập nội dung" rows="10"></textarea>
                     </div>

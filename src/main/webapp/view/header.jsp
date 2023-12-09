@@ -41,7 +41,7 @@
                     <div id="dropdownMenuButton1" class="btn text-white d-flex align-items-center"
                          style="font-size: 16px;" data-bs-toggle="dropdown" data-bs-display="static">
                         <img src="${pageContext.request.contextPath}/image/<%=user.getAvatar()==null  || user.getAvatar().equals("") ? "29.jpg" : user.getAvatar()%>" alt="mdo" width="40" height="40" class="rounded-circle">
-                        <span class="text-white mx-2"><%=user.getName()%></span>
+                        <span class="text-white mx-2"><%=user.getUsername()%></span>
                     </div>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                         <li><a class="dropdown-item" href="../Profile/Info?username=<%=user.getUsername()%>">Trang cá nhân</a></li>
