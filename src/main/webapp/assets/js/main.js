@@ -25,79 +25,6 @@
     });
 
 
-    // Team carousel
-    // $(".team-carousel").owlCarousel({
-    //     autoplay: true,
-    //     smartSpeed: 1000,
-    //     center: false,
-    //     dots: false,
-    //     loop: true,
-    //     margin: 50,
-    //     nav : true,
-    //     navText : [
-    //         '<i class="bi bi-arrow-left"></i>',
-    //         '<i class="bi bi-arrow-right"></i>'
-    //     ],
-    //     responsiveClass: true,
-    //     responsive: {
-    //         0:{
-    //             items:1
-    //         },
-    //         768:{
-    //             items:2
-    //         },
-    //         992:{
-    //             items:3
-    //         }
-    //     }
-    // });
-
-
-    // Testimonial carousel
-
-    // $(".testimonial-carousel").owlCarousel({
-    //     autoplay: true,
-    //     smartSpeed: 1500,
-    //     center: true,
-    //     dots: true,
-    //     loop: true,
-    //     margin: 0,
-    //     nav : true,
-    //     navText: false,
-    //     responsiveClass: true,
-    //     responsive: {
-    //         0:{
-    //             items:1
-    //         },
-    //         576:{
-    //             items:1
-    //         },
-    //         768:{
-    //             items:2
-    //         },
-    //         992:{
-    //             items:3
-    //         }
-    //     }
-    // });
-
-
-    // Fact Counter
-
-    //  $(document).ready(function(){
-    //     $('.counter-value').each(function(){
-    //         $(this).prop('Counter',0).animate({
-    //             Counter: $(this).text()
-    //         },{
-    //             duration: 2000,
-    //             easing: 'easeInQuad',
-    //             step: function (now){
-    //                 $(this).text(Math.ceil(now));
-    //             }
-    //         });
-    //     });
-    // });
-
 
 
 })(jQuery);
@@ -217,23 +144,34 @@ function displaySelectedImage(event, elementId) {
 }
 
 // Click reply button
-function replyPost(){
-    var blockReply = document.getElementById("block-reply");
-    var commentText = document.getElementById("comment-text");
-    var elementText = document.getElementById("element-text");
-    var elementTo = document.getElementById("element-to");
-    var ownPost = document.getElementById("own-post");
+function replyPost(postOwner,postContent,idPost,ownerPostTo,contentPostTo,idPostTo,blockReply){
+    var postOwnerElement = document.getElementById(postOwner);
+    var postContentElement=document.getElementById(postContent);
+    // var idPostElement = document.getElementById(idPost);
 
+    var ownerPostToElement=document.getElementById(ownerPostTo);
+    var contentPostToElement=document.getElementById(contentPostTo);
+    var idPostToElement = document.getElementById(idPostTo);
 
-    blockReply.style.display='block';
-    elementText.innerHTML=commentText.innerHTML;
-    elementTo.innerHTML=ownPost.innerHTML
+    var blockReplyElement=document.getElementById(blockReply);
+
+    ownerPostToElement.innerHTML=postOwnerElement.innerHTML
+    contentPostToElement.innerHTML=postContentElement.innerHTML
+    idPostToElement.value=idPost
+    blockReplyElement.style.display='block'
 
 }
 
-function resetReply() {
-    var blockReply = document.getElementById("block-reply");
-    blockReply.style.display='none'
+function resetReply(ownerPostTo,contentPostTo,idPostTo,blockReply) {
+    var ownerPostToElement=document.getElementById(ownerPostTo);
+    var contentPostToElement=document.getElementById(contentPostTo);
+    var idPostToElement = document.getElementById(idPostTo);
+    var blockReplyElement=document.getElementById(blockReply);
+
+    ownerPostToElement.innerHTML=""
+    contentPostToElement.innerHTML=""
+    idPostToElement.value=""
+    blockReplyElement.style.display='none'
 }
 
 

@@ -14,7 +14,7 @@
 <div class="fixed-top my-5 container-fluid bg-primary">
     <div class="container">
         <nav class="navbar navbar-dark navbar-expand-lg py-0">
-            <a href="./home.jsp" class="navbar-brand">
+            <a href="../Home/" class="navbar-brand">
                 <h1 class="text-white fw-bold d-block">Trans<span class="text-secondary">Port</span> </h1>
             </a>
             <button type="button" class="navbar-toggler me-0" data-bs-toggle="collapse"

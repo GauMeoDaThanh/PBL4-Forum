@@ -18,8 +18,7 @@ public class AuthenticateServlet extends HttpServlet {
             case "logout":
                 HttpSession session = req.getSession(false);
                 session.removeAttribute("user");
-                resp.sendRedirect("../../Forum");
-
+                resp.sendRedirect("../index.jsp");
                 break;
         }
     }
