@@ -106,9 +106,10 @@ public class TopicServlet extends HttpServlet {
                     ArrayList<String> imageList = new ArrayList<>();
                     for(Part file:fileParts) {
                         String originalFileName = file.getSubmittedFileName();
-                        if(originalFileName!=null) {
+                        if(originalFileName!=null && !originalFileName.isEmpty()) {
                             String img = System.currentTimeMillis() + originalFileName;
                             String uploadPath="E:/giao_trinh/pbl4/img/" + img;
+                            System.out.println(img);
                             FileOutputStream fos = new FileOutputStream(uploadPath);
                             InputStream is = file.getInputStream();
 

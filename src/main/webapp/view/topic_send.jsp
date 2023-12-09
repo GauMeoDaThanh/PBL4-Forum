@@ -146,7 +146,7 @@
                         <form action="${pageContext.request.contextPath}/Topic/addNewTopic" method="post" enctype="multipart/form-data">
                             <div class="mb-3">
                                 <label for="new_topic_name" class="col-form-label">Tên Topic</label>
-                                <input name="new_topic_name" type="text" class="form-control" id="new_topic_name" placeholder="Nhập tiêu đề">
+                                <input name="new_topic_name" type="text" class="form-control" id="new_topic_name" placeholder="Nhập tiêu đề" required>
                             </div>
                             <div class="mb-3">
                                 <label for="select-topic-type-id" class="col-form-label">Chọn thể loại bài đăng</label>
@@ -179,7 +179,7 @@
                             </div>
                             <div class="mb-3">
                                 <label for="select-datetime" class="my-2" style="display:block;">Thời gian chuyển</label>
-                                <input name="new_topic_deli_datetime" type="datetime-local"  id="select-datetime" class="">
+                                <input name="new_topic_deli_datetime" type="datetime-local"  id="select-datetime" class="" required>
                             </div>
                             <div class="mb-3">
                                 <label for="formFile" class="form-label">Đính kèm ảnh</label>
@@ -187,7 +187,7 @@
                             </div>
                             <div class="mb-3">
                                 <label for="message-text" class="col-form-label">Nội dung chính</label>
-                                <textarea name="new_topic_content" class="form-control" id="message-text" placeholder="Nhập nội dung chính" rows="5"></textarea>
+                                <textarea name="new_topic_content" class="form-control" id="message-text" placeholder="Nhập nội dung chính" rows="5" required></textarea>
                             </div>
                             <div class="modal-footer">
                                 <button type="reset" class="btn btn-primary" data-bs-dismiss="modal" style="width: 80px;">Huỷ</button>
