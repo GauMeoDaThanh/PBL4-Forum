@@ -186,7 +186,7 @@
                                     </div>
                                     <div class="mb-3">
                                         <label for="message-text" class="col-form-label">Nội dung chính</label>
-                                        <input name="new_topic_content" class="form-control" id="message-text" placeholder="Nhập nội dung chính" rows="5"></input>
+                                        <textarea name="new_topic_content" class="form-control" id="message-text" placeholder="Nhập nội dung chính" rows="5"></textarea>
                                     </div>
                                     <div class="modal-footer">
                                         <button type="reset" class="btn btn-primary" data-bs-dismiss="modal" style="width: 80px;">Huỷ</button>
