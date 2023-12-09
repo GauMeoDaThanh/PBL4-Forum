@@ -39,7 +39,7 @@ public class ProfileServlet extends HttpServlet {
                     String username = req.getParameter("username");
                     AuthenticateBO authenticateBO = new AuthenticateBO();
                     if (session.getAttribute("user") == null) throw new Exception();
-                    ProfileBEAN userInfo= profileBO.getUserInfo(username);
+                    ProfileBEAN userInfo = profileBO.getUserInfo(username);
                     if (userInfo != null) {
                         req.setAttribute("userInfo", userInfo);
                         req.getRequestDispatcher("../view/profile.jsp").forward(req, resp);
@@ -88,7 +88,7 @@ public class ProfileServlet extends HttpServlet {
                             fos.close();
                         }
                     }
-                    UserBEAN userBean = new UserBEAN(username, name, email, role, img, description);
+                    UserBEAN userBean = new UserBEAN(username, name, email, role, img.equals("") ? "29.jpg" : img, description);
                     profileBO.updateProfile(userBean);
                     session.setAttribute("user", userBean);
                     resp.sendRedirect("../Home/");
