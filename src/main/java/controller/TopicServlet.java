@@ -128,9 +128,9 @@ public class TopicServlet extends HttpServlet {
                     PostBO postBO = new PostBO();
                     postBO.addPost(postBEAN);
                     if(topicTypeId==1) {
-                        resp.sendRedirect("/Topic/receive");
+                        resp.sendRedirect(req.getContextPath()+"/Topic/receive");
                     } else {
-                        resp.sendRedirect("/Topic/send");
+                        resp.sendRedirect(req.getContextPath()+"/Topic/send");
                     }
                 }catch (Exception e) {
                     throw new RuntimeException(e);

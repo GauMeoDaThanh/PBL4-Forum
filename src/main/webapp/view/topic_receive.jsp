@@ -91,8 +91,8 @@
                                 <div class="media forum-item d-flex">
                                     <a href="#" data-toggle="collapse" data-target=".forum-content"><img src="${pageContext.request.contextPath}/image/<%=topic.getAvatar()==null  || topic.getAvatar().equals("") ? "29.jpg" : topic.getAvatar()%>" class="mr-3 rounded-circle" width="70" height="70" alt="User" /></a>
                                     <div class="media-body mx-2" style="min-width: 60%; max-width: 60%;">
-                                        <h4><a href="/Topic/Info?topicID=<%=topic.getId()%>" data-toggle="collapse" data-target=".forum-content" class="text-body"><strong><%=topic.getTopic_name()%></strong></a></h4>
-                                        <p class="text-muted"><a href="/Profile/Info?username=<%=topic.getFrom_user()%>"><%=topic.getFrom_user()%></a> at <span class="text-dark font-weight-bold"><%=createTime%></span></p>
+                                        <h4><a href="${pageContext.request.contextPath}/Topic/Info?topicID=<%=topic.getId()%>" data-toggle="collapse" data-target=".forum-content" class="text-body"><strong><%=topic.getTopic_name()%></strong></a></h4>
+                                        <p class="text-muted"><a href="${pageContext.request.contextPath}/Profile/Info?username=<%=topic.getFrom_user()%>"><%=topic.getFrom_user()%></a> at <span class="text-dark font-weight-bold"><%=createTime%></span></p>
                                     </div>
                                     <div class="media-body mx-4" style="width: 20%;">
                                         <div class="content__topic-item-right-item">
@@ -142,7 +142,7 @@
                                 <button type="reset" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
-                                <form action="/Topic/addNewTopic" method="post" enctype="multipart/form-data">
+                                <form action="${pageContext.request.contextPath}/Topic/addNewTopic" method="post" enctype="multipart/form-data">
                                     <div class="mb-3">
                                         <label for="new_topic_name" class="col-form-label">Tên Topic</label>
                                         <input name="new_topic_name" type="text" class="form-control" id="new_topic_name" placeholder="Nhập tiêu đề">

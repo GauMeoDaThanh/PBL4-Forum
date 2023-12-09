@@ -63,7 +63,7 @@
             <!-- Bài nhận vận chuyển -->
             <div class="container">
                 <div class="row border-top">
-                    <a href="/Topic/receive">
+                    <a href="${pageContext.request.contextPath}/Topic/receive">
                         <h4 class="p-2 bg-primary text-secondary border-top" style="display: block;">BÀI NHẬN VẬN CHUYỂN</h4>
                     </a>
                 </div>
@@ -81,8 +81,8 @@
                                 <div class="media forum-item d-flex">
                                     <a href="#" data-toggle="collapse" data-target=".forum-content"><img src="${pageContext.request.contextPath}/image/<%=topic.getAvatar()==null  || topic.getAvatar().equals("") ? "29.jpg" : topic.getAvatar()%>" class="mr-3 rounded-circle" width="70" height="70" alt="User" /></a>
                                     <div class="media-body mx-2" style="min-width: 60%; max-width: 60%;">
-                                        <h4><a href="/Topic/Info?topicID=<%=topic.getId()%>" data-toggle="collapse" data-target=".forum-content" class="text-body"><strong><%=topic.getTopic_name()%></strong></a></h4>
-                                        <p class="text-muted"><a href="/Profile/Info?username=<%=topic.getFrom_user()%>" class="text-primary"><%=topic.getFrom_user()%></a> at <span class="text-dark font-weight-bold"><%=createTime%></span></p>
+                                        <h4><a href="${pageContext.request.contextPath}/Topic/Info?topicID=<%=topic.getId()%>" data-toggle="collapse" data-target=".forum-content" class="text-body"><strong><%=topic.getTopic_name()%></strong></a></h4>
+                                        <p class="text-muted"><a href="${pageContext.request.contextPath}/Profile/Info?username=<%=topic.getFrom_user()%>" class="text-primary"><%=topic.getFrom_user()%></a> at <span class="text-dark font-weight-bold"><%=createTime%></span></p>
                                     </div>
                                     <div class="media-body mx-4" style="width: 20%;">
                                         <div class="content__topic-item-right-item">
@@ -111,7 +111,7 @@
             <!-- Bài gửi vận chuyển -->
             <div class="container py-5">
                 <div class="row border-top">
-                    <a href="/Topic/send">
+                    <a href="${pageContext.request.contextPath}/Topic/send">
                         <h4 class="p-2 bg-primary text-secondary border-top" style="display: block;">BÀI GỬI VẬN CHUYỂN</h4>
                     </a>
                 </div>
@@ -127,10 +127,10 @@
                         <div class="card mb-2" style="background-color: #E5F2FF;">
                             <div class="card-body">
                                 <div class="media forum-item d-flex">
-                                    <a href="profile.jsp" data-toggle="collapse" data-target=".forum-content"><img src="${pageContext.request.contextPath}/image/<%=topic.getAvatar()==null  || topic.getAvatar().equals("") ? "29.jpg" : topic.getAvatar()%>" class="mr-3 rounded-circle" width="70" height="70" alt="User" /></a>
+                                    <a href="#" data-toggle="collapse" data-target=".forum-content"><img src="${pageContext.request.contextPath}/image/<%=topic.getAvatar()==null  || topic.getAvatar().equals("") ? "29.jpg" : topic.getAvatar()%>" class="mr-3 rounded-circle" width="70" height="70" alt="User" /></a>
                                     <div class="media-body mx-2" style="min-width: 60%; max-width: 60%;">
-                                        <h4><a href="/Topic/Info?topicID=<%=topic.getId()%>" data-toggle="collapse" data-target=".forum-content" class="text-body"><strong><%=topic.getTopic_name()%></strong></a></h4>
-                                        <p class="text-muted"><a href="/Profile/Info?username=<%=topic.getFrom_user()%>" class="text-primary"><%=topic.getFrom_user()%></a> at <span class="text-dark font-weight-bold"><%=createTime%></span></p>
+                                        <h4><a href="${pageContext.request.contextPath}/Topic/Info?topicID=<%=topic.getId()%>" data-toggle="collapse" data-target=".forum-content" class="text-body"><strong><%=topic.getTopic_name()%></strong></a></h4>
+                                        <p class="text-muted"><a href="${pageContext.request.contextPath}/Profile/Info?username=<%=topic.getFrom_user()%>" class="text-primary"><%=topic.getFrom_user()%></a> at <span class="text-dark font-weight-bold"><%=createTime%></span></p>
                                     </div>
                                     <div class="media-body mx-4" style="width: 20%;">
                                         <div class="content__topic-item-right-item">

@@ -151,8 +151,8 @@
                             <div class="mb-3">
                                 <label for="select-topic-type-id" class="col-form-label">Chọn thể loại bài đăng</label>
                                 <select name="new_topic_type_id" id="select-topic-type-id" class="form-select" aria-label="Default select example">
-                                    <option value="1" selected>Bài nhận vận chuyển</option>
-                                    <option value="2">Bài gửi vận chuyển</option>
+                                    <option value="1">Bài nhận vận chuyển</option>
+                                    <option value="2" selected>Bài gửi vận chuyển</option>
                                 </select>
                             </div>
                             <div class="mb-3">

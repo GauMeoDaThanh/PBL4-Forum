@@ -71,7 +71,7 @@
             <div class="d-flex align-items-center">
                 <div class="mx-2 d-flex align-items-center">
                     <i class="bi bi-person" style="font-size: larger;"></i>
-                    <a href="/Profile/Info?username=<%=topic.getFrom_user()%>" class="mx-1"><%=topic.getFrom_user()%></a>
+                    <a href="${pageContext.request.contextPath}/Profile/Info?username=<%=topic.getFrom_user()%>" class="mx-1"><%=topic.getFrom_user()%></a>
                 </div>
                 <div class="mx-2 d-flex align-items-center">
                     <i class="bi bi-geo-alt-fill" style="color: red; font-size: large;"></i>
@@ -112,7 +112,7 @@
             <div class="col-2 p-2 text-center" style="background-color: #ccc; border-right: 1px solid #d3d5d7;">
                 <img src="${pageContext.request.contextPath}/image/<%=post.getAvatar()==null  || post.getAvatar().equals("") ? "29.jpg" : post.getAvatar()%>"  class="rounded-circle mr-1 avatar-hover" alt="Vanessa Tucker" width="100" height="100">
                 <div>
-                    <a id="post-owner-<%=post.getId()%>" class="text-primary my-2" href="/Profile/Info?username=<%=post.getFrom_user()%>" style="font-weight: 700; font-size: larger;"><%=post.getFrom_user()%></a>
+                    <a id="post-owner-<%=post.getId()%>" class="text-primary my-2" href="${pageContext.request.contextPath}/Profile/Info?username=<%=post.getFrom_user()%>" style="font-weight: 700; font-size: larger;"><%=post.getFrom_user()%></a>
                     <p class="text-success p-2"><%=post.getDescription()%></p>
                 </div>
             </div>
@@ -187,7 +187,7 @@
                         }
                         else {
                     %>
-                    <form action="/Post/Delete" method="get" style="display: inline-block;">
+                    <form action="${pageContext.request.contextPath}/Post/Delete" method="get" style="display: inline-block;">
                         <input name="topicID" type="text" value="<%=topic.getId()%>" style="display: none">
                         <input name="postID" type="text" value="<%=post.getId()%>" style="display: none">
                         <button type="submit" class="icon-hover btn btn-link" style="color: #dc3545;" data-bs-toggle="modal" data-bs-target="#confirm-delete">
@@ -225,13 +225,13 @@
             <div class="col-2 p-2 text-center" style="background-color: #ccc; border-right: 1px solid #d3d5d7;">
                 <img src="${pageContext.request.contextPath}/image/<%=user.getAvatar()==null  || user.getAvatar().equals("") ? "29.jpg" : user.getAvatar()%>"  class="rounded-circle mr-1 avatar-hover" alt="Vanessa Tucker" width="100" height="100">
                 <div>
-                    <a class="text-primary my-2" href="/Profile/Info?username=<%=user.getUsername()%>" style="font-weight: 700; font-size: larger;"><%=user.getUsername()%></a>
+                    <a class="text-primary my-2" href="${pageContext.request.contextPath}/Profile/Info?username=<%=user.getUsername()%>" style="font-weight: 700; font-size: larger;"><%=user.getUsername()%></a>
                     <p class="text-success p-2"><%=user.getDescription()%></p>
                 </div>
             </div>
 
             <div class="col-10 p-3" style="background-color: #E5F2FF;">
-                <form action="/Post/Add" method="post" enctype="multipart/form-data">
+                <form action="${pageContext.request.contextPath}/Post/Add" method="post" enctype="multipart/form-data">
                     <div id="block-reply" style="background-color: #ccc; display: none;" class="p-3 rounded">
                         <strong><span class="text-dark text-bold" >Trả lời </span><span id="owner-post-to" class="text-dark text-bold"></span>:</strong><br>
                         <p id="content-post-to"></p>

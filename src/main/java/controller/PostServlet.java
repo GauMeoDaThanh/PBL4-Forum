@@ -38,7 +38,7 @@ public class PostServlet extends HttpServlet {
                     postBO.deletePost(postID);
 
                     int topicID = Integer.parseInt(req.getParameter("topicID"));
-                    resp.sendRedirect("/Topic/Info?topicID="+topicID);
+                    resp.sendRedirect(req.getContextPath()+"/Topic/Info?topicID="+topicID);
                 }catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -90,7 +90,7 @@ public class PostServlet extends HttpServlet {
 
                     // Load lại trang post sau khi thêm
 //                    req.setAttribute("topicID",topic_id);
-                    resp.sendRedirect("/Topic/Info?topicID="+topic_id);
+                    resp.sendRedirect( req.getContextPath()+"/Topic/Info?topicID="+topic_id);
 //                    req.getRequestDispatcher("/Topic/Info?topicID="+topic_id).forward(req,resp);
 //                    TopicBO topicBO = new TopicBO();
 //                    TopicBEAN topicBEAN = topicBO.getTopicById(topic_id);
