@@ -13,8 +13,9 @@ public class MessageBEAN {
 
     private String sendTime;
     private boolean form;
+    private boolean formState;
 
-    public MessageBEAN(int id, String fromUser, String toUser, String message, String picture, Timestamp sendTime, boolean form) {
+    public MessageBEAN(int id, String fromUser, String toUser, String message, String picture, Timestamp sendTime, boolean form, boolean formState) {
         this.id = id;
         this.fromUser = fromUser;
         this.toUser = toUser;
@@ -22,6 +23,7 @@ public class MessageBEAN {
         this.picture = picture;
         this.sendTime = new SimpleDateFormat("dd/MM/yyyy HH:mm").format(sendTime);
         this.form = form;
+        this.formState = formState;
     }
 
     public int getId() {
@@ -78,5 +80,17 @@ public class MessageBEAN {
 
     public void setForm(boolean form) {
         this.form = form;
+    }
+
+    public void setSendTime(String sendTime) {
+        this.sendTime = sendTime;
+    }
+
+    public boolean isFormState() {
+        return formState;
+    }
+
+    public void setFormState(boolean formState) {
+        this.formState = formState;
     }
 }

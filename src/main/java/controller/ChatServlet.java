@@ -61,7 +61,17 @@ public class ChatServlet extends HttpServlet {
             ChatBO chatBO = new ChatBO();
             switch (action){
                 case "CreateForm":
-
+                    String goodsName = req.getParameter("goods-name");
+                    String receiver = req.getParameter("receiver");
+                    String phoneNumber = req.getParameter("phone-number");
+                    String address = req.getParameter("address");
+                    String deliNote = req.getParameter("deli-note");
+                    String formInfo = goodsName + "/" + receiver + "/" + phoneNumber + "/" + address + "/" + deliNote + "/";
+                    chatBO.addMessage(new MessageBEAN(0, self.getUsername(), user.getUsername(), formInfo, null, new Timestamp(new Date().getTime()), true, false));
+                    break;
+                case "ChangeState":
+                    int idMessage = Integer.parseInt(req.getParameter("id"));
+                    chatBO.changeDeliFormState(idMessage);
                     break;
                 case "Info":
                     String message = req.getParameter("text") == null ? "" : req.getParameter("text").trim();
@@ -69,7 +79,7 @@ public class ChatServlet extends HttpServlet {
                     Part file = req.getPart("message-picture");
                     if (!file.getSubmittedFileName().equals("")) {
                         String img = System.currentTimeMillis() + file.getSubmittedFileName();
-                        MessageBEAN messageBEAN = new MessageBEAN(0, self.getUsername(), toUser, "", img, new Timestamp(new Date().getTime()), false);
+                        MessageBEAN messageBEAN = new MessageBEAN(0, self.getUsername(), toUser, "", img, new Timestamp(new Date().getTime()), false, false);
                         chatBO.addMessage(messageBEAN);
                         String uploadPath = "E:/giao_trinh/pbl4/img/" + img;
                         FileOutputStream fos = new FileOutputStream(uploadPath);
@@ -81,7 +91,7 @@ public class ChatServlet extends HttpServlet {
                         fos.close();
                     }
                     if (!message.equals("")) {
-                        MessageBEAN messageBEAN = new MessageBEAN(0, self.getUsername(), toUser, message, null, new Timestamp(new Date().getTime()), false);
+                        MessageBEAN messageBEAN = new MessageBEAN(0, self.getUsername(), toUser, message, null, new Timestamp(new Date().getTime()), false, false);
                         chatBO.addMessage(messageBEAN);
                     }
                     break;
@@ -127,6 +137,56 @@ public class ChatServlet extends HttpServlet {
                     }
                     resp.getWriter().println("</div>\n" +
                             "                                                    <div class=\"text-muted small text-nowrap mt-2 mx-2\"> "+message.getSendTime()+"</div>\n" +
+                            "                                                </div>");
+                } else if (message.getFromUser().equals(self.getUsername()) && message.isForm()){
+                    String[] deliInfo = message.getMessage().split("/");
+                    resp.getWriter().println("<div class=\"chat-message-right mb-4\">\n" +
+                            "                                                    <div>\n" +
+                            "                                                        <img src=\""+ req.getContextPath() + "/image/" + self.getAvatar() +"\"\n" +
+                            "                                                             class=\"rounded-circle mr-1\" alt=\"Chris Wood\" width=\"40\" height=\"40\">\n" +
+                            "                                                    </div>\n" +
+                            "                                                    <div class=\"flex-shrink-1 bg-light rounded py-2 px-3 mr-3\">\n" +
+                            "                                                        <div class=\"font-weight-bold mb-1 text-end\"><strong>Bạn</strong></div>\n" +
+                            "                                                        <span class=\"bg-primary text-white\">Đơn yêu cầu vận chuyển<br></span>\n" +
+                            "                                                        <div>\n" +
+                            "                                                            <strong>Tên hàng hóa: </strong>"+  deliInfo[0] +"<br>\n" +
+                            "                                                            <strong>Người nhận: </strong>"+  deliInfo[1] +"<br>\n" +
+                            "                                                            <strong>Số điện thoại: </strong>"+  deliInfo[2] +"<br>\n" +
+                            "                                                            <strong>Địa chỉ đến: </strong>"+  deliInfo[3] +"<br>\n" +
+                            "                                                            <strong>Ghi chú: </strong>"+  deliInfo[4] +"<br>\n" +
+                            "                                                        </div>\n");
+                    if (message.isFormState()){
+                        resp.getWriter().println("  <span class=\"bg-primary text-white\">Đơn đã được nhận<br></span>");
+                    }
+                    resp.getWriter().println(" </div>\n" +
+                            "                                                    <div class=\"text-muted small text-nowrap mt-2 mx-2\">"+message.getSendTime()+"</div>\n" +
+                            "                                                </div>");
+                } else if (message.getFromUser().equals(user.getUsername()) && message.isForm()) {
+                    String[] deliInfo = message.getMessage().split("/");
+                    resp.getWriter().println("<div class=\"chat-message-left pb-4\">\n" +
+                            "                                                    <div>\n" +
+                            "                                                        <img src=\""+ req.getContextPath() + "/image/" + user.getAvatar() +"\"\n" +
+                            "                                                             class=\"rounded-circle mr-1\" alt=\"Sharon Lessman\" width=\"40\" height=\"40\">\n" +
+                            "                                                    </div>\n" +
+                            "                                                    <div class=\"flex-shrink-1 bg-light rounded py-2 px-3 mr-3\">\n" +
+                            "                                                        <div class=\"font-weight-bold mb-1\"><strong>"+user.getUsername()+"</strong></div>" +
+                            "                                                        <span class=\"bg-success text-white\">Đơn yêu cầu nhận vận chuyển<br></span>\n" +
+                            "                                                        <div>\n" +
+                            "                                                            <strong>Tên hàng hóa: </strong>"+  deliInfo[0] +"<br>\n" +
+                            "                                                            <strong>Người nhận: </strong>"+  deliInfo[1] +"<br>\n" +
+                            "                                                            <strong>Số điện thoại: </strong>"+  deliInfo[2] +"<br>\n" +
+                            "                                                            <strong>Địa chỉ đến: </strong>"+  deliInfo[3] +"<br>\n" +
+                            "                                                            <strong>Ghi chú: </strong>"+  deliInfo[4] +"<br>\n" +
+                            "                                                        </div>\n" +
+                            "                                                        <div style=\"float: right;\">\n");
+                    if (message.isFormState()){
+                        resp.getWriter().println("                                                                    <span class=\"bg-success text-white\">Đã nhận đơn này<br></span>\n");
+                    }else{
+                        resp.getWriter().println("                                                                    <a href=\"#\" class=\"btn btn-success\" onclick=\"acceptDeli()\">Nhận đơn</a>\n");
+                    }
+                    resp.getWriter().println("</div>\n" +
+                            "                                                    </div>\n" +
+                            "                                                    <div class=\"text-muted small text-nowrap mt-2 mx-2\">"+message.getSendTime()+"</div>\n" +
                             "                                                </div>");
                 }
             }

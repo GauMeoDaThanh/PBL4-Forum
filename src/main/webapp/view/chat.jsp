@@ -1,6 +1,7 @@
 <%@ page import="model.BEAN.UserBEAN" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -190,6 +191,62 @@
                                                         </c:choose>
                                                     </div>
                                                     <div class="text-muted small text-nowrap mt-2 mx-2"> <c:out value="${mess.sendTime}"/></div>
+                                                </div>
+                                            </c:when>
+                                            <c:when test="${mess.fromUser eq sessionScope.user.username && mess.form}">
+                                                <div class="chat-message-right mb-4">
+                                                    <div>
+                                                        <img src="${pageContext.request.contextPath}/image/<%=user.getAvatar()==null  || user.getAvatar().equals("") ? "29.jpg" : user.getAvatar()%>"
+                                                             class="rounded-circle mr-1" alt="Chris Wood" width="40" height="40">
+                                                    </div>
+                                                    <div class="flex-shrink-1 bg-light rounded py-2 px-3 mr-3">
+                                                        <div class="font-weight-bold mb-1 text-end"><strong>Bạn</strong></div>
+                                                        <span class="bg-primary text-white">Đơn yêu cầu vận chuyển<br></span>
+                                                        <c:set var="deliInfo" value="${fn:split(mess.message, '/')}" />
+                                                        <div>
+                                                            <strong>Tên hàng hóa: </strong>${deliInfo[0]}<br>
+                                                            <strong>Người nhận: </strong>${deliInfo[1]}<br>
+                                                            <strong>Số điện thoại: </strong>${deliInfo[2]}<br>
+                                                            <strong>Địa chỉ đến: </strong>${deliInfo[3]}<br>
+                                                            <strong>Ghi chú: </strong>${deliInfo[4]}<br>
+                                                        </div>
+                                                        <c:if test="${mess.formState}">
+                                                            <span class="bg-primary text-white">Đơn đã được nhận<br></span>
+                                                        </c:if>
+                                                    </div>
+                                                    <div class="text-muted small text-nowrap mt-2 mx-2"><c:out value="${mess.sendTime}"/></div>
+                                                </div>
+                                            </c:when>
+                                            <c:when test="${mess.fromUser eq requestScope.username && mess.form}">
+                                                <div class="chat-message-left pb-4">
+                                                    <div>
+                                                        <img src="${pageContext.request.contextPath}/image/<%= avatar==null || avatar.equals("") ? "29.jpg" : avatar%>"
+                                                             class="rounded-circle mr-1" alt="Sharon Lessman" width="40" height="40">
+                                                    </div>
+                                                    <div class="flex-shrink-1 bg-light rounded py-2 px-3 mr-3">
+                                                        <div class="font-weight-bold mb-1"><strong><c:out value="${mess.fromUser}"/></strong></div>
+                                                        <span class="bg-success text-white">Đơn yêu cầu nhận vận chuyển<br></span>
+                                                        <c:set var="deliInfo" value="${fn:split(mess.message, '/')}" />
+                                                        <div>
+                                                            <strong>Tên hàng hóa: </strong>${deliInfo[0]}<br>
+                                                            <strong>Người nhận: </strong>${deliInfo[1]}<br>
+                                                            <strong>Số điện thoại: </strong>${deliInfo[2]}<br>
+                                                            <strong>Địa chỉ đến: </strong>${deliInfo[3]}<br>
+                                                            <strong>Ghi chú: </strong>${deliInfo[4]}<br>
+                                                        </div>
+                                                        <div style="float: right;">
+                                                            <c:set value="${mess.id}" var="deliInfoId"/>
+                                                            <c:choose>
+                                                                <c:when test="${mess.formState}">
+                                                                    <span class="bg-success text-white">Đã nhận đơn này<br></span>
+                                                                </c:when>
+                                                                <c:otherwise>
+                                                                    <a href="#" class="btn btn-success" onclick="acceptDeli()">Nhận đơn</a>
+                                                                </c:otherwise>
+                                                            </c:choose>
+                                                        </div>
+                                                    </div>
+                                                    <div class="text-muted small text-nowrap mt-2 mx-2"><c:out value="${mess.sendTime}"/></div>
                                                 </div>
                                             </c:when>
                                         </c:choose>
@@ -666,7 +723,7 @@
         </div>
     </div>
     <!-- Modal điền đơn -->
-    <div class="container">
+    <div class="container" id="delivery-form-container">
         <div class="modal fade" id="modal-order" tabindex="-1" aria-labelledby="modal-orderLabel" aria-hidden="true">
             <div class="modal-dialog" style="min-width: 1000px; ">
                 <div class="modal-content">
@@ -675,41 +732,37 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <form>
+                        <form method="post" id="deli-form">
                             <div class="mb-3">
-                                <label for="recipient-name" class="col-form-label">Nhập tên người nhận</label>
-                                <input type="text" class="form-control" id="recipient-name"
-                                       placeholder="Nhập tên người nhận">
+                                <label for="goods-name" class="col-form-label">Nhập tên hàng hóa</label>
+                                <input type="text" class="form-control" name="goods-name" id="goods-name"
+                                       placeholder="Nhập tên hàng hóa" required>
                             </div>
                             <div class="mb-3">
-                                <label for="recipient-name" class="col-form-label">Số điện thoại</label>
-                                <input type="text" class="form-control" id="recipient-name"
-                                       placeholder="Nhập số điện thoại">
+                                <label for="receiver" class="col-form-label">Nhập tên người nhận</label>
+                                <input type="text" class="form-control" name="receiver" id="receiver"
+                                       placeholder="Nhập tên người nhận" required>
                             </div>
                             <div class="mb-3">
-                                <label for="recipient-name" class="col-form-label">Địa điểm đến</label>
-                                <input type="text" class="form-control" id="recipient-name"
-                                       placeholder="Nhập địa điểm đến">
+                                <label for="phone-number" class="col-form-label">Số điện thoại</label>
+                                <input type="text" class="form-control" name="phone-number" id="phone-number"
+                                       placeholder="Nhập số điện thoại" required>
                             </div>
                             <div class="mb-3">
-                                <label for="recipient-name" class="col-form-label">Khổi lượng</label>
-                                <input type="number" class="form-control" id="recipient-name"
-                                       placeholder="Nhập khổi lượng">
+                                <label for="address" class="col-form-label">Địa điểm đến</label>
+                                <input type="text" class="form-control" name="address" id="address"
+                                       placeholder="Nhập địa điểm đến" required>
                             </div>
                             <div class="mb-3">
-                                <label for="" class="my-2">Thời gian đưa hàng cho người vận chuyển</label>
-                                <input type="datetime-local" class="mx-3">
-                            </div>
-                            <div class="mb-3">
-                                <label for="message-text" class="col-form-label">Nhập ghi chú</label>
-                                <textarea class="form-control" id="message-text" placeholder="Nhập ghi chú..."
-                                          rows="3"></textarea>
+                                <label for="deli-note" class="col-form-label">Nhập ghi chú</label>
+                                <textarea class="form-control" name="deli-note" id="deli-note" placeholder="Nhập ghi chú..."
+                                          rows="3" required></textarea>
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-primary" data-bs-dismiss="modal"
                                         style="width: 80px;">Huỷ
                                 </button>
-                                <button type="button" class="btn btn-success" style="width: 100px;" data-bs-dismiss="modal">OK</button>
+                                <button type="submit" class="btn btn-success" style="width: 100px;">OK</button>
                             </div>
                         </form>
                     </div>
@@ -943,6 +996,26 @@
         $("#button-deleteImage").hide();
     });
 
+    $("#deli-form").submit(function (e){
+        const $form = $(this);
+        const Data = new FormData($form[0]);
+
+        $.ajax({
+            url: "/Forum/Chat/CreateForm?user=${requestScope.username}",
+            type: "POST",
+            data: Data,
+            contentType : false,
+            processData : false,
+            success: function (response){
+                $("#chat-message").html(response);
+                $("#modal-order").modal("hide");
+                $("#chat-message").scrollTop($("#chat-message")[0].scrollHeight);
+            }
+        });
+
+        e.preventDefault();
+    })
+
     $(document).on("submit", "#send-message", function (event) {
         const $form = $(this);
         const formData = new FormData($form[0]);  // Create FormData object from the form
@@ -979,6 +1052,18 @@
         });
     }
 
+    function acceptDeli(){
+        $.ajax({
+            url : "/Forum/Chat/ChangeState?id=${deliInfoId}&user=${requestScope.username}",
+            type: "POST",
+            success: function (response){
+                $("#chat-message").html(response);
+                $("#chat-message").scrollTop($("#chat-message")[0].scrollHeight);
+                alert("Đã nhận đơn hàng");
+            }
+
+        })
+    }
 </script>
 </body>
 

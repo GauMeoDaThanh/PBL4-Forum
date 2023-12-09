@@ -20,4 +20,8 @@ public class ChatBO {
     public void addMessage(MessageBEAN messageBEAN) throws Exception {
         chatDAO.addMessage(messageBEAN);
     }
+
+    public void changeDeliFormState(int idMessage) throws Exception {
+        chatDAO.changeDeliFormState(idMessage);
+    }
 }
