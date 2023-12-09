@@ -98,7 +98,7 @@ public class ChatServlet extends HttpServlet {
             }
 
             System.out.println("da vao day");
-            List<MessageBEAN> messages = chatBO.getMessage(self.getUsername(), req.getParameter("user"));
+            List<MessageBEAN> messages = chatBO.getMessage(self.getUsername(), user.getUsername());
             for (MessageBEAN message : messages) {
                 if (message.getFromUser().equals(self.getUsername()) && !message.isForm()) {
                     resp.getWriter().println(" <div class=\"chat-message-right mb-4\" >\n" +

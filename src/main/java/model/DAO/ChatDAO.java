@@ -84,6 +84,10 @@ public class ChatDAO {
         preparedStatement.executeUpdate();
         conn.close();
     }
+//    public String getLastChatUser() throws Exception {
+//        Connection conn = connectDb();
+//        PreparedStatement preparedStatement = conn.prepareStatement("")
+//    }
     private String getAvatar(String username) throws Exception {
         Connection conn = connectDb();
         PreparedStatement preparedStatement = conn.prepareStatement("select avatar from user where username = ?");
