@@ -72,6 +72,7 @@ public class ChatServlet extends HttpServlet {
                 case "ChangeState":
                     int idMessage = Integer.parseInt(req.getParameter("id"));
                     chatBO.changeDeliFormState(idMessage);
+//                    resp.getWriter().println(req.getParameter("id"));
                     break;
                 case "Info":
                     String message = req.getParameter("text") == null ? "" : req.getParameter("text").trim();
@@ -182,7 +183,7 @@ public class ChatServlet extends HttpServlet {
                     if (message.isFormState()){
                         resp.getWriter().println("                                                                    <span class=\"bg-success text-white\">Đã nhận đơn này<br></span>\n");
                     }else{
-                        resp.getWriter().println("                                                                    <a href=\"#\" class=\"btn btn-success\" onclick=\"acceptDeli()\">Nhận đơn</a>\n");
+                        resp.getWriter().println("                                                                    <a href=\"#\" class=\"btn btn-success\" onclick=\"acceptDeli("+message.getId()+")\">Nhận đơn</a>\n");
                     }
                     resp.getWriter().println("</div>\n" +
                             "                                                    </div>\n" +

@@ -235,13 +235,13 @@
                                                             <strong>Ghi chú: </strong>${deliInfo[4]}<br>
                                                         </div>
                                                         <div style="float: right;">
-                                                            <c:set value="${mess.id}" var="deliInfoId"/>
+<%--                                                            <c:set value="${mess.id}" var="deliInfoId"/>--%>
                                                             <c:choose>
                                                                 <c:when test="${mess.formState}">
                                                                     <span class="bg-success text-white">Đã nhận đơn này<br></span>
                                                                 </c:when>
                                                                 <c:otherwise>
-                                                                    <a href="#" class="btn btn-success" onclick="acceptDeli()">Nhận đơn</a>
+                                                                    <a href="#" class="btn btn-success" onclick="acceptDeli(${mess.id})">Nhận đơn</a>
                                                                 </c:otherwise>
                                                             </c:choose>
                                                         </div>
@@ -1052,16 +1052,16 @@
         });
     }
 
-    function acceptDeli(){
+    function acceptDeli(id){
         $.ajax({
-            url : "/Forum/Chat/ChangeState?id=${deliInfoId}&user=${requestScope.username}",
+            url : "/Forum/Chat/ChangeState?id="+id+"&user=${requestScope.username}",
             type: "POST",
             success: function (response){
                 $("#chat-message").html(response);
                 $("#chat-message").scrollTop($("#chat-message")[0].scrollHeight);
                 alert("Đã nhận đơn hàng");
+                // alert(response);
             }
-
         })
     }
 </script>
