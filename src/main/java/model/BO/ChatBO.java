@@ -21,6 +21,9 @@ public class ChatBO {
         chatDAO.addMessage(messageBEAN);
     }
 
+    public String getLastChatUser(String username) throws Exception {
+        return chatDAO.getLastChatUser(username);
+    }
     public void changeDeliFormState(int idMessage) throws Exception {
         chatDAO.changeDeliFormState(idMessage);
     }

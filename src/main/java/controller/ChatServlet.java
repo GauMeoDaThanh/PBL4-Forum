@@ -30,21 +30,27 @@ public class ChatServlet extends HttpServlet {
             ChatBO chatBO = new ChatBO();
             String action = req.getPathInfo().substring(1);
             List<MessageBEAN> messages = new ArrayList<>();
-            if (action.equals("Info")) {
-                ProfileBO profileBO = new ProfileBO();
-                ProfileBEAN profileBEAN = profileBO.getUserInfo(req.getParameter("user"));
+            ProfileBO profileBO = new ProfileBO();
+            ProfileBEAN profileBEAN;
+            switch (action){
+                case "Info":
+                    profileBEAN = profileBO.getUserInfo(req.getParameter("user"));
 //                //Get username and avatar
-                req.setAttribute("userAvatar", profileBEAN.getAvatar());
-                req.setAttribute("username", profileBEAN.getUsername());
-//
-                messages = chatBO.getMessage(user.getUsername(), req.getParameter("user"));
-                Map<String, String> chatNameList = chatBO.getChatNameList(user.getUsername());
-                req.setAttribute("chatNameList", chatNameList);
-                req.setAttribute("messages", messages);
-                req.getRequestDispatcher("../view/chat.jsp").forward(req, resp);
-            } else {
-
+                    req.setAttribute("userAvatar", profileBEAN.getAvatar());
+                    req.setAttribute("username", profileBEAN.getUsername());
+                    messages = chatBO.getMessage(user.getUsername(), req.getParameter("user"));
+                    break;
+                case "View":
+                    profileBEAN = profileBO.getUserInfo(chatBO.getLastChatUser(user.getUsername()));
+                    req.setAttribute("userAvatar", profileBEAN.getAvatar());
+                    req.setAttribute("username", profileBEAN.getUsername());
+                    messages = chatBO.getMessage(user.getUsername(), profileBEAN.getUsername());
+                    break;
             }
+            Map<String, String> chatNameList = chatBO.getChatNameList(user.getUsername());
+            req.setAttribute("chatNameList", chatNameList);
+            req.setAttribute("messages", messages);
+            req.getRequestDispatcher("../view/chat.jsp").forward(req, resp);
         } catch (Exception e) {
             resp.sendRedirect("../../Forum");
             System.out.println(e.getMessage());

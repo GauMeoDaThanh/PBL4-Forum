@@ -84,10 +84,22 @@ public class ChatDAO {
         preparedStatement.executeUpdate();
         conn.close();
     }
-//    public String getLastChatUser() throws Exception {
-//        Connection conn = connectDb();
-//        PreparedStatement preparedStatement = conn.prepareStatement("")
-//    }
+    public String getLastChatUser(String username) throws Exception {
+        Connection conn = connectDb();
+        PreparedStatement preparedStatement = conn.prepareStatement("select * from message where from_user=? or to_user=? order by id desc limit 1");
+        preparedStatement.setString(1, username);
+        preparedStatement.setString(2, username);
+        ResultSet rs = preparedStatement.executeQuery();
+        rs.next();
+        String chatWithUser;
+        if (rs.getString("from_user").equals(username)){
+            chatWithUser = rs.getString("to_user");
+        }else {
+            chatWithUser = rs.getString("from_user");
+        }
+        conn.close();
+        return chatWithUser;
+    }
     private String getAvatar(String username) throws Exception {
         Connection conn = connectDb();
         PreparedStatement preparedStatement = conn.prepareStatement("select avatar from user where username = ?");
