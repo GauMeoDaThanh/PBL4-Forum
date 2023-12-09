@@ -240,9 +240,9 @@
                     </div>
 
                     <div class="mt-3">
-                        <label for="attachFile" class="text-dark" >Đính kèm ảnh</label>
+                        <label for="attachFile" class="text-dark" ><strong>Đính kèm ảnh</strong></label>
                         <input name="attachFile" type="file" id="attachFile" class="form-control my-2" accept=".jpg,.png" multiple>
-                        <textarea name="post-content-text" class="form-control" id="message-text" placeholder="Nhập nội dung" rows="10"></textarea>
+                        <textarea name="post-content-text" class="form-control" id="message-text" placeholder="Nhập nội dung" rows="10" required></textarea>
                     </div>
 
                     <div class="mt-3 py-2" style="text-align: right; border-top: 1px solid #ccc;">
