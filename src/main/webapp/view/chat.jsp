@@ -74,30 +74,6 @@
                 <div class="nav flex-column nav-pills me-3 py-2"
                      style="min-width: 25%; max-height: 694px;overflow-y: scroll; flex-wrap: nowrap;" id="v-pills-tab"
                      role="tablist" aria-orientation="vertical">
-                    <div class="px-4">
-                        <input type="text" class="form-control my-3" placeholder="Tìm kiếm...">
-                    </div>
-                    <!--  -->
-                    <%--                    <button class="nav-link active" id="v-pills-home-tab" data-bs-toggle="pill" data-bs-target="#v-pills-home" type="button" role="tab" aria-controls="v-pills-home" aria-selected="true">--%>
-                    <%--                        <div class="d-flex align-items-center position-relative">--%>
-                    <%--                            <img src="../assets/img/101.jpg" class="rounded-circle mx-2" width="40px" height="40px" alt="">--%>
-                    <%--                            <span>Nguyễn Đông</span>--%>
-                    <%--                            <span class="position-absolute top-2 start-100 translate-middle badge rounded-pill bg-danger">--%>
-                    <%--                                    10--%>
-                    <%--                                  </span>--%>
-                    <%--                        </div>--%>
-                    <%--                    </button>--%>
-                    <%--                    <!--  -->--%>
-                    <%--                    <button class="nav-link" id="v-pills-profile-tab" data-bs-toggle="pill" data-bs-target="#v-pills-profile" type="button" role="tab" aria-controls="v-pills-profile" aria-selected="false">--%>
-                    <%--                        <div class="d-flex align-items-center position-relative">--%>
-                    <%--                            <img src="../assets/img/29.jpg" class="rounded-circle mx-2" width="40px" height="40px" alt="">--%>
-                    <%--                            <span>Phùng Ánh</span>--%>
-                    <%--                            <span class="position-absolute top-2 start-100 translate-middle badge rounded-pill bg-danger">--%>
-                    <%--                                    2--%>
-                    <%--                                  </span>--%>
-                    <%--                        </div>--%>
-                    <%--                    </button>--%>
-                    <!--  -->
                     <c:if test="${not empty requestScope.chatNameList}">
                         <c:forEach var="entry" items="${requestScope.chatNameList}">
                             <a href="${pageContext.request.contextPath}/Chat/Info?user=${entry.key}" class="nav-link">
@@ -117,10 +93,6 @@
                             </a>
                         </c:forEach>
                     </c:if>
-
-                    <!--  -->
-
-
                 </div>
                 <!-- Tin nhắn (bên phải) -->
 
@@ -202,7 +174,7 @@
                                                     <div class="flex-shrink-1 bg-light rounded py-2 px-3 mr-3">
                                                         <div class="font-weight-bold mb-1 text-end"><strong>Bạn</strong></div>
                                                         <span class="bg-primary text-white">Đơn yêu cầu vận chuyển<br></span>
-                                                        <c:set var="deliInfo" value="${fn:split(mess.message, '/')}" />
+                                                        <c:set var="deliInfo" value="${fn:split(mess.message, '@@')}" />
                                                         <div>
                                                             <strong>Tên hàng hóa: </strong>${deliInfo[0]}<br>
                                                             <strong>Người nhận: </strong>${deliInfo[1]}<br>
@@ -226,7 +198,7 @@
                                                     <div class="flex-shrink-1 bg-light rounded py-2 px-3 mr-3">
                                                         <div class="font-weight-bold mb-1"><strong><c:out value="${mess.fromUser}"/></strong></div>
                                                         <span class="bg-success text-white">Đơn yêu cầu nhận vận chuyển<br></span>
-                                                        <c:set var="deliInfo" value="${fn:split(mess.message, '/')}" />
+                                                        <c:set var="deliInfo" value="${fn:split(mess.message, '@@')}" />
                                                         <div>
                                                             <strong>Tên hàng hóa: </strong>${deliInfo[0]}<br>
                                                             <strong>Người nhận: </strong>${deliInfo[1]}<br>
@@ -732,7 +704,7 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <form method="post" id="deli-form">
+                        <form method="post" id="deli-form" oninput="phone_number.setCustomValidity(phone_number.value.length > 12 || phone_number.value.length === 0? 'Vui lòng nhập đúng định dạng số điện thoại' : '')">
                             <div class="mb-3">
                                 <label for="goods-name" class="col-form-label">Nhập tên hàng hóa</label>
                                 <input type="text" class="form-control" name="goods-name" id="goods-name"
@@ -745,7 +717,7 @@
                             </div>
                             <div class="mb-3">
                                 <label for="phone-number" class="col-form-label">Số điện thoại</label>
-                                <input type="text" class="form-control" name="phone-number" id="phone-number"
+                                <input type="text" class="form-control" name="phone_number" id="phone-number"
                                        placeholder="Nhập số điện thoại" required>
                             </div>
                             <div class="mb-3">
@@ -987,6 +959,7 @@
 
     setInterval(function (){
         getMessage();
+        getChatNameList();
     }, 5000);
 
 
@@ -1033,6 +1006,7 @@
                 $("#customFile2").val('');
                 $("#selectedAvatar2").slideUp();
                 $("#button-deleteImage").hide();
+                getChatNameList();
             }
         });
         event.preventDefault();
@@ -1052,6 +1026,16 @@
         });
     }
 
+    function getChatNameList(){
+        $.ajax({
+           url:"/Forum/Chat/UpdateChatList",
+           type: "POST",
+            success: function (response) {
+                $("#v-pills-tab").html(response);
+            },
+        });
+    }
+
     function acceptDeli(id){
         $.ajax({
             url : "/Forum/Chat/ChangeState?id="+id+"&user=${requestScope.username}",
@@ -1064,6 +1048,7 @@
             }
         })
     }
+
 </script>
 </body>
 

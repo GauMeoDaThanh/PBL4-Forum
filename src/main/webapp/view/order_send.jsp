@@ -1,4 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -56,128 +58,7 @@
         <!-- Topbar End -->
 
         <!-- Navbar Start -->
-        <div class="fixed-top my-5 container-fluid bg-primary">
-            <div class="container">
-                <nav class="navbar navbar-dark navbar-expand-lg py-0">
-                    <a href="home.jsp" class="navbar-brand">
-                        <h1 class="text-white fw-bold d-block">Trans<span class="text-secondary">Port</span> </h1>
-                    </a>
-                    <button type="button" class="navbar-toggler me-0" data-bs-toggle="collapse"
-                        data-bs-target="#navbarCollapse">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                    <div class="collapse navbar-collapse bg-transparent" id="navbarCollapse">
-                        <div class="navbar-nav ms-auto mx-xl-auto p-0">
-                            <a href="order_receive.jsp" class="nav-item nav-link">Đơn nhận</a>
-                            <a href="./order_send.jsp" class="nav-item nav-link">Đơn gửi</a>
-                            <a href="chat.jsp" class="nav-item nav-link">Chat</a>
-                        </div>
-                    </div>
-                    <div class="d-none d-xl-flex flex-shirink-0 align-items-center">
-                        <form class="input-group" style="width: auto;">
-                            <div class="form-outline">
-                                <input type="text" id="form1" class="form-control" placeholder="Tìm kiếm bài viết..." />
-                            </div>
-                            <button type="button" class="btn btn-primary">
-                                <i class="fas fa-search"></i>
-                            </button>
-                        </form>
-                        <div class="btn-group">
-                            <div id="dropdownMenuButton1" class="btn text-white d-flex align-items-center"
-                                style="font-size: 16px;" data-bs-toggle="dropdown" data-bs-display="static">
-                                <img src="${pageContext.request.contextPath}
-/assets/img/101.jpg" alt="mdo" width="40" height="40" class="rounded-circle">
-                                <span class="text-white mx-2">Nguyễn Đông Tuấn</span>
-                            </div>
-                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                                <li><a class="dropdown-item" href="profile.jsp">Trang cá nhân</a></li>
-                                <li><a class="dropdown-item" href="change_profile.jsp">Chỉnh sửa thông tin</a></li>
-                                <li><a class="dropdown-item" href="change_password.jsp">Đổi mật khẩu</a></li>
-                                <li>
-                                    <hr class="dropdown-divider">
-                                </li>
-                                <li><a class="dropdown-item" href="../index.jsp">Đăng xuất</a></li>
-                            </ul>
-                        </div>
-                        <!--  -->
-                        <!--  -->
-                        <div class="header__notification" onclick="clickOnBell()">
-                                <i class="header__notification-icon bi bi-bell"></i>
-                                <!-- <span class="header__notification-number">99+</span> -->
-                                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                                    99+
-                                    <span class="visually-hidden">unread messages</span>
-                                  </span>
-                                <div class="header__popup">
-                                    <h3 class="header__popup-heading">
-                                        Thông báo
-                                    </h3>
-                                    <ul class="header__popup-list">
-                                        <a class="header__popup-item" href="">
-                                            <img class="header__popup-item-avatar rounded-circle" src="../assets/img/29.jpg"></img>
-                                            <label class="header__popup-item-content">
-                                                Người dùng Chihuahua vừa đăng bài viết mới.Vào share cho mình với. Share đi mình cho 50k. Nhanh nha bạn ơi
-                                            </label>
-                                        </a>
-                                        <a class="header__popup-item" href="">
-                                            <img class="header__popup-item-avatar rounded-circle" src="../assets/img/29.jpg"></img>
-                                            <label class="header__popup-item-content">
-                                                Người dùng Chihuahua vừa đăng bài viết mới.Vào share cho mình với. Share đi mình cho 50k. Nhanh nha bạn ơi
-                                            </label>
-                                        </a>
-                                        <a class="header__popup-item" href="">
-                                            <img class="header__popup-item-avatar rounded-circle" src="../assets/img/29.jpg"></img>
-                                            <label class="header__popup-item-content">
-                                                Share đi mình cho 50k. Nhanh nha bạn ơi.Người dùng Chihuahua vừa đăng bài viết mới.Vào share cho mình với. Share đi mình cho 50k. Nhanh nha bạn ơi.
-                                            </label>
-                                        </a>
-                                        <a class="header__popup-item" href="">
-                                            <img class="header__popup-item-avatar rounded-circle" src="../assets/img/29.jpg"></img>
-                                            <label class="header__popup-item-content">
-                                                Share đi mình cho 50k. Nhanh nha bạn ơi.Người dùng Chihuahua vừa đăng bài viết mới.Vào share cho mình với. Share đi mình cho 50k. Nhanh nha bạn ơi.
-                                            </label>
-                                        </a>
-                                        <a class="header__popup-item" href="">
-                                            <img class="header__popup-item-avatar rounded-circle" src="../assets/img/29.jpg"></img>
-                                            <label class="header__popup-item-content">
-                                                Share đi mình cho 50k. Nhanh nha bạn ơi.Người dùng Chihuahua vừa đăng bài viết mới.Vào share cho mình với. Share đi mình cho 50k. Nhanh nha bạn ơi.
-                                            </label>
-                                        </a>
-                                        <a class="header__popup-item" href="">
-                                            <img class="header__popup-item-avatar rounded-circle" src="../assets/img/29.jpg"></img>
-                                            <label class="header__popup-item-content">
-                                                Share đi mình cho 50k. Nhanh nha bạn ơi.Người dùng Chihuahua vừa đăng bài viết mới.Vào share cho mình với. Share đi mình cho 50k. Nhanh nha bạn ơi.
-                                            </label>
-                                        </a>
-                                        <a class="header__popup-item" href="">
-                                            <img class="header__popup-item-avatar rounded-circle" src="../assets/img/29.jpg"></img>
-                                            <label class="header__popup-item-content">
-                                                Share đi mình cho 50k. Nhanh nha bạn ơi.Người dùng Chihuahua vừa đăng bài viết mới.Vào share cho mình với. Share đi mình cho 50k. Nhanh nha bạn ơi.
-                                            </label>
-                                        </a>
-                                        <a class="header__popup-item" href="">
-                                            <img class="header__popup-item-avatar rounded-circle" src="../assets/img/29.jpg"></img>
-                                            <label class="header__popup-item-content">
-                                                Share đi mình cho 50k. Nhanh nha bạn ơi.Người dùng Chihuahua vừa đăng bài viết mới.Vào share cho mình với. Share đi mình cho 50k. Nhanh nha bạn ơi.
-                                            </label>
-                                        </a>
-                                        <a class="header__popup-item" href="">
-                                            <img class="header__popup-item-avatar rounded-circle" src="../assets/img/29.jpg"></img>
-                                            <label class="header__popup-item-content">
-                                                Share đi mình cho 50k. Nhanh nha bạn ơi.Người dùng Chihuahua vừa đăng bài viết mới.Vào share cho mình với. Share đi mình cho 50k. Nhanh nha bạn ơi.
-                                            </label>
-                                        </a>
-                                    </ul>
-                                    <h3 class="header__popup-bottom">
-                                        Xem tất cả
-                                    </h3>
-                                </div>   
-                            </div>
-    
-                    </div>
-                </nav>
-            </div>
-        </div>
+        <jsp:include page="header.jsp"/>
         <!-- Navbar End -->
         <div class="container-fluid py-5 my-5" style="min-height: 100vh;">
             <div class="container py-5">
@@ -185,51 +66,59 @@
 
                     <h5 class="text-center">ĐƠN GỬI VẬN CHUYỂN</h5>
                     <div class="col-12 py-2">
-                      <table class="table table-bordered">
-                        <thead>
-                          <tr>
-                            <th scope="col" style="max-width: 8%; width: 8%;"  class="text-center">Mã đơn</th>
-                            <th scope="col" style="max-width: 20%; width: 20%;" class="text-center">Thông tin người gửi</th>
-                            <th scope="col" style="max-width: 10%; width: 10%;"  class="text-center">Số điện thoại</th>
-                            <th scope="col" style="max-width: 30%; width: 30%;" class="text-center">Địa chỉ</th>
-                            <th scope="col" style="max-width: 10%; width: 10%;" class="text-center">Trạng thái</th>
-                            <th scope="col" style="max-width: 10%; width: 10%;" class="text-center">Chi tiết</th>
-                            <th scope="col" style="max-width: 12%; width: 12%;" class="text-center">Đánh giá</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <tr>
-                            <th class="text-center">D001</th>
-                            <td><a href=""><img src="${pageContext.request.contextPath}
-/assets/img/101.jpg" alt="mdo" width="35" height="35" class="rounded-circle" style="margin-right: 3px;">Recoon</a></td>
-                            <td class="text-center">0987822857</td>
-                            <td>K356 Ngũ Hành Sơn, phường Mỹ An, quận Ngũ Hành Sơn, thành phố Đà Nẵng.</td>
-                            <td class="text-center">Đang chuyển</td>
-                            <td class="text-center"><a href="order_detail.jsp"><button type="button" class="btn btn-primary">Chi tiết</button></a></td>
-                            <td class="text-center"><button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal">Đánh giá</button></td>
-                          </tr>
-                          <tr>
-                            <th class="text-center">D001</th>
-                            <td><a href=""><img src="${pageContext.request.contextPath}
-/assets/img/101.jpg" alt="mdo" width="35" height="35" class="rounded-circle" style="margin-right: 3px;">Recoon</a></td>
-                            <td class="text-center">0987822857</td>
-                            <td>K356 Ngũ Hành Sơn, phường Mỹ An, quận Ngũ Hành Sơn, thành phố Đà Nẵng.</td>
-                            <td class="text-center">Đang chuyển</td>
-                            <td class="text-center"><a href="order_detail.jsp"><button type="button" class="btn btn-primary">Chi tiết</button></a></td>
-                            <td class="text-center"><button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal">Đánh giá</button></td>
-                          </tr>
-                          <tr>
-                            <th class="text-center">D001</th>
-                            <td><a href=""><img src="${pageContext.request.contextPath}
-/assets/img/101.jpg" alt="mdo" width="35" height="35" class="rounded-circle" style="margin-right: 3px;">Recoon</a></td>
-                            <td class="text-center">0987822857</td>
-                            <td>K356 Ngũ Hành Sơn, phường Mỹ An, quận Ngũ Hành Sơn, thành phố Đà Nẵng.</td>
-                            <td class="text-center">Đang chuyển</td>
-                            <td class="text-center"><a href="order_detail.jsp"><button type="button" class="btn btn-primary">Chi tiết</button></a></td>
-                            <td class="text-center"><button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal">Đánh giá</button></td>
-                          </tr>
-                        </tbody>
-                      </table>
+                        <c:choose>
+                            <c:when test="${not empty requestScope.deliSendList}">
+                            <table class="table table-bordered">
+                                <thead>
+                                <tr>
+                                    <th scope="col" style="max-width: 6%; width: 6%;"  class="text-center">Mã đơn</th>
+                                    <th scope="col" style="max-width: 16%; width: 16%;" class="text-center">Tài khoản nhận gửi</th>
+                                    <th scope="col" style="max-width: 16%; width: 16%;" class="text-center">Tên hàng hóa</th>
+                                    <th scope="col" style="max-width: 20%; width: 20%;" class="text-center">Địa chỉ đến</th>
+                                    <th scope="col" style="max-width: 12%; width: 12%;" class="text-center">Trạng thái</th>
+                                    <th scope="col" style="max-width: 10%; width: 10%;" class="text-center">Chi tiết</th>
+                                    <th scope="col" style="max-width: 12%; width: 12%;" class="text-center">Đánh giá</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <c:forEach var="deliInfo" items="${requestScope.deliSendList}">
+                                    <tr>
+                                        <th class="text-center"><c:out value="${deliInfo.id}"/></th>
+                                        <td class="text-center"><a href="${pageContext.request.contextPath}/Profile/Info?username=${deliInfo.userTake}" >${deliInfo.userTake}</a></td>
+                                        <td class="text-center"><c:out value="${deliInfo.goodsName}"/></td>
+                                        <td><c:out value="${deliInfo.toAddress}"/> </td>
+                                        <c:choose>
+                                            <c:when test="${fn:containsIgnoreCase(deliInfo.lastDeliState, 'bắt đầu gửi')}">
+                                                <td class="text-center text-info">Bắt đầu gửi</td>
+                                            </c:when>
+                                            <c:when test="${fn:containsIgnoreCase(deliInfo.lastDeliState, 'phát thành công')}">
+                                                <td class="text-center text-success">Phát thành công</td>
+                                            </c:when>
+                                            <c:when test="${empty deliInfo.lastDeliState}">
+                                                <td class="text-center text-dark">Chưa vận chuyển</td>
+                                            </c:when>
+                                            <c:otherwise>
+                                                <td class="text-center text-secondary">Đang chuyển</td>
+                                            </c:otherwise>
+                                        </c:choose>
+                                        <td class="text-center"><a href="${pageContext.request.contextPath}/Deli/Info?id=${deliInfo.id}"><button type="button" class="btn btn-primary">Chi tiết</button></a></td>
+                                        <c:choose>
+                                            <c:when test="${fn:containsIgnoreCase(deliInfo.lastDeliState, 'phát thành công')}">
+                                                <td class="text-center"><button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal" >Đánh giá</button></td>
+                                            </c:when>
+                                            <c:otherwise>
+                                                <td class="text-center"><button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#exampleModal" disabled>Đánh giá</button></td>
+                                            </c:otherwise>
+                                        </c:choose>
+                                    </tr>
+                                </c:forEach>
+                                </tbody>
+                            </table>
+                            </c:when>
+                            <c:otherwise>
+                                <p class="text-center font-weight-bold text-danger h5">Chưa có đơn hàng nào</p>
+                            </c:otherwise>
+                        </c:choose>
                     </div>
                   </div>
             </div>
@@ -249,13 +138,13 @@
                                         <h4 class="text-center">Đánh giá sao cho người này</h4>
                                         <div class="stars my-2 text-center">
                                             <i class="fa-solid fa-star star-1 active" onclick="onStarClick()"></i>
-                                            <i class="fa-solid fa-star star-2" onclick="onStarClick()"></i>
-                                            <i class="fa-solid fa-star star-3" onclick="onStarClick()"></i>
-                                            <i class="fa-solid fa-star star-4" onclick="onStarClick()"></i>
-                                            <i class="fa-solid fa-star star-5" onclick="onStarClick()"></i>
+                                            <i class="fa-solid fa-star star-2 active" onclick="onStarClick()"></i>
+                                            <i class="fa-solid fa-star star-3 active" onclick="onStarClick()"></i>
+                                            <i class="fa-solid fa-star star-4 active" onclick="onStarClick()"></i>
+                                            <i class="fa-solid fa-star star-5 active" onclick="onStarClick()"></i>
                                         </div>
-                                        <h4 class="text-center rating-label my-2">Rất tệ</h4>
-                                        <h6 class="text-center rating-number d-none">1</h6>
+                                        <h4 class="text-center rating-label my-2">Rất tốt</h4>
+                                        <h6 class="text-center rating-number d-none">5</h6>
                                     </div>
                                 </div>
                                 <div class="mb-3">

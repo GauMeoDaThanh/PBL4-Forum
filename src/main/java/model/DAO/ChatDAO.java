@@ -3,11 +3,8 @@ package model.DAO;
 import model.BEAN.MessageBEAN;
 
 import java.sql.*;
-import java.util.ArrayList;
+import java.util.*;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 public class ChatDAO {
     public Connection connectDb() throws Exception{
@@ -30,11 +27,13 @@ public class ChatDAO {
             messages.add(message);
         }
         conn.close();
+        preparedStatement.close();
+        rs.close();
         return messages;
     }
     public Map<String, String> getChatNameList(String username) throws Exception {
         Connection conn = connectDb();
-        Map<String, String> chatNameList = new HashMap<>();
+        Map<String, String> chatNameList = new LinkedHashMap<>();
         PreparedStatement preparedStatement = conn.prepareStatement("select from_user, to_user from message where " +
                 "from_user = ? or to_user= ? order by id desc");
         preparedStatement.setString(1, username);
@@ -52,6 +51,8 @@ public class ChatDAO {
             }
         }
         conn.close();
+        preparedStatement.close();
+        rs.close();
         return chatNameList;
     }
 
@@ -75,6 +76,7 @@ public class ChatDAO {
             preparedStatement.executeUpdate();
         }
         conn.close();
+        preparedStatement.close();
     }
 
     public void changeDeliFormState(int idMessage) throws Exception {
@@ -83,6 +85,20 @@ public class ChatDAO {
         preparedStatement.setInt(1, idMessage);
         preparedStatement.executeUpdate();
         conn.close();
+        preparedStatement.close();
+    }
+
+    public String getDeliInfoMessage(int idMessage) throws Exception {
+        Connection conn = connectDb();
+        PreparedStatement preparedStatement = conn.prepareStatement("select message from message where id = ?");
+        preparedStatement.setInt(1, idMessage);
+        ResultSet rs = preparedStatement.executeQuery();
+        rs.next();
+        String deliInfoMessage = rs.getString("message");
+        conn.close();
+        preparedStatement.close();
+        rs.close();
+        return deliInfoMessage;
     }
     public String getLastChatUser(String username) throws Exception {
         Connection conn = connectDb();
@@ -98,6 +114,8 @@ public class ChatDAO {
             chatWithUser = rs.getString("from_user");
         }
         conn.close();
+        preparedStatement.close();
+        rs.close();
         return chatWithUser;
     }
     private String getAvatar(String username) throws Exception {
@@ -109,6 +127,8 @@ public class ChatDAO {
             return rs.getString("avatar");
         }
         conn.close();
+        preparedStatement.close();
+        rs.close();
         return null;
     }
 }
