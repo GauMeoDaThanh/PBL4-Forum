@@ -8,12 +8,12 @@
 <html lang="en">
 <%
     UserBEAN user = (UserBEAN) session.getAttribute("user");
-    ArrayList<TopicBEAN> list= (ArrayList<TopicBEAN>) request.getAttribute("listTopic");
-%>
+    ArrayList<TopicBEAN> list = (ArrayList<TopicBEAN>) request.getAttribute("listSearch");
 
+%>
 <head>
     <meta charset="utf-8">
-    <title>Topic send</title>
+    <title>Tìm kiếm topic</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="" name="keywords">
     <meta content="" name="description">
@@ -56,34 +56,24 @@
         </div>
     </div>
 </div>
-<!-- Topbar End -->
-
-<!-- Navbar Start -->
 <jsp:include page="header.jsp"/>
-<!-- Navbar End -->
-<main class="content" style="margin-top: 150px; margin-bottom: 150px;">
+<!-- Topbar End -->
+<main class="content" style="margin-top: 150px; margin-bottom: 150px; min-height: 80vh;">
     <div class="container">
-        <div class="row">
-            <div class="col p-4">
-                <button class="btn btn-primary has-icon btn-block" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-plus mr-2">
-                        <line x1="12" y1="5" x2="12" y2="19"></line>
-                        <line x1="5" y1="12" x2="19" y2="12"></line>
-                    </svg>
-                    ĐĂNG TOPIC MỚI
-                </button>
-            </div>
-        </div>
-        <div class="row">
-            <h3 class="text-center p-3">BÀI GỬI VẬN CHUYỂN</h3>
-        </div>
+        <h4 class="p-2 text-secondary text-center" style="display: block;">Kết quả tìm kiếm</h4>
         <%
+            if(list.isEmpty()){
+                System.out.println(list.size());
+
+        %>
+        <h4 class="p-2 text-primary text-center" style="display: block;">Không có bài viết nào phù hợp</h4>
+        <%
+        }else {
             for (TopicBEAN topic:list) {
                 SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
                 String createTime = dateFormat.format(topic.getCreate_time());
-//                String editTime = dateFormat.format(topic.getEdit_time());
+//                        String editTime = dateFormat.format(topic.getEdit_time());
                 String deliDateTime = dateFormat.format(topic.getDeli_datetime());
-
         %>
         <div class="row">
             <div class="col-12">
@@ -92,6 +82,17 @@
                         <div class="col-7 d-flex">
                             <a href="${pageContext.request.contextPath}/Profile/Info?username=<%=user.getUsername()%>"><img src="${pageContext.request.contextPath}/image/<%=topic.getAvatar()==null  || topic.getAvatar().equals("") ? "29.jpg" : topic.getAvatar()%>" class="mr-3 rounded-circle" width="70" height="70" alt="User" /></a>
                             <div class="media-body mx-2">
+                                <%
+                                    if(topic.getTopic_type_id()==1) {
+                                %>
+                                <span class="text-white rounded p-1 my-2" style="background-color: #7752FE;">Bài nhận vận chuyển</span>
+                                <%
+                                    } else{
+                                %>
+                                <span class="text-white rounded p-1 my-2" style="background-color: #A231FC;">Bài nhận vận chuyển</span>
+                                <%
+                                    }
+                                %>
                                 <h4><a href="${pageContext.request.contextPath}/Topic/Info?topicID=<%=topic.getId()%>" class="text-body"><strong><%=topic.getTopic_name()%></strong></a></h4>
                                 <p class="text-muted"><a href="${pageContext.request.contextPath}/Profile/Info?username=<%=topic.getFrom_user()%>" class="text-primary"><%=topic.getFrom_user()%></a> at <span class="text-dark font-weight-bold"><%=createTime%></span></p>
                             </div>
@@ -114,9 +115,8 @@
             </div>
         </div>
         <%
-            }
+                }
         %>
-
         <div class="row">
             <nav aria-label="Page navigation example">
                 <ul class="pagination justify-content-center">
@@ -132,71 +132,9 @@
                 </ul>
             </nav>
         </div>
-    </div>
-    <div class="container">
-        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog" style="min-width: 800px;">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Đăng Topic mới</h5>
-                        <button type="reset" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <form action="${pageContext.request.contextPath}/Topic/addNewTopic" method="post" enctype="multipart/form-data">
-                            <div class="mb-3">
-                                <label for="new_topic_name" class="col-form-label">Tên Topic</label>
-                                <input name="new_topic_name" type="text" class="form-control" id="new_topic_name" placeholder="Nhập tiêu đề" required>
-                            </div>
-                            <div class="mb-3">
-                                <label for="select-topic-type-id" class="col-form-label">Chọn thể loại bài đăng</label>
-                                <select name="new_topic_type_id" id="select-topic-type-id" class="form-select" aria-label="Default select example">
-                                    <option value="1">Bài nhận vận chuyển</option>
-                                    <option value="2" selected>Bài gửi vận chuyển</option>
-                                </select>
-                            </div>
-                            <div class="mb-3">
-                                <label for="select-from-location" class="col-form-label">Địa điểm đi</label>
-                                <select name="new_topic_from_location" id="select-from-location" class="form-select" aria-label="Default select example">
-<%--                                    <option value="An Giang" selected>An Giang</option>--%>
-<%--                                    <option value="Hà Nội">Hà Nội</option>--%>
-<%--                                    <option value="Phú Quốc">Phú Quốc</option>--%>
-<%--                                    <option value="Đà Nẵng">Đà Nẵng</option>--%>
-<%--                                    <option value="Hồ Chí Minh">Hồ Chí Minh</option>--%>
-<%--                                    <option value="Nha Trang">Nha Trang</option>--%>
-                                </select>
-                            </div>
-                            <div class="mb-3">
-                                <label for="select-to-location" class="col-form-label">Địa điểm đến</label>
-                                <select name="new_topic_to_location" id="select-to-location" class="form-select" aria-label="Default select example">
-<%--                                    <option value="An Giang" selected>An Giang</option>--%>
-<%--                                    <option value="Hà Nội">Hà Nội</option>--%>
-<%--                                    <option value="Phú Quốc">Phú Quốc</option>--%>
-<%--                                    <option value="Đà Nẵng">Đà Nẵng</option>--%>
-<%--                                    <option value="Hồ Chí Minh">Hồ Chí Minh</option>--%>
-<%--                                    <option value="Nha Trang">Nha Trang</option>--%>
-                                </select>
-                            </div>
-                            <div class="mb-3">
-                                <label for="select-datetime" class="my-2" style="display:block;">Thời gian chuyển</label>
-                                <input name="new_topic_deli_datetime" type="datetime-local"  id="select-datetime" class="form-control" required>
-                            </div>
-                            <div class="mb-3">
-                                <label for="formFile" class="form-label">Đính kèm ảnh</label>
-                                <input name="new_topic_file" class="form-control" type="file" accept=".jpg,.png" id="formFile" multiple>
-                            </div>
-                            <div class="mb-3">
-                                <label for="message-text" class="col-form-label">Nội dung chính</label>
-                                <textarea name="new_topic_content" class="form-control" id="message-text" placeholder="Nhập nội dung chính" rows="5" required></textarea>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="reset" class="btn btn-primary" data-bs-dismiss="modal" style="width: 80px;">Huỷ</button>
-                                <button type="submit" class="btn btn-success" style="width: 100px;">OK</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <%
+            }
+        %>
     </div>
 </main>
 <!-- Footer Start -->
@@ -268,9 +206,7 @@
 <script src="${pageContext.request.contextPath}/assets/lib/easing/easing.min.js"></script>
 <script src="${pageContext.request.contextPath}/assets/lib/waypoints/waypoints.min.js"></script>
 <script src="${pageContext.request.contextPath}/assets/lib/owlcarousel/owl.carousel.min.js"></script>
-<!-- Province API -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.26.1/axios.min.js" integrity="sha512-bPh3uwgU5qEMipS/VOmRqynnMXGGSRv+72H/N260MQeXZIK4PG48401Bsby9Nq5P5fz7hy5UGNmC/W1Z51h2GQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
 <!-- Template Javascript -->
 <script src="${pageContext.request.contextPath}/assets/js/main.js"></script>
 </body>

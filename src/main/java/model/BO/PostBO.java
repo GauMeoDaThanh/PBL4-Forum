@@ -16,5 +16,8 @@ public class PostBO {
     public void deletePost(int postID) throws Exception {
         postDAO.deletePostById(postID);
     }
+    public void updatePost(PostBEAN postBEAN) throws Exception{
+        postDAO.updatePost(postBEAN);
+    }
 
 }

@@ -85,29 +85,28 @@
                         String deliDateTime = dateFormat.format(topic.getDeli_datetime());
                 %>
                 <div class="row">
-                    <div class="inner-main-bodycollapse forum-content show">
+                    <div class="col-12">
                         <div class="card mb-2" style="background-color: #E5F2FF;">
-                            <div class="card-body">
-                                <div class="media forum-item d-flex">
-                                    <a href="#" data-toggle="collapse" data-target=".forum-content"><img src="${pageContext.request.contextPath}/image/<%=topic.getAvatar()==null  || topic.getAvatar().equals("") ? "29.jpg" : topic.getAvatar()%>" class="mr-3 rounded-circle" width="70" height="70" alt="User" /></a>
-                                    <div class="media-body mx-2" style="min-width: 60%; max-width: 60%;">
-                                        <h4><a href="${pageContext.request.contextPath}/Topic/Info?topicID=<%=topic.getId()%>" data-toggle="collapse" data-target=".forum-content" class="text-body"><strong><%=topic.getTopic_name()%></strong></a></h4>
-                                        <p class="text-muted"><a href="${pageContext.request.contextPath}/Profile/Info?username=<%=topic.getFrom_user()%>"><%=topic.getFrom_user()%></a> at <span class="text-dark font-weight-bold"><%=createTime%></span></p>
+                            <div class="card-body d-flex">
+                                <div class="col-7 d-flex">
+                                    <a href="${pageContext.request.contextPath}/Profile/Info?username=<%=user.getUsername()%>"><img src="${pageContext.request.contextPath}/image/<%=topic.getAvatar()==null  || topic.getAvatar().equals("") ? "29.jpg" : topic.getAvatar()%>" class="mr-3 rounded-circle" width="70" height="70" alt="User" /></a>
+                                    <div class="media-body mx-2">
+                                        <h4><a href="${pageContext.request.contextPath}/Topic/Info?topicID=<%=topic.getId()%>" class="text-body"><strong><%=topic.getTopic_name()%></strong></a></h4>
+                                        <p class="text-muted"><a href="${pageContext.request.contextPath}/Profile/Info?username=<%=topic.getFrom_user()%>" class="text-primary"><%=topic.getFrom_user()%></a> at <span class="text-dark font-weight-bold"><%=createTime%></span></p>
                                     </div>
-                                    <div class="media-body mx-4" style="width: 20%;">
-                                        <div class="content__topic-item-right-item">
-                                            <i class="bi bi-geo-alt-fill" style="color: red; font-size: larger;"></i>
-                                            <label for="" class="text-dark"><%=topic.getFrom_location()+" đến "+ topic.getTo_location()%></label>
-                                        </div>
-                                        <div class="content__topic-item-right-item py-3">
-                                            <i class="content__topic-item-icon color--green fa-solid fa-calendar-days" style="color: green"></i>
-                                            <label for="" class="text-dark"><%=deliDateTime%></label>
-                                        </div>
+                                </div>
+                                <div class="mx-2 col-4 d-flex flex-column justify-content-center">
+                                    <div class="py-2">
+                                        <i class="bi bi-geo-alt-fill" style="color: red; font-size: larger;"></i>
+                                        <label for="" class="text-dark"><%=topic.getFrom_location()+" đến "+ topic.getTo_location()%></label>
                                     </div>
-                                    <div class="text-muted small text-center align-self-center">
-                                        <!-- <span class="d-none d-sm-inline-block mx-1"><i class="far fa-eye"></i> 19</span> -->
-                                        <span><i class="far fa-comment mx-1"></i> 3</span>
+                                    <div class="py-2">
+                                        <i class="content__topic-item-icon color--green fa-solid fa-calendar-days" style="color: green; font-size: larger;"></i>
+                                        <label for="" class="text-dark"><%=deliDateTime%></label>
                                     </div>
+                                </div>
+                                <div class="col-1 d-flex align-items-center justify-content-center">
+                                    <span><i class="far fa-comment mx-1"></i><%=topic.getCountPost()%></span>
                                 </div>
                             </div>
                         </div>
@@ -157,28 +156,28 @@
                                     <div class="mb-3">
                                         <label for="select-from-location" class="col-form-label">Địa điểm đi</label>
                                         <select name="new_topic_from_location" id="select-from-location" class="form-select" aria-label="Default select example">
-                                            <option value="An Giang" selected>An Giang</option>
-                                            <option value="Hà Nội">Hà Nội</option>
-                                            <option value="Phú Quốc">Phú Quốc</option>
-                                            <option value="Đà Nẵng">Đà Nẵng</option>
-                                            <option value="Hồ Chí Minh">Hồ Chí Minh</option>
-                                            <option value="Nha Trang">Nha Trang</option>
+<%--                                            <option value="An Giang" selected>An Giang</option>--%>
+<%--                                            <option value="Hà Nội">Hà Nội</option>--%>
+<%--                                            <option value="Phú Quốc">Phú Quốc</option>--%>
+<%--                                            <option value="Đà Nẵng">Đà Nẵng</option>--%>
+<%--                                            <option value="Hồ Chí Minh">Hồ Chí Minh</option>--%>
+<%--                                            <option value="Nha Trang">Nha Trang</option>--%>
                                         </select>
                                     </div>
                                     <div class="mb-3">
                                         <label for="select-to-location" class="col-form-label">Địa điểm đến</label>
                                         <select name="new_topic_to_location" id="select-to-location" class="form-select" aria-label="Default select example">
-                                            <option value="An Giang" selected>An Giang</option>
-                                            <option value="Hà Nội">Hà Nội</option>
-                                            <option value="Phú Quốc">Phú Quốc</option>
-                                            <option value="Đà Nẵng">Đà Nẵng</option>
-                                            <option value="Hồ Chí Minh">Hồ Chí Minh</option>
-                                            <option value="Nha Trang">Nha Trang</option>
+<%--                                            <option value="An Giang" selected>An Giang</option>--%>
+<%--                                            <option value="Hà Nội">Hà Nội</option>--%>
+<%--                                            <option value="Phú Quốc">Phú Quốc</option>--%>
+<%--                                            <option value="Đà Nẵng">Đà Nẵng</option>--%>
+<%--                                            <option value="Hồ Chí Minh">Hồ Chí Minh</option>--%>
+<%--                                            <option value="Nha Trang">Nha Trang</option>--%>
                                         </select>
                                     </div>
                                     <div class="mb-3">
                                         <label for="select-datetime" class="my-2" style="display:block;">Thời gian chuyển</label>
-                                        <input name="new_topic_deli_datetime" type="datetime-local"  id="select-datetime" class="" required>
+                                        <input name="new_topic_deli_datetime" type="datetime-local"  id="select-datetime" class="form-control" required>
                                     </div>
                                     <div class="mb-3">
                                         <label for="formFile" class="form-label">Đính kèm ảnh</label>
@@ -268,7 +267,9 @@
         <script src="${pageContext.request.contextPath}/assets/lib/easing/easing.min.js"></script>
         <script src="${pageContext.request.contextPath}/assets/lib/waypoints/waypoints.min.js"></script>
         <script src="${pageContext.request.contextPath}/assets/lib/owlcarousel/owl.carousel.min.js"></script>
-
+        <!-- Province API -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.26.1/axios.min.js" integrity="sha512-bPh3uwgU5qEMipS/VOmRqynnMXGGSRv+72H/N260MQeXZIK4PG48401Bsby9Nq5P5fz7hy5UGNmC/W1Z51h2GQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
         <!-- Template Javascript -->
         <script src="${pageContext.request.contextPath}/assets/js/main.js"></script>
     </body>

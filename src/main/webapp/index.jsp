@@ -80,7 +80,7 @@
                     <div class="collapse navbar-collapse bg-transparent" id="navbarCollapse">
                         <div class="navbar-nav ms-auto mx-xl-auto p-0"></div>
                     </div>
-                    <div class="d-none d-xl-flex flex-shirink-0">
+                    <div class="">
                         <button class="btn btn-secondary rounded-pill px-5 py-3 text-white" data-bs-toggle="modal" data-bs-target="#LoginRegisterModal">Đăng nhập</button>
                     </div>
                 </nav>

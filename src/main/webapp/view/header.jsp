@@ -29,11 +29,11 @@
                 </div>
             </div>
             <div class="d-none d-xl-flex flex-shirink-0 align-items-center">
-                <form class="input-group" style="width: auto;">
+                <form action="../Topic/Search" method="post" class="input-group" style="width: auto;">
                     <div class="form-outline">
-                        <input type="text" id="form1" class="form-control" placeholder="Tìm kiếm bài viết..." />
+                        <input name="txtSearch" type="text" id="form1" class="form-control" placeholder="Tìm kiếm topic" required/>
                     </div>
-                    <button type="button" class="btn btn-primary">
+                    <button type="submit" class="btn btn-primary">
                         <i class="fas fa-search"></i>
                     </button>
                 </form>

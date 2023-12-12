@@ -25,4 +25,16 @@ public class TopicBO{
     public TopicBEAN addTopic(TopicBEAN topicBEAN) throws Exception {
         return topicDAO.addTopic(topicBEAN);
     }
+    public void updateTopic(TopicBEAN topicBEAN) throws Exception {
+        topicDAO.updateTopic(topicBEAN);
+    }
+    public void deleteTopicById(int topicId) throws Exception {
+        topicDAO.deleteTopicById(topicId);
+    }
+    public ArrayList<TopicBEAN> searchTopic(String txtSearch) throws Exception {
+        return topicDAO.searchTopic(txtSearch);
+    }
+    public ArrayList<TopicBEAN> getAllTopicByUsername(String username) throws Exception{
+        return topicDAO.getAllTopicByUsername(username);
+    }
 }

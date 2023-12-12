@@ -1,8 +1,19 @@
 <%@ page import="model.BEAN.ProfileBEAN" %>
+<%@ page import="model.BEAN.UserBEAN" %>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="model.BEAN.TopicBEAN" %>
+<%@ page import="java.text.DateFormat" %>
+<%@ page import="java.util.SortedMap" %>
+<%@ page import="java.text.SimpleDateFormat" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html lang="en">
+<%
+    UserBEAN user = (UserBEAN) session.getAttribute("user");
+//    ArrayList<TopicBEAN> listTopic = (ArrayList<TopicBEAN>) request.getParameter("listTopic");
+    ArrayList<TopicBEAN> listTopic = (ArrayList<TopicBEAN>) request.getAttribute("listTopic");
+%>
 
 <head>
     <meta charset="utf-8">
@@ -14,9 +25,7 @@
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Saira:wght@500;600;700&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Saira:wght@500;600;700&display=swap" rel="stylesheet">
 
     <!-- Icon Font Stylesheet -->
 
@@ -24,16 +33,12 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/library/bootstrap-icons-1.11.1/bootstrap-icons.css">
     <!-- Libraries Stylesheet -->
 
-    <link rel="stylesheet" href="${pageContext.request.contextPath}
-/assets/lib/animate/animate.min.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}
-/assets/lib/owlcarousel/assets/owl.carousel.min.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/lib/animate/animate.min.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/lib/owlcarousel/assets/owl.carousel.min.css">
 
-    <link rel="stylesheet" href="${pageContext.request.contextPath}
-/assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/bootstrap.min.css">
     <!-- style.css -->
-    <link rel="stylesheet" href="${pageContext.request.contextPath}
-/assets/css/style.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/style.css">
 </head>
 
 <body>
@@ -42,23 +47,15 @@
         <div class="container">
             <div class="d-flex justify-content-between topbar">
                 <div class="top-info">
-                    <small class="me-3 text-white-50"><a href="#"><i
-                                class="fas fa-map-marker-alt me-2 text-secondary"></i></a>54 Nguyễn Lương Bằng, Đà
-                        Nẵng</small>
-                    <small class="me-3 text-white-50"><a href="#"><i
-                                class="fas fa-envelope me-2 text-secondary"></i></a>PBL4@gmail.com</small>
+                    <small class="me-3 text-white-50"><a href="#"><i class="fas fa-map-marker-alt me-2 text-secondary"></i></a>54 Nguyễn Lương Bằng, Đà Nẵng</small>
+                    <small class="me-3 text-white-50"><a href="#"><i class="fas fa-envelope me-2 text-secondary"></i></a>PBL4@gmail.com</small>
                 </div>
-                <div id="note" class="text-secondary d-none d-xl-flex"><small>Đến với chúng tôi, mọi thứ rất dễ
-                        dàng</small></div>
+                <div id="note" class="text-secondary d-none d-xl-flex"><small>Đến với chúng tôi, mọi thứ rất dễ dàng</small></div>
                 <div class="top-link">
-                    <a href="" class="bg-light nav-fill btn btn-sm-square rounded-circle"><i
-                            class="fab fa-facebook-f text-primary"></i></a>
-                    <a href="" class="bg-light nav-fill btn btn-sm-square rounded-circle"><i
-                            class="fab fa-twitter text-primary"></i></a>
-                    <a href="" class="bg-light nav-fill btn btn-sm-square rounded-circle"><i
-                            class="fab fa-instagram text-primary"></i></a>
-                    <a href="" class="bg-light nav-fill btn btn-sm-square rounded-circle me-0"><i
-                            class="fab fa-linkedin-in text-primary"></i></a>
+                    <a href="" class="bg-light nav-fill btn btn-sm-square rounded-circle"><i class="fab fa-facebook-f text-primary"></i></a>
+                    <a href="" class="bg-light nav-fill btn btn-sm-square rounded-circle"><i class="fab fa-twitter text-primary"></i></a>
+                    <a href="" class="bg-light nav-fill btn btn-sm-square rounded-circle"><i class="fab fa-instagram text-primary"></i></a>
+                    <a href="" class="bg-light nav-fill btn btn-sm-square rounded-circle me-0"><i class="fab fa-linkedin-in text-primary"></i></a>
                 </div>
             </div>
         </div>
@@ -114,8 +111,7 @@
                                             <div class="modal-body">
                                                 <form action="">
                                                     <div class="mb-3">
-                                                        <label for="report-select" class="mb-2">Chọn Lý do báo cáo người
-                                                            dùng</label>
+                                                        <label for="report-select" class="mb-2">Chọn Lý do báo cáo người dùng</label>
                                                         <select name="" id="" class="form-select">
                                                             <option value="">Ngôn từ thù địch</option>
                                                             <option value="">Lừa đảo</option>
@@ -125,10 +121,8 @@
                                                     </div>
                                                     <div class="mb-3">
                                                         <div class="form-group">
-                                                            <label for="exampleFormControlTextarea1" class="mb-3">Nhập
-                                                                nội dung</label>
-                                                            <textarea class="form-control"
-                                                                id="exampleFormControlTextarea1" rows="7"></textarea>
+                                                            <label for="exampleFormControlTextarea1" class="mb-3">Nhập nội dung</label>
+                                                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="7"></textarea>
                                                         </div>
                                                     </div>
                                                     <div class="mb-3 text-center">
@@ -148,14 +142,12 @@
                                         <div class="modal-content">
                                             <div class="modal-header">
                                                 <h5 class="modal-title" id="modal-ban-label">Xử phạt người dùng</h5>
-                                                <button type="reset" class="btn-close" data-bs-dismiss="modal"
-                                                    aria-label="Close"></button>
+                                                <button type="reset" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                             </div>
                                             <div class="modal-body">
                                                 <form action="">
                                                     <div class="mb-3">
-                                                        <label for="ban-select" class="mb-2">Chọn hình thức xử
-                                                            phạt</label>
+                                                        <label for="ban-select" class="mb-2">Chọn hình thức xử phạt</label>
                                                         <select name="" id="" class="form-select">
                                                             <option value="">Chặn đăng bài 7 ngày</option>
                                                             <option value="">Chặn nhận/chuyển hàng 7 ngày</option>
@@ -165,10 +157,8 @@
                                                     </div>
                                                     <div class="mb-3">
                                                         <div class="form-group">
-                                                            <label for="exampleFormControlTextarea1" class="mb-3">Nhập
-                                                                nội dung</label>
-                                                            <textarea class="form-control"
-                                                                id="exampleFormControlTextarea1" rows="7"></textarea>
+                                                            <label for="exampleFormControlTextarea1" class="mb-3">Nhập nội dung</label>
+                                                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="7"></textarea>
                                                         </div>
                                                     </div>
                                                     <div class="mb-3 text-center">
@@ -202,117 +192,55 @@
                     </li>
                 </ul>
                 <div class="tab-content my-3" id="pills-tabContent">
-                    <div class="tab-pane fade show active" id="pills-home" role="tabpanel"
-                        aria-labelledby="pills-home-tab">
-                        <div class="card mb-2" style="background-color: #E5F2FF;">
-                            <div class="card-body">
-                                <div class="d-flex">
-                                    <a href="" data-toggle="collapse" data-target=".forum-content"><img
-                                            src="${pageContext.request.contextPath}
-/assets/img/29.jpg" class="mr-3 rounded-circle" width="70"
-                                            height="70" alt="User" /></a>
-                                    <div class="media-body mx-2" style="min-width: 60%; max-width: 60%;">
-                                        <span class="text-white rounded p-1" style="background-color: #A231FC;">Bài nhận
-                                            vận chuyển</span>
-                                        <h4 class="mt-2"><a href="post.jsp" data-toggle="collapse"
-                                                            data-target=".forum-content" class="text-body"><strong>Nhận vận chuyển
-                                                    nội thành Đà Nẵng.Nhận vận chuyển nội thành Đà Nẵng</strong></a>
-                                        </h4>
-                                        <p class="text-muted"><a href="javascript:void(0)">NguyenDong</a> at <span
-                                                class="text-dark font-weight-bold">05/05/2023 16:00</span></p>
-                                    </div>
-                                    <div class="media-body mx-4" style="width: 20%;">
-                                        <div class="content__topic-item-right-item">
-                                            <!-- <i class="content__topic-item-icon fa-solid fa-location-dot" style="color: red"></i> -->
-                                            <i class="bi bi-geo-alt-fill" style="color: red; font-size: larger;"></i>
-                                            <label for="" class="content__topic-item-text">HCM to Ha Noi</label>
+                    <div class="tab-pane fade show active" id="pills-home" role="tabpanel"  aria-labelledby="pills-home-tab">
+                        <%
+                            for (var topic:listTopic) {
+                                DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+                                String createTime = dateFormat.format(topic.getCreate_time());
+                                String deliDateTime = dateFormat.format(topic.getDeli_datetime());
+                        %>
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="card mb-2" style="background-color: #E5F2FF;">
+                                    <div class="card-body d-flex">
+                                        <div class="col-7 d-flex">
+                                            <a href="${pageContext.request.contextPath}/Profile/Info?username=<%=user.getUsername()%>"><img src="${pageContext.request.contextPath}/image/<%=topic.getAvatar()==null  || topic.getAvatar().equals("") ? "29.jpg" : topic.getAvatar()%>" class="mr-3 rounded-circle" width="70" height="70" alt="User" /></a>
+                                            <div class="media-body mx-2">
+                                                <%
+                                                    if(topic.getTopic_type_id()==1) {
+                                                %>
+                                                <span class="text-white rounded p-1 my-2" style="background-color: #7752FE;">Bài nhận vận chuyển</span>
+                                                <%
+                                                } else{
+                                                %>
+                                                <span class="text-white rounded p-1 my-2" style="background-color: #A231FC;">Bài nhận vận chuyển</span>
+                                                <%
+                                                    }
+                                                %>
+                                                <h4><a href="${pageContext.request.contextPath}/Topic/Info?topicID=<%=topic.getId()%>" class="text-body"><strong><%=topic.getTopic_name()%></strong></a></h4>
+                                                <p class="text-muted"><a href="${pageContext.request.contextPath}/Profile/Info?username=<%=topic.getFrom_user()%>" class="text-primary"><%=topic.getFrom_user()%></a> at <span class="text-dark font-weight-bold"><%=createTime%></span></p>
+                                            </div>
                                         </div>
-                                        <div class="content__topic-item-right-item py-3">
-                                            <!-- <i class="bi bi-clock" style="color: green; font-size: larger;"></i> -->
-                                            <i class="content__topic-item-icon color--green fa-solid fa-calendar-days"
-                                                style="color: green"></i>
-                                            <label for="" class="content__topic-item-text">05/05/2023, 16:00</label>
+                                        <div class="mx-2 col-4 d-flex flex-column justify-content-center">
+                                            <div class="py-2">
+                                                <i class="bi bi-geo-alt-fill" style="color: red; font-size: larger;"></i>
+                                                <label for="" class="text-dark"><%=topic.getFrom_location()+" đến "+ topic.getTo_location()%></label>
+                                            </div>
+                                            <div class="py-2">
+                                                <i class="content__topic-item-icon color--green fa-solid fa-calendar-days" style="color: green; font-size: larger;"></i>
+                                                <label for="" class="text-dark"><%=deliDateTime%></label>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="text-muted small text-center align-self-center">
-                                        <!-- <span class="d-none d-sm-inline-block mx-1"><i class="far fa-eye"></i> 19</span> -->
-                                        <span><i class="far fa-comment mx-1"></i> 3</span>
+                                        <div class="col-1 d-flex align-items-center justify-content-center">
+                                            <span><i class="far fa-comment mx-1"></i><%=topic.getCountPost()%></span>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="card mb-2" style="background-color: #E5F2FF;">
-                            <div class="card-body">
-                                <div class="d-flex">
-                                    <a href="" data-toggle="collapse" data-target=".forum-content"><img
-                                            src="../assets/img/29.jpg" class="mr-3 rounded-circle" width="70"
-                                            height="70" alt="User" /></a>
-                                    <div class="media-body mx-2" style="min-width: 60%; max-width: 60%;">
-                                        <span class="text-white rounded p-1" style="background-color: #7752FE;">Bài gửi
-                                            vận chuyển</span>
-                                        <h4 class="mt-2"><a href="post.jsp" data-toggle="collapse"
-                                                            data-target=".forum-content" class="text-body"><strong>Nhận vận chuyển
-                                                    nội thành Đà Nẵng.Nhận vận chuyển nội thành Đà Nẵng</strong></a>
-                                        </h4>
-                                        <p class="text-muted"><a href="javascript:void(0)">NguyenDong</a> at <span
-                                                class="text-dark font-weight-bold">05/05/2023 16:00</span></p>
-                                    </div>
-                                    <div class="media-body mx-4" style="width: 20%;">
-                                        <div class="content__topic-item-right-item">
-                                            <!-- <i class="content__topic-item-icon fa-solid fa-location-dot" style="color: red"></i> -->
-                                            <i class="bi bi-geo-alt-fill" style="color: red; font-size: larger;"></i>
-                                            <label for="" class="content__topic-item-text">HCM to Ha Noi</label>
-                                        </div>
-                                        <div class="content__topic-item-right-item py-3">
-                                            <!-- <i class="bi bi-clock" style="color: green; font-size: larger;"></i> -->
-                                            <i class="content__topic-item-icon color--green fa-solid fa-calendar-days"
-                                                style="color: green"></i>
-                                            <label for="" class="content__topic-item-text">05/05/2023, 16:00</label>
-                                        </div>
-                                    </div>
-                                    <div class="text-muted small text-center align-self-center">
-                                        <!-- <span class="d-none d-sm-inline-block mx-1"><i class="far fa-eye"></i> 19</span> -->
-                                        <span><i class="far fa-comment mx-1"></i> 3</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card mb-2" style="background-color: #E5F2FF;">
-                            <div class="card-body">
-                                <div class="d-flex">
-                                    <a href="" data-toggle="collapse" data-target=".forum-content"><img
-                                            src="../assets/img/29.jpg" class="mr-3 rounded-circle" width="70"
-                                            height="70" alt="User" /></a>
-                                    <div class="media-body mx-2" style="min-width: 60%; max-width: 60%;">
-                                        <span class="text-white rounded p-1" style="background-color: #7752FE;">Bài gửi
-                                            vận chuyển</span>
-                                        <h4 class="mt-2"><a href="post.jsp" data-toggle="collapse"
-                                                            data-target=".forum-content" class="text-body"><strong>Nhận vận chuyển
-                                                    nội thành Đà Nẵng.Nhận vận chuyển nội thành Đà Nẵng</strong></a>
-                                        </h4>
-                                        <p class="text-muted"><a href="javascript:void(0)">NguyenDong</a> at <span
-                                                class="text-dark font-weight-bold">05/05/2023 16:00</span></p>
-                                    </div>
-                                    <div class="media-body mx-4" style="width: 20%;">
-                                        <div class="content__topic-item-right-item">
-                                            <!-- <i class="content__topic-item-icon fa-solid fa-location-dot" style="color: red"></i> -->
-                                            <i class="bi bi-geo-alt-fill" style="color: red; font-size: larger;"></i>
-                                            <label for="" class="content__topic-item-text">HCM to Ha Noi</label>
-                                        </div>
-                                        <div class="content__topic-item-right-item py-3">
-                                            <!-- <i class="bi bi-clock" style="color: green; font-size: larger;"></i> -->
-                                            <i class="content__topic-item-icon color--green fa-solid fa-calendar-days"
-                                                style="color: green"></i>
-                                            <label for="" class="content__topic-item-text">05/05/2023, 16:00</label>
-                                        </div>
-                                    </div>
-                                    <div class="text-muted small text-center align-self-center">
-                                        <!-- <span class="d-none d-sm-inline-block mx-1"><i class="far fa-eye"></i> 19</span> -->
-                                        <span><i class="far fa-comment mx-1"></i> 3</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        <%
+                            }
+                        %>
                         <!-- pagination -->
                         <nav aria-label="...">
                             <ul class="pagination justify-content-center">
@@ -330,6 +258,7 @@
                             </ul>
                         </nav>
                     </div>
+                    <!--Đánh giá-->
                     <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
                         <div class="card mb-2" style="background-color: #E5F2FF;">
                             <div class="card-body">
@@ -354,8 +283,7 @@
                             <div class="card-body">
                                 <div class="d-flex">
                                     <a href="" data-toggle="collapse" data-target=".forum-content"><img
-                                            src="${pageContext.request.contextPath}
-/assets/img/29.jpg" class="mr-3 rounded-circle" width="70"
+                                            src="${pageContext.request.contextPath}/assets/img/29.jpg" class="mr-3 rounded-circle" width="70"
                                             height="70" alt="User" /></a>
                                     <div class="media-body mx-2" style="min-width: 60%; max-width: 60%;">
                                         <span class="text-white rounded p-1" style="background-color: #A231FC;">Người

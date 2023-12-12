@@ -66,8 +66,8 @@ public class TopicServlet extends HttpServlet {
                 } catch (Exception e) {
                     throw new RuntimeException(e);
                 }
-
                 break;
+
         }
     }
 
@@ -137,7 +137,67 @@ public class TopicServlet extends HttpServlet {
                     throw new RuntimeException(e);
                 }
                 break;
+            case "Update":
+                try {
+                    HttpSession session = req.getSession();
+                    UserBEAN user = (UserBEAN) session.getAttribute("user");
 
+                    int topicId = Integer.parseInt(req.getParameter("topicId"));
+                    String topicName = req.getParameter("update_topic_name");
+                    int topicTypeId = Integer.parseInt(req.getParameter("update_topic_type_id"));
+                    String topicFromLocation = req.getParameter("update_topic_from_location");
+                    String topicToLocation = req.getParameter("update_topic_to_location");
+                    //
+                    String datetime= req.getParameter("update_topic_deli_datetime");
+                    LocalDateTime localDateTime = LocalDateTime.parse(datetime, DateTimeFormatter.ISO_LOCAL_DATE_TIME);
+                    Timestamp topicDeliDatetime = Timestamp.valueOf(localDateTime);
+                    //
+                    Timestamp editTime = Timestamp.valueOf(LocalDateTime.now());
+
+                    TopicBEAN topic = new TopicBEAN();
+                    topic.setId(topicId);
+                    topic.setTopic_name(topicName);
+                    topic.setTopic_type_id(topicTypeId);
+                    topic.setFrom_location(topicFromLocation);
+                    topic.setTo_location(topicToLocation);
+                    topic.setDeli_datetime(topicDeliDatetime);
+                    topic.setEdit_time(editTime);
+
+                    TopicBO topicBO = new TopicBO();
+                    topicBO.updateTopic(topic);
+                    resp.sendRedirect(req.getContextPath()+"/Topic/Info?topicID="+topicId);
+                }catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
+                break;
+            case "Delete":
+                try {
+                    int topicID = Integer.parseInt(req.getParameter("delete-topicId"));
+                    int topidTypeId = Integer.parseInt(req.getParameter("topicTypeId"));
+
+                    TopicBO topicBO = new TopicBO();
+                    topicBO.deleteTopicById(topicID);
+
+                    if(topidTypeId==1) {
+                        resp.sendRedirect(req.getContextPath()+"/Topic/receive");
+                    } else {
+                        resp.sendRedirect(req.getContextPath()+"/Topic/send");
+                    }
+                }catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
+                break;
+            case "Search":
+                try {
+                    String txtSearch = req.getParameter("txtSearch");
+                    TopicBO topicBO = new TopicBO();
+                    ArrayList<TopicBEAN> list = topicBO.searchTopic(txtSearch);
+                    req.setAttribute("listSearch",list);
+                    req.getRequestDispatcher("../view/search_topic.jsp").forward(req,resp);
+                    break;
+                }catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
         }
     }
 }

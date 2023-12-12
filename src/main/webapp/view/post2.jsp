@@ -196,8 +196,8 @@
                                         <option value="1" selected>Bài nhận vận chuyển</option>
                                         <option value="2">Bài gửi vận chuyển</option>
                                         <%
-                                            }
-                                            else{
+                                        }
+                                        else{
                                         %>
                                         <option value="1">Bài nhận vận chuyển</option>
                                         <option value="2" selected>Bài gửi vận chuyển</option>
@@ -209,10 +209,142 @@
                                 <div class="mb-3">
                                     <label for="select-from-location" class="col-form-label">Địa điểm đi</label>
                                     <select name="update_topic_from_location" id="select-from-location" class="form-select"></select>
+
+
+                                    <%--                                    <select name="update_topic_from_location" id="select-from-location" class="form-select">--%>
+                                    <%--                                        <option value="An Giang" selected>An Giang</option>--%>
+                                    <%--                                        <option value="Bà Rịa-Vũng Tàu">Bà Rịa-Vũng Tàu</option>--%>
+                                    <%--                                        <option value="Bắc Giang">Bắc Giang</option>--%>
+                                    <%--                                        <option value="Bắc Kạn">Bắc Kạn</option>--%>
+                                    <%--                                        <option value="Bạc Liêu">Bạc Liêu</option>--%>
+                                    <%--                                        <option value="Bắc Ninh">Bắc Ninh</option>--%>
+                                    <%--                                        <option value="Bến Tre">Bến Tre</option>--%>
+                                    <%--                                        <option value="Bình Định">Bình Định</option>--%>
+                                    <%--                                        <option value="Bình Dương">Bình Dương</option>--%>
+                                    <%--                                        <option value="Bình Phước">Bình Phước</option>--%>
+                                    <%--                                        <option value="Bình Thuận">Bình Thuận</option>--%>
+                                    <%--                                        <option value="Cà Mau">Cà Mau</option>--%>
+                                    <%--                                        <option value="Cần Thơ">Cần Thơ</option>--%>
+                                    <%--                                        <option value="Cao Bằng">Cao Bằng</option>--%>
+                                    <%--                                        <option value="Đà Nẵng">Đà Nẵng</option>--%>
+                                    <%--                                        <option value="Đắk Lắk">Đắk Lắk</option>--%>
+                                    <%--                                        <option value="Đắk Nông">Đắk Nông</option>--%>
+                                    <%--                                        <option value="Điện Biên">Điện Biên</option>--%>
+                                    <%--                                        <option value="Đồng Nai">Đồng Nai</option>--%>
+                                    <%--                                        <option value="Đồng Tháp">Đồng Tháp</option>--%>
+                                    <%--                                        <option value="Gia Lai">Gia Lai</option>--%>
+                                    <%--                                        <option value="Hà Giang">Hà Giang</option>--%>
+                                    <%--                                        <option value="Hà Nam">Hà Nam</option>--%>
+                                    <%--                                        <option value="Hà Nội">Hà Nội</option>--%>
+                                    <%--                                        <option value="Hà Tĩnh">Hà Tĩnh</option>--%>
+                                    <%--                                        <option value="Hải Dương">Hải Dương</option>--%>
+                                    <%--                                        <option value="Hải Phòng">Hải Phòng</option>--%>
+                                    <%--                                        <option value="Hậu Giang">Hậu Giang</option>--%>
+                                    <%--                                        <option value="TP. Hồ Chí Minh">TP. Hồ Chí Minh</option>--%>
+                                    <%--                                        <option value="Hòa Bình">Hòa Bình</option>--%>
+                                    <%--                                        <option value="Hưng Yên">Hưng Yên</option>--%>
+                                    <%--                                        <option value="Khánh Hòa">Khánh Hòa</option>--%>
+                                    <%--                                        <option value="Kiên Giang">Kiên Giang</option>--%>
+                                    <%--                                        <option value="Kon Tum">Kon Tum</option>--%>
+                                    <%--                                        <option value="Lai Châu">Lai Châu</option>--%>
+                                    <%--                                        <option value="Lâm Đồng">Lâm Đồng</option>--%>
+                                    <%--                                        <option value="Lạng Sơn">Lạng Sơn</option>--%>
+                                    <%--                                        <option value="Lào Cai">Lào Cai</option>--%>
+                                    <%--                                        <option value="Long An">Long An</option>--%>
+                                    <%--                                        <option value="Nam Định">Nam Định</option>--%>
+                                    <%--                                        <option value="Nghệ An">Nghệ An</option>--%>
+                                    <%--                                        <option value="Ninh Bình">Ninh Bình</option>--%>
+                                    <%--                                        <option value="Ninh Thuận">Ninh Thuận</option>--%>
+                                    <%--                                        <option value="Phú Thọ">Phú Thọ</option>--%>
+                                    <%--                                        <option value="Phú Yên">Phú Yên</option>--%>
+                                    <%--                                        <option value="Quảng Bình">Quảng Bình</option>--%>
+                                    <%--                                        <option value="Quảng Nam">Quảng Nam</option>--%>
+                                    <%--                                        <option value="Quảng Ngãi">Quảng Ngãi</option>--%>
+                                    <%--                                        <option value="Quảng Ninh">Quảng Ninh</option>--%>
+                                    <%--                                        <option value="Quảng Trị">Quảng Trị</option>--%>
+                                    <%--                                        <option value="Sóc Trăng">Sóc Trăng</option>--%>
+                                    <%--                                        <option value="Sơn La">Sơn La</option>--%>
+                                    <%--                                        <option value="Tây Ninh">Tây Ninh</option>--%>
+                                    <%--                                        <option value="Thái Bình">Thái Bình</option>--%>
+                                    <%--                                        <option value="Thái Nguyên">Thái Nguyên</option>--%>
+                                    <%--                                        <option value="Thanh Hóa">Thanh Hóa</option>--%>
+                                    <%--                                        <option value="Thừa Thiên - Huế">Thừa Thiên - Huế</option>--%>
+                                    <%--                                        <option value="Tiền Giang">Tiền Giang</option>--%>
+                                    <%--                                        <option value="Trà Vinh">Trà Vinh</option>--%>
+                                    <%--                                        <option value="Tuyên Quang">Tuyên Quang</option>--%>
+                                    <%--                                        <option value="Vĩnh Long">Vĩnh Long</option>--%>
+                                    <%--                                        <option value="Vĩnh Phúc">Vĩnh Phúc</option>--%>
+                                    <%--                                        <option value="Yên Bái">Yên Bái</option>--%>
+                                    <%--                                    </select>--%>
                                 </div>
                                 <div class="mb-3">
                                     <label for="select-to-location" class="col-form-label">Địa điểm đến</label>
                                     <select name="update_topic_to_location" id="select-to-location" class="form-select" ></select>
+                                    <%--                              <select name="update_topic_to_location" id="select-to-location" class="form-select">--%>
+                                    <%--                                        <option value="An Giang" selected>An Giang</option>--%>
+                                    <%--                                        <option value="Bà Rịa-Vũng Tàu">Bà Rịa-Vũng Tàu</option>--%>
+                                    <%--                                        <option value="Bắc Giang">Bắc Giang</option>--%>
+                                    <%--                                        <option value="Bắc Kạn">Bắc Kạn</option>--%>
+                                    <%--                                        <option value="Bạc Liêu">Bạc Liêu</option>--%>
+                                    <%--                                        <option value="Bắc Ninh">Bắc Ninh</option>--%>
+                                    <%--                                        <option value="Bến Tre">Bến Tre</option>--%>
+                                    <%--                                        <option value="Bình Định">Bình Định</option>--%>
+                                    <%--                                        <option value="Bình Dương">Bình Dương</option>--%>
+                                    <%--                                        <option value="Bình Phước">Bình Phước</option>--%>
+                                    <%--                                        <option value="Bình Thuận">Bình Thuận</option>--%>
+                                    <%--                                        <option value="Cà Mau">Cà Mau</option>--%>
+                                    <%--                                        <option value="Cần Thơ">Cần Thơ</option>--%>
+                                    <%--                                        <option value="Cao Bằng">Cao Bằng</option>--%>
+                                    <%--                                        <option value="Đà Nẵng">Đà Nẵng</option>--%>
+                                    <%--                                        <option value="Đắk Lắk">Đắk Lắk</option>--%>
+                                    <%--                                        <option value="Đắk Nông">Đắk Nông</option>--%>
+                                    <%--                                        <option value="Điện Biên">Điện Biên</option>--%>
+                                    <%--                                        <option value="Đồng Nai">Đồng Nai</option>--%>
+                                    <%--                                        <option value="Đồng Tháp">Đồng Tháp</option>--%>
+                                    <%--                                        <option value="Gia Lai">Gia Lai</option>--%>
+                                    <%--                                        <option value="Hà Giang">Hà Giang</option>--%>
+                                    <%--                                        <option value="Hà Nam">Hà Nam</option>--%>
+                                    <%--                                        <option value="Hà Nội">Hà Nội</option>--%>
+                                    <%--                                        <option value="Hà Tĩnh">Hà Tĩnh</option>--%>
+                                    <%--                                        <option value="Hải Dương">Hải Dương</option>--%>
+                                    <%--                                        <option value="Hải Phòng">Hải Phòng</option>--%>
+                                    <%--                                        <option value="Hậu Giang">Hậu Giang</option>--%>
+                                    <%--                                        <option value="TP. Hồ Chí Minh">TP. Hồ Chí Minh</option>--%>
+                                    <%--                                        <option value="Hòa Bình">Hòa Bình</option>--%>
+                                    <%--                                        <option value="Hưng Yên">Hưng Yên</option>--%>
+                                    <%--                                        <option value="Khánh Hòa">Khánh Hòa</option>--%>
+                                    <%--                                        <option value="Kiên Giang">Kiên Giang</option>--%>
+                                    <%--                                        <option value="Kon Tum">Kon Tum</option>--%>
+                                    <%--                                        <option value="Lai Châu">Lai Châu</option>--%>
+                                    <%--                                        <option value="Lâm Đồng">Lâm Đồng</option>--%>
+                                    <%--                                        <option value="Lạng Sơn">Lạng Sơn</option>--%>
+                                    <%--                                        <option value="Lào Cai">Lào Cai</option>--%>
+                                    <%--                                        <option value="Long An">Long An</option>--%>
+                                    <%--                                        <option value="Nam Định">Nam Định</option>--%>
+                                    <%--                                        <option value="Nghệ An">Nghệ An</option>--%>
+                                    <%--                                        <option value="Ninh Bình">Ninh Bình</option>--%>
+                                    <%--                                        <option value="Ninh Thuận">Ninh Thuận</option>--%>
+                                    <%--                                        <option value="Phú Thọ">Phú Thọ</option>--%>
+                                    <%--                                        <option value="Phú Yên">Phú Yên</option>--%>
+                                    <%--                                        <option value="Quảng Bình">Quảng Bình</option>--%>
+                                    <%--                                        <option value="Quảng Nam">Quảng Nam</option>--%>
+                                    <%--                                        <option value="Quảng Ngãi">Quảng Ngãi</option>--%>
+                                    <%--                                        <option value="Quảng Ninh">Quảng Ninh</option>--%>
+                                    <%--                                        <option value="Quảng Trị">Quảng Trị</option>--%>
+                                    <%--                                        <option value="Sóc Trăng">Sóc Trăng</option>--%>
+                                    <%--                                        <option value="Sơn La">Sơn La</option>--%>
+                                    <%--                                        <option value="Tây Ninh">Tây Ninh</option>--%>
+                                    <%--                                        <option value="Thái Bình">Thái Bình</option>--%>
+                                    <%--                                        <option value="Thái Nguyên">Thái Nguyên</option>--%>
+                                    <%--                                        <option value="Thanh Hóa">Thanh Hóa</option>--%>
+                                    <%--                                        <option value="Thừa Thiên - Huế">Thừa Thiên - Huế</option>--%>
+                                    <%--                                        <option value="Tiền Giang">Tiền Giang</option>--%>
+                                    <%--                                        <option value="Trà Vinh">Trà Vinh</option>--%>
+                                    <%--                                        <option value="Tuyên Quang">Tuyên Quang</option>--%>
+                                    <%--                                        <option value="Vĩnh Long">Vĩnh Long</option>--%>
+                                    <%--                                        <option value="Vĩnh Phúc">Vĩnh Phúc</option>--%>
+                                    <%--                                        <option value="Yên Bái">Yên Bái</option>--%>
+                                    <%--                                    </select>--%>
                                 </div>
                                 <div class="mb-3">
                                     <label for="select-datetime" class="my-2" style="display:block;">Thời gian chuyển</label>
@@ -233,7 +365,7 @@
         <%
             for (PostBEAN post:listPost) {
         %>
-        <div class="row rounded border mt-3" id="<%=post.getId()%>" style="">
+        <div class="row rounded border mt-3" id="<%=post.getId()%>" style="min-height: 200px;">
             <div class="col-2 p-2 text-center" style="background-color: #ccc; border-right: 1px solid #d3d5d7;">
                 <img src="${pageContext.request.contextPath}/image/<%=post.getAvatar()==null  || post.getAvatar().equals("") ? "29.jpg" : post.getAvatar()%>"  class="rounded-circle mr-1 avatar-hover" alt="Vanessa Tucker" width="100" height="100">
                 <div>
@@ -244,66 +376,66 @@
             <div class="col-10 p-3" style="background-color: #E5F2FF; min-height: 100%;">
                 <div class="d-flex align-items-center py-2 my-1" style="border-bottom: 1px solid #ccc;">
                     <span class="mx-1 text-dark" style="margin-right: 30px;"><%=dateFormat.format(post.getCreate_time())%></span>
+                    <%--                    <i class="bi bi-pen" style="color: blue; font-size: large;"></i>--%>
                     <span class="mx-1"><%=post.getEdit_time()==null?"":"Chỉnh sửa lúc: "+dateFormat.format(post.getEdit_time())%></span>
                 </div>
                 <%
-                    if(post.getDelete_time()==null){
+                    if(post.getPost_id()!=null) {
+                        for(PostBEAN p: listPost) {
+                            if(Objects.equals(p.getId(), post.getPost_id())){
 
                 %>
-                <%
-                        if(post.getPost_id()!=null) {
-                            for(PostBEAN p: listPost) {
-                                if(Objects.equals(p.getId(), post.getPost_id()) && p.getDelete_time()==null){
+                <div style="background-color: #ccc;" class="p-3 rounded">
+                    <span class="text-dark"><strong>Trả lời <%=p.getFrom_user()%>:</strong></span><br>
+                    <%=p.getContent()%>
+                    <br><br>
+                    <%
+                        for (String imageName2 : p.getImageList()){
+                    %>
+                    <img src="${pageContext.request.contextPath}/image/<%=imageName2%>" class="mx-2" width="160" height="160" alt="image">
+                    <%
 
-                %>
-                                    <div style="background-color: #ccc;" class="p-3 rounded">
-                                        <span class="text-dark"><strong>Trả lời <%=p.getFrom_user()%>:</strong></span><br>
-                                        <%=p.getContent()%>
-                                        <br><br>
-                                        <%
-                                                        for (String imageName2 : p.getImageList()){
-                                        %>
-                                        <img src="${pageContext.request.contextPath}/image/<%=imageName2%>" class="mx-2" width="160" height="160" alt="image">
-                                        <%
-
-                                                        }
-                                        %>
-                                    </div>
-                <%
-                                }
-                                else if(Objects.equals(p.getId(), post.getPost_id()) && p.getDelete_time()!=null){
-                %>
-                                <div style="background-color: #ccc;" class="p-3 rounded">
-                                    <h1 style="color: #dc3545;" class="p-4">Bài viết đã bị xoá</h1>
-                                </div>
-                <%
-                                }
-                            }
                         }
+                    %>
+
+                </div>
+                <%
+                            }
+
+                        }
+                    }
                 %>
-<%--                </div>--%>
-                <div id="post-content-<%=post.getId()%>" class="text-dark">
+                <p id="post-content-<%=post.getId()%>" class="text-dark">
                     <%=post.getContent()%>
                     <br><br>
                     <%
 
-                            for(String imageName:post.getImageList()) {
+                        for(String imageName:post.getImageList()) {
 
                     %>
                     <img src="${pageContext.request.contextPath}/image/<%=imageName%>" class="mx-2" width="160" height="160" alt="image">
                     <%
-                            }
+                        }
                     %>
-                </div>
-<%--                </div>--%>
+                </p>
+
                 <%--                --%>
                 <div class="mt-3 py-2" style="border-top: 1px solid #ccc;">
+                    <button class="icon-hover btn" style="display: none;">
+                        <i class="bi bi-heart" ></i>
+                        Thích
+                    </button>
+                    <button class="icon-hover btn" style="display: none;">
+                        <i class="bi bi-emoji-angry"></i>
+                        Phẫn nộ
+                    </button>
                     <button class="icon-hover btn" onclick="replyPost('post-owner-<%=post.getId()%>','post-content-<%=post.getId()%>','<%=post.getId()%>','owner-post-to','content-post-to','id-post-to','block-reply')">
                         <i class="bi bi-reply"></i>
                         Trả lời
                     </button>
                     <%
                         if(!post.getFrom_user().equals(user.getUsername())) {
+
                     %>
 
                     <button class="icon-hover btn">
@@ -345,8 +477,8 @@
                         </div>
                     </div>
                     <%
-                        }
-                        else {
+                    }
+                    else {
                     %>
                     <button class="icon-hover btn" data-bs-toggle="modal" data-bs-target="#update-post-modal-<%=post.getId()%>">
                         <i class="bi bi-pen"></i>
@@ -410,67 +542,17 @@
                         </div>
                     </div>
 
+
                     <%
-                            }
+                        }
                     %>
                 </div>
-                    <%
-                        }
-                        else {
 
-                    %>
-                    <!--Post bi xoa start-->
-                    <%
-                        if(post.getPost_id()!=null) {
-                            for(PostBEAN p: listPost) {
-                                if(Objects.equals(p.getId(), post.getPost_id())){
-                    %>
-                                <div style="background-color: #ccc;" class="p-3 rounded">
-                                    <span class="text-dark"><strong>Trả lời <%=p.getFrom_user()%>:</strong></span><br>
-                    <%
-                                    if(p.getDelete_time()==null){
-                    %>
-                                        <%=p.getContent()%>
-                                        <br><br>
-                    <%
-                                        for (String imageName2 : p.getImageList()){
-                    %>
-                                    <img src="${pageContext.request.contextPath}/image/<%=imageName2%>" class="mx-2" width="160" height="160" alt="image">
-
-                    <%
-                                        }
-                    %>
-                    <%
-                                    } else{
-                    %>
-                                    <h1 style="color: #dc3545;" class="p-4">Bài viết đã bị xoá</h1>
-                    <%
-                                    }
-                    %>
-                                </div>
-                    <%
-                                }
-                            }
-                        }
-                    %>
-
-                     <div id="post-content-<%=post.getId()%>" class="text-dark">
-                        <h1 style="color: #dc3545;" class="p-4">Bài viết đã bị xoá</h1>
-                     </div>
-
-                    <!--Post bi xoa end-->
-                <%
-                    }
-                %>
             </div>
-
         </div>
-
         <%
             }
         %>
-    </div>
-    <div class="container">
         <nav aria-label="Page navigation example" class="my-5">
             <ul class="pagination justify-content-center">
                 <li class="page-item disabled">
@@ -484,8 +566,6 @@
                 </li>
             </ul>
         </nav>
-    </div>
-    <div class="container">
         <div class="row rounded border mt-3" id="element-focus-reply">
             <div class="col-2 p-2 text-center" style="background-color: #ccc; border-right: 1px solid #d3d5d7;">
                 <img src="${pageContext.request.contextPath}/image/<%=user.getAvatar()==null  || user.getAvatar().equals("") ? "29.jpg" : user.getAvatar()%>"  class="rounded-circle mr-1 avatar-hover" alt="Vanessa Tucker" width="100" height="100">

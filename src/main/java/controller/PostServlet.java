@@ -29,21 +29,7 @@ import java.util.Collection;
 public class PostServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String action =req.getPathInfo().substring(1);
-        switch (action) {
-            case "Delete":
-                try {
-                    int postID = Integer.parseInt(req.getParameter("postID"));
-                    PostBO postBO = new PostBO();
-                    postBO.deletePost(postID);
 
-                    int topicID = Integer.parseInt(req.getParameter("topicID"));
-                    resp.sendRedirect(req.getContextPath()+"/Topic/Info?topicID="+topicID);
-                }catch (Exception e) {
-                    e.printStackTrace();
-                }
-                break;
-        }
     }
 
     @Override
@@ -62,7 +48,6 @@ public class PostServlet extends HttpServlet {
                     if(!req.getParameter("idPostTo").equals("")) {
                         post_id = Integer.valueOf(req.getParameter("idPostTo"));
                     }
-
 
                     // Thêm post và image của post
                     Collection<Part> fileParts = req.getParts();
@@ -89,17 +74,63 @@ public class PostServlet extends HttpServlet {
                     postBO.addPost(postBEAN);
 
                     // Load lại trang post sau khi thêm
-//                    req.setAttribute("topicID",topic_id);
                     resp.sendRedirect( req.getContextPath()+"/Topic/Info?topicID="+topic_id);
-//                    req.getRequestDispatcher("/Topic/Info?topicID="+topic_id).forward(req,resp);
-//                    TopicBO topicBO = new TopicBO();
-//                    TopicBEAN topicBEAN = topicBO.getTopicById(topic_id);
-//
-//                    ArrayList<PostBEAN> list = postBO.getAllPostInTopic(topic_id);
-//
-//                    req.setAttribute("topic",topicBEAN);
-//                    req.setAttribute("listPost",list);
-//                    req.getRequestDispatcher("../view/post.jsp").forward(req,resp);
+
+                }catch (Exception e) {
+                    e.printStackTrace();
+                }
+                break;
+            case "Update":
+                try {
+                    int topicId = Integer.parseInt(req.getParameter("update-topic-id"));
+                    int postId = Integer.parseInt(req.getParameter("update-post-id"));
+                    String content = req.getParameter("update-post-content");
+                    Timestamp editTime = Timestamp.valueOf(LocalDateTime.now());
+
+
+                    Collection<Part> fileParts = req.getParts();
+                    ArrayList<String> imageList = new ArrayList<>();
+                    for(Part file:fileParts) {
+                        String originalFileName = file.getSubmittedFileName();
+                        if(originalFileName!=null && !originalFileName.isEmpty()) {
+                            String img = System.currentTimeMillis() + originalFileName;
+                            String uploadPath="E:/giao_trinh/pbl4/img/" + img;
+                            FileOutputStream fos = new FileOutputStream(uploadPath);
+                            InputStream is = file.getInputStream();
+
+                            byte[] data = new byte[is.available()];
+                            is.read(data);
+                            fos.write(data);
+                            fos.close();
+
+                            imageList.add(img);
+                        }
+                    }
+
+                    PostBEAN post = new PostBEAN();
+                    post.setId(postId);
+                    post.setContent(content);
+                    post.setEdit_time(editTime);
+                    post.setImageList(imageList);
+
+                    PostBO postBO = new PostBO();
+                    postBO.updatePost(post);
+                    resp.sendRedirect( req.getContextPath()+"/Topic/Info?topicID="+topicId);
+
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
+                break;
+            case "Delete":
+                try {
+                    int postID = Integer.parseInt(req.getParameter("delete-postId"));
+                    System.out.println(postID);
+                    PostBO postBO = new PostBO();
+                    postBO.deletePost(postID);
+
+                    int topicID = Integer.parseInt(req.getParameter("topicId"));
+                    System.out.println(topicID);
+                    resp.sendRedirect(req.getContextPath()+"/Topic/Info?topicID="+topicID);
                 }catch (Exception e) {
                     e.printStackTrace();
                 }

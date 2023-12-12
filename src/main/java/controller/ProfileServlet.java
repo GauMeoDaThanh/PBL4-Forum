@@ -5,14 +5,17 @@ import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.*;
 import model.BEAN.ProfileBEAN;
+import model.BEAN.TopicBEAN;
 import model.BEAN.UserBEAN;
 import model.BO.AuthenticateBO;
 import model.BO.ProfileBO;
+import model.BO.TopicBO;
 
 import java.io.EOFException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 
 @WebServlet("/Profile/*")
 @MultipartConfig()
@@ -40,7 +43,12 @@ public class ProfileServlet extends HttpServlet {
                     AuthenticateBO authenticateBO = new AuthenticateBO();
                     if (session.getAttribute("user") == null) throw new Exception();
                     ProfileBEAN userInfo = profileBO.getUserInfo(username);
+
+                    TopicBO topicBO = new TopicBO();
+                    ArrayList<TopicBEAN> listTopic = topicBO.getAllTopicByUsername(username);
+
                     if (userInfo != null) {
+                        req.setAttribute("listTopic",listTopic);
                         req.setAttribute("userInfo", userInfo);
                         req.getRequestDispatcher("../view/profile.jsp").forward(req, resp);
                     } else {
