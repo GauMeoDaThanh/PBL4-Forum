@@ -213,7 +213,7 @@
                                                 <%
                                                 } else{
                                                 %>
-                                                <span class="text-white rounded p-1 my-2" style="background-color: #A231FC;">Bài nhận vận chuyển</span>
+                                                <span class="text-white rounded p-1 my-2" style="background-color: #A231FC;">Bài gửi vận chuyển</span>
                                                 <%
                                                     }
                                                 %>

@@ -98,19 +98,36 @@
             </div>
         </div>
         <div class="mb-5">
+            <%
+                if(user.getRole().equals("admin") || user.getUsername().equals(topic.getFrom_user())){
+            %>
             <button class="btn btn-danger mx-2 p-2" style="width: 120px;" data-bs-toggle="modal" data-bs-target="#confirm-delete-topic-modal">
                 <i class="bi bi-trash" ></i>
                 Xoá
             </button>
+            <%
+                }
+            %>
+            <%
+                if(!user.getUsername().equals(topic.getFrom_user())) {
+            %>
             <button class="btn btn-primary mx-2 p-2" style="width: 120px;" data-bs-toggle="modal" data-bs-target="#report-topic-modal">
                 <i class="bi bi-flag" ></i>
                 Báo cáo
             </button>
-
+            <%
+                }
+            %>
+            <%
+                if(user.getUsername().equals(topic.getFrom_user())){
+            %>
             <button class="btn btn-success mx-2 p-2" style="width: 120px;" data-bs-toggle="modal" data-bs-target="#update-topic-modal"  onclick="getProvinceOption('select-from-location','<%=topic.getFrom_location()%>','select-to-location','<%=topic.getTo_location()%>')">
                 <i class="bi bi-pen"></i>
                 Chỉnh sửa
             </button>
+            <%
+                }
+            %>
             <div class="modal fade" id="confirm-delete-topic-modal" tabindex="-1"  aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered" style="min-width: 800px;">
                     <div class="modal-content">
@@ -142,9 +159,9 @@
                         <div class="modal-body">
                             <form action="${pageContext.request.contextPath}/Notify/Add" method="post">
                                 <div class="mb-3 d-none">
-                                    <input name="topicId" value="<%=topic.getId()%>" type="text">
-                                    <input name="from-username" value="<%=user.getUsername()%>" type="text">
-                                    <input name="to-username" value="<%=topic.getFrom_user()%>" type="text">
+                                    <input name="topicId" value="<%=topic.getId()%>" type="hidden">
+                                    <input name="from-username" value="<%=user.getUsername()%>" type="hidden">
+                                    <input name="to-username" value="<%=topic.getFrom_user()%>" type="hidden">
                                 </div>
                                 <div class="mb-3">
                                     <label for="" class="form-label">Chọn lý do báo cáo</label>
@@ -263,7 +280,7 @@
                                         <%
                                                         for (String imageName2 : p.getImageList()){
                                         %>
-                                        <img src="${pageContext.request.contextPath}/image/<%=imageName2%>" class="mx-2" width="160" height="160" alt="image">
+                                        <img src="${pageContext.request.contextPath}/image/<%=imageName2%>" class="mx-2" height="160" alt="image">
                                         <%
 
                                                         }
@@ -274,14 +291,13 @@
                                 else if(Objects.equals(p.getId(), post.getPost_id()) && p.getDelete_time()!=null){
                 %>
                                 <div style="background-color: #ccc;" class="p-3 rounded">
-                                    <h1 style="color: #dc3545;" class="p-4">Bài viết đã bị xoá</h1>
+                                    <h6 style="color: #dc3545;" class="p-4">Bài viết đã bị xoá</h6>
                                 </div>
                 <%
                                 }
                             }
                         }
                 %>
-<%--                </div>--%>
                 <div id="post-content-<%=post.getId()%>" class="text-dark">
                     <%=post.getContent()%>
                     <br><br>
@@ -290,13 +306,11 @@
                             for(String imageName:post.getImageList()) {
 
                     %>
-                    <img src="${pageContext.request.contextPath}/image/<%=imageName%>" class="mx-2" width="160" height="160" alt="image">
+                    <img src="${pageContext.request.contextPath}/image/<%=imageName%>" class="mx-2" height="160" alt="image">
                     <%
                             }
                     %>
                 </div>
-<%--                </div>--%>
-                <%--                --%>
                 <div class="mt-3 py-2" style="border-top: 1px solid #ccc;">
                     <button class="icon-hover btn" onclick="replyPost('post-owner-<%=post.getId()%>','post-content-<%=post.getId()%>','<%=post.getId()%>','owner-post-to','content-post-to','id-post-to','block-reply')">
                         <i class="bi bi-reply"></i>
@@ -306,6 +320,9 @@
                         if(!post.getFrom_user().equals(user.getUsername())) {
                     %>
 
+                    <%
+                            if(!user.getRole().equals("admin")){
+                    %>
                     <button class="icon-hover btn">
                         <i class="bi bi-flag" ></i>
                         Báo cáo
@@ -344,6 +361,39 @@
                             </div>
                         </div>
                     </div>
+                    <%
+                            }
+                            else{
+
+                    %>
+                    <button type="submit" class="icon-hover btn btn-link" style="color: #dc3545;" data-bs-toggle="modal" data-bs-target="#confirm-delete-post-modal1-<%=post.getId()%>">
+                        <i class="bi bi-trash" ></i>
+                        Xoá bài viết
+                    </button>
+                    <div class="modal fade" id="confirm-delete-post-modal1-<%=post.getId()%>" tabindex="-1"  aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered" style="min-width: 800px;">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title">Xác nhận xoá bài viết</h5>
+                                    <button type="reset" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <h4 class="text-center">Bạn có chắc chẵn muốn xoá viết này.<br>Thao tác này không thể quay lại</h4>
+                                    <form action="${pageContext.request.contextPath}/Post/Delete" method="post">
+                                        <input name="topicId" value="<%=topic.getId()%>" type="hidden">
+                                        <input name="delete-postId" value="<%=post.getId()%>" type="hidden">
+                                        <div class="modal-footer">
+                                            <button type="reset" class="btn btn-primary" data-bs-dismiss="modal" style="width: 80px;">Huỷ</button>
+                                            <button type="submit" class="btn btn-success" style="width: 100px;">Xác nhận</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <%
+                            }
+                    %>
                     <%
                         }
                         else {
@@ -392,7 +442,7 @@
                         <div class="modal-dialog modal-dialog-centered" style="min-width: 800px;">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title" id="confirm-delete-post-modalLabel">Xác nhận xoá bài viết</h5>
+                                    <h5 class="modal-title">Xác nhận xoá bài viết</h5>
                                     <button type="reset" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
                                 <div class="modal-body">
@@ -435,7 +485,7 @@
                     <%
                                         for (String imageName2 : p.getImageList()){
                     %>
-                                    <img src="${pageContext.request.contextPath}/image/<%=imageName2%>" class="mx-2" width="160" height="160" alt="image">
+                                    <img src="${pageContext.request.contextPath}/image/<%=imageName2%>" class="mx-2" height="160" alt="image">
 
                     <%
                                         }
@@ -443,7 +493,7 @@
                     <%
                                     } else{
                     %>
-                                    <h1 style="color: #dc3545;" class="p-4">Bài viết đã bị xoá</h1>
+                                    <h6 style="color: #dc3545;" class="p-4">Bài viết đã bị xoá</h6>
                     <%
                                     }
                     %>
@@ -455,7 +505,7 @@
                     %>
 
                      <div id="post-content-<%=post.getId()%>" class="text-dark">
-                        <h1 style="color: #dc3545;" class="p-4">Bài viết đã bị xoá</h1>
+                        <h6 style="color: #dc3545;" class="p-4">Bài viết đã bị xoá</h6>
                      </div>
 
                     <!--Post bi xoa end-->

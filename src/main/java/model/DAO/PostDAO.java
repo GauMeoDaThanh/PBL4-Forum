@@ -79,9 +79,6 @@ public class PostDAO {
             Timestamp editTime=rs.getTimestamp("post.edit_time");
             Timestamp deleteTime = rs.getTimestamp("post.delete_time");
 
-            System.out.println("==================");
-            System.out.println(deleteTime);
-
             Integer postID;
             if(rs.getObject("post.post_id") == null) {
                 postID = null;
