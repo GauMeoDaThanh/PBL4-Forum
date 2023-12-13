@@ -60,6 +60,7 @@ function clickOnBell() {
 function onStarClick() {
     var rating_label = document.querySelector(".rating-label");
     var rating_number = document.querySelector(".rating-number");
+    var rating = document.getElementById("rating");
     const stars = document.querySelectorAll(".stars i");
 
     // Add an event listener to each star
@@ -75,21 +76,25 @@ function onStarClick() {
             if (index1 == 0) {
                 rating_label.innerHTML = 'Rất tệ';
                 rating_number.innerHTML = '1';
+                rating.value = "1";
             } else if (index1 == 1) {
                 rating_label.innerHTML = 'Tệ';
                 rating_number.innerHTML = '2';
-
+                rating.value = "2";
             } else if (index1 == 2) {
                 rating_label.innerHTML = 'Bình thường';
                 rating_number.innerHTML = '3';
+                rating.value = "3";
 
             } else if (index1 == 3) {
                 rating_label.innerHTML = 'Tốt';
                 rating_number.innerHTML = '4';
+                rating.value = "4";
 
             } else if (index1 == 4) {
                 rating_label.innerHTML = 'Rất tốt';
                 rating_number.innerHTML = '5';
+                rating.value = "5";
 
             }
         });

@@ -103,8 +103,11 @@
                                         </c:choose>
                                         <td class="text-center"><a href="${pageContext.request.contextPath}/Deli/Info?id=${deliInfo.id}"><button type="button" class="btn btn-primary">Chi tiết</button></a></td>
                                         <c:choose>
-                                            <c:when test="${fn:containsIgnoreCase(deliInfo.lastDeliState, 'phát thành công')}">
-                                                <td class="text-center"><button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal" >Đánh giá</button></td>
+                                            <c:when test="${deliInfo.rated}">
+                                                <td class="text-center"><button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#exampleModal" disabled>Đã đánh giá</button></td>
+                                            </c:when>
+                                            <c:when test="${deliInfo.end}">
+                                                <td class="text-center"><button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal" data-id="${deliInfo.id}" id="rating-btn">Đánh giá</button></td>
                                             </c:when>
                                             <c:otherwise>
                                                 <td class="text-center"><button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#exampleModal" disabled>Đánh giá</button></td>
@@ -132,7 +135,7 @@
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            <form>
+                            <form action="${pageContext.request.contextPath}/Rating/Send" method="post" enctype="multipart/form-data">
                                 <div class="mb-3">
                                     <div class="rating-box">
                                         <h4 class="text-center">Đánh giá sao cho người này</h4>
@@ -145,20 +148,22 @@
                                         </div>
                                         <h4 class="text-center rating-label my-2">Rất tốt</h4>
                                         <h6 class="text-center rating-number d-none">5</h6>
+                                        <input type="text" value="5" name="rating-point" id="rating" hidden>
+                                        <input type="text" id="deli-id" name="deliId" value="" hidden>
                                     </div>
                                 </div>
                                 <div class="mb-3">
                                     <label for="message-text" class="col-form-label">Đính kèm ảnh</label>
-                                    <input type="file" class="form-control">
+                                    <input type="file" class="form-control" accept=".jpg,.png" name="rate-picture">
                                 </div>
                                 <div class="mb-3">
                                     <label for="message-text" class="col-form-label">Nhận xét</label>
-                                    <textarea class="form-control" id="message-text" placeholder="Nhập nhận xét..." rows="5"></textarea>
+                                    <textarea class="form-control" id="message-text" placeholder="Nhập nhận xét..." rows="5" name="rate-comment"></textarea>
                                 </div>
                                 
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal" style="width: 80px;">Huỷ</button>
-                                    <button type="button" class="btn btn-success" style="width: 100px;">OK</button>
+                                    <button type="reset" class="btn btn-primary" data-bs-dismiss="modal" style="width: 80px;">Huỷ</button>
+                                    <button type="submit" class="btn btn-success" style="width: 100px;">OK</button>
                                 </div>
                             </form>
                         </div>
@@ -230,6 +235,7 @@
 
         
         <!-- JavaScript Libraries -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
         <script src="${pageContext.request.contextPath}
 /assets/library/bootstrap-5.2.3-dist/js/bootstrap.bundle.min.js"></script>
         <script src="${pageContext.request.contextPath}
@@ -244,6 +250,12 @@
         <!-- Template Javascript -->
         <script src="${pageContext.request.contextPath}
 /assets/js/main.js"></script>
+        <script>
+            $(document).on("click", "#rating-btn", function (){
+                var deliId = $(this).data('id');
+                $("#deli-id").val(deliId);
+            });
+        </script>
     </body>
 
 </html>

@@ -81,7 +81,9 @@ public class DeliveryDAO {
         while (rs.next()) {
             DeliveryBEAN deliveryBEAN = new DeliveryBEAN(rs.getInt("id"), rs.getString("user_send"), rs.getString("user_take"), rs.getString("goods_name"), rs.getString("contact_number"),
                     rs.getString("receive_name"), rs.getString("to_address"), rs.getString("note"), rs.getBoolean("is_end"));
+
             deliveryBEAN.setLastDeliState(getLastDeliState(rs.getInt("id")));
+            deliveryBEAN.setRated(isRated(rs.getInt("id"), username));
             deliveryBEANS.add(deliveryBEAN);
         }
         conn.close();
@@ -100,12 +102,31 @@ public class DeliveryDAO {
             DeliveryBEAN deliveryBEAN = new DeliveryBEAN(rs.getInt("id"), rs.getString("user_send"), rs.getString("user_take"), rs.getString("goods_name"), rs.getString("contact_number"),
                     rs.getString("receive_name"), rs.getString("to_address"), rs.getString("note"), rs.getBoolean("is_end"));
             deliveryBEAN.setLastDeliState(getLastDeliState(rs.getInt("id")));
+            deliveryBEAN.setRated(isRated(rs.getInt("id"), username));
             deliveryBEANS.add(deliveryBEAN);
         }
         conn.close();
         preparedStatement.close();
         rs.close();
         return deliveryBEANS;
+    }
+
+    public boolean isRated(int deliId, String username) throws Exception{
+        Connection conn = connectDb();
+        PreparedStatement preparedStatement = conn.prepareStatement("select * from rate where from_user = ? and delivery_id = ?");
+        preparedStatement.setString(1, username);
+        preparedStatement.setInt(2, deliId);
+        ResultSet rs = preparedStatement.executeQuery();
+        if (rs.next()) {
+            conn.close();
+            preparedStatement.close();
+            rs.close();
+            return true;
+        }
+        conn.close();
+        preparedStatement.close();
+        rs.close();
+        return false;
     }
     public String getLastDeliState(int deliId) throws Exception {
         Connection conn = connectDb();

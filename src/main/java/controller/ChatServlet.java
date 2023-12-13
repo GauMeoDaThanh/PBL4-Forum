@@ -42,10 +42,13 @@ public class ChatServlet extends HttpServlet {
                     messages = chatBO.getMessage(user.getUsername(), req.getParameter("user"));
                     break;
                 case "View":
-                    profileBEAN = profileBO.getUserInfo(chatBO.getLastChatUser(user.getUsername()));
-                    req.setAttribute("userAvatar", profileBEAN.getAvatar());
-                    req.setAttribute("username", profileBEAN.getUsername());
-                    messages = chatBO.getMessage(user.getUsername(), profileBEAN.getUsername());
+                    String lastChatUser = chatBO.getLastChatUser(user.getUsername());
+                    if (lastChatUser != null) {
+                        profileBEAN = profileBO.getUserInfo(chatBO.getLastChatUser(user.getUsername()));
+                        req.setAttribute("userAvatar", profileBEAN.getAvatar());
+                        req.setAttribute("username", profileBEAN.getUsername());
+                        messages = chatBO.getMessage(user.getUsername(), profileBEAN.getUsername());
+                    }
                     break;
             }
             Map<String, String> chatNameList = chatBO.getChatNameList(user.getUsername());

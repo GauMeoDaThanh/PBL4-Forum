@@ -106,17 +106,22 @@ public class ChatDAO {
         preparedStatement.setString(1, username);
         preparedStatement.setString(2, username);
         ResultSet rs = preparedStatement.executeQuery();
-        rs.next();
-        String chatWithUser;
-        if (rs.getString("from_user").equals(username)){
-            chatWithUser = rs.getString("to_user");
-        }else {
-            chatWithUser = rs.getString("from_user");
+        if (rs.next()){
+            String chatWithUser;
+            if (rs.getString("from_user").equals(username)){
+                chatWithUser = rs.getString("to_user");
+            }else {
+                chatWithUser = rs.getString("from_user");
+            }
+            conn.close();
+            preparedStatement.close();
+            rs.close();
+            return chatWithUser;
         }
         conn.close();
         preparedStatement.close();
         rs.close();
-        return chatWithUser;
+        return null;
     }
     private String getAvatar(String username) throws Exception {
         Connection conn = connectDb();

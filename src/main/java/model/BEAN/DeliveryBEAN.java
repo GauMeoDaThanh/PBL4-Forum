@@ -12,7 +12,9 @@ public class DeliveryBEAN {
     private String toAddress;
     private String note;
     private boolean end;
+    private boolean rated;
     private String lastDeliState;
+
 
     public DeliveryBEAN(int id, String userSend, String userTake, String goodsName, String contactNumber, String receiveName, String toAddress, String note, boolean end) {
         this.id = id;
@@ -105,5 +107,13 @@ public class DeliveryBEAN {
 
     public void setLastDeliState(String lastDeliState) {
         this.lastDeliState = lastDeliState;
+    }
+
+    public boolean isRated() {
+        return rated;
+    }
+
+    public void setRated(boolean rated) {
+        this.rated = rated;
     }
 }
