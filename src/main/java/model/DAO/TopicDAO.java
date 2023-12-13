@@ -1,5 +1,6 @@
 package model.DAO;
 
+import jakarta.servlet.annotation.WebServlet;
 import model.BEAN.TopicBEAN;
 
 import java.sql.Connection;
@@ -100,6 +101,137 @@ public class TopicDAO {
         }
         return null;
     }
+
+
+    // Get ALl topic Receive/Send By Page + Pagination
+    public int getTopicPageNumberByTopicTypeId(int topic_type_id) {
+        try{
+            Connection conn = connectDb();
+            PreparedStatement preparedStatement = conn.prepareStatement(" select count(*) as listNumber from topic where topic_type_id = ?");
+            preparedStatement.setInt(1,topic_type_id);
+
+            ResultSet rs = preparedStatement.executeQuery();
+
+            int sizePerPage = 6;
+            int pageNumber=0;
+            while (rs.next()){
+                int listNumber=rs.getInt("listNumber");
+                pageNumber = listNumber/sizePerPage;
+                if(listNumber<sizePerPage){
+                    ++pageNumber;
+                }
+                else if(listNumber%sizePerPage != 0){
+                    ++pageNumber;
+                }
+            }
+
+            return pageNumber;
+        }catch (Exception e){
+            e.printStackTrace();
+            return 0;
+        }
+    }
+    public ArrayList<TopicBEAN> getAllTopicReceiveByPage(int pageIndex) throws Exception{
+        try {
+            ArrayList<TopicBEAN> list = new ArrayList<>();
+            Connection conn = connectDb();
+            String sql="select * from " +
+                    "(select row_number() over (order by id asc) as stt , from_user,topic_id,content,create_time,edit_time,post_id,delete_time from post) as x " +
+                    "inner join user on user.username = x.from_user " +
+                    "where stt between 1 and 6 " +
+                    "order by create_time DESC ";
+            PreparedStatement preparedStatement = conn.prepareStatement("select * from " +
+                    " (select row_number() over (order by id asc) as stt ,id,from_user,topic_type_id,create_time,edit_time,topic_name,from_location,to_location,deli_datetime " +
+                    " from topic " +
+                    " where topic_type_id=1 " +
+                    " ) as x " +
+                    " inner join user on user.username = x.from_user " +
+                    " where stt between ? and ? " +
+                    " order by create_time DESC ");
+
+            int sizePerPage = 6;
+            preparedStatement.setInt(1,pageIndex*sizePerPage-(sizePerPage-1));
+            preparedStatement.setInt(2,pageIndex*sizePerPage);
+
+            ResultSet rs = preparedStatement.executeQuery();
+            while (rs.next()){
+                int topic_id = rs.getInt("id");
+                String from_user = rs.getString("from_user");
+                int topic_type_id = rs.getInt("topic_type_id");
+                //
+                Timestamp create_time =rs.getTimestamp("create_time");
+                Timestamp edit_time = rs.getTimestamp("edit_time");
+                //
+                String topic_name = rs.getString("topic_name");
+                String from_location = rs.getString("from_location");
+                String to_location = rs.getString("to_location");
+                //
+                Timestamp deli_datetime=rs.getTimestamp("deli_datetime");
+                //
+                String avatar = rs.getString("avatar");
+                String name = rs.getString("name");
+                String description = rs.getString("description");
+                int countPost = countPostInTopic(topic_id);
+                //
+                TopicBEAN topic = new TopicBEAN(topic_id,from_user,topic_type_id,create_time,edit_time,topic_name,from_location,to_location,deli_datetime,avatar,name,description,countPost);
+                list.add(topic);
+            }
+            return list;
+        }catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+    public ArrayList<TopicBEAN> getAllTopicSendByPage(int pageIndex) throws Exception{
+        try {
+            ArrayList<TopicBEAN> list = new ArrayList<>();
+            Connection conn = connectDb();
+            PreparedStatement preparedStatement = conn.prepareStatement("select * from " +
+                    " (select row_number() over (order by id asc) as stt ,id,from_user,topic_type_id,create_time,edit_time,topic_name,from_location,to_location,deli_datetime " +
+                    " from topic " +
+                    " where topic_type_id=2 " +
+                    " ) as x " +
+                    " inner join user on user.username = x.from_user " +
+                    " where stt between ? and ? " +
+                    " order by create_time DESC ");
+
+            int sizePerPage = 6;
+            preparedStatement.setInt(1,pageIndex*sizePerPage-(sizePerPage-1));
+            preparedStatement.setInt(2,pageIndex*sizePerPage);
+
+            ResultSet rs = preparedStatement.executeQuery();
+            while (rs.next()){
+                int topic_id = rs.getInt("id");
+                String from_user = rs.getString("from_user");
+                int topic_type_id = rs.getInt("topic_type_id");
+                //
+                Timestamp create_time =rs.getTimestamp("create_time");
+                Timestamp edit_time = rs.getTimestamp("edit_time");
+
+                //
+                String topic_name = rs.getString("topic_name");
+                String from_location = rs.getString("from_location");
+                String to_location = rs.getString("to_location");
+                //
+                Timestamp deli_datetime=rs.getTimestamp("deli_datetime");
+                //
+                String avatar = rs.getString("avatar");
+                String name = rs.getString("name");
+                String description = rs.getString("description");
+
+                int countPost = countPostInTopic(topic_id);
+
+                //
+                TopicBEAN topic = new TopicBEAN(topic_id,from_user,topic_type_id,create_time,edit_time,topic_name,from_location,to_location,deli_datetime,avatar,name,description,countPost);
+                list.add(topic);
+            }
+            return list;
+        }catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
     // Get List Topic in Home Page
     public ArrayList<TopicBEAN> getTopicHomeReceive() throws Exception{
         try {
@@ -183,79 +315,8 @@ public class TopicDAO {
             return null;
         }
     }
-    // Get All Topic in Topic receive/send page
-    public ArrayList<TopicBEAN> getAllTopicReceive() throws Exception{
-        ArrayList<TopicBEAN> list = new ArrayList<>();
-        Connection conn = connectDb();
-        PreparedStatement preparedStatement = conn.prepareStatement("select * from topic " +
-                "inner join topic_type on topic.topic_type_id=topic_type.id " +
-                "inner join user on topic.from_user=user.username " +
-                "where topic.topic_type_id=1 " +
-                "order by topic.create_time DESC ");
-        ResultSet rs = preparedStatement.executeQuery();
-        while (rs.next()){
-            int topic_id = rs.getInt("topic.id");
-            String from_user = rs.getString("from_user");
-            int topic_type_id = rs.getInt("topic_type_id");
-            //
-            Timestamp create_time =rs.getTimestamp("create_time");
-            Timestamp edit_time = rs.getTimestamp("edit_time");
 
-            //
-            String topic_name = rs.getString("topic_name");
-            String from_location = rs.getString("from_location");
-            String to_location = rs.getString("to_location");
-            //
-            Timestamp deli_datetime=rs.getTimestamp("deli_datetime");
-            //
-            String avatar = rs.getString("avatar");
-            String name = rs.getString("name");
-            String description = rs.getString("description");
-
-            int countPost = countPostInTopic(topic_id);
-
-            //
-            TopicBEAN topic = new TopicBEAN(topic_id,from_user,topic_type_id,create_time,edit_time,topic_name,from_location,to_location,deli_datetime,avatar,name,description,countPost);
-            list.add(topic);
-        }
-        return list;
-    }
-    public ArrayList<TopicBEAN> getAllTopicSend() throws Exception{
-        ArrayList<TopicBEAN> list = new ArrayList<>();
-        Connection conn = connectDb();
-        PreparedStatement preparedStatement = conn.prepareStatement("select * from topic " +
-                "inner join topic_type on topic.topic_type_id=topic_type.id " +
-                "inner join user on topic.from_user=user.username " +
-                "where topic.topic_type_id=2 " +
-                "order by topic.create_time DESC ");
-        ResultSet rs = preparedStatement.executeQuery();
-        while (rs.next()){
-            int topic_id = rs.getInt("topic.id");
-            String from_user = rs.getString("from_user");
-            int topic_type_id = rs.getInt("topic_type_id");
-            //
-            Timestamp create_time =rs.getTimestamp("create_time");
-            Timestamp edit_time = rs.getTimestamp("edit_time");
-
-
-            //
-            String topic_name = rs.getString("topic_name");
-            String from_location = rs.getString("from_location");
-            String to_location = rs.getString("to_location");
-            //
-            Timestamp deli_datetime=rs.getTimestamp("deli_datetime");
-            //
-            String avatar = rs.getString("avatar");
-            String name = rs.getString("name");
-            String description = rs.getString("description");
-
-            int countPost = countPostInTopic(topic_id);
-            //
-            TopicBEAN topic = new TopicBEAN(topic_id,from_user,topic_type_id,create_time,edit_time,topic_name,from_location,to_location,deli_datetime,avatar,name,description,countPost);
-            list.add(topic);
-        }
-        return list;
-    }
+    //
     public TopicBEAN addTopic(TopicBEAN topicBEAN){
         try {
             // Thêm mới topic
@@ -343,22 +404,69 @@ public class TopicDAO {
             e.printStackTrace();
         }
     }
-    public ArrayList<TopicBEAN> searchTopic(String txtSearch) {
-        try {
-            ArrayList<TopicBEAN> list = new ArrayList<>();
+
+    //Search Topic
+    public int getTopicPageNumberBySearch(String txtSearch) {
+        try{
             Connection conn = connectDb();
-            PreparedStatement preparedStatement = conn.prepareStatement("select * from topic " +
-                    "inner join user on topic.from_user=user.username " +
+            PreparedStatement preparedStatement = connectDb().prepareStatement("select count(*) as listNumber " +
+                    " from topic " +
                     " where topic_name like ?" +
-                    " or from_location like ? " +
-                    " or to_location like ? ");
+                    " or from_location like ?" +
+                    " or to_location like ?");
             preparedStatement.setString(1,"%"+txtSearch+"%");
             preparedStatement.setString(2,"%"+txtSearch+"%");
             preparedStatement.setString(3,"%"+txtSearch+"%");
 
             ResultSet rs = preparedStatement.executeQuery();
+
+            int sizePerPage = 6;
+            int pageNumber=0;
             while (rs.next()){
-                int topic_id = rs.getInt("topic.id");
+                int listNumber=rs.getInt("listNumber");
+                pageNumber = listNumber/sizePerPage;
+                if(listNumber<sizePerPage){
+                    ++pageNumber;
+                }
+                else if(listNumber%sizePerPage != 0){
+                    ++pageNumber;
+                }
+            }
+
+            return pageNumber;
+        }catch (Exception e) {
+            e.printStackTrace();
+            return 0;
+        }
+    }
+    public ArrayList<TopicBEAN> searchTopic(String txtSearch,int pageIndex) {
+        try {
+            ArrayList<TopicBEAN> list = new ArrayList<>();
+            Connection conn = connectDb();
+            PreparedStatement preparedStatement = connectDb().prepareStatement("select * from " +
+                    " (select row_number() over (order by id asc) as stt ,id,from_user,topic_type_id,create_time,edit_time,topic_name,from_location,to_location,deli_datetime " +
+                    " from topic\n" +
+                    " where " +
+                    "   topic_name like ? " +
+                    "  or from_location like ? " +
+                    "  or to_location like ? " +
+                    " ) as x " +
+                    " inner join user on user.username = x.from_user " +
+                    " where stt between ? and ?" +
+                    " order by create_time DESC");
+
+
+            int sizePerPage = 6;
+
+            preparedStatement.setString(1,"%"+txtSearch+"%");
+            preparedStatement.setString(2,"%"+txtSearch+"%");
+            preparedStatement.setString(3,"%"+txtSearch+"%");
+            preparedStatement.setInt(4,pageIndex*sizePerPage-(sizePerPage-1));
+            preparedStatement.setInt(5,pageIndex*sizePerPage);
+
+            ResultSet rs = preparedStatement.executeQuery();
+            while (rs.next()){
+                int topic_id = rs.getInt("id");
                 String from_user = rs.getString("from_user");
                 int topic_type_id = rs.getInt("topic_type_id");
                 //

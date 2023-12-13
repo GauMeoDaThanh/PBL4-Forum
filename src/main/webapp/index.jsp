@@ -17,27 +17,21 @@
         <!-- Icon Font Stylesheet -->
         <!-- <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet"> -->
         <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet"> -->
-        <link rel="stylesheet" href="${pageContext.request.contextPath}
-/assets/library/fontawesome-free-6.4.2-web/css/all.css">
-        <link rel="stylesheet" href="${pageContext.request.contextPath}
-/assets/library/bootstrap-icons-1.11.1/bootstrap-icons.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/library/fontawesome-free-6.4.2-web/css/all.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/library/bootstrap-icons-1.11.1/bootstrap-icons.css">
         <!-- Libraries Stylesheet -->
         <!-- <link href="lib/animate/animate.min.css" rel="stylesheet"> -->
         <!-- <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet"> -->
-        <link rel="stylesheet" href="${pageContext.request.contextPath}
-/assets/lib/animate/animate.min.css">
-        <link rel="stylesheet" href="${pageContext.request.contextPath}
-/assets/lib/owlcarousel/assets/owl.carousel.min.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/lib/animate/animate.min.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/lib/owlcarousel/assets/owl.carousel.min.css">
 
         <!-- Customized Bootstrap Stylesheet -->
         <!-- <link href="css/bootstrap.min.css" rel="stylesheet"> -->
         <!-- <link rel="stylesheet" href="../assets/library/bootstrap-5.2.3-dist/css/bootstrap.min.css"> -->
-        <link rel="stylesheet" href="${pageContext.request.contextPath}
-/assets/css/bootstrap.min.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/bootstrap.min.css">
         <!-- Template Stylesheet -->
         <!-- <link href="css/style.css" rel="stylesheet"> -->
-        <link rel="stylesheet" href="${pageContext.request.contextPath}
-/assets/css/style.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/style.css">
     </head>
 
     <body>
@@ -48,11 +42,11 @@
         <!-- Spinner End -->
 
         <!-- Topbar Start -->
-        <div class="fixed-top container-fluid bg-dark py-2 d-none d-md-flex">
+        <div class="fixed-top bg-dark py-2 d-none d-md-flex">
             <div class="container">
                 <div class="d-flex justify-content-between topbar">
                     <div class="top-info">
-                        <small class="me-3 text-white-50"><a href="#"><i class="fas fa-map-marker-alt me-2 text-secondary"></i></a>54 Nguyễn Lương Bằng, Đà Nẵng</small>
+                        <small class="me-3 text-white-50"><a href="#"><i class="fas fa-map-marker-alt me-2 text-secondary"></i></a>ĐHBK Đà Nẵng</small>
                         <small class="me-3 text-white-50"><a href="#"><i class="fas fa-envelope me-2 text-secondary"></i></a>PBL4@gmail.com</small>
                     </div>
                     <div id="note" class="text-secondary d-none d-xl-flex"><small>Đến với chúng tôi, mọi thứ rất dễ dàng</small></div>
@@ -68,7 +62,7 @@
         <!-- Topbar End -->
 
         <!-- Navbar Start -->
-        <div class="fixed-top my-5 container-fluid bg-primary">
+        <div class="fixed-top my-5 bg-primary">
             <div class="container">
                 <nav class="navbar navbar-dark navbar-expand-lg py-0">
                     <a href="" class="navbar-brand">
@@ -162,8 +156,7 @@
                 </ol>
                 <div class="carousel-inner" role="listbox">
                     <div class="carousel-item active">
-                        <img src="${pageContext.request.contextPath}
-/assets/img/carousel-1.jpg" class="img-fluid" alt="First slide" style="width: 100%; height: 20%;">
+                        <img src="${pageContext.request.contextPath}/assets/img/carousel-1.jpg" class="img-fluid" alt="First slide" style="width: 100%; height: 20%;">
                         <div class="carousel-caption">
                             <div class="container carousel-content">
                                 <h6 class="text-secondary h4 animated fadeInUp">Diễn đàn vận chuyển</h6>
@@ -173,8 +166,7 @@
                         </div>
                     </div>
                     <div class="carousel-item">
-                        <img src="${pageContext.request.contextPath}
-/assets/img/carousel-2.jpg" class="img-fluid" alt="Second slide" style="width: 100%; height: 20%;">
+                        <img src="${pageContext.request.contextPath}/assets/img/carousel-2.jpg" class="img-fluid" alt="Second slide" style="width: 100%; height: 20%;">
                         <div class="carousel-caption">
                             <div class="container carousel-content">
                                 <h6 class="text-secondary h4 animated fadeInUp">Cam kết đảm bảo chất lượng</h6>
@@ -271,21 +263,15 @@
         <!-- <script src="lib/easing/easing.min.js"></script> -->
         <!-- <script src="lib/waypoints/waypoints.min.js"></script> -->
         <!-- <script src="lib/owlcarousel/owl.carousel.min.js"></script> -->
-        <script src="${pageContext.request.contextPath}
-/assets/library/bootstrap-5.2.3-dist/js/bootstrap.bundle.min.js"></script>
-        <script src="${pageContext.request.contextPath}
-/assets/lib/wow/wow.min.js"></script>
-        <script src="${pageContext.request.contextPath}
-/assets/lib/easing/easing.min.js"></script>
-        <script src="${pageContext.request.contextPath}
-/assets/lib/waypoints/waypoints.min.js"></script>
-        <script src="${pageContext.request.contextPath}
-/assets/lib/owlcarousel/owl.carousel.min.js"></script>
+        <script src="${pageContext.request.contextPath}/assets/library/bootstrap-5.2.3-dist/js/bootstrap.bundle.min.js"></script>
+        <script src="${pageContext.request.contextPath}/assets/lib/wow/wow.min.js"></script>
+        <script src="${pageContext.request.contextPath}/assets/lib/easing/easing.min.js"></script>
+        <script src="${pageContext.request.contextPath}/assets/lib/waypoints/waypoints.min.js"></script>
+        <script src="${pageContext.request.contextPath}/assets/lib/owlcarousel/owl.carousel.min.js"></script>
 
         <!-- Template Javascript -->
         <!-- <script src="js/main.js"></script> -->
-        <script src="${pageContext.request.contextPath}
-/assets/js/main.js"></script>
+        <script src="${pageContext.request.contextPath}/assets/js/main.js"></script>
         <script >
             $(document).on("submit", "#form-register", function (event){
                 const $form = $(this);

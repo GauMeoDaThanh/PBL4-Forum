@@ -61,40 +61,79 @@ public class PostDAO {
         }
         return imageList;
     }
+    // Get All Post in Topic By Page + Pagination
+    public int getPostPageNumber(int topicID) {
+        try{
+            Connection conn = connectDb();
+            PreparedStatement preparedStatement = conn.prepareStatement(" select count(*) as listNumber from post where topic_id = ?");
+            preparedStatement.setInt(1,topicID);
 
-    public ArrayList<PostBEAN> getAllPostInTopic(int topicId) throws Exception {
-        ArrayList<PostBEAN> list = new ArrayList<>();
-        Connection conn = connectDb();
-        PreparedStatement preparedStatement = conn.prepareStatement("select * from post " +
-                " inner join user on post.from_user = user.username " +
-                " where post.topic_id = "+topicId +
-                " order by post.create_time ");
-        ResultSet rs = preparedStatement.executeQuery();
-        while (rs.next()){
-            int ID = rs.getInt("post.id");
-            String fromUser=rs.getString("post.from_user");
-            int topicID=rs.getInt("post.topic_id");
-            String content = rs.getString("post.content");
-            Timestamp createTime = rs.getTimestamp("post.create_time");
-            Timestamp editTime=rs.getTimestamp("post.edit_time");
-            Timestamp deleteTime = rs.getTimestamp("post.delete_time");
+            ResultSet rs = preparedStatement.executeQuery();
 
-            Integer postID;
-            if(rs.getObject("post.post_id") == null) {
-                postID = null;
-            } else {
-                postID = rs.getInt("post.post_id");
+            int sizePerPage = 6;
+            int pageNumber=0;
+            while (rs.next()){
+                int listNumber=rs.getInt("listNumber");
+                pageNumber = listNumber/sizePerPage;
+                if(listNumber<sizePerPage){
+                    ++pageNumber;
+                }
+                else if(listNumber%sizePerPage != 0){
+                    ++pageNumber;
+                }
             }
 
-            String avatar=rs.getString("user.avatar");
-            String name = rs.getString("user.name");
-            String description = rs.getString("user.description");
+            return pageNumber;
+        }catch (Exception e){
+            e.printStackTrace();
+            return 0;
+        }
+    }
+    public ArrayList<PostBEAN> getAllPostInTopicByPage(int topicId,int pageIndex) throws Exception {
+        ArrayList<PostBEAN> list = new ArrayList<>();
+        Connection conn = connectDb();
+        PreparedStatement preparedStatement = conn.prepareStatement("select * from " +
+                " (select row_number() over (order by id asc) as stt ,id,from_user,topic_id,content,create_time,edit_time,post_id,delete_time " +
+                " from post " +
+                " where topic_id= ? " +
+                " ) as x " +
+                " inner join user on user.username = x.from_user " +
+                " where stt between ? and ? " +
+                " order by create_time DESC");
+
+        int sizePerPage = 6;
+        preparedStatement.setInt(1,topicId);
+        preparedStatement.setInt(2,pageIndex*sizePerPage-(sizePerPage-1));
+        preparedStatement.setInt(3,pageIndex*sizePerPage);
+
+        ResultSet rs = preparedStatement.executeQuery();
+        while (rs.next()){
+            int ID = rs.getInt("id");
+            String fromUser=rs.getString("from_user");
+            int topicID=rs.getInt("topic_id");
+            String content = rs.getString("content");
+            Timestamp createTime = rs.getTimestamp("create_time");
+            Timestamp editTime=rs.getTimestamp("edit_time");
+            Timestamp deleteTime = rs.getTimestamp("delete_time");
+
+            Integer postID;
+            if(rs.getObject("post_id") == null) {
+                postID = null;
+            } else {
+                postID = rs.getInt("post_id");
+            }
+
+            String avatar=rs.getString("avatar");
+            String name = rs.getString("name");
+            String description = rs.getString("description");
             ArrayList<String> imageList = getAllPictureInPost(ID);
             PostBEAN postBEAN = new PostBEAN(ID,fromUser,topicID,content,createTime,editTime,postID,avatar,name,description,imageList,deleteTime);
             list.add(postBEAN);
         }
         return list;
     }
+
+    //
     public void addPost(PostBEAN postBEAN) throws Exception {
         try{
             Connection conn = connectDb();
@@ -172,6 +211,8 @@ public class PostDAO {
             e.printStackTrace();
         }
     }
+
+
 //    // Xoá các post mà khoả chính id không phải là khoá ngoại của post khác (topic_id)
 //    public void deletePost_IDisNotFK(int postID) {
 //        try {

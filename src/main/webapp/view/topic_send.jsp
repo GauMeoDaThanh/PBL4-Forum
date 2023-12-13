@@ -8,6 +8,8 @@
 <html lang="en">
 <%
     UserBEAN user = (UserBEAN) session.getAttribute("user");
+    int pageNumber = (int) request.getAttribute("pageNumber");
+    int pageIndex = (int) request.getAttribute("pageIndex");
     ArrayList<TopicBEAN> list= (ArrayList<TopicBEAN>) request.getAttribute("listTopic");
 %>
 
@@ -38,25 +40,6 @@
 </head>
 
 <body>
-<!-- Topbar Start -->
-<div class="fixed-top container-fluid bg-dark py-2 d-none d-md-flex">
-    <div class="container">
-        <div class="d-flex justify-content-between topbar">
-            <div class="top-info">
-                <small class="me-3 text-white-50"><a href="#"><i class="fas fa-map-marker-alt me-2 text-secondary"></i></a>54 Nguyễn Lương Bằng, Đà Nẵng</small>
-                <small class="me-3 text-white-50"><a href="#"><i class="fas fa-envelope me-2 text-secondary"></i></a>PBL4@gmail.com</small>
-            </div>
-            <div id="note" class="text-secondary d-none d-xl-flex"><small>Đến với chúng tôi, mọi thứ rất dễ dàng</small></div>
-            <div class="top-link">
-                <a href="" class="bg-light nav-fill btn btn-sm-square rounded-circle"><i class="fab fa-facebook-f text-primary"></i></a>
-                <a href="" class="bg-light nav-fill btn btn-sm-square rounded-circle"><i class="fab fa-twitter text-primary"></i></a>
-                <a href="" class="bg-light nav-fill btn btn-sm-square rounded-circle"><i class="fab fa-instagram text-primary"></i></a>
-                <a href="" class="bg-light nav-fill btn btn-sm-square rounded-circle me-0"><i class="fab fa-linkedin-in text-primary"></i></a>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- Topbar End -->
 
 <!-- Navbar Start -->
 <jsp:include page="header.jsp"/>
@@ -90,9 +73,9 @@
                 <div class="card mb-2" style="background-color: #E5F2FF;">
                     <div class="card-body d-flex">
                         <div class="col-7 d-flex">
-                            <a href="${pageContext.request.contextPath}/Profile/Info?username=<%=user.getUsername()%>"><img src="${pageContext.request.contextPath}/image/<%=topic.getAvatar()==null  || topic.getAvatar().equals("") ? "29.jpg" : topic.getAvatar()%>" class="mr-3 rounded-circle" width="70" height="70" alt="User" /></a>
+                            <a href="${pageContext.request.contextPath}/Profile/Info?username=<%=topic.getFrom_user()%>"><img src="${pageContext.request.contextPath}/image/<%=topic.getAvatar()==null  || topic.getAvatar().equals("") ? "29.jpg" : topic.getAvatar()%>" class="mr-3 rounded-circle" width="70" height="70" alt="User" /></a>
                             <div class="media-body mx-2">
-                                <h4><a href="${pageContext.request.contextPath}/Topic/Info?topicID=<%=topic.getId()%>" class="text-body"><strong><%=topic.getTopic_name()%></strong></a></h4>
+                                <h4><a href="${pageContext.request.contextPath}/Topic/Info?topicID=<%=topic.getId()%>&pageIndex=1" class="text-body"><strong><%=topic.getTopic_name()%></strong></a></h4>
                                 <p class="text-muted"><a href="${pageContext.request.contextPath}/Profile/Info?username=<%=topic.getFrom_user()%>" class="text-primary"><%=topic.getFrom_user()%></a> at <span class="text-dark font-weight-bold"><%=createTime%></span></p>
                             </div>
                         </div>
@@ -116,19 +99,60 @@
         <%
             }
         %>
-
-        <div class="row">
+        <div class="row m-4">
             <nav aria-label="Page navigation example">
-                <ul class="pagination justify-content-center">
-                    <li class="page-item disabled">
-                        <a class="page-link" href="#" tabindex="-1">Quay lại</a>
+                <ul class="pagination justify-content-center" id="pagination">
+                    <%
+                        if(pageIndex==1 || pageNumber==1){
+
+                    %>
+                    <li class="page-item disabled" id="previousPage">
+                        <a class="page-link" href="#" tabindex="-1">Trước</a>
                     </li>
-                    <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                    <li class="page-item">
-                        <a class="page-link" href="#">Tiếp</a>
+                    <%
+                    } else{
+                    %>
+                    <li class="page-item" id="previousPage">
+                        <a class="page-link" href="${pageContext.request.contextPath}/Topic/Send?pageIndex=<%=pageIndex-1%>" tabindex="-1">Trước</a>
                     </li>
+                    <%
+                        }
+                    %>
+                    <%--                            --%>
+
+                    <%
+                        for(int i=1;i<=pageNumber;i++) {
+                            if(pageIndex==i){
+                    %>
+                    <li class="page-item active"><a class="page-link" href="${pageContext.request.contextPath}/Topic/Send?pageIndex=<%=i%>"><%=i%></a></li>
+                    <%
+                    }
+                            else{
+
+                    %>
+                    <li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/Topic/Send?pageIndex=<%=i%>"><%=i%></a></li>
+                    <%
+                            }
+                    %>
+                    <%
+                        }
+                    %>
+                    <%--                            --%>
+                    <%
+                        if(pageIndex==pageNumber || pageNumber==1) {
+                    %>
+                    <li class="page-item disabled" id="nextPage">
+                        <a class="page-link" href="#">Sau</a>
+                    </li>
+                    <%
+                    } else{
+                    %>
+                    <li class="page-item" id="nextPage">
+                        <a class="page-link" href="${pageContext.request.contextPath}/Topic/Send?pageIndex=<%=pageIndex+1%>">Sau</a>
+                    </li>
+                    <%
+                        }
+                    %>
                 </ul>
             </nav>
         </div>
@@ -157,23 +181,11 @@
                             <div class="mb-3">
                                 <label for="select-from-location" class="col-form-label">Địa điểm đi</label>
                                 <select name="new_topic_from_location" id="select-from-location" class="form-select" aria-label="Default select example">
-<%--                                    <option value="An Giang" selected>An Giang</option>--%>
-<%--                                    <option value="Hà Nội">Hà Nội</option>--%>
-<%--                                    <option value="Phú Quốc">Phú Quốc</option>--%>
-<%--                                    <option value="Đà Nẵng">Đà Nẵng</option>--%>
-<%--                                    <option value="Hồ Chí Minh">Hồ Chí Minh</option>--%>
-<%--                                    <option value="Nha Trang">Nha Trang</option>--%>
                                 </select>
                             </div>
                             <div class="mb-3">
                                 <label for="select-to-location" class="col-form-label">Địa điểm đến</label>
                                 <select name="new_topic_to_location" id="select-to-location" class="form-select" aria-label="Default select example">
-<%--                                    <option value="An Giang" selected>An Giang</option>--%>
-<%--                                    <option value="Hà Nội">Hà Nội</option>--%>
-<%--                                    <option value="Phú Quốc">Phú Quốc</option>--%>
-<%--                                    <option value="Đà Nẵng">Đà Nẵng</option>--%>
-<%--                                    <option value="Hồ Chí Minh">Hồ Chí Minh</option>--%>
-<%--                                    <option value="Nha Trang">Nha Trang</option>--%>
                                 </select>
                             </div>
                             <div class="mb-3">

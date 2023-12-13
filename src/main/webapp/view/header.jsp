@@ -10,11 +10,30 @@
 <%
     UserBEAN user = (UserBEAN) session.getAttribute("user"); %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<!-- Topbar Start -->
+<div class="fixed-top bg-dark py-2 d-none d-md-flex">
+    <div class="container">
+        <div class="d-flex justify-content-between topbar">
+            <div class="top-info">
+                <small class="me-3 text-white-50"><a href="#"><i class="fas fa-map-marker-alt me-2 text-secondary"></i></a>ĐHBK Đà Nẵng</small>
+                <small class="me-3 text-white-50"><a href="#"><i class="fas fa-envelope me-2 text-secondary"></i></a>PBL4@gmail.com</small>
+            </div>
+            <div id="note" class="text-secondary d-none d-xl-flex"><small>Đến với chúng tôi, mọi thứ rất dễ dàng</small></div>
+            <div class="top-link">
+                <a href="" class="bg-light nav-fill btn btn-sm-square rounded-circle"><i class="fab fa-facebook-f text-primary"></i></a>
+                <a href="" class="bg-light nav-fill btn btn-sm-square rounded-circle"><i class="fab fa-twitter text-primary"></i></a>
+                <a href="" class="bg-light nav-fill btn btn-sm-square rounded-circle"><i class="fab fa-instagram text-primary"></i></a>
+                <a href="" class="bg-light nav-fill btn btn-sm-square rounded-circle me-0"><i class="fab fa-linkedin-in text-primary"></i></a>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Topbar End -->
 <!-- Navbar Start -->
-<div class="fixed-top my-5 container-fluid bg-primary">
+<div class="fixed-top my-5 bg-primary">
     <div class="container">
         <nav class="navbar navbar-dark navbar-expand-lg py-0">
-            <a href="../Home/" class="navbar-brand">
+            <a href="${pageContext.request.contextPath}/Home/" class="navbar-brand">
                 <h1 class="text-white fw-bold d-block">Trans<span class="text-secondary">Port</span> </h1>
             </a>
             <button type="button" class="navbar-toggler me-0" data-bs-toggle="collapse"
@@ -28,10 +47,11 @@
                     <a href="${pageContext.request.contextPath}/Chat/View" class="nav-item nav-link">Chat</a>
                 </div>
             </div>
-            <div class="d-none d-xl-flex flex-shirink-0 align-items-center">
-                <form action="../Topic/Search" method="post" class="input-group" style="width: auto;">
+            <div class="d-flex align-items-center">
+                <form action="${pageContext.request.contextPath}/Topic/Search" method="get" class="input-group" style="width: auto;">
                     <div class="form-outline">
                         <input name="txtSearch" type="text" id="form1" class="form-control" placeholder="Tìm kiếm topic" required/>
+                        <input name="pageIndex" value="1" type="hidden">
                     </div>
                     <button type="submit" class="btn btn-primary">
                         <i class="fas fa-search"></i>

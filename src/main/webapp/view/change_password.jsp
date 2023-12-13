@@ -16,22 +16,16 @@
 
         <!-- Icon Font Stylesheet -->
 
-        <link rel="stylesheet" href="${pageContext.request.contextPath}
-/assets/library/fontawesome-free-6.4.2-web/css/all.css">
-        <link rel="stylesheet" href="${pageContext.request.contextPath}
-/assets/library/bootstrap-icons-1.11.1/bootstrap-icons.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/library/fontawesome-free-6.4.2-web/css/all.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/library/bootstrap-icons-1.11.1/bootstrap-icons.css">
         <!-- Libraries Stylesheet -->
 
-        <link rel="stylesheet" href="${pageContext.request.contextPath}
-/assets/lib/animate/animate.min.css">
-        <link rel="stylesheet" href="${pageContext.request.contextPath}
-/assets/lib/owlcarousel/assets/owl.carousel.min.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/lib/animate/animate.min.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/lib/owlcarousel/assets/owl.carousel.min.css">
 
-        <link rel="stylesheet" href="${pageContext.request.contextPath}
-/assets/css/bootstrap.min.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/bootstrap.min.css">
         <!-- style.css -->
-        <link rel="stylesheet" href="${pageContext.request.contextPath}
-/assets/css/style.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/style.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
         <script>
             $(document).on("submit", "#form-password", function (event) {
@@ -51,25 +45,6 @@
     </head>
 
     <body>
-        <!-- Topbar Start -->
-        <div class="fixed-top container-fluid bg-dark py-2 d-none d-md-flex">
-            <div class="container">
-                <div class="d-flex justify-content-between topbar">
-                    <div class="top-info">
-                        <small class="me-3 text-white-50"><a href="#"><i class="fas fa-map-marker-alt me-2 text-secondary"></i></a>54 Nguyễn Lương Bằng, Đà Nẵng</small>
-                        <small class="me-3 text-white-50"><a href="#"><i class="fas fa-envelope me-2 text-secondary"></i></a>PBL4@gmail.com</small>
-                    </div>
-                    <div id="note" class="text-secondary d-none d-xl-flex"><small>Đến với chúng tôi, mọi thứ rất dễ dàng</small></div>
-                    <div class="top-link">
-                        <a href="" class="bg-light nav-fill btn btn-sm-square rounded-circle"><i class="fab fa-facebook-f text-primary"></i></a>
-                        <a href="" class="bg-light nav-fill btn btn-sm-square rounded-circle"><i class="fab fa-twitter text-primary"></i></a>
-                        <a href="" class="bg-light nav-fill btn btn-sm-square rounded-circle"><i class="fab fa-instagram text-primary"></i></a>
-                        <a href="" class="bg-light nav-fill btn btn-sm-square rounded-circle me-0"><i class="fab fa-linkedin-in text-primary"></i></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Topbar End -->
         <jsp:include page="header.jsp"/>
 
         <main class="content" style="margin-top: 150px; margin-bottom: 150px;">

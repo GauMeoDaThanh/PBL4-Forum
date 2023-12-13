@@ -39,31 +39,13 @@
     </head>
 
     <body>
-        <!-- Topbar Start -->
-        <div class="fixed-top container-fluid bg-dark py-2 d-none d-md-flex">
-            <div class="container">
-                <div class="d-flex justify-content-between topbar">
-                    <div class="top-info">
-                        <small class="me-3 text-white-50"><a href="#"><i class="fas fa-map-marker-alt me-2 text-secondary"></i></a>54 Nguyễn Lương Bằng, Đà Nẵng</small>
-                        <small class="me-3 text-white-50"><a href="#"><i class="fas fa-envelope me-2 text-secondary"></i></a>PBL4@gmail.com</small>
-                    </div>
-                    <div id="note" class="text-secondary d-none d-xl-flex"><small>Đến với chúng tôi, mọi thứ rất dễ dàng</small></div>
-                    <div class="top-link">
-                        <a href="" class="bg-light nav-fill btn btn-sm-square rounded-circle"><i class="fab fa-facebook-f text-primary"></i></a>
-                        <a href="" class="bg-light nav-fill btn btn-sm-square rounded-circle"><i class="fab fa-twitter text-primary"></i></a>
-                        <a href="" class="bg-light nav-fill btn btn-sm-square rounded-circle"><i class="fab fa-instagram text-primary"></i></a>
-                        <a href="" class="bg-light nav-fill btn btn-sm-square rounded-circle me-0"><i class="fab fa-linkedin-in text-primary"></i></a>
-                    </div>
-                </div>
-            </div>
-        </div>
         <jsp:include page="header.jsp"/>
-        <!-- Topbar End -->
+<%--        --%>
         <main class="content" style="margin-top: 150px; margin-bottom: 150px;">
             <!-- Bài nhận vận chuyển -->
             <div class="container">
                 <div class="row border-top">
-                    <a href="${pageContext.request.contextPath}/Topic/receive">
+                    <a href="${pageContext.request.contextPath}/Topic/Receive?pageIndex=1">
                         <h4 class="p-2 bg-primary text-secondary border-top" style="display: block;">BÀI NHẬN VẬN CHUYỂN</h4>
                     </a>
                 </div>
@@ -79,9 +61,9 @@
                         <div class="card mb-2" style="background-color: #E5F2FF;">
                             <div class="card-body d-flex">
                                 <div class="col-7 d-flex">
-                                    <a href="${pageContext.request.contextPath}/Profile/Info?username=<%=user.getUsername()%>"><img src="${pageContext.request.contextPath}/image/<%=topic.getAvatar()==null  || topic.getAvatar().equals("") ? "29.jpg" : topic.getAvatar()%>" class="mr-3 rounded-circle" width="70" height="70" alt="User" /></a>
+                                    <a href="${pageContext.request.contextPath}/Profile/Info?username=<%=topic.getFrom_user()%>"><img src="${pageContext.request.contextPath}/image/<%=topic.getAvatar()==null  || topic.getAvatar().equals("") ? "29.jpg" : topic.getAvatar()%>" class="mr-3 rounded-circle" width="70" height="70" alt="User" /></a>
                                     <div class="media-body mx-2">
-                                        <h4><a href="${pageContext.request.contextPath}/Topic/Info?topicID=<%=topic.getId()%>" class="text-body"><strong><%=topic.getTopic_name()%></strong></a></h4>
+                                        <h4><a href="${pageContext.request.contextPath}/Topic/Info?topicID=<%=topic.getId()%>&pageIndex=1" class="text-body"><strong><%=topic.getTopic_name()%></strong></a></h4>
                                         <p class="text-muted"><a href="${pageContext.request.contextPath}/Profile/Info?username=<%=topic.getFrom_user()%>" class="text-primary"><%=topic.getFrom_user()%></a> at <span class="text-dark font-weight-bold"><%=createTime%></span></p>
                                     </div>
                                 </div>
@@ -110,7 +92,7 @@
             <!-- Bài gửi vận chuyển -->
             <div class="container py-5">
                 <div class="row border-top">
-                    <a href="${pageContext.request.contextPath}/Topic/send">
+                    <a href="${pageContext.request.contextPath}/Topic/Send?pageIndex=1">
                         <h4 class="p-2 bg-primary text-secondary border-top" style="display: block;">BÀI GỬI VẬN CHUYỂN</h4>
                     </a>
                 </div>
@@ -126,9 +108,9 @@
                         <div class="card mb-2" style="background-color: #E5F2FF;">
                             <div class="card-body d-flex">
                                 <div class="col-7 d-flex">
-                                    <a href="${pageContext.request.contextPath}/Profile/Info?username=<%=user.getUsername()%>"><img src="${pageContext.request.contextPath}/image/<%=topic.getAvatar()==null  || topic.getAvatar().equals("") ? "29.jpg" : topic.getAvatar()%>" class="mr-3 rounded-circle" width="70" height="70" alt="User" /></a>
+                                    <a href="${pageContext.request.contextPath}/Profile/Info?username=<%=topic.getFrom_user()%>"><img src="${pageContext.request.contextPath}/image/<%=topic.getAvatar()==null  || topic.getAvatar().equals("") ? "29.jpg" : topic.getAvatar()%>" class="mr-3 rounded-circle" width="70" height="70" alt="User" /></a>
                                     <div class="media-body mx-2">
-                                        <h4><a href="${pageContext.request.contextPath}/Topic/Info?topicID=<%=topic.getId()%>" class="text-body"><strong><%=topic.getTopic_name()%></strong></a></h4>
+                                        <h4><a href="${pageContext.request.contextPath}/Topic/Info?topicID=<%=topic.getId()%>&pageIndex=1" class="text-body"><strong><%=topic.getTopic_name()%></strong></a></h4>
                                         <p class="text-muted"><a href="${pageContext.request.contextPath}/Profile/Info?username=<%=topic.getFrom_user()%>" class="text-primary"><%=topic.getFrom_user()%></a> at <span class="text-dark font-weight-bold"><%=createTime%></span></p>
                                     </div>
                                 </div>

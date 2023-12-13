@@ -74,7 +74,7 @@ public class PostServlet extends HttpServlet {
                     postBO.addPost(postBEAN);
 
                     // Load lại trang post sau khi thêm
-                    resp.sendRedirect( req.getContextPath()+"/Topic/Info?topicID="+topic_id);
+                    resp.sendRedirect( req.getContextPath()+"/Topic/Info?topicID="+topic_id+"&pageIndex=1");
 
                 }catch (Exception e) {
                     e.printStackTrace();
@@ -115,7 +115,7 @@ public class PostServlet extends HttpServlet {
 
                     PostBO postBO = new PostBO();
                     postBO.updatePost(post);
-                    resp.sendRedirect( req.getContextPath()+"/Topic/Info?topicID="+topicId);
+                    resp.sendRedirect( req.getContextPath()+"/Topic/Info?topicID="+topicId+"&pageIndex=1");
 
                 }catch (Exception e){
                     e.printStackTrace();
@@ -130,7 +130,7 @@ public class PostServlet extends HttpServlet {
 
                     int topicID = Integer.parseInt(req.getParameter("topicId"));
                     System.out.println(topicID);
-                    resp.sendRedirect(req.getContextPath()+"/Topic/Info?topicID="+topicID);
+                    resp.sendRedirect(req.getContextPath()+"/Topic/Info?topicID="+topicID+"&pageIndex=1");
                 }catch (Exception e) {
                     e.printStackTrace();
                 }

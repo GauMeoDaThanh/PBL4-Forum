@@ -9,6 +9,9 @@
 <html lang="en">
 <%
     UserBEAN user = (UserBEAN) session.getAttribute("user");
+
+    int pageIndex = (int) request.getAttribute("pageIndex");
+    int pageNumber = (int) request.getAttribute("pageNumber");
     TopicBEAN topic = (TopicBEAN) request.getAttribute("topic");
     ArrayList<PostBEAN> listPost = (ArrayList<PostBEAN>) request.getAttribute("listPost");
     SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
@@ -40,26 +43,6 @@
 </head>
 
 <body>
-<!-- Topbar Start -->
-<div class="fixed-top container-fluid bg-dark py-2 d-none d-md-flex">
-    <div class="container">
-        <div class="d-flex justify-content-between topbar">
-            <div class="top-info">
-                <small class="me-3 text-white-50"><a href="#"><i class="fas fa-map-marker-alt me-2 text-secondary"></i></a>54 Nguyễn Lương Bằng, Đà Nẵng</small>
-                <small class="me-3 text-white-50"><a href="#"><i class="fas fa-envelope me-2 text-secondary"></i></a>PBL4@gmail.com</small>
-            </div>
-            <div id="note" class="text-secondary d-none d-xl-flex"><small>Đến với chúng tôi, mọi thứ rất dễ dàng</small></div>
-            <div class="top-link">
-                <a href="" class="bg-light nav-fill btn btn-sm-square rounded-circle"><i class="fab fa-facebook-f text-primary"></i></a>
-                <a href="" class="bg-light nav-fill btn btn-sm-square rounded-circle"><i class="fab fa-twitter text-primary"></i></a>
-                <a href="" class="bg-light nav-fill btn btn-sm-square rounded-circle"><i class="fab fa-instagram text-primary"></i></a>
-                <a href="" class="bg-light nav-fill btn btn-sm-square rounded-circle me-0"><i class="fab fa-linkedin-in text-primary"></i></a>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- Topbar End -->
-
 <!-- Navbar Start -->
 <jsp:include page="header.jsp"/>
 <!-- Navbar End -->
@@ -74,7 +57,7 @@
                 </div>
                 <div class="mx-2 d-flex align-items-center">
                     <i class="fa-solid fa-clock" style="color: orange; font-size: large;"></i>
-                    <span class="mx-1 text-dark"><%="Bài đăng lúc: "+dateFormat.format(topic.getCreate_time())%></span>
+                    <span class="mx-1 text-dark"><strong>Bài đăng lúc: </strong><%=dateFormat.format(topic.getCreate_time())%></span>
                 </div>
                 <%
                     if(topic.getEdit_time()!=null) {
@@ -82,7 +65,7 @@
                 %>
                 <div class="mx-2 d-flex align-items-center">
                     <i class="bi bi-pen" style="color: blue; font-size: large;"></i>
-                    <span class="mx-1 text-dark"><%="Chỉnh sửa lúc: "+dateFormat.format(topic.getEdit_time())%></span>
+                    <span class="mx-1 text-dark"><strong>Chỉnh sửa lúc: </strong><%=dateFormat.format(topic.getEdit_time())%></span>
                 </div>
                 <%
                     }
@@ -521,19 +504,64 @@
         %>
     </div>
     <div class="container">
-        <nav aria-label="Page navigation example" class="my-5">
-            <ul class="pagination justify-content-center">
-                <li class="page-item disabled">
-                    <a class="page-link" href="#" tabindex="-1">Previous</a>
-                </li>
-                <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                <li class="page-item">
-                    <a class="page-link" href="#">Next</a>
-                </li>
-            </ul>
-        </nav>
+        <div class="row m-4">
+            <nav aria-label="Page navigation example">
+                <ul class="pagination justify-content-center" id="pagination">
+                    <%
+                        if(pageIndex==1 || pageNumber==1){
+
+                    %>
+                    <li class="page-item disabled" id="previousPage">
+                        <a class="page-link" href="#" tabindex="-1">Trước</a>
+                    </li>
+                    <%
+                    } else{
+                    %>
+                    <li class="page-item" id="previousPage">
+                        <a class="page-link" href="${pageContext.request.contextPath}/Topic/Info?topicID=<%=topic.getId()%>&pageIndex=<%=pageIndex-1%>" tabindex="-1">Trước</a>
+                    </li>
+                    <%
+                        }
+                    %>
+                    <%--                            --%>
+
+                    <%
+                        for(int i=1;i<=pageNumber;i++) {
+                            if(pageIndex==i){
+                    %>
+                    <li class="page-item active"><a class="page-link" href="${pageContext.request.contextPath}/Topic/Info?topicID=<%=topic.getId()%>&pageIndex=<%=i%>"><%=i%></a></li>
+                    <%
+                    }
+                    else{
+
+                    %>
+                    <li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/Topic/Info?topicID=<%=topic.getId()%>&pageIndex=<%=i%>"><%=i%></a></li>
+                    <%
+                        }
+                    %>
+                    <%
+                        }
+                    %>
+                    <%--                            --%>
+                    <%
+                        if(pageIndex==pageNumber || pageNumber==1) {
+                    %>
+                    <li class="page-item disabled" id="nextPage">
+                        <a class="page-link" href="#">Sau</a>
+                    </li>
+                    <%
+                    } else{
+                    %>
+                    <li class="page-item" id="nextPage">
+                        <a class="page-link" href="${pageContext.request.contextPath}/Topic/Info?topicID=<%=topic.getId()%>&pageIndex=<%=pageIndex+1%>">Sau</a>
+                    </li>
+                    <%
+                        }
+                    %>
+                </ul>
+            </nav>
+        </div>
+
     </div>
     <div class="container">
         <div class="row rounded border mt-3" id="element-focus-reply">

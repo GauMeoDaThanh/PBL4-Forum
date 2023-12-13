@@ -7,9 +7,15 @@ import java.util.ArrayList;
 
 public class PostBO {
     PostDAO postDAO = new PostDAO();
-    public ArrayList<PostBEAN> getAllPostInTopic(int topicId) throws Exception {
-        return postDAO.getAllPostInTopic(topicId);
+    // get ALl Post By Page + Pagination
+    public int getPostPageNumber(int topicID) throws Exception {
+        return postDAO.getPostPageNumber(topicID);
     }
+    public ArrayList<PostBEAN> getAllPostInTopicByPage(int topicId,int pageIndex) throws Exception {
+        return postDAO.getAllPostInTopicByPage(topicId,pageIndex);
+    }
+
+    //
     public void addPost(PostBEAN postBEAN) throws Exception{
         postDAO.addPost(postBEAN);
     }

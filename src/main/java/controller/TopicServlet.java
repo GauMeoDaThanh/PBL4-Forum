@@ -33,21 +33,34 @@ public class TopicServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String action=req.getPathInfo().substring(1);
         switch (action) {
-            case "receive":
+            case "Receive":
                 try{
                     TopicBO topicBO = new TopicBO();
-                    ArrayList<TopicBEAN> list = topicBO.getAllTopicReceive();
+
+                    int pageNumber = topicBO.getTopicPageNumberByTopicTypeId(1);
+                    int pageIndex = Integer.parseInt(req.getParameter("pageIndex"));
+                    ArrayList<TopicBEAN> list = topicBO.getAllTopicReceiveByPage(pageIndex);
+
+                    req.setAttribute("pageNumber",pageNumber);
+                    req.setAttribute("pageIndex",pageIndex);
                     req.setAttribute("listTopic",list);
                     req.getRequestDispatcher("../view/topic_receive.jsp").forward(req,resp);
                 }catch (Exception e) {
                     throw new RuntimeException(e);
                 }
                 break;
-            case "send":
+            case "Send":
                 try{
                     TopicBO topicBO = new TopicBO();
-                    ArrayList<TopicBEAN> list = topicBO.getAllTopicSend();
+
+                    int pageNumber = topicBO.getTopicPageNumberByTopicTypeId(2);
+                    int pageIndex = Integer.parseInt(req.getParameter("pageIndex"));
+                    ArrayList<TopicBEAN> list = topicBO.getAllTopicSendByPage(pageIndex);
+
+                    req.setAttribute("pageNumber",pageNumber);
+                    req.setAttribute("pageIndex",pageIndex);
                     req.setAttribute("listTopic",list);
+
                     req.getRequestDispatcher("../view/topic_send.jsp").forward(req,resp);
                 }catch (Exception e) {
                     throw new RuntimeException(e);
@@ -55,11 +68,18 @@ public class TopicServlet extends HttpServlet {
                 break;
             case "Info":
                 try {
-                    int topicID = Integer.parseInt(req.getParameter("topicID"));
                     TopicBO topicBO = new TopicBO();
-                    TopicBEAN topicBEAN = topicBO.getTopicById(topicID);
                     PostBO postBO =new PostBO();
-                    ArrayList<PostBEAN> list = postBO.getAllPostInTopic(topicID);
+
+                    int topicID = Integer.parseInt(req.getParameter("topicID"));
+                    int pageIndex = Integer.parseInt(req.getParameter("pageIndex"));
+                    int pageNumber = postBO.getPostPageNumber(topicID);
+
+
+                    TopicBEAN topicBEAN = topicBO.getTopicById(topicID);
+                    ArrayList<PostBEAN> list = postBO.getAllPostInTopicByPage(topicID,pageIndex);
+                    req.setAttribute("pageIndex",pageIndex);
+                    req.setAttribute("pageNumber",pageNumber);
                     req.setAttribute("topic",topicBEAN);
                     req.setAttribute("listPost",list);
                     req.getRequestDispatcher("../view/post.jsp").forward(req,resp);
@@ -67,7 +87,25 @@ public class TopicServlet extends HttpServlet {
                     throw new RuntimeException(e);
                 }
                 break;
+            case "Search":
+                try {
+                    TopicBO topicBO = new TopicBO();
 
+                    String txtSearch = req.getParameter("txtSearch");
+                    System.out.println("2========"+txtSearch);
+                    int pageIndex = Integer.parseInt(req.getParameter("pageIndex"));
+                    int pageNumber = topicBO.getTopicPageNumberBySearch(txtSearch);
+
+                    ArrayList<TopicBEAN> list = topicBO.searchTopic(txtSearch,pageIndex);
+                    req.setAttribute("txtSearch",txtSearch);
+                    req.setAttribute("pageIndex",pageIndex);
+                    req.setAttribute("pageNumber",pageNumber);
+                    req.setAttribute("listSearch",list);
+                    req.getRequestDispatcher("../view/search_topic.jsp").forward(req,resp);
+                    break;
+                }catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
         }
     }
 
@@ -120,7 +158,6 @@ public class TopicServlet extends HttpServlet {
 
                             imageList.add(img);
                         }
-
                     }
                     String contentPost = req.getParameter("new_topic_content");
                     Timestamp createTimePost = newTopic.getCreate_time();
@@ -129,9 +166,9 @@ public class TopicServlet extends HttpServlet {
                     PostBO postBO = new PostBO();
                     postBO.addPost(postBEAN);
                     if(topicTypeId==1) {
-                        resp.sendRedirect(req.getContextPath()+"/Topic/receive");
+                        resp.sendRedirect(req.getContextPath()+"/Topic/Receive?pageIndex=1");
                     } else {
-                        resp.sendRedirect(req.getContextPath()+"/Topic/send");
+                        resp.sendRedirect(req.getContextPath()+"/Topic/Send?pageIndex=1");
                     }
                 }catch (Exception e) {
                     throw new RuntimeException(e);
@@ -179,25 +216,14 @@ public class TopicServlet extends HttpServlet {
                     topicBO.deleteTopicById(topicID);
 
                     if(topidTypeId==1) {
-                        resp.sendRedirect(req.getContextPath()+"/Topic/receive");
+                        resp.sendRedirect(req.getContextPath()+"/Topic/Receive?pageIndex=1");
                     } else {
-                        resp.sendRedirect(req.getContextPath()+"/Topic/send");
+                        resp.sendRedirect(req.getContextPath()+"/Topic/Send?pageIndex=1");
                     }
                 }catch (Exception e) {
                     throw new RuntimeException(e);
                 }
                 break;
-            case "Search":
-                try {
-                    String txtSearch = req.getParameter("txtSearch");
-                    TopicBO topicBO = new TopicBO();
-                    ArrayList<TopicBEAN> list = topicBO.searchTopic(txtSearch);
-                    req.setAttribute("listSearch",list);
-                    req.getRequestDispatcher("../view/search_topic.jsp").forward(req,resp);
-                    break;
-                }catch (Exception e) {
-                    throw new RuntimeException(e);
-                }
         }
     }
 }

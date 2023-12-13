@@ -8,6 +8,10 @@
 <html lang="en">
 <%
     UserBEAN user = (UserBEAN) session.getAttribute("user");
+    String txtSearch = (String) request.getAttribute("txtSearch");
+    System.out.println(txtSearch);
+    int pageIndex = (int) request.getAttribute("pageIndex");
+    int pageNumber = (int) request.getAttribute("pageNumber");
     ArrayList<TopicBEAN> list = (ArrayList<TopicBEAN>) request.getAttribute("listSearch");
 
 %>
@@ -38,24 +42,7 @@
 </head>
 
 <body>
-<!-- Topbar Start -->
-<div class="fixed-top container-fluid bg-dark py-2 d-none d-md-flex">
-    <div class="container">
-        <div class="d-flex justify-content-between topbar">
-            <div class="top-info">
-                <small class="me-3 text-white-50"><a href="#"><i class="fas fa-map-marker-alt me-2 text-secondary"></i></a>54 Nguyễn Lương Bằng, Đà Nẵng</small>
-                <small class="me-3 text-white-50"><a href="#"><i class="fas fa-envelope me-2 text-secondary"></i></a>PBL4@gmail.com</small>
-            </div>
-            <div id="note" class="text-secondary d-none d-xl-flex"><small>Đến với chúng tôi, mọi thứ rất dễ dàng</small></div>
-            <div class="top-link">
-                <a href="" class="bg-light nav-fill btn btn-sm-square rounded-circle"><i class="fab fa-facebook-f text-primary"></i></a>
-                <a href="" class="bg-light nav-fill btn btn-sm-square rounded-circle"><i class="fab fa-twitter text-primary"></i></a>
-                <a href="" class="bg-light nav-fill btn btn-sm-square rounded-circle"><i class="fab fa-instagram text-primary"></i></a>
-                <a href="" class="bg-light nav-fill btn btn-sm-square rounded-circle me-0"><i class="fab fa-linkedin-in text-primary"></i></a>
-            </div>
-        </div>
-    </div>
-</div>
+
 <jsp:include page="header.jsp"/>
 <!-- Topbar End -->
 <main class="content" style="margin-top: 150px; margin-bottom: 150px; min-height: 80vh;">
@@ -63,7 +50,6 @@
         <h4 class="p-2 text-secondary text-center" style="display: block;">Kết quả tìm kiếm</h4>
         <%
             if(list.isEmpty()){
-                System.out.println(list.size());
 
         %>
         <h4 class="p-2 text-primary text-center" style="display: block;">Không có bài viết nào phù hợp</h4>
@@ -80,7 +66,7 @@
                 <div class="card mb-2" style="background-color: #E5F2FF;">
                     <div class="card-body d-flex">
                         <div class="col-7 d-flex">
-                            <a href="${pageContext.request.contextPath}/Profile/Info?username=<%=user.getUsername()%>"><img src="${pageContext.request.contextPath}/image/<%=topic.getAvatar()==null  || topic.getAvatar().equals("") ? "29.jpg" : topic.getAvatar()%>" class="mr-3 rounded-circle" width="70" height="70" alt="User" /></a>
+                            <a href="${pageContext.request.contextPath}/Profile/Info?username=<%=topic.getFrom_user()%>"><img src="${pageContext.request.contextPath}/image/<%=topic.getAvatar()==null  || topic.getAvatar().equals("") ? "29.jpg" : topic.getAvatar()%>" class="mr-3 rounded-circle" width="70" height="70" alt="User" /></a>
                             <div class="media-body mx-2">
                                 <%
                                     if(topic.getTopic_type_id()==1) {
@@ -93,7 +79,7 @@
                                 <%
                                     }
                                 %>
-                                <h4><a href="${pageContext.request.contextPath}/Topic/Info?topicID=<%=topic.getId()%>" class="text-body"><strong><%=topic.getTopic_name()%></strong></a></h4>
+                                <h4><a href="${pageContext.request.contextPath}/Topic/Info?topicID=<%=topic.getId()%>&pageIndex=1" class="text-body"><strong><%=topic.getTopic_name()%></strong></a></h4>
                                 <p class="text-muted"><a href="${pageContext.request.contextPath}/Profile/Info?username=<%=topic.getFrom_user()%>" class="text-primary"><%=topic.getFrom_user()%></a> at <span class="text-dark font-weight-bold"><%=createTime%></span></p>
                             </div>
                         </div>
@@ -117,21 +103,65 @@
         <%
                 }
         %>
-        <div class="row">
+<%--        Pagination start--%>
+        <div class="row m-4">
             <nav aria-label="Page navigation example">
-                <ul class="pagination justify-content-center">
-                    <li class="page-item disabled">
-                        <a class="page-link" href="#" tabindex="-1">Quay lại</a>
+                <ul class="pagination justify-content-center" id="pagination">
+                    <%
+                        if(pageIndex==1 || pageNumber==1){
+
+                    %>
+                    <li class="page-item disabled" id="previousPage">
+                        <a class="page-link" href="#" tabindex="-1">Trước</a>
                     </li>
-                    <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                    <li class="page-item">
-                        <a class="page-link" href="#">Tiếp</a>
+                    <%
+                    } else{
+                    %>
+                    <li class="page-item" id="previousPage">
+                        <a class="page-link" href="${pageContext.request.contextPath}/Topic/Search?txtSearch=<%=txtSearch%>&pageIndex=<%=pageIndex-1%>" tabindex="-1">Trước</a>
                     </li>
+                    <%
+                        }
+                    %>
+                    <%--                            --%>
+
+                    <%
+                        for(int i=1;i<=pageNumber;i++) {
+                            if(pageIndex==i){
+                    %>
+                    <li class="page-item active"><a class="page-link" href="${pageContext.request.contextPath}/Topic/Search?txtSearch=<%=txtSearch%>&pageIndex=<%=i%>"><%=i%></a></li>
+                    <%
+                    }
+                    else{
+
+                    %>
+                    <li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/Topic/Search?txtSearch=<%=txtSearch%>&pageIndex=<%=i%>"><%=i%></a></li>
+                    <%
+                        }
+                    %>
+                    <%
+                        }
+                    %>
+                    <%--                            --%>
+                    <%
+                        if(pageIndex==pageNumber || pageNumber==1) {
+                    %>
+                    <li class="page-item disabled" id="nextPage">
+                        <a class="page-link" href="#">Sau</a>
+                    </li>
+                    <%
+                    } else{
+                    %>
+                    <li class="page-item" id="nextPage">
+                        <a class="page-link" href="${pageContext.request.contextPath}/Topic/Search?txtSearch=<%=txtSearch%>&pageIndex=<%=pageIndex+1%>">Sau</a>
+                    </li>
+                    <%
+                        }
+                    %>
                 </ul>
             </nav>
         </div>
+<%--        Pagination end--%>
         <%
             }
         %>
