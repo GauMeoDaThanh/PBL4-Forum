@@ -101,6 +101,17 @@ function onStarClick() {
 }
 
 // Login,Register tab
+function ClickRegisterTab() {
+    var login = document.getElementById("form-login");
+    var register = document.getElementById("form-register");
+    var loginTitle = document.getElementById("LoginLabel");
+    var registerTitle = document.getElementById("RegisterLabel");
+
+    login.style.display = "none";
+    register.style.display = "block";
+    loginTitle.style.display = "none";
+    registerTitle.style.display = "block";
+}
 function ClickLoginTab() {
     var login = document.getElementById("form-login");
     var register = document.getElementById("form-register");

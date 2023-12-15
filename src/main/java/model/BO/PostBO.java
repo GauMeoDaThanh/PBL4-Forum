@@ -7,9 +7,17 @@ import java.util.ArrayList;
 
 public class PostBO {
     PostDAO postDAO = new PostDAO();
+    //
+    public int getPostIdNewAdd() throws Exception{
+        return postDAO.getPostIdNewAdd();
+    }
+    // Add Notify cho tất cả những người trong topic trừ người add post mới
+    public ArrayList<String> getAllUsernameInTopicExceptFromUser(int topic_id,String username) throws Exception{
+        return postDAO.getAllUsernameInTopicExceptFromUser(topic_id,username);
+    }
     // get ALl Post By Page + Pagination
-    public int getPostPageNumber(int topicID) throws Exception {
-        return postDAO.getPostPageNumber(topicID);
+    public int getTopicPageNumber(int topicID) throws Exception {
+        return postDAO.getTopicPageNumber(topicID);
     }
     public ArrayList<PostBEAN> getAllPostInTopicByPage(int topicId,int pageIndex) throws Exception {
         return postDAO.getAllPostInTopicByPage(topicId,pageIndex);

@@ -4,6 +4,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.*;
+import model.BEAN.NotifyBEAN;
 import model.BEAN.PostBEAN;
 import model.BEAN.TopicBEAN;
 import model.BEAN.UserBEAN;
@@ -73,8 +74,33 @@ public class PostServlet extends HttpServlet {
                     PostBO postBO = new PostBO();
                     postBO.addPost(postBEAN);
 
-                    // Load lại trang post sau khi thêm
-                    resp.sendRedirect( req.getContextPath()+"/Topic/Info?topicID="+topic_id+"&pageIndex=1");
+                    // Add Notify cho tất cả những người trong topic trừ người add post mới
+                    ArrayList<String> listUsername = postBO.getAllUsernameInTopicExceptFromUser(topic_id,from_user);
+
+                    if(listUsername.isEmpty()){
+                        // Nếu không người nào khác trong topic thì Load lại trang topic sau khi thêm post
+                        resp.sendRedirect( req.getContextPath()+"/Topic/Info?topicID="+topic_id+"&pageIndex=1");
+                    }
+                    else {
+                        // Lấy id của post mới thêm
+                        int newId = postBO.getPostIdNewAdd();
+                        ArrayList<NotifyBEAN> listNotify = new ArrayList<>();
+                        for (String username : listUsername){
+                            NotifyBEAN notify = new NotifyBEAN();
+                            notify.setFrom_user(from_user);
+                            notify.setTo_user(username);
+                            notify.setTo_post_id(newId);
+                            notify.setIs_read(false);
+                            notify.setCreate_time(Timestamp.valueOf(LocalDateTime.now()));
+                            notify.setContext(content);
+                            notify.setNotify_type_id(4);
+                            listNotify.add(notify);
+                        }
+                        req.setAttribute("listNotify",listNotify);
+                        req.setAttribute("topicId",topic_id);
+                        req.getRequestDispatcher("/Notify/AddNotifyNewPost").forward(req,resp);
+                    }
+
 
                 }catch (Exception e) {
                     e.printStackTrace();
@@ -129,7 +155,6 @@ public class PostServlet extends HttpServlet {
                     postBO.deletePost(postID);
 
                     int topicID = Integer.parseInt(req.getParameter("topicId"));
-                    System.out.println(topicID);
                     resp.sendRedirect(req.getContextPath()+"/Topic/Info?topicID="+topicID+"&pageIndex=1");
                 }catch (Exception e) {
                     e.printStackTrace();

@@ -92,7 +92,7 @@
                 }
             %>
             <%
-                if(!user.getUsername().equals(topic.getFrom_user())) {
+                if(!user.getUsername().equals(topic.getFrom_user()) && !user.getRole().equals("admin")) {
             %>
             <button class="btn btn-primary mx-2 p-2" style="width: 120px;" data-bs-toggle="modal" data-bs-target="#report-topic-modal">
                 <i class="bi bi-flag" ></i>
@@ -142,25 +142,25 @@
                         <div class="modal-body">
                             <form action="${pageContext.request.contextPath}/Notify/Add" method="post">
                                 <div class="mb-3 d-none">
-                                    <input name="topicId" value="<%=topic.getId()%>" type="hidden">
                                     <input name="from-username" value="<%=user.getUsername()%>" type="hidden">
                                     <input name="to-username" value="<%=topic.getFrom_user()%>" type="hidden">
+                                    <input name="topicId" value="<%=topic.getId()%>" type="hidden">
+                                    <input name="notify-type-id" value="2" type="hidden">
                                 </div>
                                 <div class="mb-3">
-                                    <label for="" class="form-label">Chọn lý do báo cáo</label>
+                                    <label class="form-label">Chọn lý do báo cáo</label>
                                     <div class="form-check">
-                                        <input name="select-report-reason" class="form-check-input" type="checkbox" value="1">
-                                        <label class="form-check-label" for="flexCheckDefault">Ngôn từ thù địch</label>
+                                        <input name="select-report-reason" id="selected1-1" class="form-check-input" type="checkbox" value="Ngôn từ mất kiểm soát">
+                                        <label class="form-check-label" for="selected1-1">Ngôn từ mất kiểm soát</label>
                                     </div>
-
                                     <div class="form-check">
-                                        <input name="select-report-reason" class="form-check-input" type="checkbox" value="2">
-                                        <label class="form-check-label" for="flexCheckChecked">Lừa đảo</label>
+                                        <input name="select-report-reason" id="selected1-2" class="form-check-input" type="checkbox" value="Lừa đảo">
+                                        <label class="form-check-label" for="selected1-2">Lừa đảo</label>
                                     </div>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="" class="form-label">Lý do khác</label>
-                                    <textarea name="report-other-reason" class="form-control" rows="10" placeholder="Nhập lý do khác"></textarea>
+                                    <label for="other-reason1" class="form-label">Lý do khác</label>
+                                    <textarea name="report-other-reason" id="other-reason1" class="form-control" rows="10" placeholder="Nhập lý do khác"></textarea>
                                 </div>
                                 <div class="modal-footer">
                                     <button type="reset" class="btn btn-primary" data-bs-dismiss="modal" style="width: 80px;">Huỷ</button>
@@ -306,11 +306,11 @@
                     <%
                             if(!user.getRole().equals("admin")){
                     %>
-                    <button class="icon-hover btn">
+                    <button class="icon-hover btn" data-bs-toggle="modal" data-bs-target="#report-post-modal-<%=post.getId()%>">
                         <i class="bi bi-flag" ></i>
                         Báo cáo
                     </button>
-                    <div class="modal fade" id="report-post-modal" tabindex="-1" aria-hidden="true">
+                    <div class="modal fade" id="report-post-modal-<%=post.getId()%>" tabindex="-1" aria-hidden="true">
                         <div class="modal-dialog" style="min-width: 800px;">
                             <div class="modal-content">
                                 <div class="modal-header">
@@ -319,21 +319,27 @@
                                 </div>
                                 <div class="modal-body">
                                     <form action="${pageContext.request.contextPath}/Notify/Add" method="post">
+                                        <div class="mb-3 d-none">
+                                            <input name="from-username" value="<%=user.getUsername()%>" type="hidden">
+                                            <input name="to-username" value="<%=topic.getFrom_user()%>" type="hidden">
+                                            <input name="topicId" value="<%=topic.getId()%>" type="hidden">
+                                            <input name="postId" value="<%=post.getId()%>" type="hidden">
+                                            <input name="notify-type-id" value="3" type="hidden">
+                                        </div>
                                         <div class="mb-3">
-                                            <label for="" class="form-label">Chọn lý do báo cáo</label>
+                                            <label class="form-label">Chọn lý do báo cáo</label>
                                             <div class="form-check">
-                                                <input name="" class="form-check-input" type="checkbox" value="1" id="flexCheckDefault">
-                                                <label class="form-check-label" for="flexCheckDefault">Ngôn từ thù địch</label>
+                                                <input name="select-report-reason" id="selected-1" class="form-check-input" type="checkbox" value="Ngôn từ mất kiểm soát">
+                                                <label class="form-check-label" for="selected-1">Ngôn từ mất kiểm soát</label>
                                             </div>
-
                                             <div class="form-check">
-                                                <input name="" class="form-check-input" type="checkbox" value="2" id="flexCheckChecked">
-                                                <label class="form-check-label" for="flexCheckChecked">Lừa đảo</label>
+                                                <input name="select-report-reason" id="selected-2" class="form-check-input" type="checkbox" value="Lừa đảo">
+                                                <label class="form-check-label" for="selected-2">Lừa đảo</label>
                                             </div>
                                         </div>
                                         <div class="mb-3">
-                                            <label for="" class="form-label">Lý do khác</label>
-                                            <textarea name="" id="" class="form-control" rows="10" placeholder="Nhập lý do khác"></textarea>
+                                            <label for="other-reason" class="form-label">Lý do khác</label>
+                                            <textarea name="report-other-reason" id="other-reason" class="form-control" rows="10" placeholder="Nhập lý do khác"></textarea>
                                         </div>
                                         <div class="modal-footer">
                                             <button type="reset" class="btn btn-primary" data-bs-dismiss="modal" style="width: 80px;">Huỷ</button>

@@ -13,38 +13,42 @@ public class PostDAO {
         Class.forName("com.mysql.jdbc.Driver");
         return DriverManager.getConnection("jdbc:mysql://localhost:3306/deli_forum", "root", "teamctg123");
     }
-    public PostBEAN getPostById(int postId) {
-        try {
+    //
+    public int getPostIdNewAdd(){
+        try{
             Connection conn = connectDb();
-            PreparedStatement preparedStatement = conn.prepareStatement("select * from post " +
-                    " inner join user on post.from_user = user.username " +
-                    " where post.id = " + postId);
+            PreparedStatement preparedStatement = connectDb().prepareStatement("select id " +
+                    " from post " +
+                    " order by create_time DESC " +
+                    " limit 1 ");
+            ResultSet rs = preparedStatement.executeQuery();
+            int id=0;
+            while (rs.next()){
+                id = rs.getInt("id");
+            }
+            return id;
+        }catch (Exception e){
+            e.printStackTrace();
+            return 0;
+        }
+    }
+    // Add Notify cho tất cả những người trong topic trừ người add post mới
+    public ArrayList<String> getAllUsernameInTopicExceptFromUser(int topic_id,String username){
+        try{
+            ArrayList<String> listUsername = new ArrayList<>();
+            Connection conn = connectDb();
+            PreparedStatement preparedStatement = connectDb().prepareStatement("SELECT DISTINCT from_user " +
+                    "FROM post " +
+                    "WHERE topic_id = ? " +
+                    "  AND from_user <> ? ");
+            preparedStatement.setInt(1,topic_id);
+            preparedStatement.setString(2,username);
             ResultSet rs = preparedStatement.executeQuery();
             while (rs.next()){
-                int ID = rs.getInt("post.id");
-                String fromUser=rs.getString("post.from_user");
-                int topicID=rs.getInt("post.topic_id");
-                String content = rs.getString("post.content");
-                Timestamp createTime = rs.getTimestamp("post.create_time");
-                Timestamp editTime=rs.getTimestamp("post.edit_time");
-                Timestamp deleteTime = rs.getTimestamp("delete_time");
-
-                Integer postID;
-                if(rs.getObject("post.post_id") == null) {
-                    postID = null;
-                } else {
-                    postID = rs.getInt("post.post_id");
-                }
-
-                String avatar=rs.getString("user.avatar");
-                String name = rs.getString("user.name");
-                String description = rs.getString("user.description");
-                ArrayList<String> imageList = getAllPictureInPost(ID);
-                PostBEAN postBEAN = new PostBEAN(ID,fromUser,topicID,content,createTime,editTime,postID,avatar,name,description,imageList,deleteTime);
-                return postBEAN;
+                listUsername.add(rs.getString("from_user"));
             }
-            return null;
-        }catch (Exception e) {
+            return listUsername;
+        }catch (Exception e){
             e.printStackTrace();
             return null;
         }
@@ -62,7 +66,7 @@ public class PostDAO {
         return imageList;
     }
     // Get All Post in Topic By Page + Pagination
-    public int getPostPageNumber(int topicID) {
+    public int getTopicPageNumber(int topicID) {
         try{
             Connection conn = connectDb();
             PreparedStatement preparedStatement = conn.prepareStatement(" select count(*) as listNumber from post where topic_id = ?");

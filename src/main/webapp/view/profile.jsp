@@ -11,7 +11,6 @@
 <html lang="en">
 <%
     UserBEAN user = (UserBEAN) session.getAttribute("user");
-//    ArrayList<TopicBEAN> listTopic = (ArrayList<TopicBEAN>) request.getParameter("listTopic");
     ArrayList<TopicBEAN> listTopic = (ArrayList<TopicBEAN>) request.getAttribute("listTopic");
 %>
 
@@ -82,34 +81,37 @@
                                 </c:choose>
                                 <div class="modal fade" id="modal-report" aria-labelledby="modal-report-label"
                                     aria-hidden="true">
-                                    <div class="modal-dialog modal-dialog-centered" style="min-width: 800px;" centered>
+                                    <div class="modal-dialog modal-dialog-centered" style="min-width: 800px;">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <h5 class="modal-title" id="modal-report-label">Báo cáo người dùng</h5>
-                                                <ibutton type="button" class="btn-close" data-bs-dismiss="modal"
-                                                    aria-label="Close"></ibutton>
+                                                <h5 class="modal-title" id="report-topic-modalLabel">Báo cáo <%=user.getUsername()%></h5>
+                                                <button type="reset" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                             </div>
                                             <div class="modal-body">
-                                                <form action="">
-                                                    <div class="mb-3">
-                                                        <label for="report-select" class="mb-2">Chọn Lý do báo cáo người dùng</label>
-                                                        <select name="" id="" class="form-select">
-                                                            <option value="">Ngôn từ thù địch</option>
-                                                            <option value="">Lừa đảo</option>
-                                                            <option value="">Làm hỏng hàng</option>
-                                                            <option value="">Khác</option>
-                                                        </select>
+                                                <form action="${pageContext.request.contextPath}/Notify/Add" method="post">
+                                                    <div class="mb-3 d-none">
+                                                        <input name="from-username" value="<%=user.getUsername()%>" type="hidden">
+                                                        <input name="to-username" value="${requestScope.userInfo.username}" type="hidden">
+                                                        <input name="notify-type-id" value="1" type="hidden">
                                                     </div>
                                                     <div class="mb-3">
-                                                        <div class="form-group">
-                                                            <label for="exampleFormControlTextarea1" class="mb-3">Nhập nội dung</label>
-                                                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="7"></textarea>
+                                                        <label for="" class="form-label">Chọn lý do báo cáo</label>
+                                                        <div class="form-check">
+                                                            <input name="select-report-reason" id="selected-1" class="form-check-input" type="checkbox" value="Ngôn từ mất kiểm soát">
+                                                            <label class="form-check-label" for="selected-1">Ngôn từ mất kiểm soát</label>
+                                                        </div>
+                                                        <div class="form-check">
+                                                            <input name="select-report-reason" id="selected-2" class="form-check-input" type="checkbox" value="Lừa đảo">
+                                                            <label class="form-check-label" for="selected-2">Lừa đảo</label>
                                                         </div>
                                                     </div>
-                                                    <div class="mb-3 text-center">
-                                                        <button type="reset" class="btn btn-primary mx-5"
-                                                            data-bs-dismiss="modal" style="width: 80px;">Huỷ</button>
-                                                        <button class="btn btn-success" type="submit">Báo cáo</button>
+                                                    <div class="mb-3">
+                                                        <label for="other-reason" class="form-label">Lý do khác</label>
+                                                        <textarea name="report-other-reason"  id="other-reason"  class="form-control" rows="10" placeholder="Nhập lý do khác"></textarea>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="reset" class="btn btn-primary" data-bs-dismiss="modal" style="width: 80px;">Huỷ</button>
+                                                        <button type="submit" class="btn btn-success" style="width: 100px;">OK</button>
                                                     </div>
                                                 </form>
                                             </div>
@@ -391,7 +393,9 @@
     <script src="${pageContext.request.contextPath}/assets/lib/easing/easing.min.js"></script>
     <script src="${pageContext.request.contextPath}/assets/lib/waypoints/waypoints.min.js"></script>
     <script src="${pageContext.request.contextPath}/assets/lib/owlcarousel/owl.carousel.min.js"></script>
-
+    <!-- Province API -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.26.1/axios.min.js" integrity="sha512-bPh3uwgU5qEMipS/VOmRqynnMXGGSRv+72H/N260MQeXZIK4PG48401Bsby9Nq5P5fz7hy5UGNmC/W1Z51h2GQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <!-- Template Javascript -->
     <script src="${pageContext.request.contextPath}/assets/js/main.js"></script>
 </body>

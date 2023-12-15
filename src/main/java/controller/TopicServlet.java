@@ -73,7 +73,7 @@ public class TopicServlet extends HttpServlet {
 
                     int topicID = Integer.parseInt(req.getParameter("topicID"));
                     int pageIndex = Integer.parseInt(req.getParameter("pageIndex"));
-                    int pageNumber = postBO.getPostPageNumber(topicID);
+                    int pageNumber = postBO.getTopicPageNumber(topicID);
 
 
                     TopicBEAN topicBEAN = topicBO.getTopicById(topicID);

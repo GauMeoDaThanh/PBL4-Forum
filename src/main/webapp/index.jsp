@@ -86,17 +86,17 @@
                         <div class="modal-body">
                             <form action="authenticate/login" id="form-login" style="display: block;" method="post">
                                 <div class="mb-3">
-                                    <label for="recipient-name" class="col-form-label">Tên đăng nhập</label>
-                                    <input type="text" class="form-control" id="recipient-name" placeholder="Nhập tên đăng nhập..." name="username" required>
+                                    <label for="usernameInput" class="col-form-label">Tên đăng nhập</label>
+                                    <input type="text" class="form-control" id="usernameInput" placeholder="Nhập tên đăng nhập..." name="username" required  tabindex="1">
                                 </div>
 
                                 <div class="mb-3">
-                                    <label for="recipient-name" class="col-form-label">Mật khẩu</label>
-                                    <input type="password" class="form-control" id="recipient-name" placeholder="Nhập mật khẩu..." name="password" required>
+                                    <label for="passwordInput" class="col-form-label">Mật khẩu</label>
+                                    <input type="password" class="form-control" id="passwordInput" placeholder="Nhập mật khẩu..." name="password" required>
                                 </div>
 
                                 <div class="mb-3">
-                                    <label for="recipient-name" class="col-form-label">Chưa có tài khoản</label>
+                                    <label for="register-tab" class="col-form-label">Chưa có tài khoản</label>
                                     <button href="#" class="btn btn-link" id="register-tab" onclick="ClickRegisterTab()" type="reset">Đăng ký</button>
                                 </div>
                                
@@ -107,23 +107,23 @@
                             </form>
                             <form method="post" action="authenticate/register" id="form-register" style="display: none;" oninput="password2.setCustomValidity(password2.value != password.value ? 'Mật khẩu không giống' : '')">
                                 <div class="mb-3">
-                                    <label for="recipient-name" class="col-form-label">Tên đăng nhập</label>
-                                    <input type="text" class="form-control" id="recipient-name" placeholder="Nhập tên đăng nhập..." name="username" required>
+                                    <label for="register-username" class="col-form-label">Tên đăng nhập</label>
+                                    <input type="text" class="form-control" id="register-username" placeholder="Nhập tên đăng nhập..." name="username" required>
                                 </div>
 
                                 <div class="mb-3">
-                                    <label for="recipient-name" class="col-form-label" >Mật khẩu</label>
-                                    <input type="password" class="form-control" id="password" placeholder="Nhập mật khẩu..." name="password" required>
+                                    <label for="register-password" class="col-form-label" >Mật khẩu</label>
+                                    <input type="password" class="form-control" id="register-password" placeholder="Nhập mật khẩu..." name="password" required>
                                 </div>
 
                                 <div class="mb-3">
-                                    <label for="recipient-name" class="col-form-label">Nhập lại mật khẩu</label>
-                                    <input type="password" class="form-control" name="password2" placeholder="Nhập lại mật khẩu..." required>
+                                    <label for="register-password2" class="col-form-label">Nhập lại mật khẩu</label>
+                                    <input type="password" class="form-control" id="register-password2" name="password2" placeholder="Nhập lại mật khẩu..." required>
                                 </div>
 
                                 <div class="mb-3">
                                     <p id="error" style="color: red"></p>
-                                    <label for="recipient-name" class="col-form-label">Đã có tài khoản</label>
+                                    <label for="login-tab" class="col-form-label">Đã có tài khoản</label>
                                     <button href="#" class="btn btn-link" id="login-tab" onclick="ClickLoginTab()" type="reset">Đăng nhập</button>
                                 </div>
                                
@@ -257,6 +257,9 @@
         <script src="${pageContext.request.contextPath}/assets/lib/waypoints/waypoints.min.js"></script>
         <script src="${pageContext.request.contextPath}/assets/lib/owlcarousel/owl.carousel.min.js"></script>
 
+        <!-- Province API -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.26.1/axios.min.js" integrity="sha512-bPh3uwgU5qEMipS/VOmRqynnMXGGSRv+72H/N260MQeXZIK4PG48401Bsby9Nq5P5fz7hy5UGNmC/W1Z51h2GQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
         <!-- Template Javascript -->
         <script src="${pageContext.request.contextPath}/assets/js/main.js"></script>
         <script >

@@ -45,15 +45,15 @@
                         <table class="table table-bordered">
                             <thead>
                             <tr>
-                                <th scope="col" style="max-width: 6%; width: 6%;"  class="text-center">Mã đơn</th>
-                                <th scope="col" style="max-width: 16%; width: 16%;" class="text-center">Tài khoản nhờ gửi</th>
-                                <th scope="col" style="max-width: 16%; width: 16%;" class="text-center">Tên hàng hóa</th>
-                                <th scope="col" style="max-width: 14%; width: 14%;" class="text-center">Người nhận</th>
-                                <th scope="col" style="max-width: 12%; width: 12%;" class="text-center">Số điện thoại</th>
-                                <th scope="col" style="max-width: 15%; width: 15%;" class="text-center">Địa chỉ đến</th>
-                                <th scope="col" style="max-width: 12%; width: 12%;" class="text-center">Trạng thái</th>
+                                <th scope="col" style="max-width: 7%; width: 7%;"  class="text-center">Mã đơn</th>
+                                <th scope="col" style="max-width: 15%; width: 15%;" class="text-center">Tài khoản nhờ gửi</th>
+                                <th scope="col" style="max-width: 12%; width: 12%;" class="text-center">Tên hàng hoá</th>
+                                <th scope="col" style="max-width: 20%; width: 20%;" class="text-center">Người nhận</th>
+<%--                                <th scope="col" style="max-width: 12%; width: 12%;" class="text-center">Số điện thoại</th>--%>
+                                <th scope="col" style="max-width: 13%; width: 13%;" class="text-center">Địa chỉ đến</th>
+                                <th scope="col" style="max-width: 10%; width: 10%;" class="text-center">Trạng thái</th>
                                 <th scope="col" style="max-width: 10%; width: 10%;" class="text-center">Chi tiết</th>
-                                <th scope="col" style="max-width: 12%; width: 12%;" class="text-center">Đánh giá</th>
+                                <th scope="col" style="max-width: 13%; width: 13%;" class="text-center">Đánh giá</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -63,17 +63,17 @@
                                     <td class="text-center"><a href="${pageContext.request.contextPath}/Profile/Info?username=${deliInfo.userSend}" >${deliInfo.userSend}</a></td>
                                     <td class="text-center"><c:out value="${deliInfo.goodsName}"/></td>
                                     <td class="text-center"><c:out value="${deliInfo.receiveName}"/></td>
-                                    <td class="text-center"><c:out value="${deliInfo.contactNumber}"/></td>
-                                    <td><c:out value="${deliInfo.toAddress}"/> </td>
+<%--                                    <td class="text-center"><c:out value="${deliInfo.contactNumber}"/></td>--%>
+                                    <td ><c:out value="${deliInfo.toAddress}"/> </td>
                                     <c:choose>
                                         <c:when test="${fn:containsIgnoreCase(deliInfo.lastDeliState, 'bắt đầu gửi')}">
                                             <td class="text-center text-info">Bắt đầu gửi</td>
                                         </c:when>
                                         <c:when test="${deliInfo.end}">
-                                            <td class="text-center text-success">Phát thành công</td>
+                                            <td class="text-center text-success">Thành công</td>
                                         </c:when>
                                         <c:when test="${empty deliInfo.lastDeliState}">
-                                            <td class="text-center text-dark">Chưa vận chuyển</td>
+                                            <td class="text-center text-dark">Chưa chuyển</td>
                                         </c:when>
                                         <c:otherwise>
                                             <td class="text-center text-secondary">Đang chuyển</td>
@@ -126,8 +126,8 @@
                                 </div>
                                 <h4 class="text-center rating-label my-2">Rất tốt</h4>
                                 <h6 class="text-center rating-number d-none">5</h6>
-                                <input type="text" value="5" name="rating-point" id="rating" >
-                                <input type="text" id="deli-id" name="deliId" value="">
+                                <input type="hidden" value="5" name="rating-point" id="rating" >
+                                <input type="hidden" id="deli-id" name="deliId" value="">
                             </div>
                         </div>
                         <div class="mb-3">
