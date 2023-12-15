@@ -252,8 +252,8 @@
         var deliId = $(this).data('id');
         $("#deli-id").val(deliId);
     });
-
 </script>
+
 </body>
 
 </html>
