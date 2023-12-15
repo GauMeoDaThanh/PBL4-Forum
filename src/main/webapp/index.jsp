@@ -15,22 +15,15 @@
         <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Saira:wght@500;600;700&display=swap" rel="stylesheet"> 
 
         <!-- Icon Font Stylesheet -->
-        <!-- <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet"> -->
-        <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet"> -->
         <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/library/fontawesome-free-6.4.2-web/css/all.css">
         <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/library/bootstrap-icons-1.11.1/bootstrap-icons.css">
         <!-- Libraries Stylesheet -->
-        <!-- <link href="lib/animate/animate.min.css" rel="stylesheet"> -->
-        <!-- <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet"> -->
         <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/lib/animate/animate.min.css">
         <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/lib/owlcarousel/assets/owl.carousel.min.css">
 
         <!-- Customized Bootstrap Stylesheet -->
-        <!-- <link href="css/bootstrap.min.css" rel="stylesheet"> -->
-        <!-- <link rel="stylesheet" href="../assets/library/bootstrap-5.2.3-dist/css/bootstrap.min.css"> -->
         <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/bootstrap.min.css">
         <!-- Template Stylesheet -->
-        <!-- <link href="css/style.css" rel="stylesheet"> -->
         <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/style.css">
     </head>
 
