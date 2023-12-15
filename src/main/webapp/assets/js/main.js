@@ -57,13 +57,12 @@ function clickOnBell() {
 
 // Rating star
 // Select all elements with the "i" tag and store them in a NodeList called "stars"
+
 function onStarClick() {
-    alert("Hello Star 1");
     var rating_label = document.querySelector(".rating-label");
     var rating_number = document.querySelector(".rating-number");
     var rating = document.getElementById("rating");
     const stars = document.querySelectorAll(".stars i");
-
     // Add an event listener to each star
     stars.forEach((star, index1) => {
         star.addEventListener("click", () => {
@@ -72,7 +71,6 @@ function onStarClick() {
             stars.forEach((star, index2) => {
                 index1 >= index2 ? star.classList.add("active") : star.classList.remove("active");
             });
-            alert("Hello Star 2");
             // Update rating_label based on the clicked star's index
             if (index1 == 0) {
                 rating_label.innerHTML = 'Rất tệ';
@@ -98,25 +96,11 @@ function onStarClick() {
                 rating.value = "5";
 
             }
-        });
+        },true);
     });
 }
 
-
 // Login,Register tab
-
-function ClickRegisterTab() {
-    var login = document.getElementById("form-login");
-    var register = document.getElementById("form-register");
-    var loginTitle = document.getElementById("LoginLabel");
-    var registerTitle = document.getElementById("RegisterLabel");
-
-    login.style.display="none";
-    register.style.display="block";
-    loginTitle.style.display="none";
-    registerTitle.style.display="block";
-}
-
 function ClickLoginTab() {
     var login = document.getElementById("form-login");
     var register = document.getElementById("form-register");
@@ -215,5 +199,53 @@ function uploadImages(id) {
 
         reader.readAsDataURL(file);
     }
+}
+
+// Api getallProvince
+const host = "https://provinces.open-api.vn/api/";
+var callAPI = (api) => {
+    return axios.get(api)
+        .then((response) => {
+            renderData(response.data, "select-from-location");
+            renderData(response.data,"select-to-location");
+        });
+}
+callAPI('https://provinces.open-api.vn/api/?depth=1');
+var callApiDistrict = (api) => {
+    return axios.get(api)
+        .then((response) => {
+            renderData(response.data.districts, "district");
+        });
+}
+var callApiWard = (api) => {
+    return axios.get(api)
+        .then((response) => {
+            renderData(response.data.wards, "ward");
+        });
+}
+var renderData = (array, select) => {
+    let row = '';
+
+    // Thêm thuộc tính 'selected' vào thẻ option đầu tiên
+    row += `<option value="${array[0].name}" selected>${array[0].name}</option>`;
+
+    // Tiếp tục vòng lặp để thêm các option khác
+    for (let i = 1; i < array.length; i++) {
+        row += `<option value="${array[i].name}">${array[i].name}</option>`;
+    }
+
+    var targetElement = document.querySelector("#" + select);
+    if (targetElement) {
+        targetElement.innerHTML = row;
+    }
+    // document.querySelector("#" + select).innerHTML = row;
+}
+function getProvinceOption(idFrom,valueFrom,idTo,valueTo) {
+    var selectElement = document.getElementById(idFrom);
+    var selectElement2 = document.getElementById(idTo);
+    selectElement.value=valueFrom
+    selectElement2.value=valueTo
+    console.log(selectElement.value)
+    console.log(selectElement2.value)
 }
 
