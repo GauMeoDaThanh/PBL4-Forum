@@ -8,6 +8,7 @@ import model.BEAN.MessageBEAN;
 import model.BEAN.ProfileBEAN;
 import model.BEAN.UserBEAN;
 import model.BO.ChatBO;
+import model.BO.DeliveryBO;
 import model.BO.ProfileBO;
 
 import java.io.FileOutputStream;
@@ -41,10 +42,13 @@ public class ChatServlet extends HttpServlet {
                     messages = chatBO.getMessage(user.getUsername(), req.getParameter("user"));
                     break;
                 case "View":
-                    profileBEAN = profileBO.getUserInfo(chatBO.getLastChatUser(user.getUsername()));
-                    req.setAttribute("userAvatar", profileBEAN.getAvatar());
-                    req.setAttribute("username", profileBEAN.getUsername());
-                    messages = chatBO.getMessage(user.getUsername(), profileBEAN.getUsername());
+                    String lastChatUser = chatBO.getLastChatUser(user.getUsername());
+                    if (lastChatUser != null) {
+                        profileBEAN = profileBO.getUserInfo(chatBO.getLastChatUser(user.getUsername()));
+                        req.setAttribute("userAvatar", profileBEAN.getAvatar());
+                        req.setAttribute("username", profileBEAN.getUsername());
+                        messages = chatBO.getMessage(user.getUsername(), profileBEAN.getUsername());
+                    }
                     break;
             }
             Map<String, String> chatNameList = chatBO.getChatNameList(user.getUsername());
@@ -63,22 +67,23 @@ public class ChatServlet extends HttpServlet {
             String action = req.getPathInfo().substring(1);
             HttpSession session = req.getSession(false);
             UserBEAN self = (UserBEAN) session.getAttribute("user");
-            ProfileBEAN user = new ProfileBO().getUserInfo(req.getParameter("user"));
+            ProfileBEAN user = req.getParameter("user") != null ? new ProfileBO().getUserInfo(req.getParameter("user")) : null;
             ChatBO chatBO = new ChatBO();
             switch (action){
                 case "CreateForm":
                     String goodsName = req.getParameter("goods-name");
                     String receiver = req.getParameter("receiver");
-                    String phoneNumber = req.getParameter("phone-number");
+                    String phoneNumber = req.getParameter("phone_number");
                     String address = req.getParameter("address");
                     String deliNote = req.getParameter("deli-note");
-                    String formInfo = goodsName + "/" + receiver + "/" + phoneNumber + "/" + address + "/" + deliNote + "/";
+                    String formInfo = goodsName + "@@" + receiver + "@@" + phoneNumber + "@@" + address + "@@" + deliNote + "@@";
                     chatBO.addMessage(new MessageBEAN(0, self.getUsername(), user.getUsername(), formInfo, null, new Timestamp(new Date().getTime()), true, false));
                     break;
                 case "ChangeState":
                     int idMessage = Integer.parseInt(req.getParameter("id"));
                     chatBO.changeDeliFormState(idMessage);
-//                    resp.getWriter().println(req.getParameter("id"));
+                    DeliveryBO deliveryBO = new DeliveryBO();
+                    deliveryBO.addDeliForm(user.getUsername(), self.getUsername(), idMessage);
                     break;
                 case "Info":
                     String message = req.getParameter("text") == null ? "" : req.getParameter("text").trim();
@@ -102,6 +107,25 @@ public class ChatServlet extends HttpServlet {
                         chatBO.addMessage(messageBEAN);
                     }
                     break;
+                case "UpdateChatList":
+                    System.out.println("da lay duoc chat list");
+                    Map<String, String> chatNameList = chatBO.getChatNameList(self.getUsername());
+                    if (chatNameList != null) {
+                        for (Map.Entry<String, String> entry : chatNameList.entrySet()) {
+                            resp.getWriter().println(" <a href=\""+req.getContextPath()+"/Chat/Info?user="+entry.getKey()+"\" class=\"nav-link\">\n" +
+                                    "                                <div class=\"d-flex align-items-center position-relative\">");
+                            if (entry.getValue().equals("")){
+                                resp.getWriter().println(" <img src=\""+req.getContextPath()+"/image/29.jpg\"\n" +
+                                        "                                                 class=\"rounded-circle mx-2\" width=\"40px\" height=\"40px\" alt=\"\">");
+                            }else{
+                                resp.getWriter().println("<img src=\""+req.getContextPath()+"/image/"+entry.getValue()+"\"\n" +
+                                        "                                                 class=\"rounded-circle mx-2\" width=\"40px\" height=\"40px\" alt=\"\">");
+                            }
+                            resp.getWriter().println(" <span>"+entry.getKey()+"</span></div>\n" +
+                                    "                            </a>");
+                        }
+                    }
+                    return;
             }
 
             System.out.println("da vao day");
@@ -146,7 +170,7 @@ public class ChatServlet extends HttpServlet {
                             "                                                    <div class=\"text-muted small text-nowrap mt-2 mx-2\"> "+message.getSendTime()+"</div>\n" +
                             "                                                </div>");
                 } else if (message.getFromUser().equals(self.getUsername()) && message.isForm()){
-                    String[] deliInfo = message.getMessage().split("/");
+                    String[] deliInfo = message.getMessage().split("@@");
                     resp.getWriter().println("<div class=\"chat-message-right mb-4\">\n" +
                             "                                                    <div>\n" +
                             "                                                        <img src=\""+ req.getContextPath() + "/image/" + self.getAvatar() +"\"\n" +
@@ -169,7 +193,7 @@ public class ChatServlet extends HttpServlet {
                             "                                                    <div class=\"text-muted small text-nowrap mt-2 mx-2\">"+message.getSendTime()+"</div>\n" +
                             "                                                </div>");
                 } else if (message.getFromUser().equals(user.getUsername()) && message.isForm()) {
-                    String[] deliInfo = message.getMessage().split("/");
+                    String[] deliInfo = message.getMessage().split("@@");
                     resp.getWriter().println("<div class=\"chat-message-left pb-4\">\n" +
                             "                                                    <div>\n" +
                             "                                                        <img src=\""+ req.getContextPath() + "/image/" + user.getAvatar() +"\"\n" +
@@ -199,6 +223,7 @@ public class ChatServlet extends HttpServlet {
             }
         } catch (Exception e) {
             System.out.println(e.getMessage());
+
         }
     }
 }

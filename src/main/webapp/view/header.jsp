@@ -42,8 +42,8 @@
             </button>
             <div class="collapse navbar-collapse bg-transparent" id="navbarCollapse">
                 <div class="navbar-nav ms-auto mx-xl-auto p-0">
-                    <a href="#" class="nav-item nav-link">Đơn nhận</a>
-                    <a href="#" class="nav-item nav-link">Đơn gửi</a>
+                    <a href="${pageContext.request.contextPath}/Deli/Receive" class="nav-item nav-link">Đơn nhận</a>
+                    <a href="${pageContext.request.contextPath}/Deli/Send" class="nav-item nav-link">Đơn gửi</a>
                     <a href="${pageContext.request.contextPath}/Chat/View" class="nav-item nav-link">Chat</a>
                 </div>
             </div>
