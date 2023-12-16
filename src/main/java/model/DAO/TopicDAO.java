@@ -369,6 +369,7 @@ public class TopicDAO {
             preparedStatement.setInt(7,topic.getId());
 
             preparedStatement.executeUpdate();
+            conn.close();
 
         }catch (Exception e) {
             e.printStackTrace();
@@ -385,18 +386,26 @@ public class TopicDAO {
             while (rs.next()) {
                 postIDList.add(rs.getInt("id"));
             }
+            // Xoá notify chứa topicID này
+            PreparedStatement preparedStatement1 = conn.prepareStatement("delete from notify where to_topic_id = "+topicId);
+            preparedStatement1.executeUpdate();
             for (var postID:postIDList) {
-                // Xoá post_picture
-                PreparedStatement preparedStatement1 = conn.prepareStatement("delete from post_picture where post_id = "+postID);
-                preparedStatement1.executeUpdate();
-                // Xoá post
-                PreparedStatement preparedStatement2 = conn.prepareStatement("delete from post where id = "+postID);
+                // Xoá notify chứa postID này
+                PreparedStatement preparedStatement2 = conn.prepareStatement("delete from notify where to_post_id = "+postID);
                 preparedStatement2.executeUpdate();
+                // Xoá post_picture
+                PreparedStatement preparedStatement3 = conn.prepareStatement("delete from post_picture where post_id = "+postID);
+                preparedStatement3.executeUpdate();
+                // Xoá post
+                PreparedStatement preparedStatement4 = conn.prepareStatement("delete from post where id = "+postID);
+                preparedStatement4.executeUpdate();
+
             }
             // Xoá topic
-            PreparedStatement preparedStatement3 = conn.prepareStatement("delete from topic where id = "+topicId);
-            preparedStatement3.executeUpdate();
+            PreparedStatement preparedStatement5 = conn.prepareStatement("delete from topic where id = "+topicId);
+            preparedStatement5.executeUpdate();
 
+            conn.close();
 
         }catch (Exception e) {
             e.printStackTrace();

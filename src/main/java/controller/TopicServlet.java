@@ -217,7 +217,7 @@ public class TopicServlet extends HttpServlet {
 
                     TopicBO topicBO = new TopicBO();
                     topicBO.updateTopic(topic);
-                    resp.sendRedirect(req.getContextPath()+"/Topic/Info?topicID="+topicId);
+                    resp.sendRedirect(req.getContextPath()+"/Topic/Info?topicID="+topicId+"&pageIndex=1");
                 }catch (Exception e) {
                     throw new RuntimeException(e);
                 }

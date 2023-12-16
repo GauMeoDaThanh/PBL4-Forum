@@ -34,7 +34,7 @@
 <!-- Navbar Start -->
 <jsp:include page="header.jsp"/>
 <!-- Navbar End -->
-<div class="container-fluid py-5 my-5" style="min-height: 100vh;">
+<div class="container py-5 my-5" style="min-height: 100vh;">
     <div class="container py-5">
         <div class="row my-4">
 
