@@ -70,7 +70,7 @@
                                     </c:when>
                                     <c:when test="${sessionScope.user.role == 'admin'}">
                                         <a class="btn btn-success mx-4" style="width: 100px;" href="../Chat/Info?user=${requestScope.userInfo.username}">Chat</a>
-                                        <button class="btn btn-danger mx-4" data-bs-toggle="modal" data-bs-target="#modal-ban"
+                                        <button onclick="LoadSelect()" class="btn btn-danger mx-4" data-bs-toggle="modal" data-bs-target="#modal-ban"
                                                 style="width: 100px;">Xử phạt</button>
                                     </c:when>
                                     <c:otherwise>
@@ -130,12 +130,10 @@
                                             <div class="modal-body">
                                                 <form action="">
                                                     <div class="mb-3">
-                                                        <label for="ban-select" class="mb-2">Chọn hình thức xử phạt</label>
-                                                        <select name="" id="" class="form-select">
-                                                            <option value="">Chặn đăng bài 7 ngày</option>
-                                                            <option value="">Chặn nhận/chuyển hàng 7 ngày</option>
-                                                            <option value="">Chặn tài khoản 7 ngày</option>
-                                                            <option value="">Chặn tài khoản vĩnh viễn</option>
+                                                        <label for="form-select-punish" class="mb-2">Chọn hình thức xử phạt</label>
+                                                        <select name="form-select-punish" id="form-select-punish" class="form-select">
+
+
                                                         </select>
                                                     </div>
                                                     <div class="mb-3">
@@ -147,7 +145,7 @@
                                                     <div class="mb-3 text-center">
                                                         <button type="reset" class="btn btn-primary mx-5"
                                                             data-bs-dismiss="modal" style="width: 80px;">Huỷ</button>
-                                                        <button class="btn btn-danger" type="submit">Xử phạt</button>
+                                                        <button onclick="UpdateLimitation(event)" class="btn btn-danger" type="submit" data-bs-dismiss="modal">Xử phạt</button>
                                                     </div>
                                                 </form>
                                             </div>
@@ -393,11 +391,69 @@
     <script src="${pageContext.request.contextPath}/assets/lib/easing/easing.min.js"></script>
     <script src="${pageContext.request.contextPath}/assets/lib/waypoints/waypoints.min.js"></script>
     <script src="${pageContext.request.contextPath}/assets/lib/owlcarousel/owl.carousel.min.js"></script>
+<%--    --%>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <!-- Province API -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.26.1/axios.min.js" integrity="sha512-bPh3uwgU5qEMipS/VOmRqynnMXGGSRv+72H/N260MQeXZIK4PG48401Bsby9Nq5P5fz7hy5UGNmC/W1Z51h2GQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <!-- Template Javascript -->
     <script src="${pageContext.request.contextPath}/assets/js/main.js"></script>
+
+    <script>
+
+        function LoadSelect(){
+
+            var select = document.getElementById("form-select-punish");
+            select.innerHTML="";
+            // select.innerHTML="<option value='0'>--Chọn hình thức xử phạt--</option>";
+            $.ajax({
+                url: "/Forum/limitation/GetTypeLimitation",
+                type: "get",
+                success: function (response){
+
+                    select.innerHTML +=response;
+                },
+                error: function (xhr, status, error) {
+                    console.error("AJAX request failed:", status, error);
+                }
+            });
+        }
+
+        function UpdateLimitation(event){
+            event.preventDefault();
+            let idLimit= document.getElementById("form-select-punish").value;
+
+            $.ajax({
+
+                url: "/Forum/limitation/UpdateLimitation?UserName=<%= profileBEAN.getUsername()%>&idLimit="+idLimit,
+                type: "get",
+                success: function (response){
+                    alert(response);
+                }
+            });
+        }
+
+        function AddNotification(event){
+            event.preventDefault();
+            let selectElement = document.getElementById("form-select-report");
+
+            let index = selectElement.selectedIndex;
+
+            let context = selectElement.options[index].innerText;
+            <%--let Name = '<%=userLogin.getName()%>';--%>
+            // alert(Name);
+            // alert(context);
+            $.ajax({
+
+                url: "/Forum/notification/ReportUser?toUser=<%=profileBEAN.getUsername()%>&context="+context+"&idNotify=1",
+                type: "get",
+                success: function (response){
+                    alert(response);
+                }
+            });
+
+        }
+    </script>
 </body>
 
 </html>

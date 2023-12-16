@@ -33,14 +33,19 @@ public class AuthenticateServlet extends HttpServlet {
                     String username = req.getParameter("username");
                     String password = req.getParameter("password");
                     if (authenticateBO.verify(username, password)) {
-                        UserBEAN user = authenticateBO.getUserDetail(username);
-                        HttpSession session = req.getSession();
-                        session.setAttribute("user", user);
-                        if (user.getName() == null) {
-                            resp.sendRedirect("../Profile/Register");
-                        }else{
-                            resp.sendRedirect("../Home/");
+                        if(authenticateBO.CheckPunished(username)){
+                            UserBEAN user = authenticateBO.getUserDetail(username);
+                            HttpSession session = req.getSession();
+                            session.setAttribute("user", user);
+                            if (user.getName() == null) {
+                                resp.sendRedirect("../Profile/Register");
+                            }else{
+                                resp.sendRedirect("../Home/");
+                            }
+                        }else {
+                            resp.sendRedirect("../../Forum?alert=BanAccount");
                         }
+
 
                     }else{
                         resp.sendRedirect("../../Forum?alert=1");

@@ -283,7 +283,14 @@
                 alert('Sai tài khoản hoặc mật khẩu');
                 window.location.assign("/Forum");
             }
+            ////////
+            else if(alertParam==="BanAccount"){
+                alert('Tài khoản đã bị chặn đăng nhập, liên hệ admin để được hỗ trợ!');
+                window.location.assign("/Forum");
+            }
         </script>
+
+
     </body>
 
 </html>

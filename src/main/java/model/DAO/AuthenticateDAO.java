@@ -49,4 +49,37 @@ public class AuthenticateDAO {
         preparedStatement.setString(2, password);
         preparedStatement.executeUpdate();
     }
+
+    /////////////////////////////Xử phạt
+    public UserBEAN CheckPunishedByUserName(String UserName) throws Exception {
+        Connection conn = connectDb();
+        PreparedStatement preparedStatement = conn.prepareStatement("select username, name, email, role_id, avatar, limit_id, limit_started, description from user where username=?");
+        preparedStatement.setString(1,UserName);
+
+        ResultSet rs = preparedStatement.executeQuery();
+        while (rs.next()) {
+            String userName = rs.getString("username");
+            String name = rs.getString("name");
+            String email = rs.getString("email");
+            String role = rs.getString("role_id");
+            String avatar = rs.getString("avatar");
+            String limit_id = rs.getString("limit_id");
+            String limit_started = rs.getString("limit_started");
+            String description = rs.getString("description");
+            UserBEAN user = new UserBEAN(userName, name, email, role, avatar, description);
+            user.setLimitId(limit_id);
+            user.setLimitStart(limit_started);
+            return user;
+        }
+        return null;
+
+
+    }
+
+    public void StopPunished (String UserName) throws Exception {
+        Connection conn = connectDb();
+        PreparedStatement preparedStatement = conn.prepareStatement("update user set limit_id=null,limit_started=null where username=?");
+        preparedStatement.setString(1,UserName);
+        preparedStatement.executeUpdate();
+    }
 }
