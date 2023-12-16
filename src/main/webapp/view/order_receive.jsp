@@ -104,13 +104,47 @@
         </div>
     </div>
 </div>
-<div class="container">
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog"  style="min-width: 1200px; ">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Đánh giá</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <div class="container">
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog"  style="min-width: 1200px; ">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Đánh giá</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form action="${pageContext.request.contextPath}/Rating/Receive" method="post" enctype="multipart/form-data">
+                                <div class="mb-3">
+                                    <div class="rating-box">
+                                        <h4 class="text-center">Đánh giá sao cho người này</h4>
+                                        <div class="stars my-2 text-center">
+                                            <i class="fa-solid fa-star star-1 active" onclick="onStarClick()"></i>
+                                            <i class="fa-solid fa-star star-2 active" onclick="onStarClick()"></i>
+                                            <i class="fa-solid fa-star star-3 active" onclick="onStarClick()"></i>
+                                            <i class="fa-solid fa-star star-4 active" onclick="onStarClick()"></i>
+                                            <i class="fa-solid fa-star star-5 active" onclick="onStarClick()"></i>
+                                        </div>
+                                        <h4 class="text-center rating-label my-2">Rất tốt</h4>
+                                        <h6 class="text-center rating-number d-none">5</h6>
+                                        <input type="text" value="5" name="rating-point" id="rating" hidden >
+                                        <input type="text" id="deli-id" name="deliId" value="" hidden>
+                                      </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="message-text" class="col-form-label">Đính kèm ảnh</label>
+                                    <input type="file" class="form-control" accept=".jpg,.png" name="rate-picture">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="message-text" class="col-form-label">Nhận xét</label>
+                                    <textarea class="form-control" id="message-text" placeholder="Nhập nhận xét..." rows="5" name="rate-comment"></textarea>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="reset" class="btn btn-primary" data-bs-dismiss="modal" style="width: 80px;">Huỷ</button>
+                                    <button type="submit" class="btn btn-success" style="width: 100px;">OK</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
                 </div>
                 <div class="modal-body">
                     <form action="${pageContext.request.contextPath}/Rating/Receive" method="post" enctype="multipart/form-data">
