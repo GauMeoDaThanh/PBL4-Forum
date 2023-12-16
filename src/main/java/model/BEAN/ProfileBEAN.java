@@ -68,7 +68,7 @@ public class ProfileBEAN {
     }
 
     public double getStar() {
-        return Math.round((star*100)/100);
+        return star;
     }
 
     public void setStar(double star) {

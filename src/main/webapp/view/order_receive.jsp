@@ -126,7 +126,7 @@
                                         </div>
                                         <h4 class="text-center rating-label my-2">Rất tốt</h4>
                                         <h6 class="text-center rating-number d-none">5</h6>
-                                        <input type="text" value="5" name="rating-point" id="rating" hidden >
+                                        <input type="text" value="5" name="rating-point" id="rating" hidden>
                                         <input type="text" id="deli-id" name="deliId" value="" hidden>
                                       </div>
                                 </div>
