@@ -136,12 +136,6 @@
 
                                                         </select>
                                                     </div>
-                                                    <div class="mb-3">
-                                                        <div class="form-group">
-                                                            <label for="exampleFormControlTextarea1" class="mb-3">Nhập nội dung</label>
-                                                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="7"></textarea>
-                                                        </div>
-                                                    </div>
                                                     <div class="mb-3 text-center">
                                                         <button type="reset" class="btn btn-primary mx-5"
                                                             data-bs-dismiss="modal" style="width: 80px;">Huỷ</button>
