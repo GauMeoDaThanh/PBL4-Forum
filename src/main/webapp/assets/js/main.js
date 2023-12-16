@@ -32,16 +32,25 @@
 //
 
 //
-window.addEventListener("load", function() {
-    // Wait for the entire page, including images and other resources, to be fully loaded
-    var elementToFocus = document.getElementById("element-focus");
+function goToPost(postID) {
+    var elementToFocus = document.getElementById(postID);
 
     // Check if the element exists
     if (elementToFocus) {
         // Scroll to the element with smooth behavior
         elementToFocus.scrollIntoView({ behavior: 'smooth', block: 'center' });
     }
-});
+}
+// window.addEventListener("load", function() {
+//     // Wait for the entire page, including images and other resources, to be fully loaded
+//     var elementToFocus = document.getElementById("element-focus");
+//
+//     // Check if the element exists
+//     if (elementToFocus) {
+//         // Scroll to the element with smooth behavior
+//         elementToFocus.scrollIntoView({ behavior: 'smooth', block: 'center' });
+//     }
+// });
 //
 function clickOnBell() {
     var dropdown = document.querySelector('.header__popup')

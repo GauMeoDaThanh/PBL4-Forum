@@ -48,7 +48,6 @@ public class NotifyServlet extends HttpServlet {
                     //
                     String[] selectedReasons = req.getParameterValues("select-report-reason");
                     String otherReason = req.getParameter("report-other-reason");
-
                     String context="";
                     if (selectedReasons != null) {
                         int length = selectedReasons.length;
@@ -57,10 +56,12 @@ public class NotifyServlet extends HttpServlet {
                             context += ", " + selectedReasons[i] ;
                         }
                     }
-                    if (context.isEmpty()) {
-                        context += otherReason;
-                    } else {
-                        context += ", " + otherReason;
+                    if(!otherReason.equals("")){
+                        if(context.equals("")){
+                            context+=otherReason;
+                        }else{
+                            context+=", "+otherReason;
+                        }
                     }
 
                     //

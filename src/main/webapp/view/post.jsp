@@ -9,7 +9,28 @@
 <html lang="en">
 <%
     UserBEAN user = (UserBEAN) session.getAttribute("user");
+    // Go to Post when click post in notify
+    int postID = -1;
+    if(request.getAttribute("postID") != null){
+        String data = request.getAttribute("postID").toString();
+        if(data!=null && !data.isEmpty()){
+            postID = Integer.parseInt(data);
+        }
+    }
 
+//    System.out.println(request.getAttribute("postID").toString());
+
+
+    System.out.println(postID+1);
+
+//    System.out.println(postID+1);
+//    System.out.println(data);
+//    Integer postID = null;
+//    if(data != null && !data.isEmpty()){
+//        postID = Integer.valueOf(data);
+//    }
+
+    //
     int pageIndex = (int) request.getAttribute("pageIndex");
     int pageNumber = (int) request.getAttribute("pageNumber");
     TopicBEAN topic = (TopicBEAN) request.getAttribute("topic");
@@ -42,7 +63,7 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/style.css">
 </head>
 
-<body>
+<body onload="goToPost(<%=postID%>)">
 <!-- Navbar Start -->
 <jsp:include page="header.jsp"/>
 <!-- Navbar End -->
@@ -229,6 +250,7 @@
             </div>
         </div>
     </div>
+<%--    Post Section--%>
     <div class="container">
         <%
             for (PostBEAN post:listPost) {
@@ -509,6 +531,7 @@
             }
         %>
     </div>
+<%--    Pagination section--%>
     <div class="container">
         <div class="row m-4">
             <nav aria-label="Page navigation example">
@@ -567,8 +590,8 @@
                 </ul>
             </nav>
         </div>
-
     </div>
+<%--    Comment section--%>
     <div class="container">
         <div class="row rounded border mt-3" id="element-focus-reply">
             <div class="col-2 p-2 text-center" style="background-color: #ccc; border-right: 1px solid #d3d5d7;">

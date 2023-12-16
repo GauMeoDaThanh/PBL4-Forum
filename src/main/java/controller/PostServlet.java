@@ -8,6 +8,7 @@ import model.BEAN.NotifyBEAN;
 import model.BEAN.PostBEAN;
 import model.BEAN.TopicBEAN;
 import model.BEAN.UserBEAN;
+import model.BO.NotifyBO;
 import model.BO.PostBO;
 import model.BO.TopicBO;
 
@@ -30,17 +31,57 @@ import java.util.Collection;
 public class PostServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        HttpSession session = req.getSession();
+        UserBEAN user = (UserBEAN) session.getAttribute("user");
+        // Notify
+        NotifyBO notifyBO = new NotifyBO();
+        ArrayList<NotifyBEAN> listNotify = new ArrayList<>();
+        if(user.getRole().equals("admin")){
+            listNotify = notifyBO.getAllNotifyRoleAdmin(user.getUsername());
+        } else{
+            listNotify = notifyBO.getAllNotifyRoleUser(user.getUsername());
+        }
+        req.setAttribute("listNotify",listNotify);
+        String action = req.getPathInfo().substring(1);
+        switch (action){
+            case "Info":
+                try{
+                    PostBO postBO = new PostBO();
+                    int postID = Integer.parseInt(req.getParameter("postID"));
+                    int topicID = postBO.getTopicIdOfPost(postID);
 
+                    int pageNumber = postBO.getTopicPageNumber(topicID);
+                    int pageIndex = postBO.getPostPageIndex(topicID,postID);
+                    System.out.println("postID = "+postID);
+                    System.out.println("topicID = "+topicID);
+                    System.out.println("pageIndex = "+pageIndex);
+                    System.out.println("pageNumber = "+pageNumber);
+                    //
+
+                    TopicBO topicBO = new TopicBO();
+                    TopicBEAN topicBEAN = topicBO.getTopicById(topicID);
+                    ArrayList<PostBEAN> list = postBO.getAllPostInTopicByPage(topicID,pageIndex);
+
+                    req.setAttribute("postID",postID);
+                    req.setAttribute("pageIndex",pageIndex);
+                    req.setAttribute("pageNumber",pageNumber);
+                    req.setAttribute("topic",topicBEAN);
+                    req.setAttribute("listPost",list);
+                    req.getRequestDispatcher("../view/post.jsp").forward(req,resp);
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
+        }
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        HttpSession session = req.getSession();
+        UserBEAN user = (UserBEAN) session.getAttribute("user");
         String action = req.getPathInfo().substring(1);
         switch (action) {
             case "Add":
                 try {
-                    HttpSession session = req.getSession();
-                    UserBEAN user = (UserBEAN) session.getAttribute("user");
                     String from_user = user.getUsername();
                     int topic_id = Integer.parseInt(req.getParameter("topicID"));
                     String content = req.getParameter("post-content-text");
@@ -84,7 +125,7 @@ public class PostServlet extends HttpServlet {
                     else {
                         // Lấy id của post mới thêm
                         int newId = postBO.getPostIdNewAdd();
-                        ArrayList<NotifyBEAN> listNotify = new ArrayList<>();
+                        ArrayList<NotifyBEAN> listNotify2 = new ArrayList<>();
                         for (String username : listUsername){
                             NotifyBEAN notify = new NotifyBEAN();
                             notify.setFrom_user(from_user);
@@ -94,9 +135,9 @@ public class PostServlet extends HttpServlet {
                             notify.setCreate_time(Timestamp.valueOf(LocalDateTime.now()));
                             notify.setContext(content);
                             notify.setNotify_type_id(4);
-                            listNotify.add(notify);
+                            listNotify2.add(notify);
                         }
-                        req.setAttribute("listNotify",listNotify);
+                        req.setAttribute("listNotify",listNotify2);
                         req.setAttribute("topicId",topic_id);
                         req.getRequestDispatcher("/Notify/AddNotifyNewPost").forward(req,resp);
                     }

@@ -8,12 +8,15 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import model.BEAN.DeliDetailBEAN;
 import model.BEAN.DeliveryBEAN;
+import model.BEAN.NotifyBEAN;
 import model.BEAN.UserBEAN;
 import model.BO.DeliveryBO;
+import model.BO.NotifyBO;
 
 import java.io.EOFException;
 import java.io.IOException;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -24,6 +27,16 @@ public class DeliveryServlet extends HttpServlet {
         try {
             HttpSession session = req.getSession(false);
             UserBEAN user = (UserBEAN) session.getAttribute("user");
+            // Notify
+            NotifyBO notifyBO = new NotifyBO();
+            ArrayList<NotifyBEAN> listNotify = new ArrayList<>();
+            if(user.getRole().equals("admin")){
+                listNotify = notifyBO.getAllNotifyRoleAdmin(user.getUsername());
+            } else{
+                listNotify = notifyBO.getAllNotifyRoleUser(user.getUsername());
+            }
+            req.setAttribute("listNotify",listNotify);
+
             String action = req.getPathInfo().substring(1);
             DeliveryBO deliveryBO = new DeliveryBO();
             List<DeliveryBEAN> deliveryBEANS;

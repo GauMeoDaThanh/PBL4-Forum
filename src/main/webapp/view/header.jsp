@@ -1,4 +1,8 @@
 <%@ page import="model.BEAN.UserBEAN" %>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="model.BEAN.NotifyBEAN" %>
+<%@ page import="java.text.DateFormat" %>
+<%@ page import="java.text.SimpleDateFormat" %>
 <%@page isELIgnored="false" %>
 <%--
   Created by IntelliJ IDEA.
@@ -8,7 +12,9 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%
-    UserBEAN user = (UserBEAN) session.getAttribute("user"); %>
+    UserBEAN user = (UserBEAN) session.getAttribute("user");
+    ArrayList<NotifyBEAN> list = (ArrayList<NotifyBEAN>) request.getAttribute("listNotify");
+%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!-- Topbar Start -->
 <div class="fixed-top bg-dark py-2 d-none d-md-flex">
@@ -77,9 +83,7 @@
                 <!--  -->
                 <div class="header__notification" onclick="clickOnBell()">
                     <i class="header__notification-icon bi bi-bell"></i>
-                    <!-- <span class="header__notification-number">99+</span> -->
-                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                                    99+
+                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"><%=list.size()%>
                                     <span class="visually-hidden">unread messages</span>
                                   </span>
                     <div class="header__popup">
@@ -87,64 +91,141 @@
                             Thông báo
                         </h3>
                         <ul class="header__popup-list">
-                            <a class="header__popup-item" href="">
-                                <img class="header__popup-item-avatar rounded-circle" src="../assets/img/29.jpg"></img>
-                                <label class="header__popup-item-content">
-                                    Người dùng Chihuahua vừa đăng bài viết mới.Vào share cho mình với. Share đi mình cho 50k. Nhanh nha bạn ơi
-                                </label>
-                            </a>
-                            <a class="header__popup-item" href="">
-                                <img class="header__popup-item-avatar rounded-circle" src="../assets/img/29.jpg"></img>
-                                <label class="header__popup-item-content">
-                                    Người dùng Chihuahua vừa đăng bài viết mới.Vào share cho mình với. Share đi mình cho 50k. Nhanh nha bạn ơi
-                                </label>
-                            </a>
-                            <a class="header__popup-item" href="">
-                                <img class="header__popup-item-avatar rounded-circle" src="../assets/img/29.jpg"></img>
-                                <label class="header__popup-item-content">
-                                    Share đi mình cho 50k. Nhanh nha bạn ơi.Người dùng Chihuahua vừa đăng bài viết mới.Vào share cho mình với. Share đi mình cho 50k. Nhanh nha bạn ơi.
-                                </label>
-                            </a>
-                            <a class="header__popup-item" href="">
-                                <img class="header__popup-item-avatar rounded-circle" src="../assets/img/29.jpg"></img>
-                                <label class="header__popup-item-content">
-                                    Share đi mình cho 50k. Nhanh nha bạn ơi.Người dùng Chihuahua vừa đăng bài viết mới.Vào share cho mình với. Share đi mình cho 50k. Nhanh nha bạn ơi.
-                                </label>
-                            </a>
-                            <a class="header__popup-item" href="">
-                                <img class="header__popup-item-avatar rounded-circle" src="../assets/img/29.jpg"></img>
-                                <label class="header__popup-item-content">
-                                    Share đi mình cho 50k. Nhanh nha bạn ơi.Người dùng Chihuahua vừa đăng bài viết mới.Vào share cho mình với. Share đi mình cho 50k. Nhanh nha bạn ơi.
-                                </label>
-                            </a>
-                            <a class="header__popup-item" href="">
-                                <img class="header__popup-item-avatar rounded-circle" src="../assets/img/29.jpg"></img>
-                                <label class="header__popup-item-content">
-                                    Share đi mình cho 50k. Nhanh nha bạn ơi.Người dùng Chihuahua vừa đăng bài viết mới.Vào share cho mình với. Share đi mình cho 50k. Nhanh nha bạn ơi.
-                                </label>
-                            </a>
-                            <a class="header__popup-item" href="">
-                                <img class="header__popup-item-avatar rounded-circle" src="../assets/img/29.jpg"></img>
-                                <label class="header__popup-item-content">
-                                    Share đi mình cho 50k. Nhanh nha bạn ơi.Người dùng Chihuahua vừa đăng bài viết mới.Vào share cho mình với. Share đi mình cho 50k. Nhanh nha bạn ơi.
-                                </label>
-                            </a>
-                            <a class="header__popup-item" href="">
-                                <img class="header__popup-item-avatar rounded-circle" src="../assets/img/29.jpg"></img>
-                                <label class="header__popup-item-content">
-                                    Share đi mình cho 50k. Nhanh nha bạn ơi.Người dùng Chihuahua vừa đăng bài viết mới.Vào share cho mình với. Share đi mình cho 50k. Nhanh nha bạn ơi.
-                                </label>
-                            </a>
-                            <a class="header__popup-item" href="">
-                                <img class="header__popup-item-avatar rounded-circle" src="../assets/img/29.jpg"></img>
-                                <label class="header__popup-item-content">
-                                    Share đi mình cho 50k. Nhanh nha bạn ơi.Người dùng Chihuahua vừa đăng bài viết mới.Vào share cho mình với. Share đi mình cho 50k. Nhanh nha bạn ơi.
-                                </label>
-                            </a>
+                            <%
+                                DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+                                for(NotifyBEAN notify : list){
+                            %>
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="card mb-2" >
+                                        <div class="card-body">
+                                            <div class="d-flex">
+                                                <a href=""><img src="${pageContext.request.contextPath}/image/<%=notify.getAvatar()==null  || notify.getAvatar().equals("") ? "29.jpg" : notify.getAvatar()%>" class="mr-3 rounded-circle" width="70" height="70" alt="User" /></a>
+                                                <div class="media-body mx-2">
+                                                    <%
+                                                        if(notify.getNotify_type_id()==1){
+                                                    %>
+                                                    <span class="text-white rounded p-1 my-2 bg-danger"  style="font-size: 1rem;">Báo cáo trang cá nhân</span>
+                                                    <h4 class="header__popup-item-content mt-1">
+                                                        <a href="${pageContext.request.contextPath}/Profile/Info?username=<%=notify.getTo_user()%>" class="text-body" style="font-size: 18px;"><strong><%=notify.getContext()%></strong></a>
+                                                    </h4>
+                                                    <p class="text-muted">
+                                                        <a href="${pageContext.request.contextPath}/Profile/Info?username=<%=notify.getFrom_user()%>" class="text-primary" style="font-size: 1rem;"><%=notify.getFrom_user()%></a>
+                                                        báo cáo
+                                                        <a href="${pageContext.request.contextPath}/Profile/Info?username=<%=notify.getTo_user()%>"><%=notify.getTo_user()%></a>
+                                                        at
+                                                        <span class="text-dark font-weight-bold"><%=dateFormat.format(notify.getCreate_time())%></span>
+                                                    </p>
+                                                    <%
+                                                        }
+                                                        else if(notify.getNotify_type_id()==2){
+                                                    %>
+                                                    <span class="text-white rounded p-1 my-2 bg-warning"  style="font-size: 1rem;">Báo cáo Topic</span>
+                                                    <h4 class="header__popup-item-content mt-1">
+                                                        <a href="${pageContext.request.contextPath}/Topic/Info?topicID=<%=notify.getTo_topic_id()%>&pageIndex=1" class="text-body" style="font-size: 18px;"><strong><%=notify.getContext()%></strong></a>
+                                                    </h4>
+                                                    <p class="text-muted">
+                                                        <a href="${pageContext.request.contextPath}/Profile/Info?username=<%=notify.getFrom_user()%>" class="text-primary" style="font-size: 1rem;"><%=notify.getFrom_user()%></a>
+                                                        báo cáo Topic của
+                                                        <a href="${pageContext.request.contextPath}/Profile/Info?username=<%=notify.getTo_user()%>"><%=notify.getTo_user()%></a>
+                                                        at
+                                                        <span class="text-dark font-weight-bold"><%=dateFormat.format(notify.getCreate_time())%></span>
+                                                    </p>
+                                                    <%
+                                                        }
+                                                        else if(notify.getNotify_type_id()==3){
+                                                    %>
+                                                    <span class="text-white rounded p-1 my-2 bg-primary"  style="font-size: 1rem;">Báo cáo Post</span>
+                                                    <h4 class="header__popup-item-content mt-1">
+                                                        <a href="${pageContext.request.contextPath}/Post/Info?postID=<%=notify.getTo_post_id()%>" class="text-body" style="font-size: 18px;"><strong><%=notify.getContext()%></strong></a>
+                                                    </h4>
+                                                    <p class="text-muted">
+                                                        <a href="${pageContext.request.contextPath}/Profile/Info?username=<%=notify.getFrom_user()%>" class="text-primary" style="font-size: 1rem;"><%=notify.getFrom_user()%></a>
+                                                        báo cáo Post của
+                                                        <a href="${pageContext.request.contextPath}/Profile/Info?username=<%=notify.getTo_user()%>"><%=notify.getTo_user()%></a>
+                                                        at
+                                                        <span class="text-dark font-weight-bold"><%=dateFormat.format(notify.getCreate_time())%></span>
+                                                    </p>
+                                                    <%
+                                                        }
+                                                        else if(notify.getNotify_type_id()==4){
+                                                    %>
+                                                    <span class="text-white rounded p-1 my-2 bg-success"  style="font-size: 1rem;">Bài Post mới</span>
+                                                    <h4 class="header__popup-item-content mt-1">
+                                                        <a href="${pageContext.request.contextPath}/Post/Info?postID=<%=notify.getTo_post_id()%>" class="text-body" style="font-size: 18px;"><strong><%=notify.getContext()%></strong></a>
+                                                    </h4>
+                                                    <p class="text-muted">
+                                                        <a href="${pageContext.request.contextPath}/Profile/Info?username=<%=notify.getFrom_user()%>" class="text-primary" style="font-size: 1rem;"><%=notify.getFrom_user()%></a>
+                                                        đăng Post mới at
+                                                        <span class="text-dark font-weight-bold"><%=dateFormat.format(notify.getCreate_time())%></span>
+                                                    </p>
+                                                   <%
+                                                       }
+                                                   %>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <%
+                                }
+                            %>
+<%--                            <div class="row">--%>
+<%--                                <div class="col-12">--%>
+<%--                                    <div class="card mb-2" >--%>
+<%--                                        <div class="card-body">--%>
+<%--                                            <div class="d-flex">--%>
+<%--                                                <a href=""><img src="../assets/img/101.jpg" class="mr-3 rounded-circle" width="70" height="70" alt="User" /></a>--%>
+<%--                                                <div class="media-body mx-2">--%>
+<%--                                                    <span class="text-white rounded p-1 my-2 bg-warning"  style="font-size: 1rem;">Báo cáo Topic</span>--%>
+<%--                                                    <h4 class="header__popup-item-content mt-1"><a href="" class="text-body" style="font-size: 18px;"><strong>Ngôn từ mất kiểm soát, lừa đảo, scam.Ngôn từ mất kiểm soát, lừa đảo, scam.Ngôn từ mất kiểm soát, lừa đảo, scam.Ngôn từ mất kiểm soát, lừa đảo, scam</strong></a></h4>--%>
+<%--                                                    <p class="text-muted">--%>
+<%--                                                        <a href="" class="text-primary" style="font-size: 1rem;">Nguyen Dong</a> báo cáo Topic của <a href="">Van Dat</a>  at <span class="text-dark font-weight-bold">16:00:00</span></p>--%>
+<%--                                                </div>--%>
+<%--                                            </div>--%>
+<%--                                        </div>--%>
+<%--                                    </div>--%>
+<%--                                </div>--%>
+<%--                            </div>--%>
+<%--                            <div class="row">--%>
+<%--                                <div class="col-12">--%>
+<%--                                    <div class="card mb-2" style="background-color: #E5F2FF;">--%>
+<%--                                        <div class="card-body">--%>
+<%--                                            <div class="d-flex">--%>
+<%--                                                <a href=""><img src="../assets/img/101.jpg" class="mr-3 rounded-circle" width="70" height="70" alt="User" /></a>--%>
+<%--                                                <div class="media-body mx-2">--%>
+<%--                                                    <span class="text-white rounded p-1 my-2 bg-primary"  style="font-size: 1rem;">Báo cáo Post</span>--%>
+<%--                                                    <h4 class="header__popup-item-content mt-1"><a href="" class="text-body" style="font-size: 18px;"><strong>Ngôn từ mất kiểm soát, lừa đảo, scam.Ngôn từ mất kiểm soát, lừa đảo, scam.Ngôn từ mất kiểm soát, lừa đảo, scam.Ngôn từ mất kiểm soát, lừa đảo, scam</strong></a></h4>--%>
+<%--                                                    <p class="text-muted">--%>
+<%--                                                        <a href="" class="text-primary" style="font-size: 1rem;">Nguyen Dong</a> báo cáo Post của <a href="">Van Dat</a>  at <span class="text-dark font-weight-bold">16:00:00</span></p>--%>
+<%--                                                </div>--%>
+<%--                                            </div>--%>
+<%--                                        </div>--%>
+<%--                                    </div>--%>
+<%--                                </div>--%>
+<%--                            </div>--%>
+<%--                            <div class="row">--%>
+<%--                                <div class="col-12">--%>
+<%--                                    <div class="card mb-2" style="background-color: #E5F2FF;">--%>
+<%--                                        <div class="card-body">--%>
+<%--                                            <div class="d-flex">--%>
+<%--                                                <a href=""><img src="../assets/img/101.jpg" class="mr-3 rounded-circle" width="70" height="70" alt="User" /></a>--%>
+<%--                                                <div class="media-body mx-2">--%>
+<%--                                                    <span class="text-white rounded p-1 my-2 bg-success"  style="font-size: 1rem;">Bài Post mới</span>--%>
+<%--                                                    <h4 class="header__popup-item-content mt-1"><a href="" class="text-body" style="font-size: 18px;"><strong>Ngôn từ mất kiểm soát, lừa đảo, scam.Ngôn từ mất kiểm soát, lừa đảo, scam.Ngôn từ mất kiểm soát, lừa đảo, scam.Ngôn từ mất kiểm soát, lừa đảo, scam</strong></a></h4>--%>
+<%--                                                    <p class="text-muted">--%>
+<%--                                                        <a href="" class="text-primary" style="font-size: 1rem;">Nguyen Dong</a> đăng Post mới at <span class="text-dark font-weight-bold">16:00:00</span></p>--%>
+<%--                                                </div>--%>
+<%--                                            </div>--%>
+<%--                                        </div>--%>
+<%--                                    </div>--%>
+<%--                                </div>--%>
+<%--                            </div>--%>
                         </ul>
-                        <h3 class="header__popup-bottom">
+                        <a class="header__popup-bottom">
                             Xem tất cả
-                        </h3>
+                        </a>
                     </div>
                 </div>
 

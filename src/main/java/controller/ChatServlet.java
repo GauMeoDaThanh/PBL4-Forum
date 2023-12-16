@@ -5,10 +5,12 @@ import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.*;
 import model.BEAN.MessageBEAN;
+import model.BEAN.NotifyBEAN;
 import model.BEAN.ProfileBEAN;
 import model.BEAN.UserBEAN;
 import model.BO.ChatBO;
 import model.BO.DeliveryBO;
+import model.BO.NotifyBO;
 import model.BO.ProfileBO;
 
 import java.io.FileOutputStream;
@@ -28,6 +30,16 @@ public class ChatServlet extends HttpServlet {
         try {
             HttpSession session = req.getSession(false);
             UserBEAN user = (UserBEAN) session.getAttribute("user");
+            // Notify
+            NotifyBO notifyBO = new NotifyBO();
+            ArrayList<NotifyBEAN> listNotify = new ArrayList<>();
+            if(user.getRole().equals("admin")){
+                listNotify = notifyBO.getAllNotifyRoleAdmin(user.getUsername());
+            } else{
+                listNotify = notifyBO.getAllNotifyRoleUser(user.getUsername());
+            }
+            req.setAttribute("listNotify",listNotify);
+            //
             ChatBO chatBO = new ChatBO();
             String action = req.getPathInfo().substring(1);
             List<MessageBEAN> messages = new ArrayList<>();

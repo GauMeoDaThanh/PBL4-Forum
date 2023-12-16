@@ -15,6 +15,13 @@ public class PostBO {
     public ArrayList<String> getAllUsernameInTopicExceptFromUser(int topic_id,String username) throws Exception{
         return postDAO.getAllUsernameInTopicExceptFromUser(topic_id,username);
     }
+    // Go to Post when click Notify
+    public int getTopicIdOfPost(int postID) {
+        return postDAO.getTopicIdOfPost(postID);
+    }
+    public int getPostPageIndex(int topicID,int postID) throws Exception{
+        return postDAO.getPostPageIndex(topicID,postID);
+    }
     // get ALl Post By Page + Pagination
     public int getTopicPageNumber(int topicID) throws Exception {
         return postDAO.getTopicPageNumber(topicID);

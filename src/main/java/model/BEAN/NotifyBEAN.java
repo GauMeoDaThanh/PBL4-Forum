@@ -13,7 +13,6 @@ public class NotifyBEAN {
     private String context;
     private int notify_type_id;
     //
-    private String notify_type;
     private String avatar;
 
     public int getId() {
@@ -86,14 +85,6 @@ public class NotifyBEAN {
 
     public void setNotify_type_id(int notify_type_id) {
         this.notify_type_id = notify_type_id;
-    }
-
-    public String getNotify_type() {
-        return notify_type;
-    }
-
-    public void setNotify_type(String notify_type) {
-        this.notify_type = notify_type;
     }
 
     public String getAvatar() {

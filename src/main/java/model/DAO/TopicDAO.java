@@ -135,13 +135,8 @@ public class TopicDAO {
         try {
             ArrayList<TopicBEAN> list = new ArrayList<>();
             Connection conn = connectDb();
-            String sql="select * from " +
-                    "(select row_number() over (order by id asc) as stt , from_user,topic_id,content,create_time,edit_time,post_id,delete_time from post) as x " +
-                    "inner join user on user.username = x.from_user " +
-                    "where stt between 1 and 6 " +
-                    "order by create_time DESC ";
             PreparedStatement preparedStatement = conn.prepareStatement("select * from " +
-                    " (select row_number() over (order by id asc) as stt ,id,from_user,topic_type_id,create_time,edit_time,topic_name,from_location,to_location,deli_datetime " +
+                    " (select row_number() over (order by id desc) as stt ,id,from_user,topic_type_id,create_time,edit_time,topic_name,from_location,to_location,deli_datetime " +
                     " from topic " +
                     " where topic_type_id=1 " +
                     " ) as x " +
@@ -161,6 +156,7 @@ public class TopicDAO {
                 //
                 Timestamp create_time =rs.getTimestamp("create_time");
                 Timestamp edit_time = rs.getTimestamp("edit_time");
+
                 //
                 String topic_name = rs.getString("topic_name");
                 String from_location = rs.getString("from_location");
@@ -171,7 +167,9 @@ public class TopicDAO {
                 String avatar = rs.getString("avatar");
                 String name = rs.getString("name");
                 String description = rs.getString("description");
+
                 int countPost = countPostInTopic(topic_id);
+
                 //
                 TopicBEAN topic = new TopicBEAN(topic_id,from_user,topic_type_id,create_time,edit_time,topic_name,from_location,to_location,deli_datetime,avatar,name,description,countPost);
                 list.add(topic);
@@ -187,7 +185,7 @@ public class TopicDAO {
             ArrayList<TopicBEAN> list = new ArrayList<>();
             Connection conn = connectDb();
             PreparedStatement preparedStatement = conn.prepareStatement("select * from " +
-                    " (select row_number() over (order by id asc) as stt ,id,from_user,topic_type_id,create_time,edit_time,topic_name,from_location,to_location,deli_datetime " +
+                    " (select row_number() over (order by id desc) as stt ,id,from_user,topic_type_id,create_time,edit_time,topic_name,from_location,to_location,deli_datetime " +
                     " from topic " +
                     " where topic_type_id=2 " +
                     " ) as x " +
@@ -445,7 +443,7 @@ public class TopicDAO {
             Connection conn = connectDb();
             PreparedStatement preparedStatement = connectDb().prepareStatement("select * from " +
                     " (select row_number() over (order by id asc) as stt ,id,from_user,topic_type_id,create_time,edit_time,topic_name,from_location,to_location,deli_datetime " +
-                    " from topic\n" +
+                    " from topic " +
                     " where " +
                     "   topic_name like ? " +
                     "  or from_location like ? " +

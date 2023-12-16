@@ -65,6 +65,54 @@ public class PostDAO {
         }
         return imageList;
     }
+    // Go to post when click notify
+    public int getTopicIdOfPost(int postID){
+        try{
+            Connection conn = connectDb();
+            PreparedStatement preparedStatement = connectDb().prepareStatement("select topic_id from post\n" +
+                    "where id = ?");
+            preparedStatement.setInt(1,postID);
+            ResultSet rs = preparedStatement.executeQuery();
+
+            while (rs.next()){
+                return rs.getInt("topic_id");
+            }
+
+        }catch (Exception e) {
+            e.printStackTrace();
+        }
+        return -1;
+    }
+    public int getPostPageIndex(int topicID,int postID){
+        try {
+            Connection conn = connectDb();
+            PreparedStatement preparedStatement = connectDb().prepareStatement("select stt from " +
+                    " (select row_number() over (order by id asc) as stt, id " +
+                    " from post " +
+                    " where topic_id= ? " +
+                    " ) as x " +
+                    " where id = ?");
+            preparedStatement.setInt(1,topicID);
+            preparedStatement.setInt(2,postID);
+            ResultSet rs = preparedStatement.executeQuery();
+            int sizePerPage = 6;
+            int postPageIndex=0;
+            while (rs.next()){
+                int postSTT = rs.getInt("stt");
+                postPageIndex = postSTT/sizePerPage;
+                if(postSTT<sizePerPage){
+                    ++postPageIndex;
+                }
+                else if(postSTT%sizePerPage != 0){
+                    ++postPageIndex;
+                }
+            }
+            return postPageIndex;
+        }catch (Exception e){
+            e.printStackTrace();
+            return -1;
+        }
+    }
     // Get All Post in Topic By Page + Pagination
     public int getTopicPageNumber(int topicID) {
         try{
@@ -102,8 +150,7 @@ public class PostDAO {
                 " where topic_id= ? " +
                 " ) as x " +
                 " inner join user on user.username = x.from_user " +
-                " where stt between ? and ? " +
-                " order by create_time DESC");
+                " where stt between ? and ? ");
 
         int sizePerPage = 6;
         preparedStatement.setInt(1,topicId);

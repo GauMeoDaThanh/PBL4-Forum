@@ -9,7 +9,6 @@
 <%
     UserBEAN user = (UserBEAN) session.getAttribute("user");
     String txtSearch = (String) request.getAttribute("txtSearch");
-    System.out.println(txtSearch);
     int pageIndex = (int) request.getAttribute("pageIndex");
     int pageNumber = (int) request.getAttribute("pageNumber");
     ArrayList<TopicBEAN> list = (ArrayList<TopicBEAN>) request.getAttribute("listSearch");

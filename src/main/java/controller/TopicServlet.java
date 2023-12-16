@@ -4,9 +4,11 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.*;
+import model.BEAN.NotifyBEAN;
 import model.BEAN.PostBEAN;
 import model.BEAN.TopicBEAN;
 import model.BEAN.UserBEAN;
+import model.BO.NotifyBO;
 import model.BO.PostBO;
 import model.BO.TopicBO;
 
@@ -31,6 +33,19 @@ import java.util.Collection;
 public class TopicServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        HttpSession session = req.getSession();
+        UserBEAN user = (UserBEAN) session.getAttribute("user");
+        // Notify
+        NotifyBO notifyBO = new NotifyBO();
+        ArrayList<NotifyBEAN> listNotify = new ArrayList<>();
+        if(user.getRole().equals("admin")){
+            listNotify = notifyBO.getAllNotifyRoleAdmin(user.getUsername());
+        } else{
+            listNotify = notifyBO.getAllNotifyRoleUser(user.getUsername());
+        }
+        req.setAttribute("listNotify",listNotify);
+        //
+
         String action=req.getPathInfo().substring(1);
         switch (action) {
             case "Receive":
@@ -44,6 +59,7 @@ public class TopicServlet extends HttpServlet {
                     req.setAttribute("pageNumber",pageNumber);
                     req.setAttribute("pageIndex",pageIndex);
                     req.setAttribute("listTopic",list);
+
                     req.getRequestDispatcher("../view/topic_receive.jsp").forward(req,resp);
                 }catch (Exception e) {
                     throw new RuntimeException(e);
@@ -71,10 +87,10 @@ public class TopicServlet extends HttpServlet {
                     TopicBO topicBO = new TopicBO();
                     PostBO postBO =new PostBO();
 
+                    //
                     int topicID = Integer.parseInt(req.getParameter("topicID"));
                     int pageIndex = Integer.parseInt(req.getParameter("pageIndex"));
                     int pageNumber = postBO.getTopicPageNumber(topicID);
-
 
                     TopicBEAN topicBEAN = topicBO.getTopicById(topicID);
                     ArrayList<PostBEAN> list = postBO.getAllPostInTopicByPage(topicID,pageIndex);
@@ -92,7 +108,6 @@ public class TopicServlet extends HttpServlet {
                     TopicBO topicBO = new TopicBO();
 
                     String txtSearch = req.getParameter("txtSearch");
-                    System.out.println("2========"+txtSearch);
                     int pageIndex = Integer.parseInt(req.getParameter("pageIndex"));
                     int pageNumber = topicBO.getTopicPageNumberBySearch(txtSearch);
 
