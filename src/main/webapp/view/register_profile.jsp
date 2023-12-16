@@ -30,11 +30,11 @@
 
 <body>
 <!-- Topbar Start -->
-<div class="fixed-top container-fluid bg-dark py-2 d-none d-md-flex">
+<div class="fixed-top bg-dark py-2 d-none d-md-flex">
     <div class="container">
         <div class="d-flex justify-content-between topbar">
             <div class="top-info">
-                <small class="me-3 text-white-50"><a href="#"><i class="fas fa-map-marker-alt me-2 text-secondary"></i></a>54 Nguyễn Lương Bằng, Đà Nẵng</small>
+                <small class="me-3 text-white-50"><a href="#"><i class="fas fa-map-marker-alt me-2 text-secondary"></i></a>ĐHBK Đà Nẵng</small>
                 <small class="me-3 text-white-50"><a href="#"><i class="fas fa-envelope me-2 text-secondary"></i></a>PBL4@gmail.com</small>
             </div>
             <div id="note" class="text-secondary d-none d-xl-flex"><small>Đến với chúng tôi, mọi thứ rất dễ dàng</small></div>
@@ -157,7 +157,9 @@
 <script src="${pageContext.request.contextPath}/assets/lib/easing/easing.min.js"></script>
 <script src="${pageContext.request.contextPath}/assets/lib/waypoints/waypoints.min.js"></script>
 <script src="${pageContext.request.contextPath}/assets/lib/owlcarousel/owl.carousel.min.js"></script>
-
+<!-- Province API -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.26.1/axios.min.js" integrity="sha512-bPh3uwgU5qEMipS/VOmRqynnMXGGSRv+72H/N260MQeXZIK4PG48401Bsby9Nq5P5fz7hy5UGNmC/W1Z51h2GQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <!-- Template Javascript -->
 <script src="${pageContext.request.contextPath}/assets/js/main.js"></script>
 </body>

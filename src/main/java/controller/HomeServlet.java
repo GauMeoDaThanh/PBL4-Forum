@@ -6,8 +6,10 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import model.BEAN.NotifyBEAN;
 import model.BEAN.TopicBEAN;
 import model.BEAN.UserBEAN;
+import model.BO.NotifyBO;
 import model.BO.TopicBO;
 
 import java.io.IOException;
@@ -28,6 +30,17 @@ public class HomeServlet extends HttpServlet {
 
             req.setAttribute("listTopicReceive",listReceive);
             req.setAttribute("listTopicSend",listSend);
+
+            // Notify
+            NotifyBO notifyBO = new NotifyBO();
+            ArrayList<NotifyBEAN> listNotify = new ArrayList<>();
+            if(user.getRole().equals("admin")){
+                listNotify = notifyBO.getAllNotifyRoleAdmin(user.getUsername());
+            } else{
+                listNotify = notifyBO.getAllNotifyRoleUser(user.getUsername());
+            }
+            req.setAttribute("listNotify",listNotify);
+            //
 
             req.getRequestDispatcher("../view/home.jsp").forward(req, resp);
         } catch (Exception e) {

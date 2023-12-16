@@ -16,6 +16,7 @@ public class PostBEAN {
     private String name;
     private String description;
     private ArrayList<String> imageList;
+    private Timestamp delete_time;
     public PostBEAN() {
 
     }
@@ -29,7 +30,7 @@ public class PostBEAN {
         this.post_id = post_id;
     }
 
-    public PostBEAN(int id, String from_user, int topic_id, String content, Timestamp create_time, Timestamp edit_time, Integer post_id, String avatar, String name, String description, ArrayList<String> imageList) {
+    public PostBEAN(int id, String from_user, int topic_id, String content, Timestamp create_time, Timestamp edit_time, Integer post_id, String avatar, String name, String description, ArrayList<String> imageList,Timestamp delete_time) {
         this.id = id;
         this.from_user = from_user;
         this.topic_id = topic_id;
@@ -41,6 +42,7 @@ public class PostBEAN {
         this.name = name;
         this.description = description;
         this.imageList = imageList;
+        this.delete_time = delete_time;
     }
 
     public int getId() {
@@ -130,4 +132,13 @@ public class PostBEAN {
     public void setImageList(ArrayList<String> imageList) {
         this.imageList = imageList;
     }
+
+    public Timestamp getDelete_time() {
+        return delete_time;
+    }
+
+    public void setDelete_time(Timestamp delete_time) {
+        this.delete_time = delete_time;
+    }
+
 }

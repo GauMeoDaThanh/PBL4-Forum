@@ -33,31 +33,6 @@
 </head>
 
 <body>
-<!-- Topbar Start -->
-<div class="fixed-top container-fluid bg-dark py-2 d-none d-md-flex">
-    <div class="container">
-        <div class="d-flex justify-content-between topbar">
-            <div class="top-info">
-                <small class="me-3 text-white-50"><a href="#"><i class="fas fa-map-marker-alt me-2 text-secondary"></i></a>54
-                    Nguyễn Lương Bằng, Đà Nẵng</small>
-                <small class="me-3 text-white-50"><a href="#"><i class="fas fa-envelope me-2 text-secondary"></i></a>PBL4@gmail.com</small>
-            </div>
-            <div id="note" class="text-secondary d-none d-xl-flex"><small>Đến với chúng tôi, mọi thứ rất dễ dàng</small>
-            </div>
-            <div class="top-link">
-                <a href="" class="bg-light nav-fill btn btn-sm-square rounded-circle"><i
-                        class="fab fa-facebook-f text-primary"></i></a>
-                <a href="" class="bg-light nav-fill btn btn-sm-square rounded-circle"><i
-                        class="fab fa-twitter text-primary"></i></a>
-                <a href="" class="bg-light nav-fill btn btn-sm-square rounded-circle"><i
-                        class="fab fa-instagram text-primary"></i></a>
-                <a href="" class="bg-light nav-fill btn btn-sm-square rounded-circle me-0"><i
-                        class="fab fa-linkedin-in text-primary"></i></a>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- Topbar End -->
 
 <jsp:include page="header.jsp"/>
 <%
@@ -950,7 +925,9 @@
 <script src="../assets/lib/easing/easing.min.js"></script>
 <script src="../assets/lib/waypoints/waypoints.min.js"></script>
 <script src="../assets/lib/owlcarousel/owl.carousel.min.js"></script>
-
+<!-- Province API -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.26.1/axios.min.js" integrity="sha512-bPh3uwgU5qEMipS/VOmRqynnMXGGSRv+72H/N260MQeXZIK4PG48401Bsby9Nq5P5fz7hy5UGNmC/W1Z51h2GQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <!-- Template Javascript -->
 <script src="../assets/js/main.js"></script>
 <script>

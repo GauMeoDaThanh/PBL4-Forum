@@ -1,13 +1,13 @@
 package model.BEAN;
 
 public class ProfileBEAN {
-    String username;
-    String name;
-    String email;
-    String description;
-    int receiveDeli;
-    double star;
-    String avatar;
+    private String username;
+    private String name;
+    private String email;
+    private String description;
+    private int receiveDeli;
+    private double star;
+    private String avatar;
 
     public ProfileBEAN(String username, String name, String email, String description, int receiveDeli, double star, String avatar) {
         this.username = username;

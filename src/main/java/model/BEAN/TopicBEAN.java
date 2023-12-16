@@ -15,7 +15,7 @@ public class TopicBEAN {
     private String avatar;
     private String name;
     private String description;
-//    private int countPost;
+    private int countPost;
 
     public TopicBEAN() {
 
@@ -32,7 +32,7 @@ public class TopicBEAN {
     }
     // Lấy topic ra
 
-    public TopicBEAN(int id, String from_user, int topic_type_id, Timestamp create_time, Timestamp edit_time, String topic_name, String from_location, String to_location, Timestamp deli_datetime, String avatar, String name, String description) {
+    public TopicBEAN(int id, String from_user, int topic_type_id, Timestamp create_time, Timestamp edit_time, String topic_name, String from_location, String to_location, Timestamp deli_datetime, String avatar, String name, String description,int countPost) {
         this.id = id;
         this.from_user = from_user;
         this.topic_type_id = topic_type_id;
@@ -45,6 +45,7 @@ public class TopicBEAN {
         this.avatar = avatar;
         this.name = name;
         this.description = description;
+        this.countPost = countPost;
     }
 
     public int getId() {
@@ -141,5 +142,13 @@ public class TopicBEAN {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public int getCountPost() {
+        return countPost;
+    }
+
+    public void setCountPost(int countPost) {
+        this.countPost = countPost;
     }
 }

@@ -32,16 +32,25 @@
 //
 
 //
-window.addEventListener("load", function() {
-    // Wait for the entire page, including images and other resources, to be fully loaded
-    var elementToFocus = document.getElementById("element-focus");
+function goToPost(postID) {
+    var elementToFocus = document.getElementById(postID);
 
     // Check if the element exists
     if (elementToFocus) {
         // Scroll to the element with smooth behavior
         elementToFocus.scrollIntoView({ behavior: 'smooth', block: 'center' });
     }
-});
+}
+// window.addEventListener("load", function() {
+//     // Wait for the entire page, including images and other resources, to be fully loaded
+//     var elementToFocus = document.getElementById("element-focus");
+//
+//     // Check if the element exists
+//     if (elementToFocus) {
+//         // Scroll to the element with smooth behavior
+//         elementToFocus.scrollIntoView({ behavior: 'smooth', block: 'center' });
+//     }
+// });
 //
 function clickOnBell() {
     var dropdown = document.querySelector('.header__popup')
@@ -57,12 +66,12 @@ function clickOnBell() {
 
 // Rating star
 // Select all elements with the "i" tag and store them in a NodeList called "stars"
+
 function onStarClick() {
     var rating_label = document.querySelector(".rating-label");
     var rating_number = document.querySelector(".rating-number");
     var rating = document.getElementById("rating");
     const stars = document.querySelectorAll(".stars i");
-
     // Add an event listener to each star
     stars.forEach((star, index1) => {
         star.addEventListener("click", () => {
@@ -71,7 +80,6 @@ function onStarClick() {
             stars.forEach((star, index2) => {
                 index1 >= index2 ? star.classList.add("active") : star.classList.remove("active");
             });
-
             // Update rating_label based on the clicked star's index
             if (index1 == 0) {
                 rating_label.innerHTML = 'Rất tệ';
@@ -97,24 +105,22 @@ function onStarClick() {
                 rating.value = "5";
 
             }
-        });
+        },true);
     });
 }
 
 // Login,Register tab
-
 function ClickRegisterTab() {
     var login = document.getElementById("form-login");
     var register = document.getElementById("form-register");
     var loginTitle = document.getElementById("LoginLabel");
     var registerTitle = document.getElementById("RegisterLabel");
 
-    login.style.display="none";
-    register.style.display="block";
-    loginTitle.style.display="none";
-    registerTitle.style.display="block";
+    login.style.display = "none";
+    register.style.display = "block";
+    loginTitle.style.display = "none";
+    registerTitle.style.display = "block";
 }
-
 function ClickLoginTab() {
     var login = document.getElementById("form-login");
     var register = document.getElementById("form-register");
@@ -165,6 +171,11 @@ function replyPost(postOwner,postContent,idPost,ownerPostTo,contentPostTo,idPost
     idPostToElement.value=idPost
     blockReplyElement.style.display='block'
 
+    // truot xuong khung chat
+    var focus = document.getElementById("element-focus-reply")
+
+    focus.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
 }
 
 function resetReply(ownerPostTo,contentPostTo,idPostTo,blockReply) {
@@ -179,4 +190,82 @@ function resetReply(ownerPostTo,contentPostTo,idPostTo,blockReply) {
     blockReplyElement.style.display='none'
 }
 
+// display multiple image
+function uploadImages(id) {
+    var input = document.getElementById('formFileMultiple-'+id);
+    var viewImageContainer = document.getElementById('view-image-container-'+id);
+    console.log('formFileMultiple-'+id)
+    console.log('view-image-container-'+id)
+
+    viewImageContainer.innerHTML = "";
+
+    var files = input.files;
+
+    for (var i = 0; i < files.length; i++) {
+        var file = files[i];
+        var reader = new FileReader();
+
+        reader.onload = function (e) {
+            var viewImage = document.createElement('div');
+            viewImage.classList.add('view-image', 'm-2');
+
+            var imageElement = document.createElement('img');
+            imageElement.src = e.target.result;
+            imageElement.height = "150";
+
+            viewImage.appendChild(imageElement);
+            viewImageContainer.appendChild(viewImage);
+        };
+
+        reader.readAsDataURL(file);
+    }
+}
+
+// Api getallProvince
+const host = "https://provinces.open-api.vn/api/";
+var callAPI = (api) => {
+    return axios.get(api)
+        .then((response) => {
+            renderData(response.data, "select-from-location");
+            renderData(response.data,"select-to-location");
+        });
+}
+callAPI('https://provinces.open-api.vn/api/?depth=1');
+var callApiDistrict = (api) => {
+    return axios.get(api)
+        .then((response) => {
+            renderData(response.data.districts, "district");
+        });
+}
+var callApiWard = (api) => {
+    return axios.get(api)
+        .then((response) => {
+            renderData(response.data.wards, "ward");
+        });
+}
+var renderData = (array, select) => {
+    let row = '';
+
+    // Thêm thuộc tính 'selected' vào thẻ option đầu tiên
+    row += `<option value="${array[0].name}" selected>${array[0].name}</option>`;
+
+    // Tiếp tục vòng lặp để thêm các option khác
+    for (let i = 1; i < array.length; i++) {
+        row += `<option value="${array[i].name}">${array[i].name}</option>`;
+    }
+
+    var targetElement = document.querySelector("#" + select);
+    if (targetElement) {
+        targetElement.innerHTML = row;
+    }
+    // document.querySelector("#" + select).innerHTML = row;
+}
+function getProvinceOption(idFrom,valueFrom,idTo,valueTo) {
+    var selectElement = document.getElementById(idFrom);
+    var selectElement2 = document.getElementById(idTo);
+    selectElement.value=valueFrom
+    selectElement2.value=valueTo
+    console.log(selectElement.value)
+    console.log(selectElement2.value)
+}
 

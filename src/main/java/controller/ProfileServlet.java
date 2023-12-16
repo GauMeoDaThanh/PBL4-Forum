@@ -4,15 +4,20 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.*;
+import model.BEAN.NotifyBEAN;
 import model.BEAN.ProfileBEAN;
+import model.BEAN.TopicBEAN;
 import model.BEAN.UserBEAN;
 import model.BO.AuthenticateBO;
+import model.BO.NotifyBO;
 import model.BO.ProfileBO;
+import model.BO.TopicBO;
 
 import java.io.EOFException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 
 @WebServlet("/Profile/*")
 @MultipartConfig()
@@ -24,6 +29,17 @@ public class ProfileServlet extends HttpServlet {
         try {
             String action = req.getPathInfo().substring(1);
             UserBEAN user = (UserBEAN) session.getAttribute("user");
+
+            // Notify
+            NotifyBO notifyBO = new NotifyBO();
+            ArrayList<NotifyBEAN> listNotify = new ArrayList<>();
+            if(user.getRole().equals("admin")){
+                listNotify = notifyBO.getAllNotifyRoleAdmin(user.getUsername());
+            } else{
+                listNotify = notifyBO.getAllNotifyRoleUser(user.getUsername());
+            }
+            req.setAttribute("listNotify",listNotify);
+            //
             switch (action) {
                 case "Register":
                     req.getRequestDispatcher("../view/register_profile.jsp").forward(req, resp);
@@ -35,12 +51,17 @@ public class ProfileServlet extends HttpServlet {
                     req.getRequestDispatcher("../view/change_password.jsp").forward(req, resp);
                     break;
                 case "Info":
-                    System.out.println(req.getParameter("username"));
+//                    System.out.println(req.getParameter("username"));
                     String username = req.getParameter("username");
                     AuthenticateBO authenticateBO = new AuthenticateBO();
                     if (session.getAttribute("user") == null) throw new Exception();
                     ProfileBEAN userInfo = profileBO.getUserInfo(username);
+
+                    TopicBO topicBO = new TopicBO();
+                    ArrayList<TopicBEAN> listTopic = topicBO.getAllTopicByUsername(username);
+
                     if (userInfo != null) {
+                        req.setAttribute("listTopic",listTopic);
                         req.setAttribute("userInfo", userInfo);
                         req.getRequestDispatcher("../view/profile.jsp").forward(req, resp);
                     } else {
@@ -92,6 +113,7 @@ public class ProfileServlet extends HttpServlet {
                     profileBO.updateProfile(userBean);
                     session.setAttribute("user", userBean);
                     resp.sendRedirect("../Home/");
+
                     break;
                 case "UpdatePassword":
                     UserBEAN userBEAN = (UserBEAN) session.getAttribute("user");

@@ -15,29 +15,16 @@
         <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Saira:wght@500;600;700&display=swap" rel="stylesheet"> 
 
         <!-- Icon Font Stylesheet -->
-        <!-- <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet"> -->
-        <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet"> -->
-        <link rel="stylesheet" href="${pageContext.request.contextPath}
-/assets/library/fontawesome-free-6.4.2-web/css/all.css">
-        <link rel="stylesheet" href="${pageContext.request.contextPath}
-/assets/library/bootstrap-icons-1.11.1/bootstrap-icons.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/library/fontawesome-free-6.4.2-web/css/all.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/library/bootstrap-icons-1.11.1/bootstrap-icons.css">
         <!-- Libraries Stylesheet -->
-        <!-- <link href="lib/animate/animate.min.css" rel="stylesheet"> -->
-        <!-- <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet"> -->
-        <link rel="stylesheet" href="${pageContext.request.contextPath}
-/assets/lib/animate/animate.min.css">
-        <link rel="stylesheet" href="${pageContext.request.contextPath}
-/assets/lib/owlcarousel/assets/owl.carousel.min.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/lib/animate/animate.min.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/lib/owlcarousel/assets/owl.carousel.min.css">
 
         <!-- Customized Bootstrap Stylesheet -->
-        <!-- <link href="css/bootstrap.min.css" rel="stylesheet"> -->
-        <!-- <link rel="stylesheet" href="../assets/library/bootstrap-5.2.3-dist/css/bootstrap.min.css"> -->
-        <link rel="stylesheet" href="${pageContext.request.contextPath}
-/assets/css/bootstrap.min.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/bootstrap.min.css">
         <!-- Template Stylesheet -->
-        <!-- <link href="css/style.css" rel="stylesheet"> -->
-        <link rel="stylesheet" href="${pageContext.request.contextPath}
-/assets/css/style.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/style.css">
     </head>
 
     <body>
@@ -48,11 +35,11 @@
         <!-- Spinner End -->
 
         <!-- Topbar Start -->
-        <div class="fixed-top container-fluid bg-dark py-2 d-none d-md-flex">
+        <div class="fixed-top bg-dark py-2 d-none d-md-flex">
             <div class="container">
                 <div class="d-flex justify-content-between topbar">
                     <div class="top-info">
-                        <small class="me-3 text-white-50"><a href="#"><i class="fas fa-map-marker-alt me-2 text-secondary"></i></a>54 Nguyễn Lương Bằng, Đà Nẵng</small>
+                        <small class="me-3 text-white-50"><a href="#"><i class="fas fa-map-marker-alt me-2 text-secondary"></i></a>ĐHBK Đà Nẵng</small>
                         <small class="me-3 text-white-50"><a href="#"><i class="fas fa-envelope me-2 text-secondary"></i></a>PBL4@gmail.com</small>
                     </div>
                     <div id="note" class="text-secondary d-none d-xl-flex"><small>Đến với chúng tôi, mọi thứ rất dễ dàng</small></div>
@@ -68,7 +55,7 @@
         <!-- Topbar End -->
 
         <!-- Navbar Start -->
-        <div class="fixed-top my-5 container-fluid bg-primary">
+        <div class="fixed-top my-5 bg-primary">
             <div class="container">
                 <nav class="navbar navbar-dark navbar-expand-lg py-0">
                     <a href="" class="navbar-brand">
@@ -80,7 +67,7 @@
                     <div class="collapse navbar-collapse bg-transparent" id="navbarCollapse">
                         <div class="navbar-nav ms-auto mx-xl-auto p-0"></div>
                     </div>
-                    <div class="d-none d-xl-flex flex-shirink-0">
+                    <div class="">
                         <button class="btn btn-secondary rounded-pill px-5 py-3 text-white" data-bs-toggle="modal" data-bs-target="#LoginRegisterModal">Đăng nhập</button>
                     </div>
                 </nav>
@@ -99,17 +86,17 @@
                         <div class="modal-body">
                             <form action="authenticate/login" id="form-login" style="display: block;" method="post">
                                 <div class="mb-3">
-                                    <label for="recipient-name" class="col-form-label">Tên đăng nhập</label>
-                                    <input type="text" class="form-control" id="recipient-name" placeholder="Nhập tên đăng nhập..." name="username" required>
+                                    <label for="usernameInput" class="col-form-label">Tên đăng nhập</label>
+                                    <input type="text" class="form-control" id="usernameInput" placeholder="Nhập tên đăng nhập..." name="username" required  tabindex="1">
                                 </div>
 
                                 <div class="mb-3">
-                                    <label for="recipient-name" class="col-form-label">Mật khẩu</label>
-                                    <input type="password" class="form-control" id="recipient-name" placeholder="Nhập mật khẩu..." name="password" required>
+                                    <label for="passwordInput" class="col-form-label">Mật khẩu</label>
+                                    <input type="password" class="form-control" id="passwordInput" placeholder="Nhập mật khẩu..." name="password" required>
                                 </div>
 
                                 <div class="mb-3">
-                                    <label for="recipient-name" class="col-form-label">Chưa có tài khoản</label>
+                                    <label for="register-tab" class="col-form-label">Chưa có tài khoản</label>
                                     <button href="#" class="btn btn-link" id="register-tab" onclick="ClickRegisterTab()" type="reset">Đăng ký</button>
                                 </div>
                                
@@ -120,23 +107,23 @@
                             </form>
                             <form method="post" action="authenticate/register" id="form-register" style="display: none;" oninput="password2.setCustomValidity(password2.value != password.value ? 'Mật khẩu không giống' : '')">
                                 <div class="mb-3">
-                                    <label for="recipient-name" class="col-form-label">Tên đăng nhập</label>
-                                    <input type="text" class="form-control" id="recipient-name" placeholder="Nhập tên đăng nhập..." name="username" required>
+                                    <label for="register-username" class="col-form-label">Tên đăng nhập</label>
+                                    <input type="text" class="form-control" id="register-username" placeholder="Nhập tên đăng nhập..." name="username" required>
                                 </div>
 
                                 <div class="mb-3">
-                                    <label for="recipient-name" class="col-form-label" >Mật khẩu</label>
-                                    <input type="password" class="form-control" id="password" placeholder="Nhập mật khẩu..." name="password" required>
+                                    <label for="register-password" class="col-form-label" >Mật khẩu</label>
+                                    <input type="password" class="form-control" id="register-password" placeholder="Nhập mật khẩu..." name="password" required>
                                 </div>
 
                                 <div class="mb-3">
-                                    <label for="recipient-name" class="col-form-label">Nhập lại mật khẩu</label>
-                                    <input type="password" class="form-control" name="password2" placeholder="Nhập lại mật khẩu..." required>
+                                    <label for="register-password2" class="col-form-label">Nhập lại mật khẩu</label>
+                                    <input type="password" class="form-control" id="register-password2" name="password2" placeholder="Nhập lại mật khẩu..." required>
                                 </div>
 
                                 <div class="mb-3">
                                     <p id="error" style="color: red"></p>
-                                    <label for="recipient-name" class="col-form-label">Đã có tài khoản</label>
+                                    <label for="login-tab" class="col-form-label">Đã có tài khoản</label>
                                     <button href="#" class="btn btn-link" id="login-tab" onclick="ClickLoginTab()" type="reset">Đăng nhập</button>
                                 </div>
                                
@@ -162,8 +149,7 @@
                 </ol>
                 <div class="carousel-inner" role="listbox">
                     <div class="carousel-item active">
-                        <img src="${pageContext.request.contextPath}
-/assets/img/carousel-1.jpg" class="img-fluid" alt="First slide" style="width: 100%; height: 20%;">
+                        <img src="${pageContext.request.contextPath}/assets/img/carousel-1.jpg" class="img-fluid" alt="First slide" style="width: 100%; height: 20%;">
                         <div class="carousel-caption">
                             <div class="container carousel-content">
                                 <h6 class="text-secondary h4 animated fadeInUp">Diễn đàn vận chuyển</h6>
@@ -173,8 +159,7 @@
                         </div>
                     </div>
                     <div class="carousel-item">
-                        <img src="${pageContext.request.contextPath}
-/assets/img/carousel-2.jpg" class="img-fluid" alt="Second slide" style="width: 100%; height: 20%;">
+                        <img src="${pageContext.request.contextPath}/assets/img/carousel-2.jpg" class="img-fluid" alt="Second slide" style="width: 100%; height: 20%;">
                         <div class="carousel-caption">
                             <div class="container carousel-content">
                                 <h6 class="text-secondary h4 animated fadeInUp">Cam kết đảm bảo chất lượng</h6>
@@ -266,26 +251,17 @@
         
         <!-- JavaScript Libraries -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
-        <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script> -->
-        <!-- <script src="lib/wow/wow.min.js"></script> -->
-        <!-- <script src="lib/easing/easing.min.js"></script> -->
-        <!-- <script src="lib/waypoints/waypoints.min.js"></script> -->
-        <!-- <script src="lib/owlcarousel/owl.carousel.min.js"></script> -->
-        <script src="${pageContext.request.contextPath}
-/assets/library/bootstrap-5.2.3-dist/js/bootstrap.bundle.min.js"></script>
-        <script src="${pageContext.request.contextPath}
-/assets/lib/wow/wow.min.js"></script>
-        <script src="${pageContext.request.contextPath}
-/assets/lib/easing/easing.min.js"></script>
-        <script src="${pageContext.request.contextPath}
-/assets/lib/waypoints/waypoints.min.js"></script>
-        <script src="${pageContext.request.contextPath}
-/assets/lib/owlcarousel/owl.carousel.min.js"></script>
+        <script src="${pageContext.request.contextPath}/assets/library/bootstrap-5.2.3-dist/js/bootstrap.bundle.min.js"></script>
+        <script src="${pageContext.request.contextPath}/assets/lib/wow/wow.min.js"></script>
+        <script src="${pageContext.request.contextPath}/assets/lib/easing/easing.min.js"></script>
+        <script src="${pageContext.request.contextPath}/assets/lib/waypoints/waypoints.min.js"></script>
+        <script src="${pageContext.request.contextPath}/assets/lib/owlcarousel/owl.carousel.min.js"></script>
 
+        <!-- Province API -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.26.1/axios.min.js" integrity="sha512-bPh3uwgU5qEMipS/VOmRqynnMXGGSRv+72H/N260MQeXZIK4PG48401Bsby9Nq5P5fz7hy5UGNmC/W1Z51h2GQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
         <!-- Template Javascript -->
-        <!-- <script src="js/main.js"></script> -->
-        <script src="${pageContext.request.contextPath}
-/assets/js/main.js"></script>
+        <script src="${pageContext.request.contextPath}/assets/js/main.js"></script>
         <script >
             $(document).on("submit", "#form-register", function (event){
                 const $form = $(this);
@@ -307,7 +283,14 @@
                 alert('Sai tài khoản hoặc mật khẩu');
                 window.location.assign("/Forum");
             }
+            ////////
+            else if(alertParam==="BanAccount"){
+                alert('Tài khoản đã bị chặn đăng nhập, liên hệ admin để được hỗ trợ!');
+                window.location.assign("/Forum");
+            }
         </script>
+
+
     </body>
 
 </html>

@@ -8,6 +8,9 @@
 <html lang="en">
 <%
     UserBEAN user = (UserBEAN) session.getAttribute("user");
+
+    int pageNumber = (int) request.getAttribute("pageNumber");
+    int pageIndex = (int) request.getAttribute("pageIndex");
     ArrayList<TopicBEAN> list= (ArrayList<TopicBEAN>) request.getAttribute("listTopic");
 %>
 
@@ -38,25 +41,6 @@
     </head>
 
     <body>
-        <!-- Topbar Start -->
-        <div class="fixed-top container-fluid bg-dark py-2 d-none d-md-flex">
-            <div class="container">
-                <div class="d-flex justify-content-between topbar">
-                    <div class="top-info">
-                        <small class="me-3 text-white-50"><a href="#"><i class="fas fa-map-marker-alt me-2 text-secondary"></i></a>54 Nguyễn Lương Bằng, Đà Nẵng</small>
-                        <small class="me-3 text-white-50"><a href="#"><i class="fas fa-envelope me-2 text-secondary"></i></a>PBL4@gmail.com</small>
-                    </div>
-                    <div id="note" class="text-secondary d-none d-xl-flex"><small>Đến với chúng tôi, mọi thứ rất dễ dàng</small></div>
-                    <div class="top-link">
-                        <a href="" class="bg-light nav-fill btn btn-sm-square rounded-circle"><i class="fab fa-facebook-f text-primary"></i></a>
-                        <a href="" class="bg-light nav-fill btn btn-sm-square rounded-circle"><i class="fab fa-twitter text-primary"></i></a>
-                        <a href="" class="bg-light nav-fill btn btn-sm-square rounded-circle"><i class="fab fa-instagram text-primary"></i></a>
-                        <a href="" class="bg-light nav-fill btn btn-sm-square rounded-circle me-0"><i class="fab fa-linkedin-in text-primary"></i></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Topbar End -->
 
         <!-- Navbar Start -->
         <jsp:include page="header.jsp"/>
@@ -85,29 +69,28 @@
                         String deliDateTime = dateFormat.format(topic.getDeli_datetime());
                 %>
                 <div class="row">
-                    <div class="inner-main-bodycollapse forum-content show">
+                    <div class="col-12">
                         <div class="card mb-2" style="background-color: #E5F2FF;">
-                            <div class="card-body">
-                                <div class="media forum-item d-flex">
-                                    <a href="#" data-toggle="collapse" data-target=".forum-content"><img src="${pageContext.request.contextPath}/image/<%=topic.getAvatar()==null  || topic.getAvatar().equals("") ? "29.jpg" : topic.getAvatar()%>" class="mr-3 rounded-circle" width="70" height="70" alt="User" /></a>
-                                    <div class="media-body mx-2" style="min-width: 60%; max-width: 60%;">
-                                        <h4><a href="${pageContext.request.contextPath}/Topic/Info?topicID=<%=topic.getId()%>" data-toggle="collapse" data-target=".forum-content" class="text-body"><strong><%=topic.getTopic_name()%></strong></a></h4>
-                                        <p class="text-muted"><a href="${pageContext.request.contextPath}/Profile/Info?username=<%=topic.getFrom_user()%>"><%=topic.getFrom_user()%></a> at <span class="text-dark font-weight-bold"><%=createTime%></span></p>
+                            <div class="card-body d-flex">
+                                <div class="col-7 d-flex">
+                                    <a href="${pageContext.request.contextPath}/Profile/Info?username=<%=topic.getFrom_user()%>"><img src="${pageContext.request.contextPath}/image/<%=topic.getAvatar()==null  || topic.getAvatar().equals("") ? "29.jpg" : topic.getAvatar()%>" class="mr-3 rounded-circle" width="70" height="70" alt="User" /></a>
+                                    <div class="media-body mx-2">
+                                        <h4><a href="${pageContext.request.contextPath}/Topic/Info?topicID=<%=topic.getId()%>&pageIndex=1" class="text-body"><strong><%=topic.getTopic_name()%></strong></a></h4>
+                                        <p class="text-muted"><a href="${pageContext.request.contextPath}/Profile/Info?username=<%=topic.getFrom_user()%>" class="text-primary"><%=topic.getFrom_user()%></a> at <span class="text-dark font-weight-bold"><%=createTime%></span></p>
                                     </div>
-                                    <div class="media-body mx-4" style="width: 20%;">
-                                        <div class="content__topic-item-right-item">
-                                            <i class="bi bi-geo-alt-fill" style="color: red; font-size: larger;"></i>
-                                            <label for="" class="text-dark"><%=topic.getFrom_location()+" đến "+ topic.getTo_location()%></label>
-                                        </div>
-                                        <div class="content__topic-item-right-item py-3">
-                                            <i class="content__topic-item-icon color--green fa-solid fa-calendar-days" style="color: green"></i>
-                                            <label for="" class="text-dark"><%=deliDateTime%></label>
-                                        </div>
+                                </div>
+                                <div class="mx-2 col-4 d-flex flex-column justify-content-center">
+                                    <div class="py-2">
+                                        <i class="bi bi-geo-alt-fill" style="color: red; font-size: larger;"></i>
+                                        <label for="" class="text-dark"><%=topic.getFrom_location()+" đến "+ topic.getTo_location()%></label>
                                     </div>
-                                    <div class="text-muted small text-center align-self-center">
-                                        <!-- <span class="d-none d-sm-inline-block mx-1"><i class="far fa-eye"></i> 19</span> -->
-                                        <span><i class="far fa-comment mx-1"></i> 3</span>
+                                    <div class="py-2">
+                                        <i class="content__topic-item-icon color--green fa-solid fa-calendar-days" style="color: green; font-size: larger;"></i>
+                                        <label for="" class="text-dark"><%=deliDateTime%></label>
                                     </div>
+                                </div>
+                                <div class="col-1 d-flex align-items-center justify-content-center">
+                                    <span><i class="far fa-comment mx-1"></i><%=topic.getCountPost()%></span>
                                 </div>
                             </div>
                         </div>
@@ -117,22 +100,64 @@
                     }
                 %>
 
-                <div class="row">
+                <div class="row m-4">
                     <nav aria-label="Page navigation example">
-                        <ul class="pagination justify-content-center">
-                          <li class="page-item disabled">
-                            <a class="page-link" href="#" tabindex="-1">Quay lại</a>
-                          </li>
-                          <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                          <li class="page-item"><a class="page-link" href="#">2</a></li>
-                          <li class="page-item"><a class="page-link" href="#">3</a></li>
-                          <li class="page-item">
-                            <a class="page-link" href="#">Tiếp</a>
-                          </li>
+                        <ul class="pagination justify-content-center" id="pagination">
+                            <%
+                                if(pageIndex==1 || pageNumber==1){
+
+                            %>
+                            <li class="page-item disabled" id="previousPage">
+                                <a class="page-link" href="#" tabindex="-1">Trước</a>
+                            </li>
+                            <%
+                                } else{
+                            %>
+                            <li class="page-item" id="previousPage">
+                                <a class="page-link" href="${pageContext.request.contextPath}/Topic/Receive?pageIndex=<%=pageIndex-1%>" tabindex="-1">Trước</a>
+                            </li>
+                            <%
+                                }
+                            %>
+<%--                            --%>
+
+                            <%
+                                for(int i=1;i<=pageNumber;i++) {
+                                   if(pageIndex==i){
+                            %>
+                            <li class="page-item active"><a class="page-link" href="${pageContext.request.contextPath}/Topic/Receive?pageIndex=<%=i%>"><%=i%></a></li>
+                            <%
+                                   }
+                                   else{
+
+                            %>
+                            <li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/Topic/Receive?pageIndex=<%=i%>"><%=i%></a></li>
+                            <%
+                                    }
+                            %>
+                            <%
+                                }
+                            %>
+<%--                            --%>
+                            <%
+                                if(pageIndex==pageNumber || pageNumber==1) {
+                            %>
+                            <li class="page-item disabled" id="nextPage">
+                                <a class="page-link" href="#">Sau</a>
+                            </li>
+                            <%
+                                } else{
+                            %>
+                            <li class="page-item" id="nextPage">
+                                <a class="page-link" href="${pageContext.request.contextPath}/Topic/Receive?pageIndex=<%=pageIndex+1%>">Sau</a>
+                            </li>
+                            <%
+                                }
+                            %>
                         </ul>
                     </nav>
                 </div>
-              </div>
+            </div>
             <div class="container">
                 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog" style="min-width: 800px;">
@@ -157,28 +182,16 @@
                                     <div class="mb-3">
                                         <label for="select-from-location" class="col-form-label">Địa điểm đi</label>
                                         <select name="new_topic_from_location" id="select-from-location" class="form-select" aria-label="Default select example">
-                                            <option value="An Giang" selected>An Giang</option>
-                                            <option value="Hà Nội">Hà Nội</option>
-                                            <option value="Phú Quốc">Phú Quốc</option>
-                                            <option value="Đà Nẵng">Đà Nẵng</option>
-                                            <option value="Hồ Chí Minh">Hồ Chí Minh</option>
-                                            <option value="Nha Trang">Nha Trang</option>
                                         </select>
                                     </div>
                                     <div class="mb-3">
                                         <label for="select-to-location" class="col-form-label">Địa điểm đến</label>
                                         <select name="new_topic_to_location" id="select-to-location" class="form-select" aria-label="Default select example">
-                                            <option value="An Giang" selected>An Giang</option>
-                                            <option value="Hà Nội">Hà Nội</option>
-                                            <option value="Phú Quốc">Phú Quốc</option>
-                                            <option value="Đà Nẵng">Đà Nẵng</option>
-                                            <option value="Hồ Chí Minh">Hồ Chí Minh</option>
-                                            <option value="Nha Trang">Nha Trang</option>
                                         </select>
                                     </div>
                                     <div class="mb-3">
                                         <label for="select-datetime" class="my-2" style="display:block;">Thời gian chuyển</label>
-                                        <input name="new_topic_deli_datetime" type="datetime-local"  id="select-datetime" class="" required>
+                                        <input name="new_topic_deli_datetime" type="datetime-local"  id="select-datetime" class="form-control" required>
                                     </div>
                                     <div class="mb-3">
                                         <label for="formFile" class="form-label">Đính kèm ảnh</label>
@@ -268,7 +281,9 @@
         <script src="${pageContext.request.contextPath}/assets/lib/easing/easing.min.js"></script>
         <script src="${pageContext.request.contextPath}/assets/lib/waypoints/waypoints.min.js"></script>
         <script src="${pageContext.request.contextPath}/assets/lib/owlcarousel/owl.carousel.min.js"></script>
-
+        <!-- Province API -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.26.1/axios.min.js" integrity="sha512-bPh3uwgU5qEMipS/VOmRqynnMXGGSRv+72H/N260MQeXZIK4PG48401Bsby9Nq5P5fz7hy5UGNmC/W1Z51h2GQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
         <!-- Template Javascript -->
         <script src="${pageContext.request.contextPath}/assets/js/main.js"></script>
     </body>
