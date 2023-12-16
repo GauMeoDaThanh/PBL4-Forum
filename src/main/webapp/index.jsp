@@ -86,20 +86,20 @@
                         <div class="modal-body">
                             <form action="authenticate/login" id="form-login" style="display: block;" method="post">
                                 <div class="mb-3">
-                                    <label for="usernameInput" class="col-form-label">Tên đăng nhập</label>
-                                    <input type="text" class="form-control" id="usernameInput" placeholder="Nhập tên đăng nhập..." name="username" required  tabindex="1">
+                                    <label for="recipient-name" class="col-form-label">Tên đăng nhập</label>
+                                    <input type="text" class="form-control" id="recipient-name" placeholder="Nhập tên đăng nhập..." name="username" required>
                                 </div>
 
                                 <div class="mb-3">
-                                    <label for="passwordInput" class="col-form-label">Mật khẩu</label>
-                                    <input type="password" class="form-control" id="passwordInput" placeholder="Nhập mật khẩu..." name="password" required>
+                                    <label for="recipient-name" class="col-form-label">Mật khẩu</label>
+                                    <input type="password" class="form-control" id="recipient-name" placeholder="Nhập mật khẩu..." name="password" required>
                                 </div>
 
                                 <div class="mb-3">
-                                    <label for="register-tab" class="col-form-label">Chưa có tài khoản</label>
+                                    <label for="recipient-name" class="col-form-label">Chưa có tài khoản</label>
                                     <button href="#" class="btn btn-link" id="register-tab" onclick="ClickRegisterTab()" type="reset">Đăng ký</button>
                                 </div>
-                               
+
                                 <div class="modal-footer">
                                     <button type="reset" class="btn btn-primary" data-bs-dismiss="modal" style="width: 120px;">Huỷ</button>
                                     <button type="submit" class="btn btn-success"  style="width: 120px;">Đăng nhập</button>
@@ -107,26 +107,26 @@
                             </form>
                             <form method="post" action="authenticate/register" id="form-register" style="display: none;" oninput="password2.setCustomValidity(password2.value != password.value ? 'Mật khẩu không giống' : '')">
                                 <div class="mb-3">
-                                    <label for="register-username" class="col-form-label">Tên đăng nhập</label>
-                                    <input type="text" class="form-control" id="register-username" placeholder="Nhập tên đăng nhập..." name="username" required>
+                                    <label for="recipient-name" class="col-form-label">Tên đăng nhập</label>
+                                    <input type="text" class="form-control" id="recipient-name" placeholder="Nhập tên đăng nhập..." name="username" required>
                                 </div>
 
                                 <div class="mb-3">
-                                    <label for="register-password" class="col-form-label" >Mật khẩu</label>
-                                    <input type="password" class="form-control" id="register-password" placeholder="Nhập mật khẩu..." name="password" required>
+                                    <label for="recipient-name" class="col-form-label" >Mật khẩu</label>
+                                    <input type="password" class="form-control" id="password" placeholder="Nhập mật khẩu..." name="password" required>
                                 </div>
 
                                 <div class="mb-3">
-                                    <label for="register-password2" class="col-form-label">Nhập lại mật khẩu</label>
-                                    <input type="password" class="form-control" id="register-password2" name="password2" placeholder="Nhập lại mật khẩu..." required>
+                                    <label for="recipient-name" class="col-form-label">Nhập lại mật khẩu</label>
+                                    <input type="password" class="form-control" name="password2" placeholder="Nhập lại mật khẩu..." required>
                                 </div>
 
                                 <div class="mb-3">
                                     <p id="error" style="color: red"></p>
-                                    <label for="login-tab" class="col-form-label">Đã có tài khoản</label>
+                                    <label for="recipient-name" class="col-form-label">Đã có tài khoản</label>
                                     <button href="#" class="btn btn-link" id="login-tab" onclick="ClickLoginTab()" type="reset">Đăng nhập</button>
                                 </div>
-                               
+
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-primary" data-bs-dismiss="modal" style="width: 120px;">Huỷ</button>
                                     <button type="submit" class="btn btn-success"  style="width: 120px;" id="register-btn">Đăng ký</button>
@@ -136,7 +136,7 @@
                     </div>
                 </div>
             </div>
-            
+
         </div>
         <!-- Navbar End -->
 
