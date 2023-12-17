@@ -16,6 +16,13 @@ public class TopicBO{
     public ArrayList<TopicBEAN> getTopicHomeSend() throws Exception{
         return topicDAO.getTopicHomeSend();
     }
+    // Topic Profile
+    public int getTopicPageNumberByUsername(String username) {
+        return topicDAO.getTopicPageNumberByUsername(username);
+    }
+    public ArrayList<TopicBEAN> getAllTopicByUsername(String username,int pageIndex) throws Exception{
+        return topicDAO.getAllTopicByUsername(username,pageIndex);
+    }
     // Topic Receive/Send
     public int getTopicPageNumberByTopicTypeId(int topic_type_id) throws Exception{
         return topicDAO.getTopicPageNumberByTopicTypeId(topic_type_id);

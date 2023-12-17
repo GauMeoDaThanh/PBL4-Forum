@@ -5,13 +5,19 @@
 <%@ page import="java.text.DateFormat" %>
 <%@ page import="java.util.SortedMap" %>
 <%@ page import="java.text.SimpleDateFormat" %>
+<%@ page import="model.BEAN.RatingBEAN" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html lang="en">
 <%
     UserBEAN user = (UserBEAN) session.getAttribute("user");
+    int modView = (int) request.getAttribute("modView");
+    int pageNumber = (int) request.getAttribute("pageNumber");
+    int pageIndex = (int) request.getAttribute("pageIndex");
+    ProfileBEAN profileBEAN = (ProfileBEAN) request.getAttribute("userInfo");
     ArrayList<TopicBEAN> listTopic = (ArrayList<TopicBEAN>) request.getAttribute("listTopic");
+    ArrayList<RatingBEAN> listRate  =  (ArrayList<RatingBEAN>) request.getAttribute("listRate");
 %>
 
 <head>
@@ -43,9 +49,7 @@
 <body>
 
     <jsp:include page="header.jsp"/>
-    <%
-        ProfileBEAN profileBEAN = (ProfileBEAN) request.getAttribute("userInfo");
-    %>
+
 
     <main class="content" style="margin-top: 150px; margin-bottom: 150px;">
         <div class="container">
@@ -61,8 +65,7 @@
                                 <span style="font-size: large;"><strong>Tên: </strong><%=profileBEAN.getName()%></span><br>
                                 <span style="font-size: large;"><strong>Email: </strong><%=profileBEAN.getEmail()%></span><br>
                                 <span style="font-size: large;"><strong>Số lượng đơn đã nhận: </strong><%=profileBEAN.getReceiveDeli()%></span><br>
-                                <span style="font-size: large;"><strong>Số sao đánh giá trung bình: </strong><%=profileBEAN.getStar()%><i
-                                        class="fas fa-star" style="color: rgb(255, 213, 0);"></i></span>
+                                <span style="font-size: large;"><strong>Số sao đánh giá trung bình: </strong><%=profileBEAN.getStar()%><i class="fas fa-star" style="color: rgb(255, 213, 0);"></i></span>
                             </div>
                             <div class="my-4">
                                 <c:choose>
@@ -95,7 +98,7 @@
                                                         <input name="notify-type-id" value="1" type="hidden">
                                                     </div>
                                                     <div class="mb-3">
-                                                        <label for="" class="form-label">Chọn lý do báo cáo</label>
+                                                        <label class="form-label">Chọn lý do báo cáo</label>
                                                         <div class="form-check">
                                                             <input name="select-report-reason" id="selected-1" class="form-check-input" type="checkbox" value="Ngôn từ mất kiểm soát">
                                                             <label class="form-check-label" for="selected-1">Ngôn từ mất kiểm soát</label>
@@ -116,12 +119,11 @@
                                                 </form>
                                             </div>
                                         </div>
-
                                     </div>
                                 </div>
                                 <div class="modal fade" id="modal-ban" aria-labelledby="modal-ban-label"
                                     aria-hidden="true">
-                                    <div class="modal-dialog modal-dialog-centered" style="min-width: 800px;" centered>
+                                    <div class="modal-dialog modal-dialog-centered" style="min-width: 800px;">
                                         <div class="modal-content">
                                             <div class="modal-header">
                                                 <h5 class="modal-title" id="modal-ban-label">Xử phạt người dùng</h5>
@@ -148,27 +150,42 @@
                                 </div>
                             </div>
                         </div>
-
                     </div>
                 </div>
             </div>
             <div class="row p-3">
-                <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
-                    <li class="nav-item" role="presentation" style="background-color: #E5F2FF;">
-                        <button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill"
-                            data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home"
-                            aria-selected="true">Bài viết đã đăng</button>
+                <ul class="nav nav-pills mb-3" id="pills-tab">
+                    <%
+                        if(modView == 1){
+                    %>
+                    <li class="nav-item" style="background-color: #E5F2FF;">
+                        <a class="nav-link active" href="${pageContext.request.contextPath}/Profile/InfoProfile?username=<%=profileBEAN.getUsername()%>&modView=1&pageIndex=1">Bài viết đã đăng</a>
                     </li>
-                    <li class="nav-item" role="presentation" style="background-color: #E5F2FF;">
-                        <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill"
-                            data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile"
-                            aria-selected="false">Đánh giá</button>
+                    <li class="nav-item" style="background-color: #E5F2FF;">
+                        <a class="nav-link" href="${pageContext.request.contextPath}/Profile/InfoProfile?username=<%=profileBEAN.getUsername()%>&modView=2&pageIndex=1">Đánh giá</a>
                     </li>
+                    <%
+                        }
+                        else{
+                    %>
+                    <li class="nav-item" style="background-color: #E5F2FF;">
+                        <a class="nav-link" href="${pageContext.request.contextPath}/Profile/InfoProfile?username=<%=profileBEAN.getUsername()%>&modView=1&pageIndex=1">Bài viết đã đăng</a>
+                    </li>
+                    <li class="nav-item" style="background-color: #E5F2FF;">
+                        <a class="nav-link active" href="${pageContext.request.contextPath}/Profile/InfoProfile?username=<%=profileBEAN.getUsername()%>&modView=2&pageIndex=1">Đánh giá</a>
+                    </li>
+                    <%
+                        }
+                    %>
                 </ul>
-                <div class="tab-content my-3" id="pills-tabContent">
-                    <div class="tab-pane fade show active" id="pills-home" role="tabpanel"  aria-labelledby="pills-home-tab">
+<%--                In ra list--%>
+                <%
+                    if(modView==1){
+                %>
+                <div class="tab-content my-3">
+                    <div class="tab-pane show active">
                         <%
-                            for (var topic:listTopic) {
+                            for (TopicBEAN topic:listTopic) {
                                 DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
                                 String createTime = dateFormat.format(topic.getCreate_time());
                                 String deliDateTime = dateFormat.format(topic.getDeli_datetime());
@@ -178,7 +195,9 @@
                                 <div class="card mb-2" style="background-color: #E5F2FF;">
                                     <div class="card-body d-flex">
                                         <div class="col-7 d-flex">
-                                            <a href="${pageContext.request.contextPath}/Profile/Info?username=<%=topic.getFrom_user()%>"><img src="${pageContext.request.contextPath}/image/<%=topic.getAvatar()==null  || topic.getAvatar().equals("") ? "29.jpg" : topic.getAvatar()%>" class="mr-3 rounded-circle" width="70" height="70" alt="User" /></a>
+                                            <a href="${pageContext.request.contextPath}/Profile/Info?username=<%=topic.getFrom_user()%>">
+                                                <img src="${pageContext.request.contextPath}/image/<%=topic.getAvatar()==null  || topic.getAvatar().equals("") ? "29.jpg" : topic.getAvatar()%>" class="mr-3 rounded-circle" width="70" height="70" alt="User" />
+                                            </a>
                                             <div class="media-body mx-2">
                                                 <%
                                                     if(topic.getTopic_type_id()==1) {
@@ -191,18 +210,18 @@
                                                 <%
                                                     }
                                                 %>
-                                                <h4><a href="${pageContext.request.contextPath}/Topic/Info?topicID=<%=topic.getId()%>" class="text-body"><strong><%=topic.getTopic_name()%></strong></a></h4>
+                                                <h4><a href="${pageContext.request.contextPath}/Topic/Info?topicID=<%=topic.getId()%>&pageIndex=1" class="text-body"><strong><%=topic.getTopic_name()%></strong></a></h4>
                                                 <p class="text-muted"><a href="${pageContext.request.contextPath}/Profile/Info?username=<%=topic.getFrom_user()%>" class="text-primary"><%=topic.getFrom_user()%></a> at <span class="text-dark font-weight-bold"><%=createTime%></span></p>
                                             </div>
                                         </div>
                                         <div class="mx-2 col-4 d-flex flex-column justify-content-center">
                                             <div class="py-2">
                                                 <i class="bi bi-geo-alt-fill" style="color: red; font-size: larger;"></i>
-                                                <label for="" class="text-dark"><%=topic.getFrom_location()+" đến "+ topic.getTo_location()%></label>
+                                                <label  class="text-dark"><%=topic.getFrom_location()+" đến "+ topic.getTo_location()%></label>
                                             </div>
                                             <div class="py-2">
                                                 <i class="content__topic-item-icon color--green fa-solid fa-calendar-days" style="color: green; font-size: larger;"></i>
-                                                <label for="" class="text-dark"><%=deliDateTime%></label>
+                                                <label  class="text-dark"><%=deliDateTime%></label>
                                             </div>
                                         </div>
                                         <div class="col-1 d-flex align-items-center justify-content-center">
@@ -212,86 +231,138 @@
                                 </div>
                             </div>
                         </div>
+
                         <%
                             }
                         %>
-                        <!-- pagination -->
-                        <nav aria-label="...">
-                            <ul class="pagination justify-content-center">
-                                <li class="page-item disabled">
-                                    <a class="page-link" href="#" tabindex="-1">Previous</a>
-                                </li>
-                                <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                                <li class="page-item">
-                                    <a class="page-link" href="#">2 <span class="sr-only">(current)</span></a>
-                                </li>
-                                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                <li class="page-item">
-                                    <a class="page-link" href="#">Next</a>
-                                </li>
-                            </ul>
-                        </nav>
-                    </div>
-                    <!--Đánh giá-->
-                    <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
-                        <div class="card mb-2" style="background-color: #E5F2FF;">
-                            <div class="card-body">
-                                <div class="d-flex">
-                                    <a href="" data-toggle="collapse" data-target=".forum-content"><img
-                                            src="../assets/img/29.jpg" class="mr-3 rounded-circle" width="70"
-                                            height="70" alt="User" /></a>
-                                    <div class="media-body mx-2" style="min-width: 60%; max-width: 60%;">
-                                        <span class="text-white rounded p-1" style="background-color: #7752FE;">Người
-                                            gửi vận chuyển</span>
-                                        <span style="font-size: large;" class="mx-2"><strong>Số sao đánh giá:
-                                            </strong>5.0<i class="fas fa-star"
-                                                style="color: rgb(255, 213, 0);"></i></span>
-                                        <h4 class="mt-2"><strong>Giao hàng nhanh uy tín</strong></h4>
-                                        <p class="text-muted"><a href="javascript:void(0)">NguyenDong</a> at <span
-                                                class="text-dark font-weight-bold">05/05/2023 16:00</span></p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card mb-2" style="background-color: #E5F2FF;">
-                            <div class="card-body">
-                                <div class="d-flex">
-                                    <a href="" data-toggle="collapse" data-target=".forum-content"><img
-                                            src="${pageContext.request.contextPath}/assets/img/29.jpg" class="mr-3 rounded-circle" width="70"
-                                            height="70" alt="User" /></a>
-                                    <div class="media-body mx-2" style="min-width: 60%; max-width: 60%;">
-                                        <span class="text-white rounded p-1" style="background-color: #A231FC;">Người
-                                            nhận vận chuyển</span>
-                                        <span style="font-size: large;" class="mx-2"><strong>Số sao đánh giá:
-                                            </strong>5.0<i class="fas fa-star"
-                                                style="color: rgb(255, 213, 0);"></i></span>
-                                        <h4 class="mt-2"><strong>Đưa hàng nhanh. Không bùng kèo</strong></h4>
-                                        <p class="text-muted"><a href="javascript:void(0)">NguyenDong</a> at <span
-                                                class="text-dark font-weight-bold">05/05/2023 16:00</span></p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <nav aria-label="...">
-                            <ul class="pagination justify-content-center">
-                                <li class="page-item disabled">
-                                    <a class="page-link" href="#" tabindex="-1">Previous</a>
-                                </li>
-                                <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                                <li class="page-item">
-                                    <a class="page-link" href="#">2 <span class="sr-only">(current)</span></a>
-                                </li>
-                                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                <li class="page-item">
-                                    <a class="page-link" href="#">Next</a>
-                                </li>
-                            </ul>
-                        </nav>
                     </div>
                 </div>
+                <!--Đánh giá-->
+                <%
+                    } else if(modView==2){
+                %>
+                <div class="tab-content my-3">
+                    <div class="tab-pane fade show active" role="tabpanel"  aria-labelledby="pills-home-tab">
+                        <%
+                            for(RatingBEAN rating:listRate){
+                        %>
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="card mb-2" style="background-color: #E5F2FF;">
+                                    <div class="card-body">
+                                        <div class="d-flex">
+                                            <a href="${pageContext.request.contextPath}/Profile/Info?username=<%=rating.getFromUser()%>">
+                                                <img src="${pageContext.request.contextPath}/image/<%=rating.getAvatar()==null  || rating.getAvatar().equals("") ? "29.jpg" : rating.getAvatar()%>" class="mr-3 rounded-circle" width="70" height="70" alt="User" />
+                                            </a>
+                                            <div class="media-body mx-2">
+                                                <%
+                                                    if(!rating.getUser_take().equals(user.getUsername())){
+                                                %>
+                                                <span class="text-white rounded p-1 my-2"  style="font-size: 1rem; background-color: #7752FE;">Người nhận vận chuyển</span>
+                                                <%
+                                                    } else {
+                                                %>
+                                                <span class="text-white rounded p-1 my-2"  style="font-size: 1rem; background-color: #A231FC;">Người gửi vận chuyển</span>
+                                                <%
+                                                    }
+                                                %>
+                                                <span style="font-size: large;" class="mx-2"><strong>Số sao đánh giá:</strong><%=rating.getPoint()%><i class="fas fa-star"style="color: rgb(255, 213, 0);"></i></span>
+                                                <h4 class="mt-1">
+                                                    <a href="#" class="text-body" style="font-size: 18px;"><strong><%=rating.getNote()%></strong></a>
+                                                </h4>
+                                                <p class="text-muted">
+                                                    <a href="${pageContext.request.contextPath}/Profile/Info?username=<%=rating.getFromUser()%>" class="text-primary" style="font-size: 1rem;"><%=rating.getFromUser()%></a>
+                                                    đánh giá at
+                                                    <span class="text-dark font-weight-bold"><%=rating.getTime()%></span>
+                                                </p>
+                                                <%
+                                                    if(rating.getPicture()!=null && !rating.getPicture().isEmpty()) {
+                                                %>
+                                                <div class="py-1">
+<%--                                                    <img src="${pageContext.request.contextPath}/image/<%=topic.getAvatar()==null  || topic.getAvatar().equals("") ? "29.jpg" : topic.getAvatar()%>" class="mr-3 rounded-circle" width="70" height="70" alt="User" />--%>
+                                                    <img src="${pageContext.request.contextPath}/image/<%=rating.getPicture()%>" height="100" alt="">
+                                                </div>
+                                                <%
+                                                    }
+                                                %>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <%
+                            }
+                        %>
+
+                    </div>
+                </div>
+                <%
+                    }
+                %>
+                <!-- pagination -->
+                <%
+                    if(listTopic !=null || listRate !=null) {
+                %>
+                <nav aria-label="Page navigation example">
+                    <ul class="pagination justify-content-center" id="pagination">
+                        <%
+                            if(pageIndex==1 || pageNumber==1){
+                        %>
+                        <li class="page-item disabled" id="previousPage">
+                            <a class="page-link" href="#" tabindex="-1">Trước</a>
+                        </li>
+                        <%
+                        } else{
+                        %>
+                        <li class="page-item" id="previousPage">
+                            <a class="page-link" href="${pageContext.request.contextPath}/Profile/InfoProfile?username=<%=profileBEAN.getUsername()%>&modView=<%=modView%>&pageIndex=<%=pageIndex-1%>" tabindex="-1">Trước</a>
+                        </li>
+                        <%
+                            }
+                        %>
+                        <%--                            --%>
+
+                        <%
+                            for(int i=1;i<=pageNumber;i++) {
+                                if(pageIndex==i){
+                        %>
+                        <li class="page-item active"><a class="page-link" href="${pageContext.request.contextPath}/Profile/InfoProfile?username=<%=profileBEAN.getUsername()%>&modView=<%=modView%>&pageIndex=<%=i%>"><%=i%></a></li>
+                        <%
+                        }
+                        else{
+
+                        %>
+                        <li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/Profile/InfoProfile?username=<%=profileBEAN.getUsername()%>&modView=<%=modView%>&pageIndex=<%=i%>"><%=i%></a></li>
+                        <%
+                            }
+                        %>
+                        <%
+                            }
+                        %>
+                        <%--                            --%>
+                        <%
+                            if(pageIndex==pageNumber || pageNumber==1) {
+                        %>
+                        <li class="page-item disabled" id="nextPage">
+                            <a class="page-link" href="#">Sau</a>
+                        </li>
+                        <%
+                        } else{
+                        %>
+                        <li class="page-item" id="nextPage">
+                            <a class="page-link" href="${pageContext.request.contextPath}/Profile/InfoProfile?username=<%=profileBEAN.getUsername()%>&modView=<%=modView%>&pageIndex=<%=pageIndex+1%>">Sau</a>
+                        </li>
+                        <%
+                            }
+                        %>
+                    </ul>
+                </nav>
+                <%
+                    }
+                %>
             </div>
         </div>
-
     </main>
     <!-- Footer Start -->
     <div class="container-fluid footer bg-dark wow fadeIn" data-wow-delay=".3s">

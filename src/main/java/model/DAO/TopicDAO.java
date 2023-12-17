@@ -131,6 +131,85 @@ public class TopicDAO {
             return 0;
         }
     }
+    /// All Topic In Profile + Pagination
+    public int getTopicPageNumberByUsername(String username){
+        try{
+            Connection conn = connectDb();
+            PreparedStatement preparedStatement = conn.prepareStatement(" select count(*) as listNumber from topic where from_user = ?");
+            preparedStatement.setString(1,username);
+
+            ResultSet rs = preparedStatement.executeQuery();
+
+            int sizePerPage = 6;
+            int pageNumber=0;
+            while (rs.next()){
+                int listNumber=rs.getInt("listNumber");
+                pageNumber = listNumber/sizePerPage;
+                if(listNumber<sizePerPage){
+                    ++pageNumber;
+                }
+                else if(listNumber%sizePerPage != 0){
+                    ++pageNumber;
+                }
+            }
+
+            return pageNumber;
+        }catch (Exception e){
+            e.printStackTrace();
+            return 0;
+        }
+    }
+    public ArrayList<TopicBEAN> getAllTopicByUsername(String username,int pageIndex) throws Exception{
+        try {
+            ArrayList<TopicBEAN> list = new ArrayList<>();
+            Connection conn = connectDb();
+            PreparedStatement preparedStatement = conn.prepareStatement("select * from " +
+                    " (select row_number() over (order by id desc) as stt ,id,from_user,topic_type_id,create_time,edit_time,topic_name,from_location,to_location,deli_datetime " +
+                    " from topic " +
+                    " where from_user = ? " +
+                    " ) as x " +
+                    " inner join user on user.username = x.from_user " +
+                    " where stt between ? and ? " +
+                    " order by create_time DESC ");
+
+            int sizePerPage = 6;
+            preparedStatement.setString(1,username);
+            preparedStatement.setInt(2,pageIndex*sizePerPage-(sizePerPage-1));
+            preparedStatement.setInt(3,pageIndex*sizePerPage);
+
+            ResultSet rs = preparedStatement.executeQuery();
+            while (rs.next()){
+                int topic_id = rs.getInt("id");
+                String from_user = rs.getString("from_user");
+                int topic_type_id = rs.getInt("topic_type_id");
+                //
+                Timestamp create_time =rs.getTimestamp("create_time");
+                Timestamp edit_time = rs.getTimestamp("edit_time");
+
+                //
+                String topic_name = rs.getString("topic_name");
+                String from_location = rs.getString("from_location");
+                String to_location = rs.getString("to_location");
+                //
+                Timestamp deli_datetime=rs.getTimestamp("deli_datetime");
+                //
+                String avatar = rs.getString("avatar");
+                String name = rs.getString("name");
+                String description = rs.getString("description");
+
+                int countPost = countPostInTopic(topic_id);
+
+                //
+                TopicBEAN topic = new TopicBEAN(topic_id,from_user,topic_type_id,create_time,edit_time,topic_name,from_location,to_location,deli_datetime,avatar,name,description,countPost);
+                list.add(topic);
+            }
+            return list;
+        }catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+    //
     public ArrayList<TopicBEAN> getAllTopicReceiveByPage(int pageIndex) throws Exception{
         try {
             ArrayList<TopicBEAN> list = new ArrayList<>();
@@ -369,6 +448,7 @@ public class TopicDAO {
             preparedStatement.setInt(7,topic.getId());
 
             preparedStatement.executeUpdate();
+            conn.close();
 
         }catch (Exception e) {
             e.printStackTrace();
@@ -385,18 +465,26 @@ public class TopicDAO {
             while (rs.next()) {
                 postIDList.add(rs.getInt("id"));
             }
+            // Xoá notify chứa topicID này
+            PreparedStatement preparedStatement1 = conn.prepareStatement("delete from notify where to_topic_id = "+topicId);
+            preparedStatement1.executeUpdate();
             for (var postID:postIDList) {
-                // Xoá post_picture
-                PreparedStatement preparedStatement1 = conn.prepareStatement("delete from post_picture where post_id = "+postID);
-                preparedStatement1.executeUpdate();
-                // Xoá post
-                PreparedStatement preparedStatement2 = conn.prepareStatement("delete from post where id = "+postID);
+                // Xoá notify chứa postID này
+                PreparedStatement preparedStatement2 = conn.prepareStatement("delete from notify where to_post_id = "+postID);
                 preparedStatement2.executeUpdate();
+                // Xoá post_picture
+                PreparedStatement preparedStatement3 = conn.prepareStatement("delete from post_picture where post_id = "+postID);
+                preparedStatement3.executeUpdate();
+                // Xoá post
+                PreparedStatement preparedStatement4 = conn.prepareStatement("delete from post where id = "+postID);
+                preparedStatement4.executeUpdate();
+
             }
             // Xoá topic
-            PreparedStatement preparedStatement3 = conn.prepareStatement("delete from topic where id = "+topicId);
-            preparedStatement3.executeUpdate();
+            PreparedStatement preparedStatement5 = conn.prepareStatement("delete from topic where id = "+topicId);
+            preparedStatement5.executeUpdate();
 
+            conn.close();
 
         }catch (Exception e) {
             e.printStackTrace();
