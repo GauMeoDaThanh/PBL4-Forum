@@ -51,14 +51,27 @@ public class ProfileDAO {
     }
     public ProfileBEAN getUser(String username) throws Exception {
         Connection conn = connectDb();
-        PreparedStatement preparedStatement = conn.prepareStatement("select count(delivery.id) as num_deli, avg(rate.point) as point, user.username," +
-                " user.name, user.email, user.description, user.avatar from user left join delivery on user.username = delivery.user_take left join rate on user.username = rate.to_user " +
-                "where user.username = ?");
+        PreparedStatement preparedStatement = conn.prepareStatement("select username,name, description, email, avatar from user where username = ?");
         preparedStatement.setString(1, username);
         ResultSet rs = preparedStatement.executeQuery();
         rs.next();
-        return new ProfileBEAN(rs.getString("username"), rs.getString("name"),
-                rs.getString("email"), rs.getString("description"),
-                rs.getInt("num_deli"), rs.getDouble("point"), rs.getString("avatar"));
+        ProfileBEAN profileBEAN = new ProfileBEAN(rs.getString("username"), rs.getString("name"), rs.getString("email"), rs.getString("description"), rs.getString("avatar"));
+        preparedStatement.clearParameters();
+        preparedStatement = conn.prepareStatement("select count(id) as num_deli from delivery where user_take = ?");
+        preparedStatement.setString(1, username);
+        rs = preparedStatement.executeQuery();
+        rs.next();
+        profileBEAN.setReceiveDeli(rs.getInt("num_deli"));
+        preparedStatement.clearParameters();
+        preparedStatement = conn.prepareStatement("select avg(point) as point from rate where to_user = ?");
+        preparedStatement.setString(1, username);
+        rs = preparedStatement.executeQuery();
+        rs.next();
+        profileBEAN.setStar(rs.getDouble("point"));
+
+        rs.close();
+        preparedStatement.close();
+        conn.close();
+        return profileBEAN;
     }
 }

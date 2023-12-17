@@ -256,35 +256,35 @@
                                             </a>
                                             <div class="media-body mx-2">
                                                 <%
-                                                    if(!rating.getUser_take().equals(user.getUsername())){
+                                                    if(!rating.getUser_take().equals(profileBEAN.getUsername())){
                                                 %>
-                                                <span class="text-white rounded p-1 my-2"  style="font-size: 1rem; background-color: #7752FE;">Người nhận vận chuyển</span>
+                                                <span class="text-white rounded p-1 my-2"  style="font-size: 1rem; background-color: #7752FE;">Đánh giá từ người vận chuyển</span>
                                                 <%
                                                     } else {
                                                 %>
-                                                <span class="text-white rounded p-1 my-2"  style="font-size: 1rem; background-color: #A231FC;">Người gửi vận chuyển</span>
+                                                <span class="text-white rounded p-1 my-2"  style="font-size: 1rem; background-color: #A231FC;">Đánh giá từ người gửi</span>
                                                 <%
                                                     }
                                                 %>
-                                                <span style="font-size: large;" class="mx-2"><strong>Số sao đánh giá:</strong><%=rating.getPoint()%><i class="fas fa-star"style="color: rgb(255, 213, 0);"></i></span>
+                                                <span style="font-size: large;" class="mx-2"><strong>Đánh giá: </strong><%=rating.getPoint()%><i class="fas fa-star"style="color: rgb(255, 213, 0);"></i></span>
                                                 <h4 class="mt-1">
                                                     <a href="#" class="text-body" style="font-size: 18px;"><strong><%=rating.getNote()%></strong></a>
                                                 </h4>
-                                                <p class="text-muted">
-                                                    <a href="${pageContext.request.contextPath}/Profile/Info?username=<%=rating.getFromUser()%>" class="text-primary" style="font-size: 1rem;"><%=rating.getFromUser()%></a>
-                                                    đánh giá at
-                                                    <span class="text-dark font-weight-bold"><%=rating.getTime()%></span>
-                                                </p>
                                                 <%
                                                     if(rating.getPicture()!=null && !rating.getPicture().isEmpty()) {
                                                 %>
                                                 <div class="py-1">
-<%--                                                    <img src="${pageContext.request.contextPath}/image/<%=topic.getAvatar()==null  || topic.getAvatar().equals("") ? "29.jpg" : topic.getAvatar()%>" class="mr-3 rounded-circle" width="70" height="70" alt="User" />--%>
+                                                    <%--                                                    <img src="${pageContext.request.contextPath}/image/<%=topic.getAvatar()==null  || topic.getAvatar().equals("") ? "29.jpg" : topic.getAvatar()%>" class="mr-3 rounded-circle" width="70" height="70" alt="User" />--%>
                                                     <img src="${pageContext.request.contextPath}/image/<%=rating.getPicture()%>" height="100" alt="">
                                                 </div>
                                                 <%
                                                     }
                                                 %>
+                                                <p class="text-muted">
+                                                    <a href="${pageContext.request.contextPath}/Profile/Info?username=<%=rating.getFromUser()%>" class="text-primary" style="font-size: 1rem;"><%=rating.getFromUser()%></a>
+                                                    đánh giá at
+                                                    <span class="text-dark font-weight-bold"><%=rating.getTime()%></span>
+                                                </p>
                                             </div>
                                         </div>
                                     </div>
