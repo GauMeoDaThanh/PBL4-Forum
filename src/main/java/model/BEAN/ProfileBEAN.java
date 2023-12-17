@@ -1,5 +1,7 @@
 package model.BEAN;
 
+import java.text.DecimalFormat;
+
 public class ProfileBEAN {
     private String username;
     private String name;
@@ -68,7 +70,15 @@ public class ProfileBEAN {
     }
 
     public double getStar() {
-        return Math.round((star*100)/100);
+        DecimalFormat df = new DecimalFormat("#.#");
+
+        // Sử dụng phương thức format để làm tròn
+        String roundedNumber = df.format(star);
+
+        // Chuyển đổi kết quả về kiểu double nếu cần
+        double roundedDouble = Double.parseDouble(roundedNumber);
+
+        return roundedDouble;
     }
 
     public void setStar(double star) {

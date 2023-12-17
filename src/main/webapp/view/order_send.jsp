@@ -46,7 +46,7 @@
                             <thead>
                             <tr>
                                 <th scope="col" style="max-width: 7%; width: 7%;"  class="text-center">Mã đơn</th>
-                                <th scope="col" style="max-width: 15%; width: 15%;" class="text-center">Tài khoản nhờ gửi</th>
+                                <th scope="col" style="max-width: 15%; width: 15%;" class="text-center">Tài khoản chuyển</th>
                                 <th scope="col" style="max-width: 12%; width: 12%;" class="text-center">Tên hàng hoá</th>
                                 <th scope="col" style="max-width: 20%; width: 20%;" class="text-center">Người nhận</th>
                                     <%--                                <th scope="col" style="max-width: 12%; width: 12%;" class="text-center">Số điện thoại</th>--%>
@@ -60,7 +60,7 @@
                             <c:forEach var="deliInfo" items="${requestScope.deliSendList}">
                                 <tr>
                                     <th class="text-center"><c:out value="${deliInfo.id}"/></th>
-                                    <td class="text-center"><a href="${pageContext.request.contextPath}/Profile/Info?username=${deliInfo.userTake}" >${deliInfo.userTake}</a></td>
+                                    <td class="text-center"><a href="${pageContext.request.contextPath}/Profile/Info?username=${deliInfo.userTake}&pageIndex=1" >${deliInfo.userTake}</a></td>
                                     <td class="text-center"><c:out value="${deliInfo.goodsName}"/></td>
                                     <td class="text-center"><c:out value="${deliInfo.receiveName}"/></td>
 

@@ -171,57 +171,6 @@
                             <%
                                 }
                             %>
-<%--                            <div class="row">--%>
-<%--                                <div class="col-12">--%>
-<%--                                    <div class="card mb-2" >--%>
-<%--                                        <div class="card-body">--%>
-<%--                                            <div class="d-flex">--%>
-<%--                                                <a href=""><img src="../assets/img/101.jpg" class="mr-3 rounded-circle" width="70" height="70" alt="User" /></a>--%>
-<%--                                                <div class="media-body mx-2">--%>
-<%--                                                    <span class="text-white rounded p-1 my-2 bg-warning"  style="font-size: 1rem;">Báo cáo Topic</span>--%>
-<%--                                                    <h4 class="header__popup-item-content mt-1"><a href="" class="text-body" style="font-size: 18px;"><strong>Ngôn từ mất kiểm soát, lừa đảo, scam.Ngôn từ mất kiểm soát, lừa đảo, scam.Ngôn từ mất kiểm soát, lừa đảo, scam.Ngôn từ mất kiểm soát, lừa đảo, scam</strong></a></h4>--%>
-<%--                                                    <p class="text-muted">--%>
-<%--                                                        <a href="" class="text-primary" style="font-size: 1rem;">Nguyen Dong</a> báo cáo Topic của <a href="">Van Dat</a>  at <span class="text-dark font-weight-bold">16:00:00</span></p>--%>
-<%--                                                </div>--%>
-<%--                                            </div>--%>
-<%--                                        </div>--%>
-<%--                                    </div>--%>
-<%--                                </div>--%>
-<%--                            </div>--%>
-<%--                            <div class="row">--%>
-<%--                                <div class="col-12">--%>
-<%--                                    <div class="card mb-2" style="background-color: #E5F2FF;">--%>
-<%--                                        <div class="card-body">--%>
-<%--                                            <div class="d-flex">--%>
-<%--                                                <a href=""><img src="../assets/img/101.jpg" class="mr-3 rounded-circle" width="70" height="70" alt="User" /></a>--%>
-<%--                                                <div class="media-body mx-2">--%>
-<%--                                                    <span class="text-white rounded p-1 my-2 bg-primary"  style="font-size: 1rem;">Báo cáo Post</span>--%>
-<%--                                                    <h4 class="header__popup-item-content mt-1"><a href="" class="text-body" style="font-size: 18px;"><strong>Ngôn từ mất kiểm soát, lừa đảo, scam.Ngôn từ mất kiểm soát, lừa đảo, scam.Ngôn từ mất kiểm soát, lừa đảo, scam.Ngôn từ mất kiểm soát, lừa đảo, scam</strong></a></h4>--%>
-<%--                                                    <p class="text-muted">--%>
-<%--                                                        <a href="" class="text-primary" style="font-size: 1rem;">Nguyen Dong</a> báo cáo Post của <a href="">Van Dat</a>  at <span class="text-dark font-weight-bold">16:00:00</span></p>--%>
-<%--                                                </div>--%>
-<%--                                            </div>--%>
-<%--                                        </div>--%>
-<%--                                    </div>--%>
-<%--                                </div>--%>
-<%--                            </div>--%>
-<%--                            <div class="row">--%>
-<%--                                <div class="col-12">--%>
-<%--                                    <div class="card mb-2" style="background-color: #E5F2FF;">--%>
-<%--                                        <div class="card-body">--%>
-<%--                                            <div class="d-flex">--%>
-<%--                                                <a href=""><img src="../assets/img/101.jpg" class="mr-3 rounded-circle" width="70" height="70" alt="User" /></a>--%>
-<%--                                                <div class="media-body mx-2">--%>
-<%--                                                    <span class="text-white rounded p-1 my-2 bg-success"  style="font-size: 1rem;">Bài Post mới</span>--%>
-<%--                                                    <h4 class="header__popup-item-content mt-1"><a href="" class="text-body" style="font-size: 18px;"><strong>Ngôn từ mất kiểm soát, lừa đảo, scam.Ngôn từ mất kiểm soát, lừa đảo, scam.Ngôn từ mất kiểm soát, lừa đảo, scam.Ngôn từ mất kiểm soát, lừa đảo, scam</strong></a></h4>--%>
-<%--                                                    <p class="text-muted">--%>
-<%--                                                        <a href="" class="text-primary" style="font-size: 1rem;">Nguyen Dong</a> đăng Post mới at <span class="text-dark font-weight-bold">16:00:00</span></p>--%>
-<%--                                                </div>--%>
-<%--                                            </div>--%>
-<%--                                        </div>--%>
-<%--                                    </div>--%>
-<%--                                </div>--%>
-<%--                            </div>--%>
                         </ul>
                         <a class="header__popup-bottom">
                             Xem tất cả

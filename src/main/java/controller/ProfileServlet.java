@@ -4,14 +4,8 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.*;
-import model.BEAN.NotifyBEAN;
-import model.BEAN.ProfileBEAN;
-import model.BEAN.TopicBEAN;
-import model.BEAN.UserBEAN;
-import model.BO.AuthenticateBO;
-import model.BO.NotifyBO;
-import model.BO.ProfileBO;
-import model.BO.TopicBO;
+import model.BEAN.*;
+import model.BO.*;
 
 import java.io.EOFException;
 import java.io.FileOutputStream;
@@ -51,18 +45,59 @@ public class ProfileServlet extends HttpServlet {
                     req.getRequestDispatcher("../view/change_password.jsp").forward(req, resp);
                     break;
                 case "Info":
-//                    System.out.println(req.getParameter("username"));
-                    String username = req.getParameter("username");
-                    AuthenticateBO authenticateBO = new AuthenticateBO();
                     if (session.getAttribute("user") == null) throw new Exception();
+                    String username = req.getParameter("username");
                     ProfileBEAN userInfo = profileBO.getUserInfo(username);
 
                     TopicBO topicBO = new TopicBO();
-                    ArrayList<TopicBEAN> listTopic = topicBO.getAllTopicByUsername(username);
+
+                    int modView = 1;
+                    int pageNumber = topicBO.getTopicPageNumberByUsername(username);
+                    int pageIndex = 1;
+                    ArrayList<TopicBEAN> listTopic = topicBO.getAllTopicByUsername(username,pageIndex);
 
                     if (userInfo != null) {
-                        req.setAttribute("listTopic",listTopic);
+                        req.setAttribute("modView",modView);
+                        req.setAttribute("pageNumber",pageNumber);
+                        req.setAttribute("pageIndex",pageIndex);
                         req.setAttribute("userInfo", userInfo);
+                        req.setAttribute("listTopic",listTopic);
+                        req.setAttribute("listRate",null);
+                        req.getRequestDispatcher("../view/profile.jsp").forward(req, resp);
+                    } else {
+                        resp.getWriter().write("User not found");
+                    }
+                    break;
+                case "InfoProfile":
+                    String username2 = req.getParameter("username");
+                    ProfileBEAN userInfo2 = profileBO.getUserInfo(username2);
+
+                    TopicBO topicBO2 = new TopicBO();
+                    RatingBO ratingBO2 = new RatingBO();
+
+                    int modView2 = Integer.parseInt(req.getParameter("modView"));
+                    int pageIndex2 = Integer.parseInt(req.getParameter("pageIndex"));
+
+                    int pageNumber2;
+
+                    ArrayList<TopicBEAN> listTopic2 = null;
+                    ArrayList<RatingBEAN> listRate2 = null;
+                    if(modView2 == 1){
+                        pageNumber2 = topicBO2.getTopicPageNumberByUsername(username2);
+                        listTopic2 = topicBO2.getAllTopicByUsername(username2,pageIndex2);
+                    } else{
+                        pageNumber2 = ratingBO2.getRatePageNumberByUsername(username2);
+                        listRate2 = ratingBO2.getAllRatingByUsername(username2,pageIndex2);
+                    }
+
+
+                    if (userInfo2 != null) {
+                        req.setAttribute("modView",modView2);
+                        req.setAttribute("pageNumber",pageNumber2);
+                        req.setAttribute("pageIndex",pageIndex2);
+                        req.setAttribute("userInfo", userInfo2);
+                        req.setAttribute("listTopic",listTopic2);
+                        req.setAttribute("listRate",listRate2);
                         req.getRequestDispatcher("../view/profile.jsp").forward(req, resp);
                     } else {
                         resp.getWriter().write("User not found");

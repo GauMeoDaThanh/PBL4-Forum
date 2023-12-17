@@ -68,7 +68,7 @@ Nguyễn Đông
                                 <tr>
                                     <th class="text-center"><c:out value="${deliInfo.id}"/></th>
                                     <td class="text-center"><a
-                                            href="${pageContext.request.contextPath}/Profile/Info?username=${deliInfo.userSend}">${deliInfo.userSend}</a>
+                                            href="${pageContext.request.contextPath}/Profile/Info?username=${deliInfo.userSend}&pageIndex=1">${deliInfo.userSend}</a>
                                     </td>
                                     <td class="text-center"><c:out value="${deliInfo.goodsName}"/></td>
                                     <td class="text-center"><c:out value="${deliInfo.receiveName}"/></td>
