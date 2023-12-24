@@ -52,10 +52,6 @@ public class PostServlet extends HttpServlet {
 
                     int pageNumber = postBO.getTopicPageNumber(topicID);
                     int pageIndex = postBO.getPostPageIndex(topicID,postID);
-                    System.out.println("postID = "+postID);
-                    System.out.println("topicID = "+topicID);
-                    System.out.println("pageIndex = "+pageIndex);
-                    System.out.println("pageNumber = "+pageNumber);
                     //
 
                     TopicBO topicBO = new TopicBO();
@@ -120,7 +116,8 @@ public class PostServlet extends HttpServlet {
 
                     if(listUsername.isEmpty()){
                         // Nếu không người nào khác trong topic thì Load lại trang topic sau khi thêm post
-                        resp.sendRedirect( req.getContextPath()+"/Topic/Info?topicID="+topic_id+"&pageIndex=1");
+                        int topicPageNumber = postBO.getTopicPageNumber(topic_id);
+                        resp.sendRedirect( req.getContextPath()+"/Topic/Info?topicID="+topic_id+"&pageIndex="+topicPageNumber);
                     }
                     else {
                         // Lấy id của post mới thêm
@@ -191,7 +188,6 @@ public class PostServlet extends HttpServlet {
             case "Delete":
                 try {
                     int postID = Integer.parseInt(req.getParameter("delete-postId"));
-                    System.out.println(postID);
                     PostBO postBO = new PostBO();
                     postBO.deletePost(postID);
 

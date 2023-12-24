@@ -17,6 +17,11 @@ public class PostBEAN {
     private String description;
     private ArrayList<String> imageList;
     private Timestamp delete_time;
+    // content of post reply
+    private String to_username;
+    private String contentOfPostReply;
+    private ArrayList<String> imageListOfPostReply;
+    private Timestamp deleteTimeOfPostReply;
     public PostBEAN() {
 
     }
@@ -30,7 +35,7 @@ public class PostBEAN {
         this.post_id = post_id;
     }
 
-    public PostBEAN(int id, String from_user, int topic_id, String content, Timestamp create_time, Timestamp edit_time, Integer post_id, String avatar, String name, String description, ArrayList<String> imageList,Timestamp delete_time) {
+    public PostBEAN(int id, String from_user, int topic_id, String content, Timestamp create_time, Timestamp edit_time, Integer post_id, String avatar, String name, String description, ArrayList<String> imageList,Timestamp delete_time, String to_username, String contentOfPostReply,ArrayList<String> imageListOfPostReply,Timestamp deleteTimeOfPostReply) {
         this.id = id;
         this.from_user = from_user;
         this.topic_id = topic_id;
@@ -43,6 +48,10 @@ public class PostBEAN {
         this.description = description;
         this.imageList = imageList;
         this.delete_time = delete_time;
+        this.to_username = to_username;
+        this.contentOfPostReply = contentOfPostReply;
+        this.imageListOfPostReply = imageListOfPostReply;
+        this.deleteTimeOfPostReply = deleteTimeOfPostReply;
     }
 
     public int getId() {
@@ -141,4 +150,35 @@ public class PostBEAN {
         this.delete_time = delete_time;
     }
 
+    public String getTo_username() {
+        return to_username;
+    }
+
+    public void setTo_username(String to_username) {
+        this.to_username = to_username;
+    }
+
+    public String getContentOfPostReply() {
+        return contentOfPostReply;
+    }
+
+    public void setContentOfPostReply(String contentOfPostReply) {
+        this.contentOfPostReply = contentOfPostReply;
+    }
+
+    public ArrayList<String> getImageListOfPostReply() {
+        return imageListOfPostReply;
+    }
+
+    public void setImageListOfPostReply(ArrayList<String> imageListOfPostReply) {
+        this.imageListOfPostReply = imageListOfPostReply;
+    }
+
+    public Timestamp getDeleteTimeOfPostReply() {
+        return deleteTimeOfPostReply;
+    }
+
+    public void setDeleteTimeOfPostReply(Timestamp deleteTimeOfPostReply) {
+        this.deleteTimeOfPostReply = deleteTimeOfPostReply;
+    }
 }

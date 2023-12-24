@@ -787,7 +787,7 @@
     border-top-right-radius: 15px;
     background-color: #EBECED;
     /*  */
-    transform-origin: calc(100% - 32px) right;
+    transform-origin: right calc(100% - 32px);
     animation: headerNotifyGrowth ease-in 0.2s;
     will-change: opacity, transform;
 }

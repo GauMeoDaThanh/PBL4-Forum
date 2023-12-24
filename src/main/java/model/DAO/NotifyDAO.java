@@ -94,4 +94,24 @@ public class NotifyDAO {
         }
     }
 
+    //set is read notify
+    public void setIsReadNotify(ArrayList<Integer> notifyIdList){
+        try {
+            Connection conn = connectDb();
+            for(var notifyId: notifyIdList){
+                PreparedStatement preparedStatement = connectDb().prepareStatement("update notify " +
+                        " set is_read = ? " +
+                        " where id = ? ");
+                preparedStatement.setBoolean(1,true);
+                preparedStatement.setInt(2,notifyId);
+                preparedStatement.executeUpdate();
+            }
+
+            conn.close();
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
 }

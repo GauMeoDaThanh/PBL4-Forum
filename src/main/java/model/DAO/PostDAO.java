@@ -17,7 +17,7 @@ public class PostDAO {
     public int getPostIdNewAdd(){
         try{
             Connection conn = connectDb();
-            PreparedStatement preparedStatement = connectDb().prepareStatement("select id " +
+            PreparedStatement preparedStatement = conn.prepareStatement("select id " +
                     " from post " +
                     " order by create_time DESC " +
                     " limit 1 ");
@@ -32,12 +32,13 @@ public class PostDAO {
             return 0;
         }
     }
+
     // Add Notify cho tất cả những người trong topic trừ người add post mới
     public ArrayList<String> getAllUsernameInTopicExceptFromUser(int topic_id,String username){
         try{
             ArrayList<String> listUsername = new ArrayList<>();
             Connection conn = connectDb();
-            PreparedStatement preparedStatement = connectDb().prepareStatement("SELECT DISTINCT from_user " +
+            PreparedStatement preparedStatement = conn.prepareStatement("SELECT DISTINCT from_user " +
                     "FROM post " +
                     "WHERE topic_id = ? " +
                     "  AND from_user <> ? ");
@@ -69,7 +70,7 @@ public class PostDAO {
     public int getTopicIdOfPost(int postID){
         try{
             Connection conn = connectDb();
-            PreparedStatement preparedStatement = connectDb().prepareStatement("select topic_id from post\n" +
+            PreparedStatement preparedStatement = conn.prepareStatement("select topic_id from post\n" +
                     "where id = ?");
             preparedStatement.setInt(1,postID);
             ResultSet rs = preparedStatement.executeQuery();
@@ -86,7 +87,7 @@ public class PostDAO {
     public int getPostPageIndex(int topicID,int postID){
         try {
             Connection conn = connectDb();
-            PreparedStatement preparedStatement = connectDb().prepareStatement("select stt from " +
+            PreparedStatement preparedStatement = conn.prepareStatement("select stt from " +
                     " (select row_number() over (order by id asc) as stt, id " +
                     " from post " +
                     " where topic_id= ? " +
@@ -141,6 +142,36 @@ public class PostDAO {
             return 0;
         }
     }
+    //View reply post
+    public PostBEAN getPostReplyById(int postId){
+        try{
+            Connection conn = connectDb();
+            PreparedStatement preparedStatement = conn.prepareStatement("select from_user,content,delete_time from post " +
+                    " where post.id = ? ");
+            preparedStatement.setInt(1,postId);
+            ResultSet rs = preparedStatement.executeQuery();
+
+
+            String from_user = null;
+            String content = null;
+            Timestamp delete_time = null;
+            ArrayList<String> imageListOfPostReply = getAllPictureInPost(postId);
+            while (rs.next()){
+                from_user = rs.getString("from_user");
+                content = rs.getString("content");
+                delete_time = rs.getTimestamp("delete_time");
+            }
+            PostBEAN postBEAN = new PostBEAN();
+            postBEAN.setFrom_user(from_user);
+            postBEAN.setContent(content);
+            postBEAN.setDelete_time(delete_time);
+            postBEAN.setImageList(imageListOfPostReply);
+            return postBEAN;
+        }catch (Exception e){
+            e.printStackTrace();
+            return null;
+        }
+    }
     public ArrayList<PostBEAN> getAllPostInTopicByPage(int topicId,int pageIndex) throws Exception {
         ArrayList<PostBEAN> list = new ArrayList<>();
         Connection conn = connectDb();
@@ -168,17 +199,32 @@ public class PostDAO {
             Timestamp deleteTime = rs.getTimestamp("delete_time");
 
             Integer postID;
+            String to_username;
+            String contentOfPostReply;
+            ArrayList<String> imageListOfPostReply;
+            Timestamp deleteTimeOfPostReply;
             if(rs.getObject("post_id") == null) {
                 postID = null;
+                to_username = null;
+                contentOfPostReply = null;
+                imageListOfPostReply =null;
+                deleteTimeOfPostReply = null;
             } else {
                 postID = rs.getInt("post_id");
+                PostBEAN post = getPostReplyById(postID);
+                to_username = post.getFrom_user();
+                contentOfPostReply = post.getContent();
+                imageListOfPostReply = post.getImageList();
+                deleteTimeOfPostReply = post.getDelete_time();
             }
 
             String avatar=rs.getString("avatar");
             String name = rs.getString("name");
             String description = rs.getString("description");
             ArrayList<String> imageList = getAllPictureInPost(ID);
-            PostBEAN postBEAN = new PostBEAN(ID,fromUser,topicID,content,createTime,editTime,postID,avatar,name,description,imageList,deleteTime);
+
+
+            PostBEAN postBEAN = new PostBEAN(ID,fromUser,topicID,content,createTime,editTime,postID,avatar,name,description,imageList,deleteTime,to_username,contentOfPostReply,imageListOfPostReply,deleteTimeOfPostReply);
             list.add(postBEAN);
         }
         return list;

@@ -29,7 +29,9 @@ public class PostBO {
     public ArrayList<PostBEAN> getAllPostInTopicByPage(int topicId,int pageIndex) throws Exception {
         return postDAO.getAllPostInTopicByPage(topicId,pageIndex);
     }
-
+    public PostBEAN getPostReplyById(int postId) {          // show content of post reply
+        return postDAO.getPostReplyById(postId);
+    }
     //
     public void addPost(PostBEAN postBEAN) throws Exception{
         postDAO.addPost(postBEAN);

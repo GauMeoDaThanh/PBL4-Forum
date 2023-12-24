@@ -16,4 +16,7 @@ public class NotifyBO {
     public ArrayList<NotifyBEAN> getAllNotifyRoleAdmin(String username){
         return notifyDAO.getAllNotifyRoleAdmin(username);
     }
+    public void setIsReadNotify(ArrayList<Integer> notifyIdList) {
+        notifyDAO.setIsReadNotify(notifyIdList);
+    }
 }

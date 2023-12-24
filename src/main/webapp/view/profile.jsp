@@ -260,7 +260,7 @@
                                                 %>
                                                 <span class="text-white rounded p-1 my-2"  style="font-size: 1rem; background-color: #7752FE;">Đánh giá từ người vận chuyển</span>
                                                 <%
-                                                    } else {
+                                                } else {
                                                 %>
                                                 <span class="text-white rounded p-1 my-2"  style="font-size: 1rem; background-color: #A231FC;">Đánh giá từ người gửi</span>
                                                 <%
@@ -274,7 +274,6 @@
                                                     if(rating.getPicture()!=null && !rating.getPicture().isEmpty()) {
                                                 %>
                                                 <div class="py-1">
-                                                    <%--                                                    <img src="${pageContext.request.contextPath}/image/<%=topic.getAvatar()==null  || topic.getAvatar().equals("") ? "29.jpg" : topic.getAvatar()%>" class="mr-3 rounded-circle" width="70" height="70" alt="User" />--%>
                                                     <img src="${pageContext.request.contextPath}/image/<%=rating.getPicture()%>" height="100" alt="">
                                                 </div>
                                                 <%
