@@ -162,7 +162,6 @@ public class TopicServlet extends HttpServlet {
                         if(originalFileName!=null && !originalFileName.isEmpty()) {
                             String img = System.currentTimeMillis() + originalFileName;
                             String uploadPath="E:/giao_trinh/pbl4/img/" + img;
-                            System.out.println(img);
                             FileOutputStream fos = new FileOutputStream(uploadPath);
                             InputStream is = file.getInputStream();
 

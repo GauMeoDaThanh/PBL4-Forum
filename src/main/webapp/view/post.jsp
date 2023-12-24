@@ -18,18 +18,6 @@
         }
     }
 
-//    System.out.println(request.getAttribute("postID").toString());
-
-
-    System.out.println(postID+1);
-
-//    System.out.println(postID+1);
-//    System.out.println(data);
-//    Integer postID = null;
-//    if(data != null && !data.isEmpty()){
-//        postID = Integer.valueOf(data);
-//    }
-
     //
     int pageIndex = (int) request.getAttribute("pageIndex");
     int pageNumber = (int) request.getAttribute("pageNumber");
@@ -274,16 +262,15 @@
                 %>
                 <%
                         if(post.getPost_id()!=null) {
-                            for(PostBEAN p: listPost) {
-                                if(Objects.equals(p.getId(), post.getPost_id()) && p.getDelete_time()==null){
+                            if(post.getDeleteTimeOfPostReply()==null){
 
                 %>
                                     <div style="background-color: #ccc;" class="p-3 rounded">
-                                        <span class="text-dark"><strong>Trả lời <%=p.getFrom_user()%>:</strong></span><br>
-                                        <%=p.getContent()%>
+                                        <span class="text-dark"><strong>Trả lời <a href="${pageContext.request.contextPath}/Profile/Info?username=<%=post.getFrom_user()%>"><%=post.getTo_username()%></a>:</strong></span><br>
+                                        <%=post.getContentOfPostReply()%>
                                         <br><br>
                                         <%
-                                                        for (String imageName2 : p.getImageList()){
+                                                        for (String imageName2 : post.getImageListOfPostReply()){
                                         %>
                                         <img src="${pageContext.request.contextPath}/image/<%=imageName2%>" class="mx-2" height="160" alt="image">
                                         <%
@@ -292,14 +279,14 @@
                                         %>
                                     </div>
                 <%
-                                }
-                                else if(Objects.equals(p.getId(), post.getPost_id()) && p.getDelete_time()!=null){
+                            }
+                            else if(post.getDeleteTimeOfPostReply()!=null){
                 %>
                                 <div style="background-color: #ccc;" class="p-3 rounded">
-                                    <h6 style="color: #dc3545;" class="p-4">Bài viết đã bị xoá</h6>
+                                    <span class="text-dark"><strong>Trả lời <a href="${pageContext.request.contextPath}/Profile/Info?username=<%=post.getFrom_user()%>"><%=post.getTo_username()%></a>:</strong></span><br>
+                                    <h6 style="color: #dc3545;" class="p-4">Bài viết đã bị xoá lúc <%=dateFormat.format(post.getDeleteTimeOfPostReply())%></h6>
                                 </div>
                 <%
-                                }
                             }
                         }
                 %>
@@ -483,18 +470,16 @@
                     <!--Post bi xoa start-->
                     <%
                         if(post.getPost_id()!=null) {
-                            for(PostBEAN p: listPost) {
-                                if(Objects.equals(p.getId(), post.getPost_id())){
                     %>
-                                <div style="background-color: #ccc;" class="p-3 rounded">
-                                    <span class="text-dark"><strong>Trả lời <%=p.getFrom_user()%>:</strong></span><br>
+                                     <div style="background-color: #ccc;" class="p-3 rounded">
+                                    <span class="text-dark"><strong>Trả lời <a href="${pageContext.request.contextPath}/Profile/Info?username=<%=post.getFrom_user()%>"><%=post.getTo_username()%></a>:</strong></span><br>
                     <%
-                                    if(p.getDelete_time()==null){
+                                    if(post.getDeleteTimeOfPostReply()==null){
                     %>
-                                        <%=p.getContent()%>
+                                        <%=post.getContentOfPostReply()%>
                                         <br><br>
                     <%
-                                        for (String imageName2 : p.getImageList()){
+                                        for (String imageName2 : post.getImageListOfPostReply()){
                     %>
                                     <img src="${pageContext.request.contextPath}/image/<%=imageName2%>" class="mx-2" height="160" alt="image">
 
@@ -504,19 +489,17 @@
                     <%
                                     } else{
                     %>
-                                    <h6 style="color: #dc3545;" class="p-4">Bài viết đã bị xoá</h6>
+                                    <h6 style="color: #dc3545;" class="p-4">Bài viết đã bị xoá lúc <%=dateFormat.format(post.getDeleteTimeOfPostReply())%></h6>
                     <%
                                     }
                     %>
                                 </div>
                     <%
-                                }
-                            }
                         }
                     %>
 
                      <div id="post-content-<%=post.getId()%>" class="text-dark">
-                        <h6 style="color: #dc3545;" class="p-4">Bài viết đã bị xoá</h6>
+                        <h6 style="color: #dc3545;" class="p-4">Bài viết đã bị xoá lúc <%=dateFormat.format(post.getDelete_time())%></h6>
                      </div>
 
                     <!--Post bi xoa end-->

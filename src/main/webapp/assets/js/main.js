@@ -52,17 +52,31 @@ function goToPost(postID) {
 //     }
 // });
 //
-function clickOnBell() {
-    var dropdown = document.querySelector('.header__popup')
-    if(dropdown.style.display ==='none') {
-        dropdown.style.display ='block'
-        // document.querySelector('.account-setting').style.display = 'none'
-    }
-    else {
-        dropdown.style.display ='none'
+// function clickOnBell() {
+//     var dropdown = document.querySelector('.header__popup');
+//     var numberUnreadNotify = document.querySelector("#number__unread");
+//     if(numberUnreadNotify.style.display !=='none'){
+//         numberUnreadNotify.style.display = 'none';
+//     }
+//
+//     if(dropdown.style.display ==='none') {
+//         dropdown.style.display ='block'
+//     }
+//     else {
+//         dropdown.style.display ='none'
+//
+//     }
+// }
 
-    }
-}
+
+
+// $(document).ready(function(){
+//     // Xử lý sự kiện khi nút được click
+//     $("#block-notification").click(function(){
+//         // Toggle thẻ span có id là "number-notify"
+//         $("#number-unread-notify").toggle();
+//     });
+// });
 
 // Rating star
 // Select all elements with the "i" tag and store them in a NodeList called "stars"

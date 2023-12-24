@@ -3,6 +3,7 @@
 <%@ page import="model.BEAN.NotifyBEAN" %>
 <%@ page import="java.text.DateFormat" %>
 <%@ page import="java.text.SimpleDateFormat" %>
+<%@ page import="java.util.Arrays" %>
 <%@page isELIgnored="false" %>
 <%--
   Created by IntelliJ IDEA.
@@ -81,16 +82,28 @@
                 </div>
                 <!--  -->
                 <!--  -->
-                <div class="header__notification" onclick="clickOnBell()">
+                <div id="block-notification" class="header__notification">
                     <i class="header__notification-icon bi bi-bell"></i>
-                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"><%=list.size()%>
-                                    <span class="visually-hidden">unread messages</span>
-                                  </span>
+                    <%
+                        int countNotifyUnread = 0;
+                        for(var noti:list) {
+                            if (!noti.isIs_read()) {
+                                countNotifyUnread++;
+                            }
+                        }
+                        if(countNotifyUnread!=0){
+                    %>
+                    <span id="number__unread" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                        <%=countNotifyUnread%>
+                    </span>
+                    <%
+                        }
+                    %>
                     <div class="header__popup">
                         <h3 class="header__popup-heading">
                             Thông báo
                         </h3>
-                        <ul class="header__popup-list">
+                        <div class="header__popup-list">
                             <%
                                 DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
                                 for(NotifyBEAN notify : list){
@@ -171,15 +184,60 @@
                             <%
                                 }
                             %>
-                        </ul>
+                        </div>
                         <a class="header__popup-bottom">
                             Xem tất cả
                         </a>
                     </div>
                 </div>
-
             </div>
         </nav>
     </div>
 </div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function() {
+        // Hide the initial state of the popup
+        $(".header__popup").hide();
+
+        // Toggle the visibility of the notification and popup on click
+        $("#block-notification").click(function() {
+            $("#number__unread").hide();
+            $(".header__popup").toggle();
+        });
+        // Click outside
+        // $(document).click(function(e) {
+        //     // Check if the clicked element is not a child of #block-notification or #header__popup
+        //     if (!$(e.target).closest("#block-notification, #header__popup").length) {
+        //         $("#number__unread").hide();
+        //         $(".header__popup").hide();
+        //     }
+        // });
+
+        $("#block-notification").click(function(){
+            var notifyIdList = [
+                <%
+                    for (int i = 0; i < list.size(); i++) {
+                %>
+                <%= list.get(i).getId() %><%= i < list.size() - 1 ? "," : "" %>
+                <%
+                    }
+                %>
+            ];
+            $.ajax({
+                type: "POST",
+                url: "${pageContext.request.contextPath}/Notify/SetIsRead",
+                data: { "notifyId": JSON.stringify(notifyIdList) },
+                contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+                dataType: "json",
+                success: function(response){
+                    console.log(response);
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    console.log("Ajax error: " + textStatus + " - " + errorThrown);
+                }
+            });
+        });
+    });
+</script>
 <!-- Navbar End -->

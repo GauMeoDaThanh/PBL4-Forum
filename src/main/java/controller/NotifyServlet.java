@@ -7,6 +7,8 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import model.BEAN.NotifyBEAN;
 import model.BO.NotifyBO;
+import model.BO.PostBO;
+import org.json.JSONArray;
 
 import java.io.IOException;
 import java.sql.Time;
@@ -100,9 +102,36 @@ public class NotifyServlet extends HttpServlet {
                     for(NotifyBEAN notify : listNotify){
                         notifyBO.addNotify(notify);
                     }
-                    resp.sendRedirect(req.getContextPath() + "/Topic/Info?topicID=" + topic_id + "&pageIndex=1");
+
+                    PostBO postBO = new PostBO();
+                    int topicPageNumber = postBO.getTopicPageNumber(topic_id);
+                    resp.sendRedirect(req.getContextPath() + "/Topic/Info?topicID=" + topic_id + "&pageIndex="+topicPageNumber);
 
                 } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                break;
+            case "SetIsRead":
+                try {
+                    NotifyBO notifyBO = new NotifyBO();
+
+                    //
+                    String notifyIdJson = req.getParameter("notifyId");
+                    // Parse JSON string to ArrayList
+                    ArrayList<Integer> idList = new ArrayList<>();
+                    if (notifyIdJson != null && !notifyIdJson.isEmpty()) {
+                        JSONArray jsonArray = new JSONArray(notifyIdJson);
+                        for (int i = 0; i < jsonArray.length(); i++) {
+                            idList.add(jsonArray.getInt(i));
+                        }
+                    }
+                    notifyBO.setIsReadNotify(idList);
+
+                    // Gửi giá trị mới về trang JSP
+                    resp.setContentType("text/plain");
+                    resp.setCharacterEncoding("UTF-8");
+                    resp.getWriter().write("successful");
+                }catch (Exception e) {
                     e.printStackTrace();
                 }
                 break;
