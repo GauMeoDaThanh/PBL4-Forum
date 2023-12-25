@@ -89,6 +89,7 @@ public class TopicServlet extends HttpServlet {
 
                     //
                     int topicID = Integer.parseInt(req.getParameter("topicID"));
+                    if (!topicBO.isTopicExisted(topicID)) throw new Exception();
                     int pageIndex = Integer.parseInt(req.getParameter("pageIndex"));
                     int pageNumber = postBO.getTopicPageNumber(topicID);
 
@@ -100,7 +101,7 @@ public class TopicServlet extends HttpServlet {
                     req.setAttribute("listPost",list);
                     req.getRequestDispatcher("../view/post.jsp").forward(req,resp);
                 } catch (Exception e) {
-                    throw new RuntimeException(e);
+                    req.getRequestDispatcher("../view/page_error.jsp").forward(req, resp);
                 }
                 break;
             case "Search":
@@ -127,6 +128,7 @@ public class TopicServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String action = req.getPathInfo().substring(1);
+        TopicBO topicBO;
         switch (action) {
             case "addNewTopic":
                 try{
@@ -150,7 +152,7 @@ public class TopicServlet extends HttpServlet {
                     //
 
                     TopicBEAN topicBEAN = new TopicBEAN(from_user,topicTypeId,createTime,topicName,fromLocation,toLocation,topicDeliDatetime);
-                    TopicBO topicBO  = new TopicBO();
+                    topicBO  = new TopicBO();
 
                     // Thêm topic mới và Lấy topic mới thêm đó ra
                     TopicBEAN newTopic = topicBO.addTopic(topicBEAN);
@@ -190,10 +192,12 @@ public class TopicServlet extends HttpServlet {
                 break;
             case "Update":
                 try {
-                    HttpSession session = req.getSession();
-                    UserBEAN user = (UserBEAN) session.getAttribute("user");
+                    topicBO = new TopicBO();
 
                     int topicId = Integer.parseInt(req.getParameter("topicId"));
+
+                    if (!topicBO.isTopicExisted(topicId)) throw new Exception();
+
                     String topicName = req.getParameter("update_topic_name");
                     int topicTypeId = Integer.parseInt(req.getParameter("update_topic_type_id"));
                     String topicFromLocation = req.getParameter("update_topic_from_location");
@@ -214,19 +218,21 @@ public class TopicServlet extends HttpServlet {
                     topic.setDeli_datetime(topicDeliDatetime);
                     topic.setEdit_time(editTime);
 
-                    TopicBO topicBO = new TopicBO();
                     topicBO.updateTopic(topic);
                     resp.sendRedirect(req.getContextPath()+"/Topic/Info?topicID="+topicId+"&pageIndex=1");
                 }catch (Exception e) {
-                    throw new RuntimeException(e);
+                    req.getRequestDispatcher("../view/page_error.jsp").forward(req, resp);
                 }
                 break;
             case "Delete":
                 try {
+                    topicBO = new TopicBO();
                     int topicID = Integer.parseInt(req.getParameter("delete-topicId"));
+
+                    if (!topicBO.isTopicExisted(topicID)) throw new Exception();
+
                     int topidTypeId = Integer.parseInt(req.getParameter("topicTypeId"));
 
-                    TopicBO topicBO = new TopicBO();
                     topicBO.deleteTopicById(topicID);
 
                     if(topidTypeId==1) {
@@ -235,7 +241,7 @@ public class TopicServlet extends HttpServlet {
                         resp.sendRedirect(req.getContextPath()+"/Topic/Send?pageIndex=1");
                     }
                 }catch (Exception e) {
-                    throw new RuntimeException(e);
+                    req.getRequestDispatcher("../view/page_error.jsp").forward(req, resp);
                 }
                 break;
         }

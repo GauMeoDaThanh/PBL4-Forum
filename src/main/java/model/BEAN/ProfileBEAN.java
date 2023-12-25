@@ -11,11 +11,13 @@ public class ProfileBEAN {
     private double star;
     private String avatar;
 
-    public ProfileBEAN(String username, String name, String email, String description, String avatar) {
+    public ProfileBEAN(String username, String name, String email, String description, int receiveDeli, double star, String avatar) {
         this.username = username;
         this.name = name;
         this.email = email;
         this.description = description;
+        this.receiveDeli = receiveDeli;
+        this.star = star;
         this.avatar = avatar;
     }
 
@@ -68,8 +70,6 @@ public class ProfileBEAN {
     }
 
     public double getStar() {
-
-
         return (double)Math.round(star* 10) / 10;
     }
 

@@ -54,4 +54,7 @@ public class TopicBO{
     public ArrayList<TopicBEAN> getAllTopicByUsername(String username) throws Exception{
         return topicDAO.getAllTopicByUsername(username);
     }
+    public boolean isTopicExisted(int topicId) throws Exception{
+        return topicDAO.isTopicExisted(topicId);
+    }
 }

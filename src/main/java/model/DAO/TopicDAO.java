@@ -1,6 +1,7 @@
 package model.DAO;
 
 import jakarta.servlet.annotation.WebServlet;
+import jdk.jshell.spi.SPIResolutionException;
 import model.BEAN.TopicBEAN;
 
 import java.sql.Connection;
@@ -625,5 +626,21 @@ public class TopicDAO {
             e.printStackTrace();
             return null;
         }
+    }
+    public boolean isTopicExisted(int id) throws Exception{
+        Connection conn = connectDb();
+        PreparedStatement preparedStatement = conn.prepareStatement("select * from topic where id = ?");
+        preparedStatement.setInt(1, id);
+        ResultSet rs = preparedStatement.executeQuery();
+        if (rs.next()) {
+            rs.close();
+            preparedStatement.close();
+            conn.close();
+            return true;
+        }
+        rs.close();
+        preparedStatement.close();
+        conn.close();
+        return false;
     }
 }

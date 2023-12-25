@@ -114,6 +114,7 @@ public class NotifyDAO {
                 preparedStatement.setBoolean(1,true);
                 preparedStatement.setInt(2,notifyId);
                 preparedStatement.executeUpdate();
+                preparedStatement.close();
             }
 
             conn.close();
