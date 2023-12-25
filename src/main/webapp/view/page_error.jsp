@@ -57,7 +57,7 @@
 
                     <div class="contant_box_404">
                         <h3 class="h2">
-                            Page not found
+                            404 Page not found
                         </h3>
 
                         <p class="sub-content">Current page not found!</p>
