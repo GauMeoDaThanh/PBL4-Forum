@@ -70,15 +70,7 @@ public class ProfileBEAN {
     }
 
     public double getStar() {
-        DecimalFormat df = new DecimalFormat("#.#");
-
-        // Sử dụng phương thức format để làm tròn
-        String roundedNumber = df.format(star);
-
-        // Chuyển đổi kết quả về kiểu double nếu cần
-        double roundedDouble = Double.parseDouble(roundedNumber);
-
-        return roundedDouble;
+        return (double)Math.round(star* 10) / 10;
     }
 
     public void setStar(double star) {

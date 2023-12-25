@@ -44,7 +44,7 @@ public class HomeServlet extends HttpServlet {
 
             req.getRequestDispatcher("../view/home.jsp").forward(req, resp);
         } catch (Exception e) {
-//            resp.sendRedirect("../../Forum");
+            resp.sendRedirect("../../Forum");
         }
     }
 }

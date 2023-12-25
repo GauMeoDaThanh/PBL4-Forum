@@ -20,6 +20,9 @@ public class AuthenticateDAO {
         if (rs.getInt("count") > 0){
             return BCrypt.checkpw(password, rs.getString("password"));
         }
+        rs.close();
+        preparedStatement.close();
+        conn.close();
         return false;
     }
     public boolean isExistedUsername(String username) throws Exception{
@@ -44,9 +47,14 @@ public class AuthenticateDAO {
         preparedStatement.setString(1, username);
         ResultSet rs = preparedStatement.executeQuery();
         rs.next();
-
-        return new UserBEAN(rs.getString("username"), rs.getString("name"),
+        UserBEAN user = new UserBEAN(rs.getString("username"), rs.getString("name"),
                 rs.getString("email"), rs.getString("role_type"), rs.getString("avatar"), rs.getString("description"));
+
+        rs.close();
+        preparedStatement.close();
+        conn.close();
+
+        return user;
     }
     public void signUp(String username, String password) throws Exception {
         Connection conn = connectDb();
@@ -78,9 +86,15 @@ public class AuthenticateDAO {
             UserBEAN user = new UserBEAN(userName, name, email, role, avatar, description);
             user.setLimitId(limit_id);
             user.setLimitStart(limit_started);
+            rs.close();
+            preparedStatement.close();
+            conn.close();
 
             return user;
         }
+        rs.close();
+        preparedStatement.close();
+        conn.close();
         return null;
 
 

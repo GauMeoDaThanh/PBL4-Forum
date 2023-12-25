@@ -49,12 +49,15 @@ public class PostServlet extends HttpServlet {
                     PostBO postBO = new PostBO();
                     int postID = Integer.parseInt(req.getParameter("postID"));
                     int topicID = postBO.getTopicIdOfPost(postID);
-
+                    TopicBO topicBO = new TopicBO();
+                    if (!topicBO.isTopicExisted(topicID)){
+                        req.getRequestDispatcher("../view/page_error").forward(req, resp);
+                        return;
+                    }
                     int pageNumber = postBO.getTopicPageNumber(topicID);
                     int pageIndex = postBO.getPostPageIndex(topicID,postID);
                     //
 
-                    TopicBO topicBO = new TopicBO();
                     TopicBEAN topicBEAN = topicBO.getTopicById(topicID);
                     ArrayList<PostBEAN> list = postBO.getAllPostInTopicByPage(topicID,pageIndex);
 
