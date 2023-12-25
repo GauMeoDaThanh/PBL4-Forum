@@ -26,6 +26,9 @@ public class PostDAO {
             while (rs.next()){
                 id = rs.getInt("id");
             }
+            rs.close();
+            preparedStatement.close();
+            conn.close();
             return id;
         }catch (Exception e){
             e.printStackTrace();
@@ -48,6 +51,9 @@ public class PostDAO {
             while (rs.next()){
                 listUsername.add(rs.getString("from_user"));
             }
+            rs.close();
+            preparedStatement.close();
+            conn.close();
             return listUsername;
         }catch (Exception e){
             e.printStackTrace();
@@ -64,6 +70,9 @@ public class PostDAO {
             String img = rs.getString("picture");
             imageList.add(img);
         }
+        rs.close();
+        preparedStatement.close();
+        conn.close();
         return imageList;
     }
     // Go to post when click notify
@@ -74,10 +83,16 @@ public class PostDAO {
                     "where id = ?");
             preparedStatement.setInt(1,postID);
             ResultSet rs = preparedStatement.executeQuery();
-
+            int topicId = -1;
             while (rs.next()){
-                return rs.getInt("topic_id");
+                topicId = rs.getInt("topic_id");
             }
+            rs.close();
+            preparedStatement.close();
+            conn.close();
+            return topicId;
+
+
 
         }catch (Exception e) {
             e.printStackTrace();
@@ -108,6 +123,9 @@ public class PostDAO {
                     ++postPageIndex;
                 }
             }
+            rs.close();
+            preparedStatement.close();
+            conn.close();
             return postPageIndex;
         }catch (Exception e){
             e.printStackTrace();
@@ -135,7 +153,9 @@ public class PostDAO {
                     ++pageNumber;
                 }
             }
-
+            rs.close();
+            preparedStatement.close();
+            conn.close();
             return pageNumber;
         }catch (Exception e){
             e.printStackTrace();
@@ -166,6 +186,9 @@ public class PostDAO {
             postBEAN.setContent(content);
             postBEAN.setDelete_time(delete_time);
             postBEAN.setImageList(imageListOfPostReply);
+            rs.close();
+            preparedStatement.close();
+            conn.close();
             return postBEAN;
         }catch (Exception e){
             e.printStackTrace();
@@ -227,6 +250,9 @@ public class PostDAO {
             PostBEAN postBEAN = new PostBEAN(ID,fromUser,topicID,content,createTime,editTime,postID,avatar,name,description,imageList,deleteTime,to_username,contentOfPostReply,imageListOfPostReply,deleteTimeOfPostReply);
             list.add(postBEAN);
         }
+        rs.close();
+        preparedStatement.close();
+        conn.close();
         return list;
     }
 
@@ -257,9 +283,13 @@ public class PostDAO {
                     preparedStatement3.setInt(1,rs2.getInt("id"));
                     preparedStatement3.setString(2,img);
                     preparedStatement3.executeUpdate();
+                    preparedStatement3.close();
                 }
             }
             //
+            preparedStatement.close();
+            preparedStatement2.close();
+            conn.close();
         }catch (Exception e) {
             e.printStackTrace();
         }
@@ -279,6 +309,7 @@ public class PostDAO {
                 PreparedStatement preparedStatement1 = conn.prepareStatement("delete from post_picture " +
                         " where post_id = "+post.getId());
                 preparedStatement1.executeUpdate();
+                preparedStatement1.close();
             }
 
 
@@ -289,7 +320,10 @@ public class PostDAO {
                 preparedStatement3.setInt(1,post.getId());
                 preparedStatement3.setString(2,img);
                 preparedStatement3.executeUpdate();
+                preparedStatement3.close();
             }
+            preparedStatement.close();
+            conn.close();
         }catch (Exception e) {
             e.printStackTrace();
         }
@@ -304,6 +338,9 @@ public class PostDAO {
             preparedStatement.setTimestamp(1,Timestamp.valueOf(LocalDateTime.now()));
             preparedStatement.setInt(2,postId);
             preparedStatement.executeUpdate();
+
+            preparedStatement.close();
+            conn.close();
         }catch (Exception e) {
             e.printStackTrace();
         }

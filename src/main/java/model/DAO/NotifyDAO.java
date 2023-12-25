@@ -13,7 +13,7 @@ public class NotifyDAO {
     public ArrayList<NotifyBEAN> getAllNotifyRoleUser(String username){
         try {
             Connection conn = connectDb();
-            PreparedStatement preparedStatement = connectDb().prepareStatement("select * from notify " +
+            PreparedStatement preparedStatement = conn.prepareStatement("select * from notify " +
                     "inner join user " +
                     "on notify.from_user = user.username " +
                     "where notify_type_id = 4 and notify.to_user= ? " +
@@ -35,6 +35,9 @@ public class NotifyDAO {
                 notifyBEAN.setAvatar(rs.getString("avatar"));
                 list.add(notifyBEAN);
             }
+            rs.close();
+            preparedStatement.close();
+            conn.close();
             return list;
         }catch (Exception e) {
             e.printStackTrace();
@@ -44,7 +47,7 @@ public class NotifyDAO {
     public ArrayList<NotifyBEAN> getAllNotifyRoleAdmin(String username){
         try {
             Connection conn = connectDb();
-            PreparedStatement preparedStatement = connectDb().prepareStatement("select * from notify " +
+            PreparedStatement preparedStatement = conn.prepareStatement("select * from notify " +
                     "inner join user " +
                     "on notify.from_user = user.username " +
                     "where notify_type_id < 4 " +
@@ -67,6 +70,9 @@ public class NotifyDAO {
                 notifyBEAN.setAvatar(rs.getString("avatar"));
                 list.add(notifyBEAN);
             }
+            rs.close();
+            preparedStatement.close();
+            conn.close();
             return list;
         }catch (Exception e) {
             e.printStackTrace();
@@ -89,6 +95,9 @@ public class NotifyDAO {
 
             preparedStatement.executeUpdate();
 
+            preparedStatement.close();
+            conn.close();
+
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -99,7 +108,7 @@ public class NotifyDAO {
         try {
             Connection conn = connectDb();
             for(var notifyId: notifyIdList){
-                PreparedStatement preparedStatement = connectDb().prepareStatement("update notify " +
+                PreparedStatement preparedStatement = conn.prepareStatement("update notify " +
                         " set is_read = ? " +
                         " where id = ? ");
                 preparedStatement.setBoolean(1,true);

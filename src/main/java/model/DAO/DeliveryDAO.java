@@ -25,6 +25,8 @@ public class DeliveryDAO {
         preparedStatement.setString(6, deliInfo.getNote());
         preparedStatement.setString(7, deliInfo.getToAddress());
         preparedStatement.executeUpdate();
+
+        preparedStatement.close();
         conn.close();
     }
 
@@ -35,8 +37,9 @@ public class DeliveryDAO {
         preparedStatement.setString(2, deliDetailBEAN.getDeliState());
         preparedStatement.setTimestamp(3,  new Timestamp(new Date().getTime()));
         preparedStatement.executeUpdate();
-        conn.close();
+
         preparedStatement.close();
+        conn.close();
     }
     public DeliveryBEAN getDeliInfo(int deliId) throws Exception{
         Connection conn = connectDb();
@@ -51,9 +54,9 @@ public class DeliveryDAO {
             rs.close();
             return deliveryBEAN;
         }
-        conn.close();
-        preparedStatement.close();
         rs.close();
+        preparedStatement.close();
+        conn.close();
         return null;
     }
     public List<DeliDetailBEAN> getDeliDetail(int deliId) throws Exception {
@@ -66,9 +69,9 @@ public class DeliveryDAO {
             DeliDetailBEAN deliDetailBEAN = new DeliDetailBEAN(rs.getInt("id"), rs.getInt("delivery_id"), rs.getString("deli_state"), rs.getTimestamp("deli_time"));
             deliDetailBEANS.add(deliDetailBEAN);
         }
-        conn.close();
-        preparedStatement.close();
         rs.close();
+        preparedStatement.close();
+        conn.close();
         return deliDetailBEANS;
     }
 
@@ -86,9 +89,9 @@ public class DeliveryDAO {
             deliveryBEAN.setRated(isRated(rs.getInt("id"), username));
             deliveryBEANS.add(deliveryBEAN);
         }
-        conn.close();
-        preparedStatement.close();
         rs.close();
+        preparedStatement.close();
+        conn.close();
         return deliveryBEANS;
     }
 
@@ -105,9 +108,9 @@ public class DeliveryDAO {
             deliveryBEAN.setRated(isRated(rs.getInt("id"), username));
             deliveryBEANS.add(deliveryBEAN);
         }
-        conn.close();
-        preparedStatement.close();
         rs.close();
+        preparedStatement.close();
+        conn.close();
         return deliveryBEANS;
     }
 
@@ -118,14 +121,14 @@ public class DeliveryDAO {
         preparedStatement.setInt(2, deliId);
         ResultSet rs = preparedStatement.executeQuery();
         if (rs.next()) {
-            conn.close();
-            preparedStatement.close();
             rs.close();
+            preparedStatement.close();
+            conn.close();
             return true;
         }
-        conn.close();
-        preparedStatement.close();
         rs.close();
+        preparedStatement.close();
+        conn.close();
         return false;
     }
     public String getLastDeliState(int deliId) throws Exception {
@@ -138,9 +141,9 @@ public class DeliveryDAO {
             conn.close();
             return lastDeliState;
         }
-        conn.close();
-        preparedStatement.close();
         rs.close();
+        preparedStatement.close();
+        conn.close();
         return null;
     }
     public List<String> getDeliUser(int deliId) throws Exception{
@@ -155,9 +158,9 @@ public class DeliveryDAO {
             conn.close();
             return userInfoDeli;
         }
-        conn.close();
-        preparedStatement.close();
         rs.close();
+        preparedStatement.close();
+        conn.close();
         return null;
     }
     public void endDeli(int deliId) throws Exception {
@@ -165,7 +168,8 @@ public class DeliveryDAO {
         PreparedStatement preparedStatement = conn.prepareStatement("update delivery set is_end = 1 where id = ?");
         preparedStatement.setInt(1, deliId);
         preparedStatement.executeUpdate();
-        conn.close();
+
         preparedStatement.close();
+        conn.close();
     }
 }

@@ -50,6 +50,9 @@ public class TopicDAO {
                 TopicBEAN topic = new TopicBEAN(topic_id,from_user,topic_type_id,create_time,edit_time,topic_name,from_location,to_location,deli_datetime,avatar,name,description,countPost);
                 list.add(topic);
             }
+            rs.close();
+            preparedStatement.close();
+            conn.close();
             return list;
         }catch (Exception e) {
             e.printStackTrace();
@@ -61,10 +64,15 @@ public class TopicDAO {
             Connection conn = connectDb();
             PreparedStatement preparedStatement = conn.prepareStatement("select count(*) as number_post from post where topic_id = "+topicId);
             ResultSet rs = preparedStatement.executeQuery();
+            int count = -1;
             while (rs.next()) {
-                return rs.getInt("number_post");
+                count = rs.getInt("number_post");
             }
-            return -1;
+            rs.close();
+            preparedStatement.close();
+            conn.close();
+            return count;
+
         }catch (Exception e ){
             e.printStackTrace();
             return -1;
@@ -97,6 +105,9 @@ public class TopicDAO {
             int countPost = countPostInTopic(topicId);
             //
             TopicBEAN topic = new TopicBEAN(topic_id,from_user,topic_type_id,create_time,edit_time,topic_name,from_location,to_location,deli_datetime,avatar,name,description,countPost);
+            rs.close();
+            preparedStatement.close();
+            conn.close();
             return topic;
         }
         return null;
@@ -124,7 +135,9 @@ public class TopicDAO {
                     ++pageNumber;
                 }
             }
-
+            rs.close();
+            preparedStatement.close();
+            conn.close();
             return pageNumber;
         }catch (Exception e){
             e.printStackTrace();
@@ -152,7 +165,9 @@ public class TopicDAO {
                     ++pageNumber;
                 }
             }
-
+            rs.close();
+            preparedStatement.close();
+            conn.close();
             return pageNumber;
         }catch (Exception e){
             e.printStackTrace();
@@ -203,6 +218,9 @@ public class TopicDAO {
                 TopicBEAN topic = new TopicBEAN(topic_id,from_user,topic_type_id,create_time,edit_time,topic_name,from_location,to_location,deli_datetime,avatar,name,description,countPost);
                 list.add(topic);
             }
+            rs.close();
+            preparedStatement.close();
+            conn.close();
             return list;
         }catch (Exception e) {
             e.printStackTrace();
@@ -253,6 +271,9 @@ public class TopicDAO {
                 TopicBEAN topic = new TopicBEAN(topic_id,from_user,topic_type_id,create_time,edit_time,topic_name,from_location,to_location,deli_datetime,avatar,name,description,countPost);
                 list.add(topic);
             }
+            rs.close();
+            preparedStatement.close();
+            conn.close();
             return list;
         }catch (Exception e) {
             e.printStackTrace();
@@ -302,6 +323,9 @@ public class TopicDAO {
                 TopicBEAN topic = new TopicBEAN(topic_id,from_user,topic_type_id,create_time,edit_time,topic_name,from_location,to_location,deli_datetime,avatar,name,description,countPost);
                 list.add(topic);
             }
+            rs.close();
+            preparedStatement.close();
+            conn.close();
             return list;
         }catch (Exception e) {
             e.printStackTrace();
@@ -343,6 +367,9 @@ public class TopicDAO {
                 TopicBEAN topic = new TopicBEAN(topic_id,from_user,topic_type_id,create_time,edit_time,topic_name,from_location,to_location,deli_datetime,avatar,name,description,countPost);
                 list.add(topic);
             }
+            rs.close();
+            preparedStatement.close();
+            conn.close();
             return list;
         }catch (Exception e) {
             e.printStackTrace();
@@ -386,6 +413,9 @@ public class TopicDAO {
                 TopicBEAN topic = new TopicBEAN(topic_id,from_user,topic_type_id,create_time,edit_time,topic_name,from_location,to_location,deli_datetime,avatar,name,description,countPost);
                 list.add(topic);
             }
+            rs.close();
+            preparedStatement.close();
+            conn.close();
             return list;
         }catch (Exception e) {
             e.printStackTrace();
@@ -422,7 +452,9 @@ public class TopicDAO {
                TopicBEAN topic = new TopicBEAN();
                topic.setId(rs.getInt("id"));
                topic.setCreate_time(rs.getTimestamp("create_time"));
-
+                rs.close();
+                preparedStatement.close();
+                conn.close();
                 return topic;
             }
             return null;
@@ -448,6 +480,7 @@ public class TopicDAO {
             preparedStatement.setInt(7,topic.getId());
 
             preparedStatement.executeUpdate();
+            preparedStatement.close();
             conn.close();
 
         }catch (Exception e) {
@@ -468,22 +501,29 @@ public class TopicDAO {
             // Xoá notify chứa topicID này
             PreparedStatement preparedStatement1 = conn.prepareStatement("delete from notify where to_topic_id = "+topicId);
             preparedStatement1.executeUpdate();
+            preparedStatement1.close();
             for (var postID:postIDList) {
                 // Xoá notify chứa postID này
                 PreparedStatement preparedStatement2 = conn.prepareStatement("delete from notify where to_post_id = "+postID);
                 preparedStatement2.executeUpdate();
+                preparedStatement2.close();
                 // Xoá post_picture
                 PreparedStatement preparedStatement3 = conn.prepareStatement("delete from post_picture where post_id = "+postID);
                 preparedStatement3.executeUpdate();
+                preparedStatement3.close();
                 // Xoá post
                 PreparedStatement preparedStatement4 = conn.prepareStatement("delete from post where id = "+postID);
                 preparedStatement4.executeUpdate();
+                preparedStatement4.close();
 
             }
             // Xoá topic
             PreparedStatement preparedStatement5 = conn.prepareStatement("delete from topic where id = "+topicId);
             preparedStatement5.executeUpdate();
+            preparedStatement5.close();
 
+            rs.close();
+            preparedStatement.close();
             conn.close();
 
         }catch (Exception e) {
@@ -518,7 +558,9 @@ public class TopicDAO {
                     ++pageNumber;
                 }
             }
-
+            rs.close();
+            preparedStatement.close();
+            conn.close();
             return pageNumber;
         }catch (Exception e) {
             e.printStackTrace();
@@ -575,6 +617,9 @@ public class TopicDAO {
                 TopicBEAN topic = new TopicBEAN(topic_id,from_user,topic_type_id,create_time,edit_time,topic_name,from_location,to_location,deli_datetime,avatar,name,description,countPost);
                 list.add(topic);
             }
+            rs.close();
+            preparedStatement.close();
+            conn.close();
             return list;
         }catch (Exception e) {
             e.printStackTrace();
