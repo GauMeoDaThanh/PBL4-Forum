@@ -25,8 +25,9 @@ public class LimitationDAO {
 
         int result =  preparedStatement.executeUpdate();
 
-        conn.close();
         preparedStatement.close();
+        conn.close();
+
         return result;
 
 
@@ -43,9 +44,10 @@ public class LimitationDAO {
             LimitationBEAN limitation= new LimitationBEAN(idLimitation,typeLimitation);
             li.add(limitation);
         }
-        conn.close();
-        preparedStatement.close();
         rs.close();
+        preparedStatement.close();
+        conn.close();
+
         return  li;
     }
 

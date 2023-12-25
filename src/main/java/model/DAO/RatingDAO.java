@@ -31,6 +31,9 @@ public class RatingDAO {
                     ++pageNumber;
                 }
             }
+            rs.close();
+            preparedStatement.close();
+            conn.close();
             return pageNumber;
         }catch (Exception e) {
             e.printStackTrace();
@@ -68,6 +71,9 @@ public class RatingDAO {
                 RatingBEAN ratingBEAN = new RatingBEAN(id, fromUser, toUser, point, note, picture, rate_time,user_take,avatar);
                 list.add(ratingBEAN);
             }
+            rs.close();
+            preparedStatement.close();
+            conn.close();
             return list;
         }catch (Exception e) {
             e.printStackTrace();

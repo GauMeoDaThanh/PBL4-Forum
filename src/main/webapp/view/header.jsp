@@ -215,15 +215,16 @@
         // });
 
         $("#block-notification").click(function(){
-            var notifyIdList = [
+            let notifyIdList = [];
                 <%
                     for (int i = 0; i < list.size(); i++) {
+                        if(!list.get(i).isIs_read()){
                 %>
-                <%= list.get(i).getId() %><%= i < list.size() - 1 ? "," : "" %>
+                notifyIdList.push(<%=list.get(i).getId()%>);
                 <%
+                        }
                     }
                 %>
-            ];
             $.ajax({
                 type: "POST",
                 url: "${pageContext.request.contextPath}/Notify/SetIsRead",

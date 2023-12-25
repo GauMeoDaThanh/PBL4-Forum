@@ -45,7 +45,7 @@ public class NotifyServlet extends HttpServlet {
                             to_post_id = Integer.valueOf(req.getParameter("postId"));
                         }
                     }
-                    boolean is_read = true;
+                    boolean is_read = false;
                     Timestamp create_time = Timestamp.valueOf(LocalDateTime.now());
                     //
                     String[] selectedReasons = req.getParameterValues("select-report-reason");
@@ -98,14 +98,16 @@ public class NotifyServlet extends HttpServlet {
                 try {
                     NotifyBO notifyBO = new NotifyBO();
                     ArrayList<NotifyBEAN> listNotify = (ArrayList<NotifyBEAN>) req.getAttribute("listNotify");
-                    int topic_id = (int) req.getAttribute("topicId");
+//                    int topic_id = (int) req.getAttribute("topicId");
+                    int postID = (int) req.getAttribute("postID");
                     for(NotifyBEAN notify : listNotify){
                         notifyBO.addNotify(notify);
                     }
 
-                    PostBO postBO = new PostBO();
-                    int topicPageNumber = postBO.getTopicPageNumber(topic_id);
-                    resp.sendRedirect(req.getContextPath() + "/Topic/Info?topicID=" + topic_id + "&pageIndex="+topicPageNumber);
+//                    PostBO postBO = new PostBO();
+                    resp.sendRedirect(req.getContextPath()+"/Post/Info?postID="+postID);
+//                    int topicPageNumber = postBO.getTopicPageNumber(topic_id);
+//                    resp.sendRedirect(req.getContextPath() + "/Topic/Info?topicID=" + topic_id + "&pageIndex="+topicPageNumber);
 
                 } catch (Exception e) {
                     e.printStackTrace();

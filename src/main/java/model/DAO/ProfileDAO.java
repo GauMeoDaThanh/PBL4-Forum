@@ -24,6 +24,9 @@ public class ProfileDAO {
         preparedStatement.setString(5, userBEAN.getUsername());
 
         preparedStatement.executeUpdate();
+
+        preparedStatement.close();
+        conn.close();
     }
 
     public String getPassword(String username) throws Exception{
@@ -32,7 +35,12 @@ public class ProfileDAO {
         preparedStatement.setString(1, username);
         ResultSet rs = preparedStatement.executeQuery();
         rs.next();
-        return rs.getString("password");
+        String password = rs.getString("password");
+
+        rs.close();
+        preparedStatement.close();
+        conn.close();
+        return password;
     }
     public void updatePassword(String username, String password) throws Exception {
         Connection conn = connectDb();
@@ -40,6 +48,8 @@ public class ProfileDAO {
         preparedStatement.setString(1, password);
         preparedStatement.setString(2, username);
         preparedStatement.executeUpdate();
+        preparedStatement.close();
+        conn.close();
     }
 
     public boolean isValidUser(String username) throws Exception{

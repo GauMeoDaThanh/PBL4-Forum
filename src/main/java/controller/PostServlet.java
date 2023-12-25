@@ -111,17 +111,20 @@ public class PostServlet extends HttpServlet {
                     PostBO postBO = new PostBO();
                     postBO.addPost(postBEAN);
 
+                    // Lấy id của post mới thêm
+                    int newId = postBO.getPostIdNewAdd();
+
                     // Add Notify cho tất cả những người trong topic trừ người add post mới
                     ArrayList<String> listUsername = postBO.getAllUsernameInTopicExceptFromUser(topic_id,from_user);
 
                     if(listUsername.isEmpty()){
                         // Nếu không người nào khác trong topic thì Load lại trang topic sau khi thêm post
                         int topicPageNumber = postBO.getTopicPageNumber(topic_id);
-                        resp.sendRedirect( req.getContextPath()+"/Topic/Info?topicID="+topic_id+"&pageIndex="+topicPageNumber);
+//                        resp.sendRedirect( req.getContextPath()+"/Topic/Info?topicID="+topic_id+"&pageIndex="+topicPageNumber);
+                        resp.sendRedirect(req.getContextPath()+"/Post/Info?postID="+newId);
+//                        href="${pageContext.request.contextPath}/Post/Info?postID=<%=notify.getTo_post_id()%>"
                     }
                     else {
-                        // Lấy id của post mới thêm
-                        int newId = postBO.getPostIdNewAdd();
                         ArrayList<NotifyBEAN> listNotify2 = new ArrayList<>();
                         for (String username : listUsername){
                             NotifyBEAN notify = new NotifyBEAN();
@@ -135,7 +138,8 @@ public class PostServlet extends HttpServlet {
                             listNotify2.add(notify);
                         }
                         req.setAttribute("listNotify",listNotify2);
-                        req.setAttribute("topicId",topic_id);
+//                        req.setAttribute("topicId",topic_id);
+                        req.setAttribute("postID",newId);
                         req.getRequestDispatcher("/Notify/AddNotifyNewPost").forward(req,resp);
                     }
 

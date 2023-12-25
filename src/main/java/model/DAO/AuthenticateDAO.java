@@ -23,13 +23,18 @@ public class AuthenticateDAO {
         return false;
     }
     public boolean isExistedUsername(String username) throws Exception{
-        PreparedStatement statement = connectDb().prepareStatement("select count(*) as count from user where username = ?");
-        statement.setString(1, username);
-        ResultSet rs = statement.executeQuery();
+        Connection conn = connectDb();
+        PreparedStatement preparedStatement = conn.prepareStatement("select count(*) as count from user where username = ?");
+        preparedStatement.setString(1, username);
+        ResultSet rs = preparedStatement.executeQuery();
         rs.next();
         if (rs.getInt("count") > 0) {
+            conn.close();
             return true;
         }
+        rs.close();
+        preparedStatement.close();
+        conn.close();
         return false;
     }
     public UserBEAN getUserDetail(String username) throws Exception {
@@ -39,6 +44,7 @@ public class AuthenticateDAO {
         preparedStatement.setString(1, username);
         ResultSet rs = preparedStatement.executeQuery();
         rs.next();
+
         return new UserBEAN(rs.getString("username"), rs.getString("name"),
                 rs.getString("email"), rs.getString("role_type"), rs.getString("avatar"), rs.getString("description"));
     }
@@ -48,6 +54,9 @@ public class AuthenticateDAO {
         preparedStatement.setString(1, username);
         preparedStatement.setString(2, password);
         preparedStatement.executeUpdate();
+
+        preparedStatement.close();
+        conn.close();
     }
 
     /////////////////////////////Xử phạt
@@ -69,6 +78,7 @@ public class AuthenticateDAO {
             UserBEAN user = new UserBEAN(userName, name, email, role, avatar, description);
             user.setLimitId(limit_id);
             user.setLimitStart(limit_started);
+
             return user;
         }
         return null;
@@ -81,5 +91,8 @@ public class AuthenticateDAO {
         PreparedStatement preparedStatement = conn.prepareStatement("update user set limit_id=null,limit_started=null where username=?");
         preparedStatement.setString(1,UserName);
         preparedStatement.executeUpdate();
+
+        preparedStatement.close();
+        conn.close();
     }
 }
