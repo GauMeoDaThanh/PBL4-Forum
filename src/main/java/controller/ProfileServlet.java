@@ -65,7 +65,7 @@ public class ProfileServlet extends HttpServlet {
                         req.setAttribute("listRate",null);
                         req.getRequestDispatcher("../view/profile.jsp").forward(req, resp);
                     } else {
-                        resp.getWriter().write("User not found");
+
                     }
                     break;
                 case "InfoProfile":
@@ -100,14 +100,13 @@ public class ProfileServlet extends HttpServlet {
                         req.setAttribute("listRate",listRate2);
                         req.getRequestDispatcher("../view/profile.jsp").forward(req, resp);
                     } else {
-                        resp.getWriter().write("User not found");
+
                     }
                     break;
             }
         } catch (Exception e) {
-            //Return to homepage if no user found
-            resp.sendRedirect("../../Forum");
-            System.out.println(e.getMessage());
+            e.printStackTrace();
+            req.getRequestDispatcher("../view/page_error.jsp").forward(req, resp);
         }
     }
 

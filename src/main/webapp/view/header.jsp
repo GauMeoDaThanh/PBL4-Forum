@@ -120,12 +120,12 @@
                                                     %>
                                                     <span class="text-white rounded p-1 my-2 bg-danger"  style="font-size: 1rem;">Báo cáo trang cá nhân</span>
                                                     <h4 class="header__popup-item-content mt-1">
-                                                        <a href="${pageContext.request.contextPath}/Profile/Info?username=<%=notify.getTo_user()%>" class="text-body" style="font-size: 18px;"><strong><%=notify.getContext()%></strong></a>
+                                                        <a href="${pageContext.request.contextPath}/Profile/Info?username=<%=notify.getTo_user()%>" class="text-body" style="font-size: 18px;"><strong class="content-hover"><%=notify.getContext()%></strong></a>
                                                     </h4>
                                                     <p class="text-muted">
-                                                        <a href="${pageContext.request.contextPath}/Profile/Info?username=<%=notify.getFrom_user()%>" class="text-primary" style="font-size: 1rem;"><%=notify.getFrom_user()%></a>
+                                                        <a href="${pageContext.request.contextPath}/Profile/Info?username=<%=notify.getFrom_user()%>" class="text-primary underline-hover" style="font-size: 1rem;"><%=notify.getFrom_user()%></a>
                                                         báo cáo
-                                                        <a href="${pageContext.request.contextPath}/Profile/Info?username=<%=notify.getTo_user()%>"><%=notify.getTo_user()%></a>
+                                                        <a href="${pageContext.request.contextPath}/Profile/Info?username=<%=notify.getTo_user()%>" class="underline-hover"><%=notify.getTo_user()%></a>
                                                         at
                                                         <span class="text-dark font-weight-bold"><%=dateFormat.format(notify.getCreate_time())%></span>
                                                     </p>
@@ -134,13 +134,13 @@
                                                         else if(notify.getNotify_type_id()==2){
                                                     %>
                                                     <span class="text-white rounded p-1 my-2 bg-warning"  style="font-size: 1rem;">Báo cáo Topic</span>
-                                                    <h4 class="header__popup-item-content mt-1">
-                                                        <a href="${pageContext.request.contextPath}/Topic/Info?topicID=<%=notify.getTo_topic_id()%>&pageIndex=1" class="text-body" style="font-size: 18px;"><strong><%=notify.getContext()%></strong></a>
+                                                    <h4 class="header__popup-item-content mt-1" >
+                                                        <a href="${pageContext.request.contextPath}/Topic/Info?topicID=<%=notify.getTo_topic_id()%>&pageIndex=1" class="text-body" style="font-size: 18px;"><strong class="content-hover"><%=notify.getContext()%></strong></a>
                                                     </h4>
                                                     <p class="text-muted">
-                                                        <a href="${pageContext.request.contextPath}/Profile/Info?username=<%=notify.getFrom_user()%>" class="text-primary" style="font-size: 1rem;"><%=notify.getFrom_user()%></a>
+                                                        <a href="${pageContext.request.contextPath}/Profile/Info?username=<%=notify.getFrom_user()%>" class="text-primary underline-hover" style="font-size: 1rem;"><%=notify.getFrom_user()%></a>
                                                         báo cáo Topic của
-                                                        <a href="${pageContext.request.contextPath}/Profile/Info?username=<%=notify.getTo_user()%>"><%=notify.getTo_user()%></a>
+                                                        <a href="${pageContext.request.contextPath}/Profile/Info?username=<%=notify.getTo_user()%>" class="underline-hover"><%=notify.getTo_user()%></a>
                                                         at
                                                         <span class="text-dark font-weight-bold"><%=dateFormat.format(notify.getCreate_time())%></span>
                                                     </p>
@@ -150,12 +150,12 @@
                                                     %>
                                                     <span class="text-white rounded p-1 my-2 bg-primary"  style="font-size: 1rem;">Báo cáo Post</span>
                                                     <h4 class="header__popup-item-content mt-1">
-                                                        <a href="${pageContext.request.contextPath}/Post/Info?postID=<%=notify.getTo_post_id()%>" class="text-body" style="font-size: 18px;"><strong><%=notify.getContext()%></strong></a>
+                                                        <a href="${pageContext.request.contextPath}/Post/Info?postID=<%=notify.getTo_post_id()%>" class="text-body" style="font-size: 18px;"><strong class="content-hover"><%=notify.getContext()%></strong></a>
                                                     </h4>
                                                     <p class="text-muted">
-                                                        <a href="${pageContext.request.contextPath}/Profile/Info?username=<%=notify.getFrom_user()%>" class="text-primary" style="font-size: 1rem;"><%=notify.getFrom_user()%></a>
+                                                        <a href="${pageContext.request.contextPath}/Profile/Info?username=<%=notify.getFrom_user()%>" class="text-primary underline-hover" style="font-size: 1rem;"><%=notify.getFrom_user()%></a>
                                                         báo cáo Post của
-                                                        <a href="${pageContext.request.contextPath}/Profile/Info?username=<%=notify.getTo_user()%>"><%=notify.getTo_user()%></a>
+                                                        <a href="${pageContext.request.contextPath}/Profile/Info?username=<%=notify.getTo_user()%>" class="underline-hover"><%=notify.getTo_user()%></a>
                                                         at
                                                         <span class="text-dark font-weight-bold"><%=dateFormat.format(notify.getCreate_time())%></span>
                                                     </p>
@@ -165,10 +165,10 @@
                                                     %>
                                                     <span class="text-white rounded p-1 my-2 bg-success"  style="font-size: 1rem;">Bài Post mới</span>
                                                     <h4 class="header__popup-item-content mt-1">
-                                                        <a href="${pageContext.request.contextPath}/Post/Info?postID=<%=notify.getTo_post_id()%>" class="text-body" style="font-size: 18px;"><strong><%=notify.getContext()%></strong></a>
+                                                        <a href="${pageContext.request.contextPath}/Post/Info?postID=<%=notify.getTo_post_id()%>" class="text-body" style="font-size: 18px;"><strong class="content-hover"><%=notify.getContext()%></strong></a>
                                                     </h4>
                                                     <p class="text-muted">
-                                                        <a href="${pageContext.request.contextPath}/Profile/Info?username=<%=notify.getFrom_user()%>" class="text-primary" style="font-size: 1rem;"><%=notify.getFrom_user()%></a>
+                                                        <a href="${pageContext.request.contextPath}/Profile/Info?username=<%=notify.getFrom_user()%>" class="text-primary underline-hover" style="font-size: 1rem;"><%=notify.getFrom_user()%></a>
                                                         đăng Post mới at
                                                         <span class="text-dark font-weight-bold"><%=dateFormat.format(notify.getCreate_time())%></span>
                                                     </p>
