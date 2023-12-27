@@ -75,8 +75,8 @@
                                 <div class="col-7 d-flex">
                                     <a href="${pageContext.request.contextPath}/Profile/Info?username=<%=topic.getFrom_user()%>"><img src="${pageContext.request.contextPath}/image/<%=topic.getAvatar()==null  || topic.getAvatar().equals("") ? "29.jpg" : topic.getAvatar()%>" class="mr-3 rounded-circle" width="70" height="70" alt="User" /></a>
                                     <div class="media-body mx-2">
-                                        <h4><a href="${pageContext.request.contextPath}/Topic/Info?topicID=<%=topic.getId()%>&pageIndex=1" class="text-body"><strong><%=topic.getTopic_name()%></strong></a></h4>
-                                        <p class="text-muted"><a href="${pageContext.request.contextPath}/Profile/Info?username=<%=topic.getFrom_user()%>" class="text-primary"><%=topic.getFrom_user()%></a> at <span class="text-dark font-weight-bold"><%=createTime%></span></p>
+                                        <h4><a href="${pageContext.request.contextPath}/Topic/Info?topicID=<%=topic.getId()%>&pageIndex=1" class="text-body content-hover"><strong><%=topic.getTopic_name()%></strong></a></h4>
+                                        <p class="text-muted"><a href="${pageContext.request.contextPath}/Profile/Info?username=<%=topic.getFrom_user()%>" class="text-primary underline-hover"><%=topic.getFrom_user()%></a> at <span class="text-dark font-weight-bold"><%=createTime%></span></p>
                                     </div>
                                 </div>
                                 <div class="mx-2 col-4 d-flex flex-column justify-content-center">

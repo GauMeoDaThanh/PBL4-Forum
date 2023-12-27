@@ -127,15 +127,24 @@ public class TopicServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        //
+        HttpSession session = req.getSession();
+        UserBEAN user = (UserBEAN) session.getAttribute("user");
+        // Notify
+        NotifyBO notifyBO = new NotifyBO();
+        ArrayList<NotifyBEAN> listNotify = new ArrayList<>();
+        if(user.getRole().equals("admin")){
+            listNotify = notifyBO.getAllNotifyRoleAdmin(user.getUsername());
+        } else{
+            listNotify = notifyBO.getAllNotifyRoleUser(user.getUsername());
+        }
+        req.setAttribute("listNotify",listNotify);
+        //
         String action = req.getPathInfo().substring(1);
         TopicBO topicBO;
         switch (action) {
             case "addNewTopic":
                 try{
-                    HttpSession session = req.getSession();
-                    UserBEAN user  = (UserBEAN) session.getAttribute("user");
-
-                    //
                     String from_user = user.getUsername();
 
                     int topicTypeId = Integer.parseInt(req.getParameter("new_topic_type_id"));

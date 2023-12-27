@@ -346,6 +346,8 @@ public class PostDAO {
         }
     }
 
+    //
+
 
 //    // Xoá các post mà khoả chính id không phải là khoá ngoại của post khác (topic_id)
 //    public void deletePost_IDisNotFK(int postID) {

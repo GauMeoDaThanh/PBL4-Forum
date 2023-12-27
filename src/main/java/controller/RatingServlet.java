@@ -50,7 +50,6 @@ public class RatingServlet extends HttpServlet {
             }
             RatingBO ratingBO = new RatingBO();
             ratingBO.addRate(deliId, rate);
-            System.out.println("da danh gia");
             resp.sendRedirect(req.getContextPath() + "/Deli/"+req.getPathInfo().substring(1));
         } catch (Exception e) {
             e.printStackTrace();

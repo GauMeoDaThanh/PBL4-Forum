@@ -48,6 +48,7 @@ public class PostServlet extends HttpServlet {
                 try{
                     PostBO postBO = new PostBO();
                     int postID = Integer.parseInt(req.getParameter("postID"));
+
                     int topicID = postBO.getTopicIdOfPost(postID);
                     TopicBO topicBO = new TopicBO();
                     if (!topicBO.isTopicExisted(topicID)){
@@ -68,21 +69,35 @@ public class PostServlet extends HttpServlet {
                     req.setAttribute("listPost",list);
                     req.getRequestDispatcher("../view/post.jsp").forward(req,resp);
                 }catch (Exception e){
-                    e.printStackTrace();
+                    req.getRequestDispatcher("../view/page_error.jsp").forward(req, resp);
                 }
         }
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        //
         HttpSession session = req.getSession();
         UserBEAN user = (UserBEAN) session.getAttribute("user");
+        // Notify
+        NotifyBO notifyBO = new NotifyBO();
+        ArrayList<NotifyBEAN> listNotify = new ArrayList<>();
+        if(user.getRole().equals("admin")){
+            listNotify = notifyBO.getAllNotifyRoleAdmin(user.getUsername());
+        } else{
+            listNotify = notifyBO.getAllNotifyRoleUser(user.getUsername());
+        }
+        req.setAttribute("listNotify",listNotify);
+        //
         String action = req.getPathInfo().substring(1);
         switch (action) {
             case "Add":
                 try {
+                    TopicBO topicBO = new TopicBO();
                     String from_user = user.getUsername();
                     int topic_id = Integer.parseInt(req.getParameter("topicID"));
+                    if (!topicBO.isTopicExisted(topic_id)) throw new Exception();
+
                     String content = req.getParameter("post-content-text");
                     Timestamp createTime = Timestamp.valueOf(LocalDateTime.now());
                     Integer post_id= null;
@@ -148,12 +163,15 @@ public class PostServlet extends HttpServlet {
 
 
                 }catch (Exception e) {
-                    e.printStackTrace();
+                    req.getRequestDispatcher("../view/page_error.jsp").forward(req, resp);
                 }
                 break;
             case "Update":
                 try {
+                    TopicBO topicBO = new TopicBO();
+                    PostBO postBO = new PostBO();
                     int topicId = Integer.parseInt(req.getParameter("update-topic-id"));
+                    if (!topicBO.isTopicExisted(topicId)) throw new Exception();
                     int postId = Integer.parseInt(req.getParameter("update-post-id"));
                     String content = req.getParameter("update-post-content");
                     Timestamp editTime = Timestamp.valueOf(LocalDateTime.now());
@@ -184,24 +202,25 @@ public class PostServlet extends HttpServlet {
                     post.setEdit_time(editTime);
                     post.setImageList(imageList);
 
-                    PostBO postBO = new PostBO();
                     postBO.updatePost(post);
                     resp.sendRedirect( req.getContextPath()+"/Topic/Info?topicID="+topicId+"&pageIndex=1");
 
                 }catch (Exception e){
-                    e.printStackTrace();
+                    req.getRequestDispatcher("../view/page_error.jsp").forward(req, resp);
                 }
                 break;
             case "Delete":
                 try {
-                    int postID = Integer.parseInt(req.getParameter("delete-postId"));
+                    TopicBO topicBO = new TopicBO();
                     PostBO postBO = new PostBO();
+                    int topicID = Integer.parseInt(req.getParameter("topicId"));
+                    if (!topicBO.isTopicExisted(topicID)) throw new Exception();
+                    int postID = Integer.parseInt(req.getParameter("delete-postId"));
                     postBO.deletePost(postID);
 
-                    int topicID = Integer.parseInt(req.getParameter("topicId"));
                     resp.sendRedirect(req.getContextPath()+"/Topic/Info?topicID="+topicID+"&pageIndex=1");
                 }catch (Exception e) {
-                    e.printStackTrace();
+                    req.getRequestDispatcher("../view/page_error.jsp").forward(req, resp);
                 }
                 break;
         }

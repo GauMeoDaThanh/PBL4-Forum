@@ -42,5 +42,4 @@ public class PostBO {
     public void updatePost(PostBEAN postBEAN) throws Exception{
         postDAO.updatePost(postBEAN);
     }
-
 }

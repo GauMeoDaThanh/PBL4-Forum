@@ -62,7 +62,7 @@
             <div class="d-flex align-items-center">
                 <div class="mx-2 d-flex align-items-center">
                     <i class="bi bi-person" style="font-size: larger;"></i>
-                    <a href="${pageContext.request.contextPath}/Profile/Info?username=<%=topic.getFrom_user()%>" class="mx-1"><%=topic.getFrom_user()%></a>
+                    <a href="${pageContext.request.contextPath}/Profile/Info?username=<%=topic.getFrom_user()%>" class="mx-1 underline-hover"><%=topic.getFrom_user()%></a>
                 </div>
                 <div class="mx-2 d-flex align-items-center">
                     <i class="fa-solid fa-clock" style="color: orange; font-size: large;"></i>
@@ -247,7 +247,7 @@
             <div class="col-2 p-2 text-center" style="background-color: #ccc; border-right: 1px solid #d3d5d7;">
                 <img src="${pageContext.request.contextPath}/image/<%=post.getAvatar()==null  || post.getAvatar().equals("") ? "29.jpg" : post.getAvatar()%>"  class="rounded-circle mr-1 avatar-hover" alt="Vanessa Tucker" width="100" height="100">
                 <div>
-                    <a id="post-owner-<%=post.getId()%>" class="text-primary my-2" href="${pageContext.request.contextPath}/Profile/Info?username=<%=post.getFrom_user()%>" style="font-weight: 700; font-size: larger;"><%=post.getFrom_user()%></a>
+                    <a id="post-owner-<%=post.getId()%>" class="text-primary my-2 underline-hover" href="${pageContext.request.contextPath}/Profile/Info?username=<%=post.getFrom_user()%>" style="font-weight: 700; font-size: larger;"><%=post.getFrom_user()%></a>
                     <p class="text-success p-2"><%=post.getDescription()%></p>
                 </div>
             </div>

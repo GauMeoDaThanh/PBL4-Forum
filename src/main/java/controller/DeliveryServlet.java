@@ -60,12 +60,11 @@ public class DeliveryServlet extends HttpServlet {
                         req.setAttribute("deliInfo", deliveryBEAN);
                         req.getRequestDispatcher("../view/order_detail.jsp").forward(req, resp);
                     }else{
-                        resp.getWriter().println("Ban khong co quyen truy cap vao thong tin don hang nay hoac don hang khong ton tai");
+                        throw new Exception();
                     }
             }
         }catch (Exception e){
-            resp.getWriter().println(e.getMessage());
-            System.out.println(e.getMessage());
+            req.getRequestDispatcher("../view/page_error.jsp").forward(req, resp);
         }
     }
 

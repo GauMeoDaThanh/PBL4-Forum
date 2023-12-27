@@ -210,8 +210,8 @@
                                                 <%
                                                     }
                                                 %>
-                                                <h4><a href="${pageContext.request.contextPath}/Topic/Info?topicID=<%=topic.getId()%>&pageIndex=1" class="text-body"><strong><%=topic.getTopic_name()%></strong></a></h4>
-                                                <p class="text-muted"><a href="${pageContext.request.contextPath}/Profile/Info?username=<%=topic.getFrom_user()%>" class="text-primary"><%=topic.getFrom_user()%></a> at <span class="text-dark font-weight-bold"><%=createTime%></span></p>
+                                                <h4><a href="${pageContext.request.contextPath}/Topic/Info?topicID=<%=topic.getId()%>&pageIndex=1" class="text-body"><strong class="content-hover"><%=topic.getTopic_name()%></strong></a></h4>
+                                                <p class="text-muted"><a href="${pageContext.request.contextPath}/Profile/Info?username=<%=topic.getFrom_user()%>" class="text-primary underline-hover"><%=topic.getFrom_user()%></a> at <span class="text-dark font-weight-bold"><%=createTime%></span></p>
                                             </div>
                                         </div>
                                         <div class="mx-2 col-4 d-flex flex-column justify-content-center">
@@ -268,7 +268,7 @@
                                                 %>
                                                 <span style="font-size: large;" class="mx-2"><strong>Đánh giá: </strong><%=rating.getPoint()%><i class="fas fa-star"style="color: rgb(255, 213, 0);"></i></span>
                                                 <h4 class="mt-1">
-                                                    <a href="#" class="text-body" style="font-size: 18px;"><strong><%=rating.getNote()%></strong></a>
+                                                    <p href="#" class="text-body" style="font-size: 18px;"><strong><%=rating.getNote()%></strong></p>
                                                 </h4>
                                                 <%
                                                     if(rating.getPicture()!=null && !rating.getPicture().isEmpty()) {
@@ -280,7 +280,7 @@
                                                     }
                                                 %>
                                                 <p class="text-muted">
-                                                    <a href="${pageContext.request.contextPath}/Profile/Info?username=<%=rating.getFromUser()%>" class="text-primary" style="font-size: 1rem;"><%=rating.getFromUser()%></a>
+                                                    <a href="${pageContext.request.contextPath}/Profile/Info?username=<%=rating.getFromUser()%>" class="text-primary underline-hover" style="font-size: 1rem;"><%=rating.getFromUser()%></a>
                                                     đánh giá at
                                                     <span class="text-dark font-weight-bold"><%=rating.getTime()%></span>
                                                 </p>
@@ -301,7 +301,16 @@
                 %>
                 <!-- pagination -->
                 <%
-                    if(listTopic !=null || listRate !=null) {
+                    if(listTopic == null && listRate !=null){
+                %>
+                <h4 class="text-center text-dark">Chưa đăng Topic</h4>
+                <%
+                    } else if(listRate == null && listTopic!=null){
+                %>
+                <h4 class="text-center text-dark">Chưa có đánh giá</h4>
+                <%
+                    }
+                    else if(listTopic !=null || listRate !=null) {
                 %>
                 <nav aria-label="Page navigation example">
                     <ul class="pagination justify-content-center" id="pagination">
