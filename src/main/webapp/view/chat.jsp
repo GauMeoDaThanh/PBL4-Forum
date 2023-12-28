@@ -64,6 +64,9 @@
                                         </c:otherwise>
                                     </c:choose>
                                     <span><c:out value="${entry.key}"/></span>
+                                    <c:if test="${not empty requestScope.unreadChatList[entry.key]}">
+                                        <span class="position-absolute top-2 start-100 translate-middle badge rounded-pill bg-danger"><c:out value="${requestScope.unreadChatList[entry.key]}"/></span>
+                                    </c:if>
                                 </div>
                             </a>
                         </c:forEach>

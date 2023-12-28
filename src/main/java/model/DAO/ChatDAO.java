@@ -26,9 +26,9 @@ public class ChatDAO {
                     rs.getTimestamp("send_time"), rs.getBoolean("isForm"), rs.getBoolean("form_state"));
             messages.add(message);
         }
-        conn.close();
         preparedStatement.close();
         rs.close();
+        conn.close();
         return messages;
     }
     public Map<String, String> getChatNameList(String username) throws Exception {
@@ -50,12 +50,34 @@ public class ChatDAO {
                 chatNameList.put(user, getAvatar(user));
             }
         }
-        conn.close();
         preparedStatement.close();
         rs.close();
+        conn.close();
         return chatNameList;
     }
-
+    public Map<String, String> getUnreadChatList(String username) throws Exception{
+        Connection conn = connectDb();
+        Map<String, String> unreadChatList = new LinkedHashMap<>();
+        PreparedStatement preparedStatement = conn.prepareStatement("select from_user, count(*) as unseen from message where to_user = ? and read_time is null group by from_user");
+        preparedStatement.setString(1, username);
+        ResultSet rs = preparedStatement.executeQuery();
+        while (rs.next()) {
+            unreadChatList.put(rs.getString("from_user"), String.valueOf(rs.getInt("unseen")));
+        }
+        preparedStatement.close();
+        rs.close();
+        conn.close();
+        return unreadChatList;
+    }
+    public void updateReadMessage(String username) throws Exception{
+        Connection conn = connectDb();
+        PreparedStatement preparedStatement = conn.prepareStatement("update message set read_time = ? where from_user = ?");
+        preparedStatement.setTimestamp(1, new Timestamp(new Date().getTime()));
+        preparedStatement.setString(2, username);
+        preparedStatement.executeUpdate();
+        preparedStatement.close();
+        conn.close();
+    }
     public void addMessage(MessageBEAN message) throws Exception {
         Connection conn = connectDb();
         PreparedStatement preparedStatement;
@@ -75,8 +97,8 @@ public class ChatDAO {
             preparedStatement.setBoolean(5, message.isForm());
             preparedStatement.executeUpdate();
         }
-        conn.close();
         preparedStatement.close();
+        conn.close();
     }
 
     public void changeDeliFormState(int idMessage) throws Exception {
@@ -106,11 +128,11 @@ public class ChatDAO {
         preparedStatement.setString(1, username);
         preparedStatement.setString(2, username);
         ResultSet rs = preparedStatement.executeQuery();
-        if (rs.next()){
+        if (rs.next()) {
             String chatWithUser;
-            if (rs.getString("from_user").equals(username)){
+            if (rs.getString("from_user").equals(username)) {
                 chatWithUser = rs.getString("to_user");
-            }else {
+            } else {
                 chatWithUser = rs.getString("from_user");
             }
             conn.close();

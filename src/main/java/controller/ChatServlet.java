@@ -52,6 +52,7 @@ public class ChatServlet extends HttpServlet {
                     req.setAttribute("userAvatar", profileBEAN.getAvatar());
                     req.setAttribute("username", profileBEAN.getUsername());
                     messages = chatBO.getMessage(user.getUsername(), req.getParameter("user"));
+                    chatBO.updateReadMessage(profileBEAN.getUsername());
                     break;
                 case "View":
                     String lastChatUser = chatBO.getLastChatUser(user.getUsername());
@@ -64,7 +65,9 @@ public class ChatServlet extends HttpServlet {
                     break;
             }
             Map<String, String> chatNameList = chatBO.getChatNameList(user.getUsername());
+            Map<String, String> unreadChatList = chatBO.getUnreadChatList(user.getUsername());
             req.setAttribute("chatNameList", chatNameList);
+            req.setAttribute("unreadChatList", unreadChatList);
             req.setAttribute("messages", messages);
             req.getRequestDispatcher("../view/chat.jsp").forward(req, resp);
         } catch (Exception e) {
@@ -118,10 +121,12 @@ public class ChatServlet extends HttpServlet {
                         MessageBEAN messageBEAN = new MessageBEAN(0, self.getUsername(), toUser, message, null, new Timestamp(new Date().getTime()), false, false);
                         chatBO.addMessage(messageBEAN);
                     }
+                    chatBO.updateReadMessage(toUser);
                     break;
                 case "UpdateChatList":
                     System.out.println("da lay duoc chat list");
                     Map<String, String> chatNameList = chatBO.getChatNameList(self.getUsername());
+                    Map<String, String> unreadChatList = chatBO.getUnreadChatList(self.getUsername());
                     if (chatNameList != null) {
                         for (Map.Entry<String, String> entry : chatNameList.entrySet()) {
                             resp.getWriter().println(" <a href=\""+req.getContextPath()+"/Chat/Info?user="+entry.getKey()+"\" class=\"nav-link\">\n" +
@@ -133,8 +138,11 @@ public class ChatServlet extends HttpServlet {
                                 resp.getWriter().println("<img src=\""+req.getContextPath()+"/image/"+entry.getValue()+"\"\n" +
                                         "                                                 class=\"rounded-circle mx-2\" width=\"40px\" height=\"40px\" alt=\"\">");
                             }
-                            resp.getWriter().println(" <span>"+entry.getKey()+"</span></div>\n" +
-                                    "                            </a>");
+                            resp.getWriter().println(" <span>"+entry.getKey()+"</span>\n");
+                            if (unreadChatList.get(entry.getKey()) != null){
+                                resp.getWriter().println("<span class=\"position-absolute top-2 start-100 translate-middle badge rounded-pill bg-danger\">"+unreadChatList.get(entry.getKey())+"</span>");
+                            }
+                            resp.getWriter().println("                           </div> </a>");
                         }
                     }
                     return;

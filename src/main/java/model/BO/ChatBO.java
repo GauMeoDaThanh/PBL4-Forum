@@ -16,7 +16,12 @@ public class ChatBO {
     public Map<String, String> getChatNameList(String username) throws Exception {
         return chatDAO.getChatNameList(username);
     }
-
+    public Map<String, String> getUnreadChatList(String username) throws Exception{
+        return chatDAO.getUnreadChatList(username);
+    }
+    public void updateReadMessage(String username) throws Exception{
+        chatDAO.updateReadMessage(username);
+    }
     public void addMessage(MessageBEAN messageBEAN) throws Exception {
         chatDAO.addMessage(messageBEAN);
     }
