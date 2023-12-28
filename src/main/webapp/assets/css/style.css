@@ -826,6 +826,7 @@
 
 .header__popup-bottom {
     display: block;
+    min-height: 40px;
     text-align: center;
     font-size: 20px;
     color: #5c7099;
@@ -834,12 +835,13 @@
     border-bottom-right-radius: 15px;
     background: linear-gradient(0deg,#dce7f5,#e3e9f1);
     padding: 12px 16px;
-    cursor: pointer;
+    /*cursor: pointer;*/
 }
 .header__popup-list {
     z-index: 1;
     padding: 0;
     margin: 0;
+    min-height: 300px;
     max-height: 500px;
     overflow-y: scroll;
     overflow-x: hidden;

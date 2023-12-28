@@ -301,16 +301,16 @@
                 %>
                 <!-- pagination -->
                 <%
-                    if(listTopic == null && listRate !=null){
+                    if(modView == 1 && listTopic.isEmpty()){
                 %>
                 <h4 class="text-center text-dark">Chưa đăng Topic</h4>
                 <%
-                    } else if(listRate == null && listTopic!=null){
+                    } else if(modView == 2 && listRate.isEmpty()){
                 %>
                 <h4 class="text-center text-dark">Chưa có đánh giá</h4>
                 <%
                     }
-                    else if(listTopic !=null || listRate !=null) {
+                    else {
                 %>
                 <nav aria-label="Page navigation example">
                     <ul class="pagination justify-content-center" id="pagination">
