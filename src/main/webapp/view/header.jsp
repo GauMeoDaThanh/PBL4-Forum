@@ -105,6 +105,19 @@
                         </h3>
                         <div class="header__popup-list">
                             <%
+                                if(list.isEmpty()){
+                            %>
+                            <div class="row">
+                                <div class="card mb-2">
+                                    <div class="card-body d-flex justify-content-center align-items-center">
+                                        <h4 class="text-center text-dark">Chưa có thông báo</h4>
+                                    </div>
+                                </div>
+                            </div>
+                            <%
+                                }
+                            %>
+                            <%
                                 DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
                                 for(NotifyBEAN notify : list){
                             %>
@@ -185,9 +198,9 @@
                                 }
                             %>
                         </div>
-                        <a class="header__popup-bottom">
-                            Xem tất cả
-                        </a>
+                        <div class="header__popup-bottom">
+<%--                            Xem tất cả--%>
+                        </div>
                     </div>
                 </div>
             </div>
