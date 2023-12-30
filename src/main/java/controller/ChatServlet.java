@@ -93,6 +93,7 @@ public class ChatServlet extends HttpServlet {
                     String deliNote = req.getParameter("deli-note");
                     String formInfo = goodsName + "@@" + receiver + "@@" + phoneNumber + "@@" + address + "@@" + deliNote + "@@";
                     chatBO.addMessage(new MessageBEAN(0, self.getUsername(), user.getUsername(), formInfo, null, new Timestamp(new Date().getTime()), true, false));
+                    chatBO.updateReadMessage(user.getUsername());
                     break;
                 case "ChangeState":
                     int idMessage = Integer.parseInt(req.getParameter("id"));
