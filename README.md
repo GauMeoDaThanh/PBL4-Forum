@@ -38,4 +38,4 @@
 
 ![image](https://github.com/GauMeoDaThanh/PBL4-Forum/assets/95362295/cdda8ff2-4037-48c7-8318-d2bb103c7aa5)
 
-`thank to [@nguyendong2003](https://github.com/nguyendong2003) for doing this project with me.`
+thank to [@nguyendong2003](https://github.com/nguyendong2003) for doing this project with me.
