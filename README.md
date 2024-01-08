@@ -3,7 +3,7 @@
 ### Technology used in project
 > Back-end : Servlet\
 > Front-end : Jsp, Bootstrap, Jquery, JSTL\
-> Database : MySQL\
+> Database : MySQL
 
 ### Some picture of project
 ![image](https://github.com/GauMeoDaThanh/PBL4-Forum/assets/95362295/3836a732-6bbe-4c3e-917a-c2075fad2b15)
